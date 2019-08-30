@@ -34,7 +34,7 @@ namespace FisioHelp.UI
 
     private void labelName_Click(object sender, EventArgs e)
     {
-      UserClicked?.Invoke(this, e);
+      UserClicked?.Invoke(this, e) ;
     }
   }
 }
