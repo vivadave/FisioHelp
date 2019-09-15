@@ -16,16 +16,27 @@ namespace FisioHelp.UI
   {
     public event EventHandler PatientSaved;
     private FisioHelp.DataModels.Customer _customer;
+    private PriceList[] _priceList;
 
     public AddPatient()
     {
       InitializeComponent();
+      comboBoxLanguage.Items.Add("italian");
+      comboBoxLanguage.Items.Add("german");
     }
 
     public AddPatient(Customer customer)
     {
       InitializeComponent();
-      _customer = customer;
+      comboBoxLanguage.Items.Add("italian");
+      comboBoxLanguage.Items.Add("german");
+
+      using (var db = new Db.PhisioDB())
+      {
+        _priceList = db.PriceLists.ToArray();
+      }
+
+        _customer = customer;
 
       textBoxName.Text = customer.Name;
       textBoxCognome.Text = customer.Surname;
@@ -35,6 +46,9 @@ namespace FisioHelp.UI
       textBoxTel2.Text = customer.Tel2;
       textBoxFiscalCode.Text = customer.Fiscalcode;
       textBoxVat.Text = customer.Vat;
+      comboBoxLanguage.SelectedItem = customer.Language;
+      comboBoxPrices.Items.AddRange(_priceList);
+      comboBoxPrices.SelectedItem = _priceList.FirstOrDefault(p => p.Id == customer.Pricelist?.Id);
       if (customer.Address != null)
       {
         textBoxIndirizzo.Text = customer.Address.Address_Column;
@@ -64,6 +78,7 @@ namespace FisioHelp.UI
       _customer.Tel2 = textBoxTel2.Text;
       _customer.Fiscalcode = textBoxFiscalCode.Text;
       _customer.Vat = textBoxVat.Text;
+      _customer.Language = comboBoxLanguage.SelectedItem.ToString();
 
       if (_customer.Address != null)
       {
@@ -79,6 +94,10 @@ namespace FisioHelp.UI
           Cap = textBoxPostalCode.Text
         };
       }
+
+      _customer.Pricelist = (PriceList)comboBoxPrices.SelectedItem;
+      _customer.PricelistId = ((PriceList)comboBoxPrices.SelectedItem).Id;
+      
     }
 
     private void buttonSave_Click(object sender, EventArgs e)
@@ -157,6 +176,16 @@ namespace FisioHelp.UI
 
     private void textBoxFiscalCode_Validating(object sender, CancelEventArgs e)
     {
+    }
+
+    private void comboBoxLanguage_Resize(object sender, EventArgs e)
+    {
+      this.BeginInvoke(new Action(() => { comboBoxLanguage.Select(0, 0); }));
+    }
+
+    private void comboBoxPrices_Resize(object sender, EventArgs e)
+    {
+      this.BeginInvoke(new Action(() => { comboBoxPrices.Select(0, 0); }));
     }
   }
 }

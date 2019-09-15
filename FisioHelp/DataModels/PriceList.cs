@@ -11,6 +11,11 @@ namespace FisioHelp.DataModels
     [Column("name"), NotNull] public string Name { get; set; } // character varying(256)
     [Column("price"), NotNull] public double Price { get; set; } // double precision
 
+    public override string ToString()
+    {
+      return $"{Name} ( {Price}€ )";
+    }
+
     #region Associations
 
     /// <summary>

@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+
+    <div class="content-box-gray">
+        <img src="https://www.elisapiaia.it/wp-content/uploads/2019/08/Elisa-logo2.png" alt="Logo"><p></p>
+        <p>
+            <em>{{ragione_sociale}}</em><br>
+            <em>{{indirizzo}}</em><br>
+            <em>Partita Iva: {{partita_iva}}</em><br>  
+        </p>
+        <p>
+            <em><strong>Fattura n° {{invoice_number}}</strong> del {{date}}</em>
+        </p>
+        <p>
+            <em>{{customer_name}}</em><br>
+            <em>{{customer_address}}</em><br>
+            <em>{{customer_piva}}</em>
+        </p>
+        <p><strong>Descrizione prestazione:</strong></p>
+        {{prestazioni}}
+        <p><strong>Imponibile prestazione:</strong> {{total}} euro</p>
+        <p><strong>Contributo INPS 4% ex. Art. 2 c. 26 L. 335/95:</strong> {{inps}} euro</p>
+        <p><strong>Totale fattura:</strong> {{total_with_inps}} euro</p>
+        <ul>
+            <li>Operazione in franchigia da IVA ai sensi della Legge 190 del 23/12/2014 art.1 commi da 54 ad 89.</li>
+            <li>Operazione effettuata ai sensi art. 1, commi da 54 ad 89 della Legge 190 del 23/12/2014 – Regime forfetario.</li>
+            <li>Il compenso non soggetto a ritenute d’acconto ai sensi della Legge 190 del 23/12/2014 art.1 comma 67.</li>
+            <li>Imposta di bollo assolta sull’originale. ID xxxxxxxx. [riporta l’id della marca da bollo solo se la fattura supera i 77,47 euro]</li>
+        </ul>
+        <p>Iban: {{iban}}</p>
+    </div>
+
+</body>
+</html>

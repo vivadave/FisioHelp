@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using LinqToDB.Mapping;
 using NpgsqlTypes;
 
@@ -13,9 +14,11 @@ namespace FisioHelp.DataModels
     [Column("invoice_id"), Nullable] public int? InvoiceId { get; set; } // integer
     [Column("price"), Nullable] public double? Price { get; set; } // double precision
     [Column("duration"), Nullable] public int? Duration { get; set; } // integer
+    [Column("start_time"), NotNull] public string StartTime { get; set; } // text
     [Column("invoiced"), Nullable] public bool? Invoiced { get; set; } // boolean
     [Column("payed"), Nullable] public bool? Payed { get; set; } // boolean
-    [Column("note"), Nullable] public string Note { get; set; } // text
+    [Column("initial_evaluetion"), Nullable] public string InitialEvaluetion { get; set; } // text
+    [Column("final_evaluetion"), Nullable] public string FinalEvaluetion { get; set; } // text
 
     #region Associations
 
@@ -31,6 +34,11 @@ namespace FisioHelp.DataModels
     [Association(ThisKey = "InvoiceId", OtherKey = "Id", CanBeNull = true, Relationship = Relationship.ManyToOne, KeyName = "visits_invoice_id_fkey", BackReferenceName = "Visitsinvoiceidfkeys")]
     public Invoice Invoice { get; set; }
 
+    /// <summary>
+    /// visits_treatments_visit_id_fkey_BackReference
+    /// </summary>
+    [Association(ThisKey = "Id", OtherKey = "VisitId", CanBeNull = true, Relationship = Relationship.OneToMany, IsBackReference = true)]
+    public IEnumerable<VisitsTreatment> Treatmentsvisitidfkeys { get; set; }
     #endregion
   }
 }

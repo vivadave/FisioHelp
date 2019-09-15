@@ -32,11 +32,16 @@ namespace DataModels
 	/// </summary>
 	public partial class PhisioDB : LinqToDB.Data.DataConnection
 	{
-		public ITable<Address>   Addresses  { get { return this.GetTable<Address>(); } }
-		public ITable<Customer>  Customers  { get { return this.GetTable<Customer>(); } }
-		public ITable<Invoice>   Invoices   { get { return this.GetTable<Invoice>(); } }
-		public ITable<PriceList> PriceLists { get { return this.GetTable<PriceList>(); } }
-		public ITable<Visit>     Visits     { get { return this.GetTable<Visit>(); } }
+		public ITable<Address>         Addresses        { get { return this.GetTable<Address>(); } }
+		public ITable<Customer>        Customers        { get { return this.GetTable<Customer>(); } }
+		public ITable<Invoice>         Invoices         { get { return this.GetTable<Invoice>(); } }
+		public ITable<PriceList>       PriceLists       { get { return this.GetTable<PriceList>(); } }
+		public ITable<RecentAnamnesy>  RecentAnamnesys  { get { return this.GetTable<RecentAnamnesy>(); } }
+		public ITable<RemoteAnamnesy>  RemoteAnamnesys  { get { return this.GetTable<RemoteAnamnesy>(); } }
+		public ITable<Therapist>       Therapists       { get { return this.GetTable<Therapist>(); } }
+		public ITable<Treatment>       Treatments       { get { return this.GetTable<Treatment>(); } }
+		public ITable<Visit>           Visits           { get { return this.GetTable<Visit>(); } }
+		public ITable<VisitsTreatment> VisitsTreatments { get { return this.GetTable<VisitsTreatment>(); } }
 
 		partial void InitMappingSchema()
 		{
@@ -1503,7 +1508,7 @@ namespace DataModels
 		[Column("address_id"),      Nullable          ] public int?   AddressId   { get; set; } // integer
 		[Column("pricelist_id"),    Nullable          ] public int?   PricelistId { get; set; } // integer
 		[Column("note"),            Nullable          ] public string Note        { get; set; } // text
-		[Column("language"),        Nullable          ] public object Language    { get; set; } // USER-DEFINED
+		[Column("language"),        Nullable          ] public string Language    { get; set; } // character varying(45)
 
 		#region Associations
 
@@ -1518,6 +1523,18 @@ namespace DataModels
 		/// </summary>
 		[Association(ThisKey="PricelistId", OtherKey="Id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="customers_pricelist_id_fkey", BackReferenceName="Customerspricelistidfkeys")]
 		public PriceList Pricelist { get; set; }
+
+		/// <summary>
+		/// recent_anamnesys_customer_id_fkey_BackReference
+		/// </summary>
+		[Association(ThisKey="Id", OtherKey="CustomerId", CanBeNull=true, Relationship=Relationship.OneToMany, IsBackReference=true)]
+		public IEnumerable<RecentAnamnesy> Recentanamnesyscustomeridfkeys { get; set; }
+
+		/// <summary>
+		/// remote_anamnesys_customer_id_fkey_BackReference
+		/// </summary>
+		[Association(ThisKey="Id", OtherKey="CustomerId", CanBeNull=true, Relationship=Relationship.OneToMany, IsBackReference=true)]
+		public IEnumerable<RemoteAnamnesy> Remoteanamnesyscustomeridfkeys { get; set; }
 
 		/// <summary>
 		/// visits_customer_id_fkey_BackReference
@@ -1536,6 +1553,8 @@ namespace DataModels
 		[Column("discount"),    Nullable          ] public double?    Discount { get; set; } // double precision
 		[Column("payed"),       Nullable          ] public bool?      Payed    { get; set; } // boolean
 		[Column("text"),        Nullable          ] public string     Text     { get; set; } // text
+		[Column("title"),    NotNull              ] public string     Title    { get; set; } // character varying(25)
+		[Column("deleted"),     Nullable          ] public bool?      Deleted  { get; set; } // boolean
 
 		#region Associations
 
@@ -1566,18 +1585,118 @@ namespace DataModels
 		#endregion
 	}
 
+	[Table(Schema="public", Name="recent_anamnesys")]
+	public partial class RecentAnamnesy
+	{
+		[Column("id"),                          PrimaryKey,  Identity] public int         Id                       { get; set; } // integer
+		[Column("main_disease_1"),                 Nullable          ] public string      MainDisease1             { get; set; } // character varying(256)
+		[Column("main_disease_2"),                 Nullable          ] public string      MainDisease2             { get; set; } // character varying(256)
+		[Column("main_disease_3"),                 Nullable          ] public string      MainDisease3             { get; set; } // character varying(256)
+		[Column("main_disease_4"),                 Nullable          ] public string      MainDisease4             { get; set; } // character varying(256)
+		[Column("main_disease_5"),                 Nullable          ] public string      MainDisease5             { get; set; } // character varying(256)
+		[Column("global_health"),                  Nullable          ] public string      GlobalHealth             { get; set; } // character varying(256)
+		[Column("other_diseases"),                 Nullable          ] public string      OtherDiseases            { get; set; } // character varying(256)
+		[Column("disease_in_life"),                Nullable          ] public int?        DiseaseInLife            { get; set; } // integer
+		[Column("disease_in_family"),              Nullable          ] public int?        DiseaseInFamily          { get; set; } // integer
+		[Column("disease_in_work"),                Nullable          ] public int?        DiseaseInWork            { get; set; } // integer
+		[Column("disease_in_social"),              Nullable          ] public int?        DiseaseInSocial          { get; set; } // integer
+		[Column("posture"),                        Nullable          ] public string      Posture                  { get; set; } // character varying(256)
+		[Column("medicine"),                       Nullable          ] public string      Medicine                 { get; set; } // character varying(256)
+		[Column("pre_treatment"),                  Nullable          ] public string      PreTreatment             { get; set; } // character varying(256)
+		[Column("main_disease_intensity"),         Nullable          ] public int?        MainDiseaseIntensity     { get; set; } // integer
+		[Column("main_disease_description"),       Nullable          ] public string      MainDiseaseDescription   { get; set; } // character varying(256)
+		[Column("main_disease_date"),              Nullable          ] public NpgsqlDate? MainDiseaseDate          { get; set; } // date
+		[Column("main_disease_modality"),          Nullable          ] public string      MainDiseaseModality      { get; set; } // character varying(256)
+		[Column("main_disease_course"),            Nullable          ] public string      MainDiseaseCourse        { get; set; } // character varying(256)
+		[Column("main_disease_factor_plus"),       Nullable          ] public string      MainDiseaseFactorPlus    { get; set; } // character varying(256)
+		[Column("main_disease_factor_minor"),      Nullable          ] public string      MainDiseaseFactorMinor   { get; set; } // character varying(256)
+		[Column("main_disease_nervous_system"),    Nullable          ] public string      MainDiseaseNervousSystem { get; set; } // character varying(256)
+		[Column("main_disease_symptoms_24"),       Nullable          ] public string      MainDiseaseSymptoms24    { get; set; } // character varying(256)
+		[Column("images_diagnostics"),             Nullable          ] public string      ImagesDiagnostics        { get; set; } // character varying(256)
+		[Column("customer_id"),                 NotNull              ] public int         CustomerId               { get; set; } // integer
+
+		#region Associations
+
+		/// <summary>
+		/// recent_anamnesys_customer_id_fkey
+		/// </summary>
+		[Association(ThisKey="CustomerId", OtherKey="Id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="recent_anamnesys_customer_id_fkey", BackReferenceName="Recentanamnesyscustomeridfkeys")]
+		public Customer Customer { get; set; }
+
+		#endregion
+	}
+
+	[Table(Schema="public", Name="remote_anamnesys")]
+	public partial class RemoteAnamnesy
+	{
+		[Column("id"),                PrimaryKey,  Identity] public int    Id               { get; set; } // integer
+		[Column("phisical_disease"),     Nullable          ] public string PhisicalDisease  { get; set; } // character varying(256)
+		[Column("psychic_disease"),      Nullable          ] public string PsychicDisease   { get; set; } // character varying(256)
+		[Column("surgery"),              Nullable          ] public string Surgery          { get; set; } // character varying(256)
+		[Column("anesthesias"),          Nullable          ] public string Anesthesias      { get; set; } // character varying(256)
+		[Column("pregnancy"),            Nullable          ] public string Pregnancy        { get; set; } // character varying(256)
+		[Column("traumas"),              Nullable          ] public string Traumas          { get; set; } // character varying(256)
+		[Column("recent_episodes"),      Nullable          ] public string RecentEpisodes   { get; set; } // character varying(256)
+		[Column("recent_treatments"),    Nullable          ] public string RecentTreatments { get; set; } // character varying(256)
+		[Column("medicines"),            Nullable          ] public string Medicines        { get; set; } // character varying(256)
+		[Column("other"),                Nullable          ] public string Other            { get; set; } // character varying(256)
+		[Column("customer_id"),       NotNull              ] public int    CustomerId       { get; set; } // integer
+
+		#region Associations
+
+		/// <summary>
+		/// remote_anamnesys_customer_id_fkey
+		/// </summary>
+		[Association(ThisKey="CustomerId", OtherKey="Id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="remote_anamnesys_customer_id_fkey", BackReferenceName="Remoteanamnesyscustomeridfkeys")]
+		public Customer Customer { get; set; }
+
+		#endregion
+	}
+
+	[Table(Schema="public", Name="therapists")]
+	public partial class Therapist
+	{
+		[Column("id"),          PrimaryKey,  Identity] public int    Id         { get; set; } // integer
+		[Column("address"),        Nullable          ] public string Address    { get; set; } // character varying(256)
+		[Column("full_name"),   NotNull              ] public string FullName   { get; set; } // character varying(45)
+		[Column("tax_number"),     Nullable          ] public string TaxNumber  { get; set; } // character varying(45)
+		[Column("fiscal_code"),    Nullable          ] public string FiscalCode { get; set; } // character varying(45)
+		[Column("email"),          Nullable          ] public string Email      { get; set; } // character varying(45)
+		[Column("iban"),           Nullable          ] public string Iban       { get; set; } // character varying(45)
+	}
+
+	[Table(Schema="public", Name="treatments")]
+	public partial class Treatment
+	{
+		[Column("id"),             PrimaryKey, Identity] public int    Id            { get; set; } // integer
+		[Column("description_de"), NotNull             ] public string DescriptionDe { get; set; } // text
+		[Column("description_it"), NotNull             ] public string DescriptionIt { get; set; } // text
+
+		#region Associations
+
+		/// <summary>
+		/// visits_treatments_treatment_id_fkey_BackReference
+		/// </summary>
+		[Association(ThisKey="Id", OtherKey="TreatmentId", CanBeNull=true, Relationship=Relationship.OneToMany, IsBackReference=true)]
+		public IEnumerable<VisitsTreatment> Visitstreatmentidfkeys { get; set; }
+
+		#endregion
+	}
+
 	[Table(Schema="public", Name="visits")]
 	public partial class Visit
 	{
-		[Column("id"),          PrimaryKey,  Identity] public int        Id         { get; set; } // integer
-		[Column("date"),        NotNull              ] public NpgsqlDate Date       { get; set; } // date
-		[Column("customer_id"), NotNull              ] public int        CustomerId { get; set; } // integer
-		[Column("invoice_id"),     Nullable          ] public int?       InvoiceId  { get; set; } // integer
-		[Column("price"),          Nullable          ] public double?    Price      { get; set; } // double precision
-		[Column("duration"),       Nullable          ] public int?       Duration   { get; set; } // integer
-		[Column("invoiced"),       Nullable          ] public bool?      Invoiced   { get; set; } // boolean
-		[Column("payed"),          Nullable          ] public bool?      Payed      { get; set; } // boolean
-		[Column("note"),           Nullable          ] public string     Note       { get; set; } // text
+		[Column("id"),                 PrimaryKey,  Identity] public int        Id                { get; set; } // integer
+		[Column("date"),               NotNull              ] public NpgsqlDate Date              { get; set; } // date
+		[Column("customer_id"),        NotNull              ] public int        CustomerId        { get; set; } // integer
+		[Column("invoice_id"),            Nullable          ] public int?       InvoiceId         { get; set; } // integer
+		[Column("price"),                 Nullable          ] public double?    Price             { get; set; } // double precision
+		[Column("duration"),              Nullable          ] public int?       Duration          { get; set; } // integer
+		[Column("invoiced"),              Nullable          ] public bool?      Invoiced          { get; set; } // boolean
+		[Column("payed"),                 Nullable          ] public bool?      Payed             { get; set; } // boolean
+		[Column("initial_evaluetion"),    Nullable          ] public string     InitialEvaluetion { get; set; } // text
+		[Column("start_time"),            Nullable          ] public string     StartTime         { get; set; } // character varying(45)
+		[Column("final_evaluetion"),      Nullable          ] public string     FinalEvaluetion   { get; set; } // text
 
 		#region Associations
 
@@ -1592,6 +1711,35 @@ namespace DataModels
 		/// </summary>
 		[Association(ThisKey="InvoiceId", OtherKey="Id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="visits_invoice_id_fkey", BackReferenceName="Visitsinvoiceidfkeys")]
 		public Invoice Invoice { get; set; }
+
+		/// <summary>
+		/// visits_treatments_visit_id_fkey_BackReference
+		/// </summary>
+		[Association(ThisKey="Id", OtherKey="VisitId", CanBeNull=true, Relationship=Relationship.OneToMany, IsBackReference=true)]
+		public IEnumerable<VisitsTreatment> Treatmentsvisitidfkeys { get; set; }
+
+		#endregion
+	}
+
+	[Table(Schema="public", Name="visits_treatments")]
+	public partial class VisitsTreatment
+	{
+		[Column("visit_id"),     PrimaryKey(1), NotNull] public int VisitId     { get; set; } // integer
+		[Column("treatment_id"), PrimaryKey(2), NotNull] public int TreatmentId { get; set; } // integer
+
+		#region Associations
+
+		/// <summary>
+		/// visits_treatments_treatment_id_fkey
+		/// </summary>
+		[Association(ThisKey="TreatmentId", OtherKey="Id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="visits_treatments_treatment_id_fkey", BackReferenceName="Visitstreatmentidfkeys")]
+		public Treatment Treatment { get; set; }
+
+		/// <summary>
+		/// visits_treatments_visit_id_fkey
+		/// </summary>
+		[Association(ThisKey="VisitId", OtherKey="Id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="visits_treatments_visit_id_fkey", BackReferenceName="Treatmentsvisitidfkeys")]
+		public Visit Visit { get; set; }
 
 		#endregion
 	}
@@ -25305,10 +25453,41 @@ namespace DataModels
 				t.Id == Id);
 		}
 
+		public static RecentAnamnesy Find(this ITable<RecentAnamnesy> table, int Id)
+		{
+			return table.FirstOrDefault(t =>
+				t.Id == Id);
+		}
+
+		public static RemoteAnamnesy Find(this ITable<RemoteAnamnesy> table, int Id)
+		{
+			return table.FirstOrDefault(t =>
+				t.Id == Id);
+		}
+
+		public static Therapist Find(this ITable<Therapist> table, int Id)
+		{
+			return table.FirstOrDefault(t =>
+				t.Id == Id);
+		}
+
+		public static Treatment Find(this ITable<Treatment> table, int Id)
+		{
+			return table.FirstOrDefault(t =>
+				t.Id == Id);
+		}
+
 		public static Visit Find(this ITable<Visit> table, int Id)
 		{
 			return table.FirstOrDefault(t =>
 				t.Id == Id);
+		}
+
+		public static VisitsTreatment Find(this ITable<VisitsTreatment> table, int VisitId, int TreatmentId)
+		{
+			return table.FirstOrDefault(t =>
+				t.VisitId     == VisitId &&
+				t.TreatmentId == TreatmentId);
 		}
 	}
 }

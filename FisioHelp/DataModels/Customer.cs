@@ -19,7 +19,12 @@ namespace FisioHelp.DataModels
     [Column("address_id"), Nullable] public int? AddressId { get; set; } // integer
     [Column("pricelist_id"), Nullable] public int? PricelistId { get; set; } // integer
     [Column("note"), Nullable] public string Note { get; set; } // text
-    [Column("language"), Nullable] public object Language { get; set; } // USER-DEFINED
+    [Column("language"), Nullable] public string Language { get; set; } // text
+
+    public string FullName
+    {
+      get { return $"{Name} {Surname}"; }
+    } 
 
     #region Associations
 

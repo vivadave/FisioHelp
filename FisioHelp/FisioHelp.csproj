@@ -36,6 +36,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="HtmlRenderer, Version=1.5.0.5, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlRenderer.Core.1.5.0.5\lib\net45\HtmlRenderer.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlRenderer.PdfSharp, Version=1.5.0.6, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlRenderer.PdfSharp.1.5.0.6\lib\net45\HtmlRenderer.PdfSharp.dll</HintPath>
+    </Reference>
     <Reference Include="linq2db, Version=2.9.0.0, Culture=neutral, PublicKeyToken=e41013125f9e410a, processorArchitecture=MSIL">
       <HintPath>..\packages\linq2db.2.9.0\lib\net46\linq2db.dll</HintPath>
     </Reference>
@@ -44,6 +50,12 @@
     </Reference>
     <Reference Include="Npgsql, Version=4.0.9.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
       <HintPath>..\packages\Npgsql.4.0.9\lib\net451\Npgsql.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp, Version=1.32.3057.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp.1.32.3057.0\lib\net20\PdfSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp.Charting, Version=1.32.3057.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp.1.32.3057.0\lib\net20\PdfSharp.Charting.dll</HintPath>
     </Reference>
     <Reference Include="PrintRichTextBox, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\RichTextBoxEx.1.0.0\lib\PrintRichTextBox.dll</HintPath>
@@ -72,6 +84,26 @@
     <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web.DataVisualization, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Chart.Controls.4.7.2046\lib\net35\System.Web.DataVisualization.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.DataVisualization.Design, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Chart.Controls.4.7.2046\lib\net35\System.Web.DataVisualization.Design.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Windows.Forms.DataVisualization, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Chart.Controls.4.7.2046\lib\net35\System.Windows.Forms.DataVisualization.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Windows.Forms.DataVisualization.Design, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Chart.Controls.4.7.2046\lib\net35\System.Windows.Forms.DataVisualization.Design.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -83,6 +115,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataModels\RecentAnamnesy.cs" />
+    <Compile Include="DataModels\RemoteAnamnesy.cs" />
+    <Compile Include="DataModels\Therapist.cs" />
+    <Compile Include="DataModels\VisitsTreatment.cs" />
+    <Compile Include="DataModels\Treatment.cs" />
     <Compile Include="DataModels\Invoice.cs" />
     <Compile Include="DataModels\Customer.cs" />
     <Compile Include="DataModels\PriceList.cs" />
@@ -95,6 +132,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Helper\Helper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="script\PostgreSQL1.generated.cs">
@@ -107,6 +145,36 @@
     </Compile>
     <Compile Include="UI\AddPatient.Designer.cs">
       <DependentUpon>AddPatient.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Anamesys\Anamnesys.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Anamesys\Anamnesys.Designer.cs">
+      <DependentUpon>Anamnesys.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Anamesys\RecentAnamnesys.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Anamesys\RecentAnamnesys.Designer.cs">
+      <DependentUpon>RecentAnamnesys.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Globals\RichText.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Globals\RichText.Designer.cs">
+      <DependentUpon>RichText.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\InvoiceFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\InvoiceFrm.Designer.cs">
+      <DependentUpon>InvoiceFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\InvoiceCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\InvoiceCtrl.Designer.cs">
+      <DependentUpon>InvoiceCtrl.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\NewPatient.cs">
       <SubType>Form</SubType>
@@ -126,6 +194,42 @@
     <Compile Include="UI\SinglePatientMain.Designer.cs">
       <DependentUpon>SinglePatientMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\VisitCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\VisitCtrl.Designer.cs">
+      <DependentUpon>VisitCtrl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\InvoiceListCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\InvoiceListCtrl.Designer.cs">
+      <DependentUpon>InvoiceListCtrl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\InvoiceListItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\InvoiceListItem.Designer.cs">
+      <DependentUpon>InvoiceListItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\VisitMedicalCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\VisitMedicalCtrl.Designer.cs">
+      <DependentUpon>VisitMedicalCtrl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\VisitEconomicCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\VisitEconomicCtrl.Designer.cs">
+      <DependentUpon>VisitEconomicCtrl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\VisitListCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\VisitListCtrl.Designer.cs">
+      <DependentUpon>VisitListCtrl.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -141,6 +245,21 @@
     <EmbeddedResource Include="UI\AddPatient.resx">
       <DependentUpon>AddPatient.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Anamesys\Anamnesys.resx">
+      <DependentUpon>Anamnesys.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Anamesys\RecentAnamnesys.resx">
+      <DependentUpon>RecentAnamnesys.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Globals\RichText.resx">
+      <DependentUpon>RichText.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\InvoiceCtrl.resx">
+      <DependentUpon>InvoiceCtrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\InvoiceFrm.resx">
+      <DependentUpon>InvoiceFrm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\NewPatient.resx">
       <DependentUpon>NewPatient.cs</DependentUpon>
     </EmbeddedResource>
@@ -149,6 +268,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\SinglePatientMain.resx">
       <DependentUpon>SinglePatientMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\VisitCtrl.resx">
+      <DependentUpon>VisitCtrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\InvoiceListCtrl.resx">
+      <DependentUpon>InvoiceListCtrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\InvoiceListItem.resx">
+      <DependentUpon>InvoiceListItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\VisitMedicalCtrl.resx">
+      <DependentUpon>VisitMedicalCtrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\VisitEconomicCtrl.resx">
+      <DependentUpon>VisitEconomicCtrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\VisitListCtrl.resx">
+      <DependentUpon>VisitListCtrl.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="LinqToDB.Templates\DataAnnotations.ttinclude" />
     <None Include="LinqToDB.Templates\DataModel.ttinclude" />
@@ -167,6 +304,7 @@
     <None Include="LinqToDB.Templates\T4Model.ttinclude" />
     <None Include="LinqToDB.Templates\Validation.ttinclude" />
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\FisioHelp.DataModels.Treatment.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -186,11 +324,19 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>PostgreSQL1.generated.cs</LastGenOutput>
     </Content>
+    <Content Include="sql\dbEliCreate_02.sql" />
+    <Content Include="sql\dbEliCreate_03.sql" />
+    <Content Include="sql\dbEliCreate_01.sql" />
+    <Content Include="Template\templateInvoice.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="UI\Dashboard\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

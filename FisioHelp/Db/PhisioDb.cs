@@ -14,7 +14,12 @@ namespace FisioHelp.Db
     public ITable<Customer> Customers { get { return this.GetTable<Customer>(); } }
     public ITable<Invoice> Invoices { get { return this.GetTable<Invoice>(); } }
     public ITable<PriceList> PriceLists { get { return this.GetTable<PriceList>(); } }
+    public ITable<Treatment> Treatments { get { return this.GetTable<Treatment>(); } }
     public ITable<Visit> Visits { get { return this.GetTable<Visit>(); } }
+    public ITable<VisitsTreatment> VisitsTreatments { get { return this.GetTable<VisitsTreatment>(); } }
+    public ITable<Therapist> Therapists { get { return this.GetTable<Therapist>(); } }
+    public ITable<RecentAnamnesy> RecentAnamnesys { get { return this.GetTable<RecentAnamnesy>(); } }
+    public ITable<RemoteAnamnesy> RemoteAnamnesys { get { return this.GetTable<RemoteAnamnesy>(); } }
 
     partial void InitMappingSchema()
     {

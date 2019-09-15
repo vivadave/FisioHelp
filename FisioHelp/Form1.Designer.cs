@@ -31,10 +31,13 @@
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
       this.panel1 = new System.Windows.Forms.Panel();
       this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+      this.panel2 = new System.Windows.Forms.Panel();
       this.toolStrip1 = new System.Windows.Forms.ToolStrip();
       this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+      this.textBoxFilter = new System.Windows.Forms.TextBox();
       this.panel1.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+      this.splitContainer1.Panel1.SuspendLayout();
       this.splitContainer1.SuspendLayout();
       this.toolStrip1.SuspendLayout();
       this.SuspendLayout();
@@ -59,13 +62,26 @@
       // splitContainer1.Panel1
       // 
       this.splitContainer1.Panel1.BackColor = System.Drawing.Color.White;
+      this.splitContainer1.Panel1.Controls.Add(this.textBoxFilter);
+      this.splitContainer1.Panel1.Controls.Add(this.panel2);
       // 
       // splitContainer1.Panel2
       // 
+      this.splitContainer1.Panel2.AutoScroll = true;
       this.splitContainer1.Panel2.BackColor = System.Drawing.Color.White;
       this.splitContainer1.Size = new System.Drawing.Size(800, 408);
       this.splitContainer1.SplitterDistance = 120;
       this.splitContainer1.TabIndex = 1;
+      // 
+      // panel2
+      // 
+      this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.panel2.Location = new System.Drawing.Point(0, 29);
+      this.panel2.Name = "panel2";
+      this.panel2.Size = new System.Drawing.Size(117, 379);
+      this.panel2.TabIndex = 0;
       // 
       // toolStrip1
       // 
@@ -91,6 +107,18 @@
       this.toolStripLabel1.Text = "NUOVO PAZIENTE";
       this.toolStripLabel1.Click += new System.EventHandler(this.toolStripLabel1_Click);
       // 
+      // textBoxFilter
+      // 
+      this.textBoxFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.textBoxFilter.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F);
+      this.textBoxFilter.ImeMode = System.Windows.Forms.ImeMode.Off;
+      this.textBoxFilter.Location = new System.Drawing.Point(3, 0);
+      this.textBoxFilter.Name = "textBoxFilter";
+      this.textBoxFilter.Size = new System.Drawing.Size(114, 27);
+      this.textBoxFilter.TabIndex = 38;
+      this.textBoxFilter.TextChanged += new System.EventHandler(this.textBoxFilter_TextChanged);
+      // 
       // Form1
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -104,6 +132,8 @@
       this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
       this.Load += new System.EventHandler(this.Form1_Load);
       this.panel1.ResumeLayout(false);
+      this.splitContainer1.Panel1.ResumeLayout(false);
+      this.splitContainer1.Panel1.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
       this.splitContainer1.ResumeLayout(false);
       this.toolStrip1.ResumeLayout(false);
@@ -118,6 +148,8 @@
     private System.Windows.Forms.SplitContainer splitContainer1;
     private System.Windows.Forms.ToolStrip toolStrip1;
     private System.Windows.Forms.ToolStripLabel toolStripLabel1;
+    private System.Windows.Forms.Panel panel2;
+    private System.Windows.Forms.TextBox textBoxFilter;
   }
 }
 

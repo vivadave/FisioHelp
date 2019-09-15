@@ -29,42 +29,92 @@ namespace FisioHelp
 
     private void OnNameClicked(object sender, EventArgs e)
     {
+
       var control = (UI.PatientListItem)sender;
-      this.splitContainer1.Panel2.Controls.Clear();
-      var userForm = new UI.SinglePatientMain(control.Customer);
-      userForm.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.splitContainer1.Panel2.Controls.Add(userForm);
+      if (control.Customer == null)
+      {
+        AddVisitList();
+      }
+      else
+      {
+        this.splitContainer1.Panel2.Controls.Clear();
+        var userForm = new UI.SinglePatientMain(control.Customer);
+        userForm.Dock = System.Windows.Forms.DockStyle.Fill;
+        this.splitContainer1.Panel2.Controls.Add(userForm);
+      }
+
+      foreach (var c in this.panel2.Controls)
+      {
+        var uc = (UI.PatientListItem)c;
+        uc.BackColor = Color.White;
+      }
+      control.BackColor = Color.FromArgb(255, 236, 236);
     }
 
     private void Form1_Load(object sender, EventArgs e)
-    { 
+    {
+      CreateNameList();
+      AddVisitList();
+    }
+
+    private void CreateNameList()
+    {
       using (var db = new Db.PhisioDB())
       {
-        customers = db.Customers.LoadWith(e1 => e1.Address).ToList();
+        if (textBoxFilter.Text.Length>0)
+          customers = db.Customers.LoadWith(e1 => e1.Address).LoadWith(e1 => e1.Pricelist).Where(x =>x.Surname.ToLower().Contains(textBoxFilter.Text.ToLower()) || x.Name.ToLower().Contains(textBoxFilter.Text.ToLower())).ToList();
+        else
+          customers = db.Customers.LoadWith(e1 => e1.Address).LoadWith(e1 => e1.Pricelist).ToList();
       }
 
       if (customers != null)
       {
-        var pos = 0;
+        customers = customers.OrderByDescending(x => x.FullName).ToList();
+        customers.Add(null);
+        this.panel2.Controls.Clear();
         foreach (var customer in customers)
         {
           var listItemName = new UI.PatientListItem(customer);
           listItemName.Dock = System.Windows.Forms.DockStyle.Top;
-          listItemName.Location = new System.Drawing.Point(0, 0);
+          listItemName.Location = new System.Drawing.Point(0, 60);
           listItemName.Size = new System.Drawing.Size(175, 60);
           listItemName.TabIndex = 0;
           listItemName.UserClicked += OnNameClicked;
-          pos += 40;
-          this.splitContainer1.Panel1.Controls.Add(listItemName);
-
+          if (customer == null)
+            listItemName.BackColor = Color.FromArgb(255, 236, 236);
+          this.panel2.Controls.Add(listItemName);
         }
       }
+    }
+
+    private void AddVisitList()
+    {
+      var visitList = new UI.VisitListCtrl(null);
+      visitList.Dock = System.Windows.Forms.DockStyle.Fill;
+      visitList.OpenVisit += OnOpenVisit;
+      this.splitContainer1.Panel2.Controls.Clear();
+      this.splitContainer1.Panel2.Controls.Add(visitList);
     }
 
     private void toolStripLabel1_Click(object sender, EventArgs e)
     {
       var newPatientForm = new UI.NewPatient();
       newPatientForm.ShowDialog();
+    }
+
+    private void OnOpenVisit(object sender, EventArgs e)
+    {
+      var vc = (UI.VisitListCtrl)sender;
+      this.splitContainer1.Panel2.Controls.Clear();
+      var userForm = new UI.SinglePatientMain(vc.SelectedVisit?.Customer);
+      userForm.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.splitContainer1.Panel2.Controls.Add(userForm);
+      userForm.OpenVisit(vc.SelectedVisit);
+    }
+
+    private void textBoxFilter_TextChanged(object sender, EventArgs e)
+    {
+      CreateNameList();
     }
   }
 }

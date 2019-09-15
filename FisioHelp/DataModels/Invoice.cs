@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using LinqToDB.Mapping;
 using System.Threading.Tasks;
 using NpgsqlTypes;
+using System.Linq;
 
 namespace FisioHelp.DataModels
 {
@@ -14,7 +15,18 @@ namespace FisioHelp.DataModels
     [Column("date"), NotNull] public NpgsqlDate Date { get; set; } // date
     [Column("discount"), Nullable] public double? Discount { get; set; } // double precision
     [Column("payed"), Nullable] public bool? Payed { get; set; } // boolean
+    [Column("deleted")] public bool Deleted { get; set; } // boolean
     [Column("text"), Nullable] public string Text { get; set; } // text
+    [Column("title")] public string Title { get; set; } // text
+
+    public double Total
+    {
+      get
+      {
+        var discount = Discount != null ? (double)Discount : 0.0;
+        return Visitsinvoiceidfkeys.Sum(x => x.Price != null ? (double)x.Price : 0.0) - discount;
+      }
+    }
 
     #region Associations
 

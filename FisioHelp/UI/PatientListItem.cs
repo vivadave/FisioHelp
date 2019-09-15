@@ -19,7 +19,10 @@ namespace FisioHelp.UI
     {
       InitializeComponent();
       Customer = customer;
-      labelName.Text = $"{customer.Name} {customer.Surname}".ToUpper();
+      if (customer != null)
+        labelName.Text = customer.FullName.ToUpper();
+      else
+        labelName.Text = "DASHBOARD";
     }
 
     private void PatientListItem_Click(object sender, EventArgs e)
