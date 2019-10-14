@@ -78,7 +78,8 @@ namespace FisioHelp.UI
       _customer.Tel2 = textBoxTel2.Text;
       _customer.Fiscalcode = textBoxFiscalCode.Text;
       _customer.Vat = textBoxVat.Text;
-      _customer.Language = comboBoxLanguage.SelectedItem.ToString();
+      if (comboBoxLanguage.SelectedItem != null)
+        _customer.Language = comboBoxLanguage.SelectedItem.ToString();
 
       if (_customer.Address != null)
       {
@@ -95,8 +96,11 @@ namespace FisioHelp.UI
         };
       }
 
-      _customer.Pricelist = (PriceList)comboBoxPrices.SelectedItem;
-      _customer.PricelistId = ((PriceList)comboBoxPrices.SelectedItem).Id;
+      if (comboBoxPrices.SelectedItem != null)
+      {
+        _customer.Pricelist = (PriceList)comboBoxPrices.SelectedItem;
+        _customer.PricelistId = ((PriceList)comboBoxPrices.SelectedItem).Id;
+      }
       
     }
 

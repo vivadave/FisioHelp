@@ -10,12 +10,11 @@ CREATE TABLE IF NOT EXISTS visits_treatments (
   CONSTRAINT bill_product_pkey PRIMARY KEY (visit_id, treatment_id)  
 );
 
-ALTER TABLE visits RENAME duration TO start_time;
-ALTER TABLE visits RENAME note TO initial_evaluetion;
-ALTER TABLE visits ADD COLUMN final_evaluetion text;
+ALTER TABLE visits ADD COLUMN IF NOT EXISTS final_evaluetion text;
+ALTER TABLE visits ADD COLUMN IF NOT EXISTS start_time varchar(45);
 
-ALTER TABLE invoices ADD title VARCHAR(25) UNIQUE NOT NULL;
-ALTER TABLE invoices ADD deleted boolean DEFAULT 'f';
+ALTER TABLE invoices ADD COLUMN IF NOT EXISTS title VARCHAR(25) UNIQUE NOT NULL;
+ALTER TABLE invoices ADD COLUMN IF NOT EXISTS deleted boolean DEFAULT 'f';
 
 CREATE TABLE IF NOT EXISTS therapists (
   id serial NOT NULL, 

@@ -18,6 +18,7 @@ namespace FisioHelp
     List<FisioHelp.DataModels.Customer> customers;
     public Form1()
     {
+      Helper.Helper.GenerateDB();
       InitializeComponent();
       LinqToDB.Common.Configuration.Linq.AllowMultipleQuery = true;
     }
@@ -98,7 +99,7 @@ namespace FisioHelp
 
     private void toolStripLabel1_Click(object sender, EventArgs e)
     {
-      var newPatientForm = new UI.NewPatient();
+      var newPatientForm = new UI.Globals.Setting();
       newPatientForm.ShowDialog();
     }
 
@@ -115,6 +116,12 @@ namespace FisioHelp
     private void textBoxFilter_TextChanged(object sender, EventArgs e)
     {
       CreateNameList();
+    }
+
+    private void toolStripLabel2_Click(object sender, EventArgs e)
+    {
+      var newPatientForm = new UI.NewPatient();
+      newPatientForm.ShowDialog();
     }
   }
 }

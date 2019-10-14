@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
+using Npgsql;
 using FisioHelp.DataModels;
+using System.Configuration;
 
 namespace FisioHelp.Helper
 {
@@ -65,6 +66,23 @@ namespace FisioHelp.Helper
       }
     }
 
+    public static void GenerateDB()
+    {
+      var dbFiles = Directory.GetFiles("sql");
+
+      foreach( var fileName in dbFiles.OrderBy(x=>x))
+      {
+        FileInfo file = new FileInfo(fileName);
+        string script = file.OpenText().ReadToEnd();
+        var connstring = ConfigurationManager.ConnectionStrings["Phisio"].ConnectionString;
+        NpgsqlConnection _connPg = new NpgsqlConnection(connstring);
+        var m_createdb_cmd = new NpgsqlCommand(script, _connPg);
+        _connPg.Open();
+        m_createdb_cmd.ExecuteNonQuery();
+        _connPg.Close();
+      }
+    }
+
     public static string ReplaceInvoicePlaceHolder (string template, Customer customer, Invoice invoice)
     {
       var therapist = GetTherapist();
@@ -81,28 +99,27 @@ namespace FisioHelp.Helper
       template = template.Replace("{{customer_address}}", $"{customer.Address?.Address_Column}, {customer.Address?.Cap} {customer.Address?.City}" );
       template = template.Replace("{{customer_piva}}", customer.Vat);
 
-      var prestazioniHtml = "<ul>";
+      var prestazioniHtml = @"<div style=""display: block; padding: 15px 0 15px 0px;"">";
 
       foreach (var prestazioni in invoice.Visitsinvoiceidfkeys)
       {
-        prestazioniHtml += $@"<li style=""display: flex; flex-direction: row;"" >
-                              <div class=""date""  style = ""width: 20%;"">{((DateTime)prestazioni.Date).ToShortDateString()}</div>";
-        foreach ( var treatment in prestazioni.Treatmentsvisitidfkeys.Select(vt => vt.Treatment))
-        {
-          var treatmentTxt = customer.Language == "german" ? treatment.DescriptionDe : treatment.DescriptionIt;
-          prestazioniHtml += $@"<div class=""treatment"" style = ""width: 60%;"">{treatmentTxt}</div>";
-        }
-        prestazioniHtml += $@"<div class=""prive"" style = ""width: 20%;"">{prestazioni.Price} €</div></li>";
+        prestazioniHtml += $@"<div style=""width: 200px; display:inline-block;"">{((DateTime)prestazioni.Date).ToShortDateString()}</div>";
+
+        var treatments = Helper.GetTratmensByIdS(prestazioni.Treatmentsvisitidfkeys.Select(x => x.TreatmentId).ToList(), customer.Language);
+
+        prestazioniHtml += $@"<div style=""display:inline-block; width: 350px; vertical-align: middle;"">";
+        foreach ( var treatment in treatments)
+          prestazioniHtml += $@"<div>{treatment}</div>";
+        prestazioniHtml += $@"</div><div style=""width: 150px; text-align:right; display:inline-block;"">{prestazioni.Price.Value.ToString("#.00")} €</div>";
       }
 
-      prestazioniHtml += "</ul>";
-
+      prestazioniHtml += "</div>";
       template = template.Replace("{{prestazioni}}", prestazioniHtml);
       var total = invoice.Visitsinvoiceidfkeys.Sum(x => x.Price);
       var inps = total * .04;
-      template = template.Replace("{{total}}", total.ToString());
-      template = template.Replace("{{inps}}", inps.ToString());
-      template = template.Replace("{{total_with_inps}}", (inps+total).ToString());
+      template = template.Replace("{{total}}", total.Value.ToString("#.00"));
+      template = template.Replace("{{inps}}", inps.Value.ToString("#.00"));
+      template = template.Replace("{{total_with_inps}}", (inps+total).Value.ToString("#.00"));
 
       return template;
     }

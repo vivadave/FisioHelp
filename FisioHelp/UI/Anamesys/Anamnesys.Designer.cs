@@ -28,9 +28,12 @@
     /// </summary>
     private void InitializeComponent()
     {
+      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Anamnesys));
       this.tabControl1 = new System.Windows.Forms.TabControl();
-      this.tabPage1 = new System.Windows.Forms.TabPage();
-      this.tabPage2 = new System.Windows.Forms.TabPage();
+      this.tabPageAnaRecent = new System.Windows.Forms.TabPage();
+      this.tabPageAnaRemota = new System.Windows.Forms.TabPage();
+      this.buttonSave = new System.Windows.Forms.Button();
+      this.tabPageStomato = new System.Windows.Forms.TabPage();
       this.tabControl1.SuspendLayout();
       this.SuspendLayout();
       // 
@@ -39,42 +42,79 @@
       this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-      this.tabControl1.Controls.Add(this.tabPage1);
-      this.tabControl1.Controls.Add(this.tabPage2);
+      this.tabControl1.Controls.Add(this.tabPageAnaRecent);
+      this.tabControl1.Controls.Add(this.tabPageAnaRemota);
+      this.tabControl1.Controls.Add(this.tabPageStomato);
+      this.tabControl1.Font = new System.Drawing.Font("Segoe UI Historic", 10F);
       this.tabControl1.Location = new System.Drawing.Point(-1, 0);
       this.tabControl1.Name = "tabControl1";
       this.tabControl1.SelectedIndex = 0;
-      this.tabControl1.Size = new System.Drawing.Size(801, 450);
+      this.tabControl1.Size = new System.Drawing.Size(1140, 458);
       this.tabControl1.TabIndex = 0;
       // 
-      // tabPage1
+      // tabPageAnaRecent
       // 
-      this.tabPage1.Location = new System.Drawing.Point(4, 22);
-      this.tabPage1.Name = "tabPage1";
-      this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-      this.tabPage1.Size = new System.Drawing.Size(793, 424);
-      this.tabPage1.TabIndex = 0;
-      this.tabPage1.Text = "tabPage1";
-      this.tabPage1.UseVisualStyleBackColor = true;
+      this.tabPageAnaRecent.AutoScroll = true;
+      this.tabPageAnaRecent.AutoScrollMinSize = new System.Drawing.Size(0, 100);
+      this.tabPageAnaRecent.Location = new System.Drawing.Point(4, 26);
+      this.tabPageAnaRecent.Name = "tabPageAnaRecent";
+      this.tabPageAnaRecent.Padding = new System.Windows.Forms.Padding(3);
+      this.tabPageAnaRecent.Size = new System.Drawing.Size(1132, 428);
+      this.tabPageAnaRecent.TabIndex = 0;
+      this.tabPageAnaRecent.Text = "Anamnesi Recente";
+      this.tabPageAnaRecent.UseVisualStyleBackColor = true;
       // 
-      // tabPage2
+      // tabPageAnaRemota
       // 
-      this.tabPage2.Location = new System.Drawing.Point(4, 22);
-      this.tabPage2.Name = "tabPage2";
-      this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-      this.tabPage2.Size = new System.Drawing.Size(192, 74);
-      this.tabPage2.TabIndex = 1;
-      this.tabPage2.Text = "tabPage2";
-      this.tabPage2.UseVisualStyleBackColor = true;
+      this.tabPageAnaRemota.AutoScroll = true;
+      this.tabPageAnaRemota.Location = new System.Drawing.Point(4, 26);
+      this.tabPageAnaRemota.Name = "tabPageAnaRemota";
+      this.tabPageAnaRemota.Padding = new System.Windows.Forms.Padding(3);
+      this.tabPageAnaRemota.Size = new System.Drawing.Size(1132, 428);
+      this.tabPageAnaRemota.TabIndex = 1;
+      this.tabPageAnaRemota.Text = "Anamnesi Remota";
+      this.tabPageAnaRemota.UseVisualStyleBackColor = true;
+      // 
+      // buttonSave
+      // 
+      this.buttonSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+      this.buttonSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
+      this.buttonSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+      this.buttonSave.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.buttonSave.ForeColor = System.Drawing.Color.White;
+      this.buttonSave.Location = new System.Drawing.Point(1021, 464);
+      this.buttonSave.Name = "buttonSave";
+      this.buttonSave.Size = new System.Drawing.Size(106, 38);
+      this.buttonSave.TabIndex = 27;
+      this.buttonSave.Text = "Save";
+      this.buttonSave.UseVisualStyleBackColor = false;
+      this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
+      // 
+      // tabPageStomato
+      // 
+      this.tabPageStomato.AutoScroll = true;
+      this.tabPageStomato.Location = new System.Drawing.Point(4, 26);
+      this.tabPageStomato.Name = "tabPageStomato";
+      this.tabPageStomato.Padding = new System.Windows.Forms.Padding(3);
+      this.tabPageStomato.Size = new System.Drawing.Size(1132, 428);
+      this.tabPageStomato.TabIndex = 2;
+      this.tabPageStomato.Text = "Stomatognathic Test";
+      this.tabPageStomato.UseVisualStyleBackColor = true;
+      this.tabPageStomato.Click += new System.EventHandler(this.tabPage1_Click);
       // 
       // Anamnesys
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(800, 450);
+      this.BackColor = System.Drawing.Color.White;
+      this.ClientSize = new System.Drawing.Size(1139, 514);
+      this.Controls.Add(this.buttonSave);
       this.Controls.Add(this.tabControl1);
+      this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
       this.Name = "Anamnesys";
-      this.Text = "Anamnesys";
+      this.Text = "Schede valutazione";
+      this.Load += new System.EventHandler(this.Anamnesys_Load);
+      this.ResizeEnd += new System.EventHandler(this.Anamnesys_ResizeEnd);
       this.tabControl1.ResumeLayout(false);
       this.ResumeLayout(false);
 
@@ -83,7 +123,9 @@
     #endregion
 
     private System.Windows.Forms.TabControl tabControl1;
-    private System.Windows.Forms.TabPage tabPage1;
-    private System.Windows.Forms.TabPage tabPage2;
+    private System.Windows.Forms.TabPage tabPageAnaRecent;
+    private System.Windows.Forms.TabPage tabPageAnaRemota;
+    private System.Windows.Forms.Button buttonSave;
+    private System.Windows.Forms.TabPage tabPageStomato;
   }
 }

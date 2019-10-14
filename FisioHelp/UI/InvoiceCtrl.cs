@@ -179,13 +179,40 @@ namespace FisioHelp.UI
 
     private void buttonPrinter_Click(object sender, EventArgs e)
     {
-      string html = File.ReadAllText("Template/templateInvoice.html");
-      html = Helper.Helper.ReplaceInvoicePlaceHolder(html, _customer, Invoice);
-      PdfDocument pdf = PdfGenerator.GeneratePdf(html, PageSize.Letter);
+      string html = "";
 
-      var pdfPath = "document.pdf";
-      pdf.Save(pdfPath);
-      System.Diagnostics.Process.Start(pdfPath);
+      if (_customer.Language == "german")
+        html = File.ReadAllText("Template/templateInvoice_de.html");
+      else
+        html = File.ReadAllText("Template/templateInvoice_it.html");
+
+      html = Helper.Helper.ReplaceInvoicePlaceHolder(html, _customer, Invoice);
+      var basePath = "C:\\";
+      var date = $"{Invoice.Date.Year}{Invoice.Date.Month}{Invoice.Date.Day:00}";
+      basePath += date;
+      Directory.CreateDirectory(basePath);
+      string path = $@"{basePath}\{Invoice.Title}.html";
+      File.WriteAllText(path, html);
+      System.Diagnostics.Process.Start(path);
+      var Renderer = new IronPdf.HtmlToPdf();
+      var PDF = Renderer.RenderHtmlAsPdf(html);
+      var OutputPath = $@"{basePath}\{Invoice.Title}.pdf";
+      PDF.SaveAs(OutputPath);
+      // This neat trick opens our PDF file so we can see the result in our default PDF viewer
+      System.Diagnostics.Process.Start(OutputPath);
+      /*
+      PdfDocument pdf = PdfGenerator.GeneratePdf(html, PageSize.Letter);
+      try
+      {
+        var pdfPath = "document.pdf";
+        pdf.Save(pdfPath);
+        System.Diagnostics.Process.Start(pdfPath);
+      }
+      catch
+      {
+        MessageBox.Show("Chiudere la fattura se già aperta");
+      }
+      */
     }
   }
 }

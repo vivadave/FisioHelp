@@ -66,14 +66,14 @@
       this.richTextBoxExInitial.FilePath = "";
       this.richTextBoxExInitial.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F);
       this.richTextBoxExInitial.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-      this.richTextBoxExInitial.Location = new System.Drawing.Point(133, 278);
+      this.richTextBoxExInitial.Location = new System.Drawing.Point(132, 220);
       this.richTextBoxExInitial.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.richTextBoxExInitial.Name = "richTextBoxExInitial";
       this.richTextBoxExInitial.Rtf = "{\\rtf1\\ansi\\ansicpg1252\\deff0\\deflang1040{\\fonttbl{\\f0\\fnil\\fcharset0 Segoe UI Hi" +
     "storic;}}\r\n\\viewkind4\\uc1\\pard\\f0\\fs23\\par\r\n}\r\n";
       this.richTextBoxExInitial.SetColorWithFont = true;
       this.richTextBoxExInitial.ShowToolStrip = true;
-      this.richTextBoxExInitial.Size = new System.Drawing.Size(754, 142);
+      this.richTextBoxExInitial.Size = new System.Drawing.Size(754, 131);
       this.richTextBoxExInitial.TabIndex = 27;
       // 
       // textBoxPrice
@@ -104,7 +104,7 @@
       // 
       this.label4.AllowDrop = true;
       this.label4.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F);
-      this.label4.Location = new System.Drawing.Point(34, 278);
+      this.label4.Location = new System.Drawing.Point(33, 220);
       this.label4.Name = "label4";
       this.label4.Size = new System.Drawing.Size(86, 80);
       this.label4.TabIndex = 24;
@@ -164,23 +164,23 @@
       this.richTextBoxExFinal.FilePath = "";
       this.richTextBoxExFinal.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F);
       this.richTextBoxExFinal.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-      this.richTextBoxExFinal.Location = new System.Drawing.Point(132, 444);
+      this.richTextBoxExFinal.Location = new System.Drawing.Point(133, 361);
       this.richTextBoxExFinal.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.richTextBoxExFinal.Name = "richTextBoxExFinal";
       this.richTextBoxExFinal.Rtf = "{\\rtf1\\ansi\\ansicpg1252\\deff0\\deflang1040{\\fonttbl{\\f0\\fnil\\fcharset0 Segoe UI Hi" +
     "storic;}}\r\n\\viewkind4\\uc1\\pard\\f0\\fs23\\par\r\n}\r\n";
       this.richTextBoxExFinal.SetColorWithFont = true;
       this.richTextBoxExFinal.ShowToolStrip = true;
-      this.richTextBoxExFinal.Size = new System.Drawing.Size(754, 80);
+      this.richTextBoxExFinal.Size = new System.Drawing.Size(754, 179);
       this.richTextBoxExFinal.TabIndex = 34;
       // 
       // label5
       // 
       this.label5.AllowDrop = true;
       this.label5.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F);
-      this.label5.Location = new System.Drawing.Point(33, 444);
+      this.label5.Location = new System.Drawing.Point(34, 361);
       this.label5.Name = "label5";
-      this.label5.Size = new System.Drawing.Size(92, 48);
+      this.label5.Size = new System.Drawing.Size(92, 147);
       this.label5.TabIndex = 33;
       this.label5.Text = "Conclusioni";
       // 
@@ -191,7 +191,6 @@
       this.textBoxTime.Name = "textBoxTime";
       this.textBoxTime.Size = new System.Drawing.Size(123, 27);
       this.textBoxTime.TabIndex = 36;
-      this.textBoxTime.UseWaitCursor = true;
       this.textBoxTime.Validating += new System.ComponentModel.CancelEventHandler(this.textBoxTime_Validating);
       this.textBoxTime.Validated += new System.EventHandler(this.textBoxTime_Validated);
       // 
@@ -223,7 +222,7 @@
       this.checkedListBox1.FormattingEnabled = true;
       this.checkedListBox1.Location = new System.Drawing.Point(133, 142);
       this.checkedListBox1.Name = "checkedListBox1";
-      this.checkedListBox1.Size = new System.Drawing.Size(753, 114);
+      this.checkedListBox1.Size = new System.Drawing.Size(753, 70);
       this.checkedListBox1.TabIndex = 38;
       this.checkedListBox1.SelectedIndexChanged += new System.EventHandler(this.checkedListBox1_SelectedIndexChanged);
       // 

@@ -20,6 +20,7 @@ namespace FisioHelp.Db
     public ITable<Therapist> Therapists { get { return this.GetTable<Therapist>(); } }
     public ITable<RecentAnamnesy> RecentAnamnesys { get { return this.GetTable<RecentAnamnesy>(); } }
     public ITable<RemoteAnamnesy> RemoteAnamnesys { get { return this.GetTable<RemoteAnamnesy>(); } }
+    public ITable<StomatognathicTest> StomatognathicTests { get { return this.GetTable<StomatognathicTest>(); } }
 
     partial void InitMappingSchema()
     {

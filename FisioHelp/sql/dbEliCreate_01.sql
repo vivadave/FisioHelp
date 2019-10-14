@@ -1,5 +1,3 @@
-CREATE TYPE language AS ENUM ('italian', 'german');
-
 CREATE TABLE IF NOT EXISTS price_lists (
   id serial NOT NULL, 
   name varchar(256) not null,  
@@ -27,7 +25,7 @@ CREATE TABLE IF NOT EXISTS customers (
   address_id INTEGER REFERENCES addresses(id),
   priceList_id INTEGER REFERENCES priceLists(id),
   note text, 
-  language language default 'german',
+  language  varchar(45), 
   PRIMARY KEY (id)  
 );
 
@@ -49,6 +47,6 @@ CREATE TABLE IF NOT EXISTS visits (
   duration INTEGER, 
   invoiced boolean DEFAULT 'f', 
   payed boolean DEFAULT 'f', 
-  note text,  
+  initial_evaluetion text,  
   PRIMARY KEY (id)  
 );

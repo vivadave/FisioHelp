@@ -215,7 +215,8 @@ namespace FisioHelp.UI
 
     private void buttonAnamnesys_Click(object sender, EventArgs e)
     {
-
+      UI.Anamesys.Anamnesys anamnesysFrm = new Anamesys.Anamnesys(_customer);
+      anamnesysFrm.ShowDialog();
     }
 
     private void buttonInvoices_Click(object sender, EventArgs e)
