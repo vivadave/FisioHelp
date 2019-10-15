@@ -34,7 +34,7 @@ namespace FisioHelp
       var control = (UI.PatientListItem)sender;
       if (control.Customer == null)
       {
-        AddVisitList();
+        AddDashBoard();
       }
       else
       {
@@ -55,7 +55,7 @@ namespace FisioHelp
     private void Form1_Load(object sender, EventArgs e)
     {
       CreateNameList();
-      AddVisitList();
+      AddDashBoard();
     }
 
     private void CreateNameList()
@@ -97,6 +97,14 @@ namespace FisioHelp
       this.splitContainer1.Panel2.Controls.Add(visitList);
     }
 
+    private void AddDashBoard()
+    {
+      var dashBoardCtrl = new UI.Dashboard.Dashboard();
+      dashBoardCtrl.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.splitContainer1.Panel2.Controls.Clear();
+      this.splitContainer1.Panel2.Controls.Add(dashBoardCtrl);
+    }
+
     private void toolStripLabel1_Click(object sender, EventArgs e)
     {
       var newPatientForm = new UI.Globals.Setting();
@@ -121,7 +129,14 @@ namespace FisioHelp
     private void toolStripLabel2_Click(object sender, EventArgs e)
     {
       var newPatientForm = new UI.NewPatient();
+      newPatientForm.PatientSaved += NewPatient;
       newPatientForm.ShowDialog();
+    }
+
+    private void NewPatient(object sender, EventArgs e)
+    {
+      CreateNameList();
+      AddDashBoard();
     }
   }
 }

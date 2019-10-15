@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using LinqToDB.Mapping;
-using System.Threading.Tasks;
+using NpgsqlTypes;
 
 namespace FisioHelp.DataModels
 {
@@ -20,6 +20,7 @@ namespace FisioHelp.DataModels
     [Column("pricelist_id"), Nullable] public int? PricelistId { get; set; } // integer
     [Column("note"), Nullable] public string Note { get; set; } // text
     [Column("language"), Nullable] public string Language { get; set; } // text
+    [Column("creation_date"), Nullable] public NpgsqlDate CreationDate { get; set; } // date
 
     public string FullName
     {

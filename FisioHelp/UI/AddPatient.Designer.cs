@@ -75,6 +75,7 @@
       this.panel2 = new System.Windows.Forms.Panel();
       this.label12 = new System.Windows.Forms.Label();
       this.errorProvider3 = new System.Windows.Forms.ErrorProvider(this.components);
+      this.buttonCancel = new System.Windows.Forms.Button();
       this.groupBox1.SuspendLayout();
       this.tableLayoutPanel2.SuspendLayout();
       this.panel11.SuspendLayout();
@@ -380,7 +381,7 @@
       this.buttonSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
       this.buttonSave.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.buttonSave.ForeColor = System.Drawing.Color.White;
-      this.buttonSave.Location = new System.Drawing.Point(740, 531);
+      this.buttonSave.Location = new System.Drawing.Point(618, 531);
       this.buttonSave.Name = "buttonSave";
       this.buttonSave.Size = new System.Drawing.Size(106, 38);
       this.buttonSave.TabIndex = 21;
@@ -601,11 +602,27 @@
       // 
       this.errorProvider3.ContainerControl = this;
       // 
+      // buttonCancel
+      // 
+      this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+      this.buttonCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
+      this.buttonCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+      this.buttonCancel.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.buttonCancel.ForeColor = System.Drawing.Color.White;
+      this.buttonCancel.Location = new System.Drawing.Point(740, 531);
+      this.buttonCancel.Name = "buttonCancel";
+      this.buttonCancel.Size = new System.Drawing.Size(106, 38);
+      this.buttonCancel.TabIndex = 39;
+      this.buttonCancel.Text = "Cancel";
+      this.buttonCancel.UseVisualStyleBackColor = false;
+      this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
+      // 
       // AddPatient
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.BackColor = System.Drawing.Color.White;
+      this.Controls.Add(this.buttonCancel);
       this.Controls.Add(this.label12);
       this.Controls.Add(this.tableLayoutPanel1);
       this.Controls.Add(this.richTextBoxEx1);
@@ -698,5 +715,6 @@
     private System.Windows.Forms.ErrorProvider errorProvider3;
     private System.Windows.Forms.ComboBox comboBoxPrices;
     private System.Windows.Forms.ComboBox comboBoxLanguage;
+    private System.Windows.Forms.Button buttonCancel;
   }
 }

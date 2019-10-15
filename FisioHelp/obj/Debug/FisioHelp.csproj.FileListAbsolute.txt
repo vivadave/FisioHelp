@@ -167,3 +167,5 @@ C:\Progetti\FisioHelp\FisioHelp\bin\Debug\IronPdf.dll
 C:\Progetti\FisioHelp\FisioHelp\bin\Debug\IronPdf.xml
 C:\Progetti\FisioHelp\FisioHelp\bin\Debug\Template\templateInvoice_de.html
 C:\Progetti\FisioHelp\FisioHelp\bin\Debug\Template\templateInvoice_it.html
+C:\Progetti\FisioHelp\FisioHelp\obj\Debug\FisioHelp.UI.Dashboard.Dashboard.resources
+C:\Progetti\FisioHelp\FisioHelp\bin\Debug\sql\dbEliCreate_05.sql

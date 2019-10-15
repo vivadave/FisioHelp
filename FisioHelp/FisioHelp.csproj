@@ -191,6 +191,12 @@
     <Compile Include="UI\Anamesys\StomatognathicPalpationRow.Designer.cs">
       <DependentUpon>StomatognathicPalpationRow.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Dashboard\Dashboard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Dashboard\Dashboard.Designer.cs">
+      <DependentUpon>Dashboard.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Globals\RichText.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -302,6 +308,9 @@
     <EmbeddedResource Include="UI\Anamesys\StomatognathicPalpationRow.resx">
       <DependentUpon>StomatognathicPalpationRow.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Dashboard\Dashboard.resx">
+      <DependentUpon>Dashboard.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Globals\RichText.resx">
       <DependentUpon>RichText.cs</DependentUpon>
     </EmbeddedResource>
@@ -379,6 +388,9 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>PostgreSQL1.generated.cs</LastGenOutput>
     </Content>
+    <Content Include="sql\dbEliCreate_05.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="sql\dbEliCreate_02.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -404,9 +416,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="UI\Dashboard\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

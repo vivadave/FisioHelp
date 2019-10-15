@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Data;
 using System.Linq;
-using System.Text;
+using NpgsqlTypes;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using FisioHelp.DataModels;
@@ -15,6 +15,7 @@ namespace FisioHelp.UI
   public partial class AddPatient : UserControl
   {
     public event EventHandler PatientSaved;
+    public event EventHandler Close;
     private FisioHelp.DataModels.Customer _customer;
     private PriceList[] _priceList;
 
@@ -78,6 +79,8 @@ namespace FisioHelp.UI
       _customer.Tel2 = textBoxTel2.Text;
       _customer.Fiscalcode = textBoxFiscalCode.Text;
       _customer.Vat = textBoxVat.Text;
+      _customer.CreationDate = NpgsqlDate.Now;
+
       if (comboBoxLanguage.SelectedItem != null)
         _customer.Language = comboBoxLanguage.SelectedItem.ToString();
 
@@ -134,11 +137,19 @@ namespace FisioHelp.UI
             _customer.Address.Id = db.InsertWithInt32Identity(_customer.Address);
             _customer.AddressId = _customer.Address.Id;
           }
-          _customer.Id = db.InsertWithInt32Identity(_customer);          
+          _customer.Id = db.InsertWithInt32Identity(_customer); 
+          
+          if (_customer.Id > 0)
+          {
+            MessageBox.Show("Utente salvato correttamente");
+            PatientSaved?.Invoke(this, e);
+          }
+          else
+          {
+            MessageBox.Show("Si è verificato un errore");
+          }
         }
       }
-
-      PatientSaved?.Invoke(this, e);
     }
 
     private void textBoxName_Validating(object sender, CancelEventArgs e)
@@ -190,6 +201,11 @@ namespace FisioHelp.UI
     private void comboBoxPrices_Resize(object sender, EventArgs e)
     {
       this.BeginInvoke(new Action(() => { comboBoxPrices.Select(0, 0); }));
+    }
+
+    private void buttonCancel_Click(object sender, EventArgs e)
+    {
+      Close?.Invoke(this, e);
     }
   }
 }
