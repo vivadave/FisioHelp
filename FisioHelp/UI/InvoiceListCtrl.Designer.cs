@@ -112,15 +112,15 @@
       this.label5.Font = new System.Drawing.Font("Segoe UI Historic", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.label5.Location = new System.Drawing.Point(16, 12);
       this.label5.Name = "label5";
-      this.label5.Size = new System.Drawing.Size(32, 17);
+      this.label5.Size = new System.Drawing.Size(48, 17);
       this.label5.TabIndex = 10;
-      this.label5.Text = "Filtri";
+      this.label5.Text = "Fatture";
       // 
       // label4
       // 
       this.label4.AutoSize = true;
       this.label4.Font = new System.Drawing.Font("Segoe UI Historic", 10F);
-      this.label4.Location = new System.Drawing.Point(511, 33);
+      this.label4.Location = new System.Drawing.Point(518, 40);
       this.label4.Name = "label4";
       this.label4.Size = new System.Drawing.Size(52, 19);
       this.label4.TabIndex = 9;
@@ -130,7 +130,7 @@
       // 
       this.label2.AutoSize = true;
       this.label2.Font = new System.Drawing.Font("Segoe UI Historic", 10F);
-      this.label2.Location = new System.Drawing.Point(257, 33);
+      this.label2.Location = new System.Drawing.Point(264, 40);
       this.label2.Name = "label2";
       this.label2.Size = new System.Drawing.Size(18, 19);
       this.label2.TabIndex = 7;
@@ -140,7 +140,7 @@
       // 
       this.label1.AutoSize = true;
       this.label1.Font = new System.Drawing.Font("Segoe UI Historic", 10F);
-      this.label1.Location = new System.Drawing.Point(80, 33);
+      this.label1.Location = new System.Drawing.Point(87, 40);
       this.label1.Name = "label1";
       this.label1.Size = new System.Drawing.Size(26, 19);
       this.label1.TabIndex = 6;
@@ -151,7 +151,7 @@
       // 
       this.comboBoxPayed.Font = new System.Drawing.Font("Segoe UI Historic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.comboBoxPayed.FormattingEnabled = true;
-      this.comboBoxPayed.Location = new System.Drawing.Point(571, 30);
+      this.comboBoxPayed.Location = new System.Drawing.Point(578, 37);
       this.comboBoxPayed.Name = "comboBoxPayed";
       this.comboBoxPayed.Size = new System.Drawing.Size(68, 25);
       this.comboBoxPayed.TabIndex = 4;
@@ -160,7 +160,7 @@
       // dateTimePickerTo
       // 
       this.dateTimePickerTo.Font = new System.Drawing.Font("Segoe UI Historic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.dateTimePickerTo.Location = new System.Drawing.Point(281, 30);
+      this.dateTimePickerTo.Location = new System.Drawing.Point(288, 37);
       this.dateTimePickerTo.Name = "dateTimePickerTo";
       this.dateTimePickerTo.Size = new System.Drawing.Size(119, 25);
       this.dateTimePickerTo.TabIndex = 3;
@@ -170,7 +170,7 @@
       // 
       this.dateTimePickerfrom.CustomFormat = "dd/MM/yyyy";
       this.dateTimePickerfrom.Font = new System.Drawing.Font("Segoe UI Historic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.dateTimePickerfrom.Location = new System.Drawing.Point(112, 30);
+      this.dateTimePickerfrom.Location = new System.Drawing.Point(119, 37);
       this.dateTimePickerfrom.Name = "dateTimePickerfrom";
       this.dateTimePickerfrom.Size = new System.Drawing.Size(119, 25);
       this.dateTimePickerfrom.TabIndex = 2;

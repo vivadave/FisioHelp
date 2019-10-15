@@ -39,6 +39,7 @@ namespace FisioHelp.UI
       comboBoxInvoice.SelectedItem = _comboBoxValues[0];
       comboBoxPayed.SelectedItem = _comboBoxValues[0];
       panel2.Width = this.Size.Width;
+      labelTitle.Text = type == "economical" ? "Visite: finanza" : "Visite: Relazione";
     }
 
     private void label1_Click(object sender, EventArgs e)

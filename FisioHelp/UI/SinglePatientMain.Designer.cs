@@ -88,7 +88,7 @@
       this.buttonMedicalList.FlatAppearance.BorderSize = 0;
       this.buttonMedicalList.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
       this.buttonMedicalList.Image = ((System.Drawing.Image)(resources.GetObject("buttonMedicalList.Image")));
-      this.buttonMedicalList.Location = new System.Drawing.Point(286, 0);
+      this.buttonMedicalList.Location = new System.Drawing.Point(216, 0);
       this.buttonMedicalList.Name = "buttonMedicalList";
       this.buttonMedicalList.Size = new System.Drawing.Size(58, 59);
       this.buttonMedicalList.TabIndex = 7;
@@ -102,7 +102,7 @@
       this.buttonEconomicList.FlatAppearance.BorderSize = 0;
       this.buttonEconomicList.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
       this.buttonEconomicList.Image = ((System.Drawing.Image)(resources.GetObject("buttonEconomicList.Image")));
-      this.buttonEconomicList.Location = new System.Drawing.Point(209, 0);
+      this.buttonEconomicList.Location = new System.Drawing.Point(287, 0);
       this.buttonEconomicList.Name = "buttonEconomicList";
       this.buttonEconomicList.Size = new System.Drawing.Size(58, 59);
       this.buttonEconomicList.TabIndex = 6;
