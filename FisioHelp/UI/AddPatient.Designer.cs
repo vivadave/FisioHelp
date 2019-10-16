@@ -76,6 +76,8 @@
       this.label12 = new System.Windows.Forms.Label();
       this.errorProvider3 = new System.Windows.Forms.ErrorProvider(this.components);
       this.buttonCancel = new System.Windows.Forms.Button();
+      this.checkBox1 = new System.Windows.Forms.CheckBox();
+      this.buttonOpenPrivacy = new System.Windows.Forms.Button();
       this.groupBox1.SuspendLayout();
       this.tableLayoutPanel2.SuspendLayout();
       this.panel11.SuspendLayout();
@@ -100,7 +102,7 @@
       // 
       this.textBoxName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
       this.textBoxName.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F);
-      this.textBoxName.Location = new System.Drawing.Point(101, 15);
+      this.textBoxName.Location = new System.Drawing.Point(101, 8);
       this.textBoxName.Name = "textBoxName";
       this.textBoxName.Size = new System.Drawing.Size(159, 27);
       this.textBoxName.TabIndex = 4;
@@ -130,7 +132,7 @@
       // 
       this.textBoxEmail.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
       this.textBoxEmail.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F);
-      this.textBoxEmail.Location = new System.Drawing.Point(154, 15);
+      this.textBoxEmail.Location = new System.Drawing.Point(154, 8);
       this.textBoxEmail.Name = "textBoxEmail";
       this.textBoxEmail.Size = new System.Drawing.Size(95, 27);
       this.textBoxEmail.TabIndex = 6;
@@ -153,7 +155,7 @@
       this.textBoxCognome.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
       this.textBoxCognome.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F);
       this.textBoxCognome.ImeMode = System.Windows.Forms.ImeMode.Off;
-      this.textBoxCognome.Location = new System.Drawing.Point(128, 15);
+      this.textBoxCognome.Location = new System.Drawing.Point(128, 8);
       this.textBoxCognome.Name = "textBoxCognome";
       this.textBoxCognome.Size = new System.Drawing.Size(122, 27);
       this.textBoxCognome.TabIndex = 8;
@@ -163,7 +165,7 @@
       // 
       this.label4.AutoSize = true;
       this.label4.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F);
-      this.label4.Location = new System.Drawing.Point(36, 281);
+      this.label4.Location = new System.Drawing.Point(36, 231);
       this.label4.Name = "label4";
       this.label4.Size = new System.Drawing.Size(42, 20);
       this.label4.TabIndex = 11;
@@ -185,7 +187,7 @@
       // 
       this.textBoxTel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
       this.textBoxTel2.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F);
-      this.textBoxTel2.Location = new System.Drawing.Point(128, 16);
+      this.textBoxTel2.Location = new System.Drawing.Point(128, 10);
       this.textBoxTel2.Name = "textBoxTel2";
       this.textBoxTel2.Size = new System.Drawing.Size(122, 27);
       this.textBoxTel2.TabIndex = 12;
@@ -204,7 +206,7 @@
       // 
       this.textBoxTel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
       this.textBoxTel1.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F);
-      this.textBoxTel1.Location = new System.Drawing.Point(101, 16);
+      this.textBoxTel1.Location = new System.Drawing.Point(101, 10);
       this.textBoxTel1.Name = "textBoxTel1";
       this.textBoxTel1.Size = new System.Drawing.Size(159, 27);
       this.textBoxTel1.TabIndex = 14;
@@ -225,7 +227,7 @@
       // 
       this.textBoxFiscalCode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
       this.textBoxFiscalCode.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F);
-      this.textBoxFiscalCode.Location = new System.Drawing.Point(128, 14);
+      this.textBoxFiscalCode.Location = new System.Drawing.Point(128, 7);
       this.textBoxFiscalCode.Name = "textBoxFiscalCode";
       this.textBoxFiscalCode.Size = new System.Drawing.Size(122, 27);
       this.textBoxFiscalCode.TabIndex = 16;
@@ -245,7 +247,7 @@
       // 
       this.textBoxVat.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
       this.textBoxVat.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F);
-      this.textBoxVat.Location = new System.Drawing.Point(101, 14);
+      this.textBoxVat.Location = new System.Drawing.Point(101, 7);
       this.textBoxVat.Name = "textBoxVat";
       this.textBoxVat.Size = new System.Drawing.Size(159, 27);
       this.textBoxVat.TabIndex = 18;
@@ -257,9 +259,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
       this.groupBox1.Controls.Add(this.tableLayoutPanel2);
       this.groupBox1.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F);
-      this.groupBox1.Location = new System.Drawing.Point(22, 399);
+      this.groupBox1.Location = new System.Drawing.Point(22, 411);
       this.groupBox1.Name = "groupBox1";
-      this.groupBox1.Size = new System.Drawing.Size(824, 110);
+      this.groupBox1.Size = new System.Drawing.Size(824, 84);
       this.groupBox1.TabIndex = 20;
       this.groupBox1.TabStop = false;
       this.groupBox1.Text = "Indirizzo";
@@ -276,12 +278,12 @@
       this.tableLayoutPanel2.Controls.Add(this.panel11, 2, 0);
       this.tableLayoutPanel2.Controls.Add(this.panel10, 0, 0);
       this.tableLayoutPanel2.Controls.Add(this.panel12, 1, 0);
-      this.tableLayoutPanel2.Location = new System.Drawing.Point(22, 27);
+      this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 27);
       this.tableLayoutPanel2.Name = "tableLayoutPanel2";
       this.tableLayoutPanel2.RowCount = 1;
       this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
       this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 64F));
-      this.tableLayoutPanel2.Size = new System.Drawing.Size(781, 64);
+      this.tableLayoutPanel2.Size = new System.Drawing.Size(815, 51);
       this.tableLayoutPanel2.TabIndex = 22;
       // 
       // panel11
@@ -289,9 +291,9 @@
       this.panel11.Controls.Add(this.label11);
       this.panel11.Controls.Add(this.textBoxPostalCode);
       this.panel11.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.panel11.Location = new System.Drawing.Point(525, 3);
+      this.panel11.Location = new System.Drawing.Point(548, 3);
       this.panel11.Name = "panel11";
-      this.panel11.Size = new System.Drawing.Size(253, 58);
+      this.panel11.Size = new System.Drawing.Size(264, 45);
       this.panel11.TabIndex = 2;
       // 
       // label11
@@ -311,7 +313,7 @@
       this.textBoxPostalCode.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F);
       this.textBoxPostalCode.Location = new System.Drawing.Point(84, 16);
       this.textBoxPostalCode.Name = "textBoxPostalCode";
-      this.textBoxPostalCode.Size = new System.Drawing.Size(153, 27);
+      this.textBoxPostalCode.Size = new System.Drawing.Size(164, 27);
       this.textBoxPostalCode.TabIndex = 16;
       // 
       // panel10
@@ -321,7 +323,7 @@
       this.panel10.Dock = System.Windows.Forms.DockStyle.Fill;
       this.panel10.Location = new System.Drawing.Point(3, 3);
       this.panel10.Name = "panel10";
-      this.panel10.Size = new System.Drawing.Size(259, 58);
+      this.panel10.Size = new System.Drawing.Size(271, 45);
       this.panel10.TabIndex = 0;
       // 
       // label9
@@ -341,7 +343,7 @@
       this.textBoxIndirizzo.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F);
       this.textBoxIndirizzo.Location = new System.Drawing.Point(60, 16);
       this.textBoxIndirizzo.Name = "textBoxIndirizzo";
-      this.textBoxIndirizzo.Size = new System.Drawing.Size(177, 27);
+      this.textBoxIndirizzo.Size = new System.Drawing.Size(189, 27);
       this.textBoxIndirizzo.TabIndex = 20;
       // 
       // panel12
@@ -349,9 +351,9 @@
       this.panel12.Controls.Add(this.textBoxCity);
       this.panel12.Controls.Add(this.label10);
       this.panel12.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.panel12.Location = new System.Drawing.Point(268, 3);
+      this.panel12.Location = new System.Drawing.Point(280, 3);
       this.panel12.Name = "panel12";
-      this.panel12.Size = new System.Drawing.Size(251, 58);
+      this.panel12.Size = new System.Drawing.Size(262, 45);
       this.panel12.TabIndex = 3;
       // 
       // textBoxCity
@@ -361,7 +363,7 @@
       this.textBoxCity.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F);
       this.textBoxCity.Location = new System.Drawing.Point(72, 16);
       this.textBoxCity.Name = "textBoxCity";
-      this.textBoxCity.Size = new System.Drawing.Size(171, 27);
+      this.textBoxCity.Size = new System.Drawing.Size(182, 27);
       this.textBoxCity.TabIndex = 18;
       // 
       // label10
@@ -413,14 +415,14 @@
       this.richTextBoxEx1.FilePath = "";
       this.richTextBoxEx1.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F);
       this.richTextBoxEx1.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-      this.richTextBoxEx1.Location = new System.Drawing.Point(91, 281);
+      this.richTextBoxEx1.Location = new System.Drawing.Point(91, 231);
       this.richTextBoxEx1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.richTextBoxEx1.Name = "richTextBoxEx1";
       this.richTextBoxEx1.Rtf = "{\\rtf1\\ansi\\ansicpg1252\\deff0\\deflang1040{\\fonttbl{\\f0\\fnil\\fcharset0 Segoe UI Hi" +
     "storic;}}\r\n\\viewkind4\\uc1\\pard\\f0\\fs23\\par\r\n}\r\n";
       this.richTextBoxEx1.SetColorWithFont = true;
       this.richTextBoxEx1.ShowToolStrip = true;
-      this.richTextBoxEx1.Size = new System.Drawing.Size(755, 99);
+      this.richTextBoxEx1.Size = new System.Drawing.Size(755, 172);
       this.richTextBoxEx1.TabIndex = 22;
       // 
       // tableLayoutPanel1
@@ -447,7 +449,7 @@
       this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33F));
       this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33F));
       this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-      this.tableLayoutPanel1.Size = new System.Drawing.Size(824, 183);
+      this.tableLayoutPanel1.Size = new System.Drawing.Size(824, 144);
       this.tableLayoutPanel1.TabIndex = 23;
       // 
       // panel9
@@ -455,9 +457,9 @@
       this.panel9.Controls.Add(this.comboBoxPrices);
       this.panel9.Controls.Add(this.label14);
       this.panel9.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.panel9.Location = new System.Drawing.Point(554, 125);
+      this.panel9.Location = new System.Drawing.Point(554, 98);
       this.panel9.Name = "panel9";
-      this.panel9.Size = new System.Drawing.Size(267, 55);
+      this.panel9.Size = new System.Drawing.Size(267, 43);
       this.panel9.TabIndex = 14;
       // 
       // comboBoxPrices
@@ -466,7 +468,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
       this.comboBoxPrices.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F);
       this.comboBoxPrices.FormattingEnabled = true;
-      this.comboBoxPrices.Location = new System.Drawing.Point(154, 15);
+      this.comboBoxPrices.Location = new System.Drawing.Point(154, 11);
       this.comboBoxPrices.Name = "comboBoxPrices";
       this.comboBoxPrices.Size = new System.Drawing.Size(95, 28);
       this.comboBoxPrices.TabIndex = 21;
@@ -478,7 +480,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
       this.label14.AutoSize = true;
       this.label14.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F);
-      this.label14.Location = new System.Drawing.Point(25, 19);
+      this.label14.Location = new System.Drawing.Point(25, 15);
       this.label14.Name = "label14";
       this.label14.Size = new System.Drawing.Size(123, 20);
       this.label14.TabIndex = 20;
@@ -489,9 +491,9 @@
       this.panel8.Controls.Add(this.label5);
       this.panel8.Controls.Add(this.textBoxTel2);
       this.panel8.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.panel8.Location = new System.Drawing.Point(283, 125);
+      this.panel8.Location = new System.Drawing.Point(283, 98);
       this.panel8.Name = "panel8";
-      this.panel8.Size = new System.Drawing.Size(265, 55);
+      this.panel8.Size = new System.Drawing.Size(265, 43);
       this.panel8.TabIndex = 13;
       // 
       // panel7
@@ -499,9 +501,9 @@
       this.panel7.Controls.Add(this.label6);
       this.panel7.Controls.Add(this.textBoxTel1);
       this.panel7.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.panel7.Location = new System.Drawing.Point(3, 125);
+      this.panel7.Location = new System.Drawing.Point(3, 98);
       this.panel7.Name = "panel7";
-      this.panel7.Size = new System.Drawing.Size(274, 55);
+      this.panel7.Size = new System.Drawing.Size(274, 43);
       this.panel7.TabIndex = 12;
       // 
       // panel6
@@ -509,9 +511,9 @@
       this.panel6.Controls.Add(this.comboBoxLanguage);
       this.panel6.Controls.Add(this.label13);
       this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.panel6.Location = new System.Drawing.Point(554, 65);
+      this.panel6.Location = new System.Drawing.Point(554, 51);
       this.panel6.Name = "panel6";
-      this.panel6.Size = new System.Drawing.Size(267, 54);
+      this.panel6.Size = new System.Drawing.Size(267, 41);
       this.panel6.TabIndex = 11;
       // 
       // comboBoxLanguage
@@ -520,7 +522,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
       this.comboBoxLanguage.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F);
       this.comboBoxLanguage.FormattingEnabled = true;
-      this.comboBoxLanguage.Location = new System.Drawing.Point(154, 13);
+      this.comboBoxLanguage.Location = new System.Drawing.Point(154, 7);
       this.comboBoxLanguage.Name = "comboBoxLanguage";
       this.comboBoxLanguage.Size = new System.Drawing.Size(95, 28);
       this.comboBoxLanguage.TabIndex = 22;
@@ -532,7 +534,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
       this.label13.AutoSize = true;
       this.label13.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F);
-      this.label13.Location = new System.Drawing.Point(25, 17);
+      this.label13.Location = new System.Drawing.Point(25, 10);
       this.label13.Name = "label13";
       this.label13.Size = new System.Drawing.Size(53, 20);
       this.label13.TabIndex = 19;
@@ -543,9 +545,9 @@
       this.panel5.Controls.Add(this.label7);
       this.panel5.Controls.Add(this.textBoxFiscalCode);
       this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.panel5.Location = new System.Drawing.Point(283, 65);
+      this.panel5.Location = new System.Drawing.Point(283, 51);
       this.panel5.Name = "panel5";
-      this.panel5.Size = new System.Drawing.Size(265, 54);
+      this.panel5.Size = new System.Drawing.Size(265, 41);
       this.panel5.TabIndex = 10;
       // 
       // panel4
@@ -555,7 +557,7 @@
       this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
       this.panel4.Location = new System.Drawing.Point(554, 3);
       this.panel4.Name = "panel4";
-      this.panel4.Size = new System.Drawing.Size(267, 56);
+      this.panel4.Size = new System.Drawing.Size(267, 42);
       this.panel4.TabIndex = 9;
       // 
       // panel3
@@ -565,7 +567,7 @@
       this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
       this.panel3.Location = new System.Drawing.Point(283, 3);
       this.panel3.Name = "panel3";
-      this.panel3.Size = new System.Drawing.Size(265, 56);
+      this.panel3.Size = new System.Drawing.Size(265, 42);
       this.panel3.TabIndex = 8;
       // 
       // panel1
@@ -573,9 +575,9 @@
       this.panel1.Controls.Add(this.label8);
       this.panel1.Controls.Add(this.textBoxVat);
       this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.panel1.Location = new System.Drawing.Point(3, 65);
+      this.panel1.Location = new System.Drawing.Point(3, 51);
       this.panel1.Name = "panel1";
-      this.panel1.Size = new System.Drawing.Size(274, 54);
+      this.panel1.Size = new System.Drawing.Size(274, 41);
       this.panel1.TabIndex = 6;
       // 
       // panel2
@@ -585,7 +587,7 @@
       this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
       this.panel2.Location = new System.Drawing.Point(3, 3);
       this.panel2.Name = "panel2";
-      this.panel2.Size = new System.Drawing.Size(274, 56);
+      this.panel2.Size = new System.Drawing.Size(274, 42);
       this.panel2.TabIndex = 7;
       // 
       // label12
@@ -617,11 +619,43 @@
       this.buttonCancel.UseVisualStyleBackColor = false;
       this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
       // 
+      // checkBox1
+      // 
+      this.checkBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+      this.checkBox1.AutoSize = true;
+      this.checkBox1.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F);
+      this.errorProvider2.SetIconAlignment(this.checkBox1, System.Windows.Forms.ErrorIconAlignment.MiddleLeft);
+      this.checkBox1.Location = new System.Drawing.Point(751, 501);
+      this.checkBox1.Name = "checkBox1";
+      this.checkBox1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+      this.checkBox1.Size = new System.Drawing.Size(74, 24);
+      this.checkBox1.TabIndex = 40;
+      this.checkBox1.Text = "Privacy";
+      this.checkBox1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+      this.checkBox1.UseVisualStyleBackColor = true;
+      // 
+      // buttonOpenPrivacy
+      // 
+      this.buttonOpenPrivacy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+      this.buttonOpenPrivacy.BackColor = System.Drawing.Color.White;
+      this.buttonOpenPrivacy.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+      this.buttonOpenPrivacy.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.buttonOpenPrivacy.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
+      this.buttonOpenPrivacy.Location = new System.Drawing.Point(470, 531);
+      this.buttonOpenPrivacy.Name = "buttonOpenPrivacy";
+      this.buttonOpenPrivacy.Size = new System.Drawing.Size(128, 38);
+      this.buttonOpenPrivacy.TabIndex = 41;
+      this.buttonOpenPrivacy.Text = "Apri privacy";
+      this.buttonOpenPrivacy.UseVisualStyleBackColor = false;
+      this.buttonOpenPrivacy.Click += new System.EventHandler(this.buttonOpenPrivacy_Click);
+      // 
       // AddPatient
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.BackColor = System.Drawing.Color.White;
+      this.Controls.Add(this.buttonOpenPrivacy);
+      this.Controls.Add(this.checkBox1);
       this.Controls.Add(this.buttonCancel);
       this.Controls.Add(this.label12);
       this.Controls.Add(this.tableLayoutPanel1);
@@ -716,5 +750,7 @@
     private System.Windows.Forms.ComboBox comboBoxPrices;
     private System.Windows.Forms.ComboBox comboBoxLanguage;
     private System.Windows.Forms.Button buttonCancel;
+    private System.Windows.Forms.Button buttonOpenPrivacy;
+    private System.Windows.Forms.CheckBox checkBox1;
   }
 }

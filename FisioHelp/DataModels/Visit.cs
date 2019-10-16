@@ -20,6 +20,11 @@ namespace FisioHelp.DataModels
     [Column("initial_evaluetion"), Nullable] public string InitialEvaluetion { get; set; } // text
     [Column("final_evaluetion"), Nullable] public string FinalEvaluetion { get; set; } // text
 
+    public bool HasInvoice()
+    {
+      return InvoiceId != null;
+    }
+    
     #region Associations
 
     /// <summary>

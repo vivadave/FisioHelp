@@ -16,6 +16,8 @@ namespace FisioHelp.DataModels
     [Column("fiscal_code"), Nullable] public string Fiscalcode { get; set; } // character varying(45)
     [Column("iban"), Nullable] public string Iban { get; set; } // character varying(45)
     [Column("postit"), Nullable] public string Postit { get; set; } // character varying(45)
+    [Column("invoices_folder"), Nullable] public string InvoicesFolder { get; set; } // character varying(45)
+    [Column("privacy_folder"), Nullable] public string PrivacyFolder { get; set; } // character varying(45)
 
 
   }

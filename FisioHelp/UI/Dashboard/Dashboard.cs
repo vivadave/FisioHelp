@@ -16,6 +16,7 @@ namespace FisioHelp.UI.Dashboard
     private List<Visit> _visitPreviousMonth;
     private List<Visit> _visitLatMonth;
     private List<Customer> _customerLastMonth;
+    private List<Customer> _customerNoPrivacy;
     private Therapist _therapist;
 
     public Dashboard()
@@ -33,6 +34,7 @@ namespace FisioHelp.UI.Dashboard
         _visitLatMonth = db.Visits.Where(x => x.Date >= new NpgsqlTypes.NpgsqlDate(today.Year, today.Month, 1)).ToList();
         _customerLastMonth = db.Customers.Where(x => x.CreationDate >= new NpgsqlTypes.NpgsqlDate(today.Year, today.Month, 1)).ToList();
         _visitPreviousMonth = db.Visits.Where(x => x.Date >= new NpgsqlTypes.NpgsqlDate(todayLstMonth.Year, todayLstMonth.Month, 1) && x.Date <= new NpgsqlTypes.NpgsqlDate(today.Year, today.Month, 1)).ToList();
+        _customerNoPrivacy = db.Customers.Where(x => x.Privacy == false).ToList();
       }
 
       FillFields();
@@ -47,6 +49,7 @@ namespace FisioHelp.UI.Dashboard
       labelMoney.Text = lastMonthMoney.ToString() + " €";
       labelVariation.Text = ((double)((lastMonthMoney - previousMonthMoney) * 100 / previousMonthMoney)).ToString("#.00") + " %";
       labelVisits.Text = _visitLatMonth.Count().ToString();
+      listBox1.DataSource = _customerNoPrivacy;
     }
 
     private void richTextBoxExPostit_Leave(object sender, EventArgs e)

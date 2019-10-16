@@ -21,11 +21,17 @@ namespace FisioHelp.DataModels
     [Column("note"), Nullable] public string Note { get; set; } // text
     [Column("language"), Nullable] public string Language { get; set; } // text
     [Column("creation_date"), Nullable] public NpgsqlDate CreationDate { get; set; } // date
+    [Column("privacy"), NotNull] public bool Privacy { get; set; } // bool
 
     public string FullName
     {
       get { return $"{Name} {Surname}"; }
-    } 
+    }
+
+    public override string ToString()
+    {
+      return FullName;
+    }
 
     #region Associations
 

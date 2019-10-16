@@ -179,6 +179,24 @@ namespace FisioHelp.UI
 
     private void buttonPrinter_Click(object sender, EventArgs e)
     {
+      DataModels.Therapist therapist = null;
+      using (var db = new Db.PhisioDB())
+      {
+        therapist = db.Therapists.FirstOrDefault();
+      }
+
+      if (therapist == null)
+      {
+        MessageBox.Show("Qualcosa è andato storto non trovo i parametri generali");
+        return;
+      }
+
+      if (string.IsNullOrEmpty(therapist.InvoicesFolder))
+      {
+        MessageBox.Show("Prima di proseguire bisogna impostare la cartella di salvataggio delle fatture");
+        return;
+      }
+
       string html = "";
 
       if (_customer.Language == "german")
@@ -187,32 +205,18 @@ namespace FisioHelp.UI
         html = File.ReadAllText("Template/templateInvoice_it.html");
 
       html = Helper.Helper.ReplaceInvoicePlaceHolder(html, _customer, Invoice);
-      var basePath = "C:\\";
-      var date = $"{Invoice.Date.Year}{Invoice.Date.Month}{Invoice.Date.Day:00}";
-      basePath += date;
-      Directory.CreateDirectory(basePath);
-      string path = $@"{basePath}\{Invoice.Title}.html";
-      File.WriteAllText(path, html);
-      System.Diagnostics.Process.Start(path);
+      var basePath = therapist.InvoicesFolder;
+      var date = $"{Invoice.Date.Year}{Invoice.Date.Month}";
+      basePath = Path.Combine(basePath, date);
+
+      Directory.CreateDirectory(basePath);      
       var Renderer = new IronPdf.HtmlToPdf();
       var PDF = Renderer.RenderHtmlAsPdf(html);
-      var OutputPath = $@"{basePath}\{Invoice.Title}.pdf";
+      var OutputPath = $@"{basePath}\{Invoice.Title}_{_customer.FullName.Replace(" ","_")}.pdf";
       PDF.SaveAs(OutputPath);
-      // This neat trick opens our PDF file so we can see the result in our default PDF viewer
+
       System.Diagnostics.Process.Start(OutputPath);
-      /*
-      PdfDocument pdf = PdfGenerator.GeneratePdf(html, PageSize.Letter);
-      try
-      {
-        var pdfPath = "document.pdf";
-        pdf.Save(pdfPath);
-        System.Diagnostics.Process.Start(pdfPath);
-      }
-      catch
-      {
-        MessageBox.Show("Chiudere la fattura se già aperta");
-      }
-      */
+     
     }
   }
 }

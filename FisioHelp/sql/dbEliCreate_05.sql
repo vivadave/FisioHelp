@@ -1,2 +1,5 @@
 ALTER TABLE therapists ADD COLUMN IF NOT EXISTS postit text;
-ALTER TABLE customers ADD COLUMN IF NOT EXISTS creation_date date;
+ALTER TABLE therapists ADD COLUMN IF NOT EXISTS invoices_folder text;
+ALTER TABLE therapists ADD COLUMN IF NOT EXISTS privacy_folder text;
+
+ALTER TABLE customers ADD COLUMN IF NOT EXISTS privacy boolean DEFAULT 'f';

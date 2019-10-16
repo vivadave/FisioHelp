@@ -33,20 +33,22 @@ namespace FisioHelp.UI
       comboBoxPayed.SelectedItem = _comboBoxValues[0];
       panel2.Width = this.Size.Width;
     }
-
-    private void label1_Click(object sender, EventArgs e)
-    {
-
-    }
-
+    
     private void dateTimePickerfrom_ValueChanged(object sender, EventArgs e)
     {
-
+      RedrawInvoices();
     }
 
     private void dateTimePickerTo_ValueChanged(object sender, EventArgs e)
     {
+      RedrawInvoices();
+    }
 
+    private void RedrawInvoices()
+    {
+      SetFilters();
+      GetInvoices();
+      DrawVisits();
     }
 
     private void CalculateTotals(object sender, EventArgs e)
@@ -64,28 +66,14 @@ namespace FisioHelp.UI
 
     private void comboBoxInvoice_SelectedIndexChanged(object sender, EventArgs e)
     {
-      SetFilters();
-      GetInvoices();
-      DrawVisits();
+      RedrawInvoices();
     }
 
     private void comboBoxPayed_SelectedIndexChanged(object sender, EventArgs e)
     {
-      SetFilters();
-      GetInvoices();
-      DrawVisits();
+      RedrawInvoices();
     }
-
-    private void panel1_Paint(object sender, PaintEventArgs e)
-    {
-
-    }
-
-    private void VisitListCtrl_Load(object sender, EventArgs e)
-    {
-      
-    }
-
+    
     private void SetFilters()
     {
       _dateFromFilter = dateTimePickerfrom.Value;

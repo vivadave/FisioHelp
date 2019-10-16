@@ -1498,18 +1498,20 @@ namespace DataModels
 	[Table(Schema="public", Name="customers")]
 	public partial class Customer
 	{
-		[Column("id"),           PrimaryKey,  Identity] public int    Id          { get; set; } // integer
-		[Column("name"),            Nullable          ] public string Name        { get; set; } // character varying(45)
-		[Column("surname"),      NotNull              ] public string Surname     { get; set; } // character varying(45)
-		[Column("email"),           Nullable          ] public string Email       { get; set; } // character varying(45)
-		[Column("vat"),             Nullable          ] public string Vat         { get; set; } // character varying(45)
-		[Column("fiscalcode"),      Nullable          ] public string Fiscalcode  { get; set; } // character varying(45)
-		[Column("tel1"),            Nullable          ] public string Tel1        { get; set; } // character varying(45)
-		[Column("tel2"),            Nullable          ] public string Tel2        { get; set; } // character varying(45)
-		[Column("address_id"),      Nullable          ] public int?   AddressId   { get; set; } // integer
-		[Column("pricelist_id"),    Nullable          ] public int?   PricelistId { get; set; } // integer
-		[Column("note"),            Nullable          ] public string Note        { get; set; } // text
-		[Column("language"),        Nullable          ] public string Language    { get; set; } // character varying(45)
+		[Column("id"),            PrimaryKey,  Identity] public int         Id           { get; set; } // integer
+		[Column("name"),             Nullable          ] public string      Name         { get; set; } // character varying(45)
+		[Column("surname"),       NotNull              ] public string      Surname      { get; set; } // character varying(45)
+		[Column("email"),            Nullable          ] public string      Email        { get; set; } // character varying(45)
+		[Column("vat"),              Nullable          ] public string      Vat          { get; set; } // character varying(45)
+		[Column("fiscalcode"),       Nullable          ] public string      Fiscalcode   { get; set; } // character varying(45)
+		[Column("tel1"),             Nullable          ] public string      Tel1         { get; set; } // character varying(45)
+		[Column("tel2"),             Nullable          ] public string      Tel2         { get; set; } // character varying(45)
+		[Column("address_id"),       Nullable          ] public int?        AddressId    { get; set; } // integer
+		[Column("pricelist_id"),     Nullable          ] public int?        PricelistId  { get; set; } // integer
+		[Column("note"),             Nullable          ] public string      Note         { get; set; } // text
+		[Column("language"),         Nullable          ] public string      Language     { get; set; } // character varying(45)
+		[Column("creation_date"),    Nullable          ] public NpgsqlDate? CreationDate { get; set; } // date
+		[Column("privacy"),          Nullable          ] public bool?       Privacy      { get; set; } // boolean
 
 		#region Associations
 
@@ -1777,13 +1779,16 @@ namespace DataModels
 	[Table(Schema="public", Name="therapists")]
 	public partial class Therapist
 	{
-		[Column("id"),          PrimaryKey,  Identity] public int    Id         { get; set; } // integer
-		[Column("address"),        Nullable          ] public string Address    { get; set; } // character varying(256)
-		[Column("full_name"),   NotNull              ] public string FullName   { get; set; } // character varying(45)
-		[Column("tax_number"),     Nullable          ] public string TaxNumber  { get; set; } // character varying(45)
-		[Column("fiscal_code"),    Nullable          ] public string FiscalCode { get; set; } // character varying(45)
-		[Column("email"),          Nullable          ] public string Email      { get; set; } // character varying(45)
-		[Column("iban"),           Nullable          ] public string Iban       { get; set; } // character varying(45)
+		[Column("id"),              PrimaryKey,  Identity] public int    Id             { get; set; } // integer
+		[Column("address"),            Nullable          ] public string Address        { get; set; } // character varying(256)
+		[Column("full_name"),       NotNull              ] public string FullName       { get; set; } // character varying(45)
+		[Column("tax_number"),         Nullable          ] public string TaxNumber      { get; set; } // character varying(45)
+		[Column("fiscal_code"),        Nullable          ] public string FiscalCode     { get; set; } // character varying(45)
+		[Column("email"),              Nullable          ] public string Email          { get; set; } // character varying(45)
+		[Column("iban"),               Nullable          ] public string Iban           { get; set; } // character varying(45)
+		[Column("postit"),             Nullable          ] public string Postit         { get; set; } // text
+		[Column("invoices_folder"),    Nullable          ] public string InvoicesFolder { get; set; } // text
+		[Column("privacy_folder"),     Nullable          ] public string PrivacyFolder  { get; set; } // text
 	}
 
 	[Table(Schema="public", Name="treatments")]

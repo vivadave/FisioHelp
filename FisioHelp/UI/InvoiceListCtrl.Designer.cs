@@ -71,7 +71,6 @@
       this.panel1.Name = "panel1";
       this.panel1.Size = new System.Drawing.Size(1017, 85);
       this.panel1.TabIndex = 0;
-      this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
       // 
       // label9
       // 
@@ -145,7 +144,6 @@
       this.label1.Size = new System.Drawing.Size(26, 19);
       this.label1.TabIndex = 6;
       this.label1.Text = "Da";
-      this.label1.Click += new System.EventHandler(this.label1_Click);
       // 
       // comboBoxPayed
       // 
@@ -298,7 +296,6 @@
       this.Controls.Add(this.panel2);
       this.Name = "InvoiceListCtrl";
       this.Size = new System.Drawing.Size(1017, 529);
-      this.Load += new System.EventHandler(this.VisitListCtrl_Load);
       this.panel1.ResumeLayout(false);
       this.panel1.PerformLayout();
       this.panel3.ResumeLayout(false);

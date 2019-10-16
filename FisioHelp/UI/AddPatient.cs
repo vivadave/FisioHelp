@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Data;
+using System.IO;
 using System.Linq;
 using NpgsqlTypes;
 using System.Threading.Tasks;
@@ -18,15 +18,9 @@ namespace FisioHelp.UI
     public event EventHandler Close;
     private FisioHelp.DataModels.Customer _customer;
     private PriceList[] _priceList;
+    private Therapist _therapist;
 
-    public AddPatient()
-    {
-      InitializeComponent();
-      comboBoxLanguage.Items.Add("italian");
-      comboBoxLanguage.Items.Add("german");
-    }
-
-    public AddPatient(Customer customer)
+    private void Initialize()
     {
       InitializeComponent();
       comboBoxLanguage.Items.Add("italian");
@@ -35,7 +29,19 @@ namespace FisioHelp.UI
       using (var db = new Db.PhisioDB())
       {
         _priceList = db.PriceLists.ToArray();
+        _therapist = db.Therapists.FirstOrDefault();
       }
+
+    }
+
+    public AddPatient()
+    {
+      Initialize();
+    }
+
+    public AddPatient(Customer customer)
+    {
+      Initialize();
 
         _customer = customer;
 
@@ -50,6 +56,8 @@ namespace FisioHelp.UI
       comboBoxLanguage.SelectedItem = customer.Language;
       comboBoxPrices.Items.AddRange(_priceList);
       comboBoxPrices.SelectedItem = _priceList.FirstOrDefault(p => p.Id == customer.Pricelist?.Id);
+      checkBox1.Checked = _customer.Privacy;
+
       if (customer.Address != null)
       {
         textBoxIndirizzo.Text = customer.Address.Address_Column;
@@ -65,6 +73,7 @@ namespace FisioHelp.UI
 
     private void AddPatient_Load(object sender, EventArgs e)
     {
+
       buttonSave.Enabled = false;
       this.ValidateChildren();
     }
@@ -80,6 +89,7 @@ namespace FisioHelp.UI
       _customer.Fiscalcode = textBoxFiscalCode.Text;
       _customer.Vat = textBoxVat.Text;
       _customer.CreationDate = NpgsqlDate.Now;
+      _customer.Privacy = checkBox1.Checked;
 
       if (comboBoxLanguage.SelectedItem != null)
         _customer.Language = comboBoxLanguage.SelectedItem.ToString();
@@ -206,6 +216,52 @@ namespace FisioHelp.UI
     private void buttonCancel_Click(object sender, EventArgs e)
     {
       Close?.Invoke(this, e);
+    }
+
+    private void buttonOpenPrivacy_Click(object sender, EventArgs e)
+    {
+      if (_customer.Id <= 0)
+      {
+        MessageBox.Show("Prima di proseguire salvare il cliente");
+        return;
+      }
+
+      if (string.IsNullOrEmpty(_customer.Language))
+      {
+        MessageBox.Show("Prima di proseguire scegliere una lingua e salvare");
+        return;
+      }
+      var privacyPath = _therapist.PrivacyFolder;
+      if (string.IsNullOrEmpty(privacyPath))
+      {
+        MessageBox.Show("Prima di proseguire impostare la cartella dei documenti privacy");
+        return;
+      }
+      var folder = $"{_customer.Id.ToString("0000")}_{_customer.FullName.Replace(" ", "_")}";
+      var path = Path.Combine(privacyPath, folder);
+      Directory.CreateDirectory(path);
+      var files = Directory.GetFiles(path);
+      if (files.Length == 0)
+      {
+        var privacyOutPath = "";
+        if (_customer.Language == "german")
+        {
+          privacyOutPath = Path.Combine(path, "privacy_de.pdf");
+          File.Copy(@"Template\privacy_de.pdf", privacyOutPath);
+        }
+        else
+        {
+          privacyOutPath = Path.Combine(path, "privacy_it.pdf");
+          File.Copy(@"Template\privacy_it.pdf", privacyOutPath);
+        }
+        System.Diagnostics.Process.Start(privacyOutPath);
+      }
+      else
+      {
+        var privacyOutPath = files.First();
+        System.Diagnostics.Process.Start(privacyOutPath);
+      }
+
     }
   }
 }

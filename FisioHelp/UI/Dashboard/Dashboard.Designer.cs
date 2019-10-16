@@ -47,14 +47,19 @@
       this.label3 = new System.Windows.Forms.Label();
       this.panel4 = new System.Windows.Forms.Panel();
       this.labelVisits = new System.Windows.Forms.Label();
-      this.richTextBoxExPostit = new RichTextBoxEx.RichTextBoxEx();
-      this.label9 = new System.Windows.Forms.Label();
       this.panel9 = new System.Windows.Forms.Panel();
       this.panel10 = new System.Windows.Forms.Panel();
+      this.label9 = new System.Windows.Forms.Label();
+      this.richTextBoxExPostit = new RichTextBoxEx.RichTextBoxEx();
+      this.panel11 = new System.Windows.Forms.Panel();
+      this.panel12 = new System.Windows.Forms.Panel();
+      this.listBox1 = new System.Windows.Forms.ListBox();
+      this.label2 = new System.Windows.Forms.Label();
       this.panel1.SuspendLayout();
       this.panel2.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
       this.splitContainer1.Panel1.SuspendLayout();
+      this.splitContainer1.Panel2.SuspendLayout();
       this.splitContainer1.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
       this.splitContainer2.Panel1.SuspendLayout();
@@ -69,6 +74,8 @@
       this.panel4.SuspendLayout();
       this.panel9.SuspendLayout();
       this.panel10.SuspendLayout();
+      this.panel11.SuspendLayout();
+      this.panel12.SuspendLayout();
       this.SuspendLayout();
       // 
       // panel1
@@ -136,6 +143,10 @@
       // splitContainer1.Panel1
       // 
       this.splitContainer1.Panel1.Controls.Add(this.splitContainer2);
+      // 
+      // splitContainer1.Panel2
+      // 
+      this.splitContainer1.Panel2.Controls.Add(this.panel11);
       this.splitContainer1.Size = new System.Drawing.Size(851, 648);
       this.splitContainer1.SplitterDistance = 425;
       this.splitContainer1.TabIndex = 1;
@@ -337,6 +348,43 @@
       this.labelVisits.Text = "25";
       this.labelVisits.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
       // 
+      // panel9
+      // 
+      this.panel9.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.panel9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
+      this.panel9.Controls.Add(this.panel10);
+      this.panel9.Location = new System.Drawing.Point(20, 17);
+      this.panel9.Name = "panel9";
+      this.panel9.Size = new System.Drawing.Size(381, 300);
+      this.panel9.TabIndex = 0;
+      // 
+      // panel10
+      // 
+      this.panel10.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.panel10.BackColor = System.Drawing.Color.White;
+      this.panel10.Controls.Add(this.label9);
+      this.panel10.Controls.Add(this.richTextBoxExPostit);
+      this.panel10.Location = new System.Drawing.Point(3, 3);
+      this.panel10.Margin = new System.Windows.Forms.Padding(5);
+      this.panel10.Name = "panel10";
+      this.panel10.Size = new System.Drawing.Size(375, 294);
+      this.panel10.TabIndex = 1;
+      // 
+      // label9
+      // 
+      this.label9.AutoSize = true;
+      this.label9.Font = new System.Drawing.Font("Segoe UI Historic", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
+      this.label9.Location = new System.Drawing.Point(10, 12);
+      this.label9.Name = "label9";
+      this.label9.Size = new System.Drawing.Size(93, 30);
+      this.label9.TabIndex = 2;
+      this.label9.Text = "POST IT";
+      // 
       // richTextBoxExPostit
       // 
       this.richTextBoxExPostit.AllowBullets = true;
@@ -364,42 +412,55 @@
       this.richTextBoxExPostit.TabIndex = 28;
       this.richTextBoxExPostit.Leave += new System.EventHandler(this.richTextBoxExPostit_Leave);
       // 
-      // label9
+      // panel11
       // 
-      this.label9.AutoSize = true;
-      this.label9.Font = new System.Drawing.Font("Segoe UI Historic", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
-      this.label9.Location = new System.Drawing.Point(10, 12);
-      this.label9.Name = "label9";
-      this.label9.Size = new System.Drawing.Size(93, 30);
-      this.label9.TabIndex = 2;
-      this.label9.Text = "POST IT";
-      // 
-      // panel9
-      // 
-      this.panel9.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+      this.panel11.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-      this.panel9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
-      this.panel9.Controls.Add(this.panel10);
-      this.panel9.Location = new System.Drawing.Point(20, 17);
-      this.panel9.Name = "panel9";
-      this.panel9.Size = new System.Drawing.Size(381, 300);
-      this.panel9.TabIndex = 0;
+      this.panel11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
+      this.panel11.Controls.Add(this.panel12);
+      this.panel11.Location = new System.Drawing.Point(21, 20);
+      this.panel11.Name = "panel11";
+      this.panel11.Size = new System.Drawing.Size(381, 610);
+      this.panel11.TabIndex = 1;
       // 
-      // panel10
+      // panel12
       // 
-      this.panel10.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+      this.panel12.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-      this.panel10.BackColor = System.Drawing.Color.White;
-      this.panel10.Controls.Add(this.label9);
-      this.panel10.Controls.Add(this.richTextBoxExPostit);
-      this.panel10.Location = new System.Drawing.Point(3, 3);
-      this.panel10.Margin = new System.Windows.Forms.Padding(5);
-      this.panel10.Name = "panel10";
-      this.panel10.Size = new System.Drawing.Size(375, 294);
-      this.panel10.TabIndex = 1;
+      this.panel12.BackColor = System.Drawing.Color.White;
+      this.panel12.Controls.Add(this.listBox1);
+      this.panel12.Controls.Add(this.label2);
+      this.panel12.Location = new System.Drawing.Point(3, 3);
+      this.panel12.Margin = new System.Windows.Forms.Padding(5);
+      this.panel12.Name = "panel12";
+      this.panel12.Size = new System.Drawing.Size(375, 604);
+      this.panel12.TabIndex = 1;
+      // 
+      // listBox1
+      // 
+      this.listBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.listBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+      this.listBox1.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.listBox1.ItemHeight = 30;
+      this.listBox1.Location = new System.Drawing.Point(15, 62);
+      this.listBox1.Name = "listBox1";
+      this.listBox1.Size = new System.Drawing.Size(343, 500);
+      this.listBox1.TabIndex = 3;
+      // 
+      // label2
+      // 
+      this.label2.AutoSize = true;
+      this.label2.Font = new System.Drawing.Font("Segoe UI Historic", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
+      this.label2.Location = new System.Drawing.Point(10, 12);
+      this.label2.Name = "label2";
+      this.label2.Size = new System.Drawing.Size(222, 30);
+      this.label2.TabIndex = 2;
+      this.label2.Text = "Clienti senza privacy";
       // 
       // Dashboard
       // 
@@ -413,6 +474,7 @@
       this.panel1.PerformLayout();
       this.panel2.ResumeLayout(false);
       this.splitContainer1.Panel1.ResumeLayout(false);
+      this.splitContainer1.Panel2.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
       this.splitContainer1.ResumeLayout(false);
       this.splitContainer2.Panel1.ResumeLayout(false);
@@ -432,6 +494,9 @@
       this.panel9.ResumeLayout(false);
       this.panel10.ResumeLayout(false);
       this.panel10.PerformLayout();
+      this.panel11.ResumeLayout(false);
+      this.panel12.ResumeLayout(false);
+      this.panel12.PerformLayout();
       this.ResumeLayout(false);
 
     }
@@ -461,5 +526,9 @@
     private RichTextBoxEx.RichTextBoxEx richTextBoxExPostit;
     private System.Windows.Forms.Panel panel9;
     private System.Windows.Forms.Panel panel10;
+    private System.Windows.Forms.Panel panel11;
+    private System.Windows.Forms.Panel panel12;
+    private System.Windows.Forms.ListBox listBox1;
+    private System.Windows.Forms.Label label2;
   }
 }
