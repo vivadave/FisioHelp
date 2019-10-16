@@ -213,7 +213,16 @@ namespace FisioHelp.UI
       var Renderer = new IronPdf.HtmlToPdf();
       var PDF = Renderer.RenderHtmlAsPdf(html);
       var OutputPath = $@"{basePath}\{Invoice.Title}_{_customer.FullName.Replace(" ","_")}.pdf";
-      PDF.SaveAs(OutputPath);
+      try
+      {
+        PDF.SaveAs(OutputPath);
+      }
+      catch (Exception ee)
+      {
+        MessageBox.Show("Il file è già aperto");
+        return;
+      }
+      Helper.DriveManagement.InsertFilePdf(OutputPath, new List<string> { "Invoice", date });
 
       System.Diagnostics.Process.Start(OutputPath);
      

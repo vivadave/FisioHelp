@@ -54,6 +54,7 @@ namespace FisioHelp
 
     private void Form1_Load(object sender, EventArgs e)
     {
+      //Helper.DriveManagement.DeleteAll();
       CreateNameList();
       AddDashBoard();
     }

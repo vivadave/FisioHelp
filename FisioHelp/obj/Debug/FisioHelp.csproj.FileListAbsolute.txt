@@ -188,3 +188,4 @@ C:\Progetti\FisioHelp\FisioHelp\bin\Debug\Google.Apis.Drive.v3.xml
 C:\Progetti\FisioHelp\FisioHelp\bin\Debug\Newtonsoft.Json.xml
 C:\Progetti\FisioHelp\FisioHelp\bin\Debug\Template\privacy_de.pdf
 C:\Progetti\FisioHelp\FisioHelp\bin\Debug\Template\privacy_it.pdf
+C:\Progetti\FisioHelp\FisioHelp\bin\Debug\Template\tebaldi.jpg
