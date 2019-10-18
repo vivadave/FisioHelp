@@ -101,7 +101,7 @@ namespace FisioHelp.Helper
 
       template = template.Replace("{{customer_name}}", customer.FullName);
       template = template.Replace("{{customer_address}}", $"{customer.Address?.Address_Column}, {customer.Address?.Cap} {customer.Address?.City}" );
-      template = template.Replace("{{customer_piva}}", customer.Vat);
+      template = template.Replace("{{customer_piva}}", customer.Fiscalcode);
 
       var prestazioniHtml = @"<div style=""display: block; padding: 15px 0 15px 0px;"">";
 

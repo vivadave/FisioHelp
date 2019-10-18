@@ -19,13 +19,13 @@
                 <div>
                     <strong>{{ragione_sociale}}</strong><br>
                     {{indirizzo}}<br>
-                    C.F.: {{partita_iva}}<br>
-                    P. Iva: {{partita_iva}}<br>
+                    Steuercodex: {{partita_iva}}<br>
+                    MwSt.-Nr: {{partita_iva}}<br>
                 </div>
             </div>
             <div style="display: flex;justify-content: flex-end; text-align:right;">
                 <div>
-                    Spett.le<br>
+                    An<br>
                     {{customer_name}}<br>
                     {{customer_address}}<br>
                     {{customer_piva}}
@@ -33,11 +33,20 @@
             </div>
         </div>
         <div>
-            <div style="padding: 30px 0 40px 0px">
-                <strong>Fattura n° {{invoice_number}}</strong> del {{date}}
+            <div style="padding: 30px 0 30px 0px">
+                <strong>Rechnung n° {{invoice_number}}</strong><br><br>
+                Marling, {{date}}
             </div>
-            <div><strong>Descrizione prestazioni:</strong></div>
+
+            <div style="display: block;padding: 15px 0 15px 0px;">
+                <div style="width: 400px; display: inline-block;"><strong>Leistungsbeschreibung</strong></div>
+                <div style="width: 295px; display: inline-block; text-align: right;">Betrag</div>
+            </div>
+
             {{prestazioni}}
+
+            {{sconto}}
+
             <div style="display: block;padding: 15px 0 15px 0px;">
                 <div style="width: 400px; display: inline-block;"><strong>Imponibile prestazione:</strong></div>
                 <div style="width: 295px; display: inline-block; text-align: right;">{{total}} €</div>
@@ -52,11 +61,19 @@
                 Operazione senza applicazione dell’IVA ai sensi dell’art. 1, comma 58, Legge n.190/2014 e successive modifiche, regime forfetario, senza applicazione della ritenuta alla fonte a titolo d’acconto.
             </div>
 
+            <div style="display: block;padding: 15px 0 15px 0px;">
+                <div style="width: 400px; display: inline-block;"><strong>Bollo:</strong></div>
+                <div style="width: 295px; display: inline-block; text-align: right;">{{bollo}} €</div>
+            </div>
+
             <div style="display: block;padding: 15px 0 25px 0px;">
-                <div style="width: 400px; display: inline-block;"><strong>Totale fattura:</strong></div>
+                <div style="width: 400px; display: inline-block;"><strong>Totale geleistete Arbeit:</strong></div>
                 <div style="width: 295px; display: inline-block; text-align: right;">{{total_with_inps}} €</div>
             </div>
             <p>Iban: {{iban}}</p>
+            <p>
+                Bei Zahlung bitte Patientenname angeben
+            </p>
         </div>
     </div>
 

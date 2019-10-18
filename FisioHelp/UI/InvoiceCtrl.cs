@@ -52,7 +52,7 @@ namespace FisioHelp.UI
       foreach ( var visit in Invoice.Visitsinvoiceidfkeys)
       {
         Panel panelIn = new Panel();
-        panelIn.Dock = DockStyle.Fill;
+        panelIn.Dock = DockStyle.Top;
         panel1.Controls.Add(panelIn);
 
         Label labelVisit = new Label();

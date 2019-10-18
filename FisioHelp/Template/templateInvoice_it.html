@@ -19,8 +19,8 @@
                 <div>
                     <strong>{{ragione_sociale}}</strong><br>
                     {{indirizzo}}<br>
-                    C.F.: {{partita_iva}}<br>
-                    P. Iva: {{partita_iva}}<br>
+                    Cod.Fisc.: {{partita_iva}}<br>
+                    Part. Iva: {{partita_iva}}<br>
                 </div>
             </div>
             <div style="display: flex;justify-content: flex-end; text-align:right;">
@@ -33,10 +33,16 @@
             </div>
         </div>
         <div>
-            <div style="padding: 30px 0 40px 0px">
-                <strong>Fattura n° {{invoice_number}}</strong> del {{date}}
+            <div style="padding: 30px 0 30px 0px">
+                <strong>Fattura n° {{invoice_number}}</strong><br><br>
+                Marlengo, {{date}}
             </div>
-            <div><strong>Descrizione prestazioni:</strong></div>
+
+            <div style="display: block;padding: 15px 0 15px 0px;">
+                <div style="width: 400px; display: inline-block;"><strong>Descrizione</strong></div>
+                <div style="width: 295px; display: inline-block; text-align: right;">Importo</div>
+            </div>
+
             {{prestazioni}}
 
             {{sconto}}
@@ -65,6 +71,9 @@
                 <div style="width: 295px; display: inline-block; text-align: right;">{{total_with_inps}} €</div>
             </div>
             <p>Iban: {{iban}}</p>
+            <p>
+                Per cortesia indicare il nome del paziente nel versamento
+            </p>
         </div>
     </div>
 
