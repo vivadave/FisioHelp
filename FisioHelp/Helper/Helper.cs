@@ -92,7 +92,7 @@ namespace FisioHelp.Helper
       var therapist = GetTherapist();
 
       template = template.Replace("{{ragione_sociale}}", therapist.FullName);
-      template = template.Replace("{{indirizzo}}", therapist.Address);
+      template = template.Replace("{{indirizzo}}", customer.Language == "german" ? therapist.AddressDe.Replace("-","<br>") : therapist.Address.Replace("-", "<br>"));
       template = template.Replace("{{partita_iva}}", therapist.TaxNumber);
       template = template.Replace("{{iban}}", therapist.Iban);
       
@@ -100,7 +100,7 @@ namespace FisioHelp.Helper
       template = template.Replace("{{date}}", ((DateTime)invoice.Date).ToShortDateString());
 
       template = template.Replace("{{customer_name}}", customer.FullName);
-      template = template.Replace("{{customer_address}}", $"{customer.Address?.Address_Column}, {customer.Address?.Cap} {customer.Address?.City}" );
+      template = template.Replace("{{customer_address}}", $"{customer.Address?.Address_Column}<br>{customer.Address?.Cap}<br>{customer.Address?.City}" );
       template = template.Replace("{{customer_piva}}", customer.Fiscalcode);
 
       var prestazioniHtml = @"<div style=""display: block; padding: 15px 0 15px 0px;"">";

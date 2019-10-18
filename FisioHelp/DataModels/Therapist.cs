@@ -9,6 +9,7 @@ namespace FisioHelp.DataModels
   public partial class Therapist : BaseModel
   {
       [Column("address"), Nullable] public string Address { get; set; } // character varying(256)
+      [Column("address_de"), Nullable] public string AddressDe { get; set; } // character varying(256)
       [Column("full_name"), NotNull] public string FullName { get; set; } // character varying(45)
       [Column("tax_number"), Nullable] public string TaxNumber { get; set; } // character varying(45)
       [Column("fiscal_code"), Nullable] public string FiscalCode { get; set; } // character varying(45)

@@ -51,6 +51,7 @@ namespace FisioHelp.UI.Globals
         textBoxIban.Text = _therapist.Iban;
         textBoxPiva.Text = _therapist.TaxNumber;
         textBoxAddress.Text = _therapist.Address;
+        textBoxAddressDe.Text = _therapist.AddressDe;
       } else
         _therapist = new Therapist();
     }
@@ -69,12 +70,9 @@ namespace FisioHelp.UI.Globals
         _therapist.Iban = textBoxIban.Text;
         _therapist.TaxNumber = textBoxPiva.Text;
         _therapist.Address = textBoxAddress.Text;
-
-        if (_therapist.Id != null)
-          db.Update(_therapist);
-        else
-          _therapist.Id = Guid.Parse(db.InsertWithIdentity(_therapist).ToString());
-
+        _therapist.AddressDe = textBoxAddressDe.Text;
+        _therapist.SaveToDB();
+       
         foreach (var a in priceListBindingSource)
         {
           var price = (PriceList)a;

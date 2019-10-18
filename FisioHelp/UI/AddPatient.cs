@@ -200,7 +200,7 @@ namespace FisioHelp.UI
         MessageBox.Show("Prima di proseguire impostare la cartella dei documenti privacy", "Salvataggio", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         return;
       }
-      var folder = $"{_customer.Id.ToString("0000")}_{_customer.FullName.Replace(" ", "_")}";
+      var folder = $"{_customer.FullName.Replace(" ", "_")}";
       var path = Path.Combine(privacyPath, folder);
       Directory.CreateDirectory(path);
       var files = Directory.GetFiles(path);
