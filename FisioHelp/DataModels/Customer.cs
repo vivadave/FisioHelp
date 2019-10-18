@@ -6,9 +6,8 @@ using NpgsqlTypes;
 namespace FisioHelp.DataModels
 {
   [Table(Schema = "public", Name = "customers")]
-  public partial class Customer
+  public partial class Customer : BaseModel
   {
-    [Column("id"), PrimaryKey, Identity] public int Id { get; set; } // integer
     [Column("name"), Nullable] public string Name { get; set; } // character varying(45)
     [Column("surname"), NotNull] public string Surname { get; set; } // character varying(45)
     [Column("email"), Nullable] public string Email { get; set; } // character varying(45)
@@ -16,12 +15,13 @@ namespace FisioHelp.DataModels
     [Column("fiscalcode"), Nullable] public string Fiscalcode { get; set; } // character varying(45)
     [Column("tel1"), Nullable] public string Tel1 { get; set; } // character varying(45)
     [Column("tel2"), Nullable] public string Tel2 { get; set; } // character varying(45)
-    [Column("address_id"), Nullable] public int? AddressId { get; set; } // integer
-    [Column("pricelist_id"), Nullable] public int? PricelistId { get; set; } // integer
+    [Column("address_id"), Nullable] public Guid? AddressId { get; set; } // uuid
+    [Column("pricelist_id"), Nullable] public Guid? PricelistId { get; set; } // uuid
+    [Column("therapist_id"), NotNull] public Guid TherapistId { get; set; } // uuid
     [Column("note"), Nullable] public string Note { get; set; } // text
-    [Column("language"), Nullable] public string Language { get; set; } // text
-    [Column("creation_date"), Nullable] public NpgsqlDate CreationDate { get; set; } // date
-    [Column("privacy"), NotNull] public bool Privacy { get; set; } // bool
+    [Column("language"), Nullable] public string Language { get; set; } // character varying(45)
+    [Column("privacy"), NotNull] public bool Privacy { get; set; } // boolean
+    [Column("creation_date"), Nullable] public NpgsqlDate? CreationDate { get; set; } // date
 
     public string FullName
     {
@@ -31,6 +31,11 @@ namespace FisioHelp.DataModels
     public override string ToString()
     {
       return FullName;
+    }
+
+    public override Guid SaveToDB()
+    {
+      return Helper.DbManagement.SaveToDB(this);
     }
 
     #region Associations
@@ -46,6 +51,30 @@ namespace FisioHelp.DataModels
     /// </summary>
     [Association(ThisKey = "PricelistId", OtherKey = "Id", CanBeNull = true, Relationship = Relationship.ManyToOne, KeyName = "customers_pricelist_id_fkey", BackReferenceName = "Customerspricelistidfkeys")]
     public PriceList Pricelist { get; set; }
+
+    /// <summary>
+    /// recent_anamnesys_customer_id_fkey_BackReference
+    /// </summary>
+    [Association(ThisKey = "Id", OtherKey = "CustomerId", CanBeNull = true, Relationship = Relationship.OneToMany, IsBackReference = true)]
+    public IEnumerable<RecentAnamnesy> Recentanamnesyscustomeridfkeys { get; set; }
+
+    /// <summary>
+    /// remote_anamnesys_customer_id_fkey_BackReference
+    /// </summary>
+    [Association(ThisKey = "Id", OtherKey = "CustomerId", CanBeNull = true, Relationship = Relationship.OneToMany, IsBackReference = true)]
+    public IEnumerable<RemoteAnamnesy> Remoteanamnesyscustomeridfkeys { get; set; }
+
+    /// <summary>
+    /// stomatognathic_test_customer_id_fkey_BackReference
+    /// </summary>
+    [Association(ThisKey = "Id", OtherKey = "CustomerId", CanBeNull = true, Relationship = Relationship.OneToMany, IsBackReference = true)]
+    public IEnumerable<StomatognathicTest> Stomatognathictestcustomeridfkeys { get; set; }
+
+    /// <summary>
+    /// customers_therapist_id_fkey
+    /// </summary>
+    [Association(ThisKey = "TherapistId", OtherKey = "Id", CanBeNull = false, Relationship = Relationship.ManyToOne, KeyName = "customers_therapist_id_fkey", BackReferenceName = "Customerstherapistidfkeys")]
+    public Therapist Therapist { get; set; }
 
     /// <summary>
     /// visits_customer_id_fkey_BackReference

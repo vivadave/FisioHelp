@@ -7,17 +7,17 @@ using System.Linq;
 
 namespace FisioHelp.DataModels
 {
-
   [Table(Schema = "public", Name = "invoices")]
-  public partial class Invoice
+  public partial class Invoice : BaseModel
   {
-    [Column("id"), PrimaryKey, Identity] public int Id { get; set; } // integer
     [Column("date"), NotNull] public NpgsqlDate Date { get; set; } // date
     [Column("discount"), Nullable] public double? Discount { get; set; } // double precision
-    [Column("payed"), Nullable] public bool? Payed { get; set; } // boolean
-    [Column("deleted")] public bool Deleted { get; set; } // boolean
+    [Column("payed"), NotNull] public bool Payed { get; set; } // boolean
+    [Column("therapist_id"), NotNull] public Guid TherapistId { get; set; } // uuid
     [Column("text"), Nullable] public string Text { get; set; } // text
-    [Column("title")] public string Title { get; set; } // text
+    [Column("title"), NotNull] public string Title { get; set; } // character varying(25)
+    [Column("deleted"), Nullable] public bool? Deleted { get; set; } // boolean
+    [Column("tax_stamp"), NotNull] public bool TaxStamp { get; set; } // boolean
 
     public double Total
     {
@@ -28,7 +28,17 @@ namespace FisioHelp.DataModels
       }
     }
 
+    public override Guid SaveToDB()
+    {
+      return Helper.DbManagement.SaveToDB(this);
+    }
     #region Associations
+
+    /// <summary>
+    /// invoices_therapist_id_fkey
+    /// </summary>
+    [Association(ThisKey = "TherapistId", OtherKey = "Id", CanBeNull = false, Relationship = Relationship.ManyToOne, KeyName = "invoices_therapist_id_fkey", BackReferenceName = "Invoicestherapistidfkeys")]
+    public Therapist Therapist { get; set; }
 
     /// <summary>
     /// visits_invoice_id_fkey_BackReference
@@ -37,5 +47,6 @@ namespace FisioHelp.DataModels
     public IEnumerable<Visit> Visitsinvoiceidfkeys { get; set; }
 
     #endregion
+
   }
 }

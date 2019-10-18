@@ -5,9 +5,8 @@ using NpgsqlTypes;
 namespace FisioHelp.DataModels
 {
   [Table(Schema = "public", Name = "recent_anamnesys")]
-  public partial class RecentAnamnesy
+  public partial class RecentAnamnesy : BaseModel
   {
-    [Column("id"), PrimaryKey, Identity] public int Id { get; set; } // integer
     [Column("main_disease_1"), Nullable] public string MainDisease1 { get; set; } // character varying(256)
     [Column("main_disease_2"), Nullable] public string MainDisease2 { get; set; } // character varying(256)
     [Column("main_disease_3"), Nullable] public string MainDisease3 { get; set; } // character varying(256)
@@ -32,7 +31,12 @@ namespace FisioHelp.DataModels
     [Column("main_disease_nervous_system"), Nullable] public string MainDiseaseNervousSystem { get; set; } // character varying(256)
     [Column("main_disease_symptoms_24"), Nullable] public string MainDiseaseSymptoms24 { get; set; } // character varying(256)
     [Column("images_diagnostics"), Nullable] public string ImagesDiagnostics { get; set; } // character varying(256)
-    [Column("customer_id"), NotNull] public int CustomerId { get; set; } // integer
+    [Column("customer_id"), NotNull] public Guid CustomerId { get; set; } // uuid
+
+    public override Guid SaveToDB()
+    {
+      return Helper.DbManagement.SaveToDB(this);
+    }
 
     #region Associations
 

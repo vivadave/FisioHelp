@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS stomatognathic_test  (
-  id serial NOT NULL, 
+  id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
   lastissimus_dors_1r integer, 
   lastissimus_dors_1l integer, 
   lastissimus_dors_2r integer, 
@@ -105,6 +105,5 @@ CREATE TABLE IF NOT EXISTS stomatognathic_test  (
   t2_l integer, 
   t2_d integer,
 
-  customer_id INTEGER not null REFERENCES customers(id),
-  PRIMARY KEY (id)  
+  customer_id uuid not null REFERENCES customers(id)
 );

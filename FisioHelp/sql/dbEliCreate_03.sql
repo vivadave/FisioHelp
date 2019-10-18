@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS recent_anamnesys (
-  id serial NOT NULL, 
+  id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
   main_disease_1 varchar(256),  
   main_disease_2 varchar(256),  
   main_disease_3 varchar(256),  
@@ -24,12 +24,11 @@ CREATE TABLE IF NOT EXISTS recent_anamnesys (
   main_disease_nervous_system varchar(256),
   main_disease_symptoms_24 varchar(256),  
   images_diagnostics varchar(256),  
-  customer_id INTEGER not null REFERENCES customers(id),
-  PRIMARY KEY (id)  
+  customer_id uuid not null REFERENCES customers(id)
 );
 
 CREATE TABLE IF NOT EXISTS remote_anamnesys (
-  id serial NOT NULL, 
+  id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
   phisical_disease varchar(256),  
   psychic_disease varchar(256),  
   surgery varchar(256),  
@@ -40,6 +39,5 @@ CREATE TABLE IF NOT EXISTS remote_anamnesys (
   recent_treatments varchar(256), 
   medicines varchar(256), 
   other varchar(256), 
-  customer_id INTEGER not null REFERENCES customers(id),
-  PRIMARY KEY (id)  
+  customer_id uuid not null REFERENCES customers(id)
 );

@@ -32,7 +32,7 @@
       this.panel1 = new System.Windows.Forms.Panel();
       this.buttonAnamnesys = new System.Windows.Forms.Button();
       this.buttonInvoices = new System.Windows.Forms.Button();
-      this.label9 = new System.Windows.Forms.Label();
+      this.labelAction = new System.Windows.Forms.Label();
       this.label7 = new System.Windows.Forms.Label();
       this.label6 = new System.Windows.Forms.Label();
       this.labelTitle = new System.Windows.Forms.Label();
@@ -64,7 +64,7 @@
       this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
       this.panel1.Controls.Add(this.buttonAnamnesys);
       this.panel1.Controls.Add(this.buttonInvoices);
-      this.panel1.Controls.Add(this.label9);
+      this.panel1.Controls.Add(this.labelAction);
       this.panel1.Controls.Add(this.label7);
       this.panel1.Controls.Add(this.label6);
       this.panel1.Controls.Add(this.labelTitle);
@@ -110,16 +110,16 @@
       this.buttonInvoices.UseVisualStyleBackColor = true;
       this.buttonInvoices.Click += new System.EventHandler(this.buttonInvoices_Click);
       // 
-      // label9
+      // labelAction
       // 
-      this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-      this.label9.AutoSize = true;
-      this.label9.Font = new System.Drawing.Font("Segoe UI Historic", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.label9.Location = new System.Drawing.Point(852, 12);
-      this.label9.Name = "label9";
-      this.label9.Size = new System.Drawing.Size(43, 17);
-      this.label9.TabIndex = 13;
-      this.label9.Text = "Azioni";
+      this.labelAction.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+      this.labelAction.AutoSize = true;
+      this.labelAction.Font = new System.Drawing.Font("Segoe UI Historic", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.labelAction.Location = new System.Drawing.Point(852, 12);
+      this.labelAction.Name = "labelAction";
+      this.labelAction.Size = new System.Drawing.Size(43, 17);
+      this.labelAction.TabIndex = 13;
+      this.labelAction.Text = "Azioni";
       // 
       // label7
       // 
@@ -386,7 +386,7 @@
     private System.Windows.Forms.Label labelTotNr;
     private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
     private System.Windows.Forms.Label label8;
-    private System.Windows.Forms.Label label9;
+    private System.Windows.Forms.Label labelAction;
     private System.Windows.Forms.Label label7;
     private System.Windows.Forms.Button buttonInvoices;
     private System.Windows.Forms.Button buttonAnamnesys;

@@ -58,6 +58,7 @@
       this.buttonSave = new System.Windows.Forms.Button();
       this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
       this.errorProvider2 = new System.Windows.Forms.ErrorProvider(this.components);
+      this.checkBox1 = new System.Windows.Forms.CheckBox();
       this.richTextBoxEx1 = new RichTextBoxEx.RichTextBoxEx();
       this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
       this.panel9 = new System.Windows.Forms.Panel();
@@ -76,7 +77,6 @@
       this.label12 = new System.Windows.Forms.Label();
       this.errorProvider3 = new System.Windows.Forms.ErrorProvider(this.components);
       this.buttonCancel = new System.Windows.Forms.Button();
-      this.checkBox1 = new System.Windows.Forms.CheckBox();
       this.buttonOpenPrivacy = new System.Windows.Forms.Button();
       this.groupBox1.SuspendLayout();
       this.tableLayoutPanel2.SuspendLayout();
@@ -105,7 +105,7 @@
       this.textBoxName.Location = new System.Drawing.Point(101, 8);
       this.textBoxName.Name = "textBoxName";
       this.textBoxName.Size = new System.Drawing.Size(159, 27);
-      this.textBoxName.TabIndex = 4;
+      this.textBoxName.TabIndex = 1;
       this.textBoxName.Validating += new System.ComponentModel.CancelEventHandler(this.textBoxName_Validating);
       // 
       // label1
@@ -135,7 +135,7 @@
       this.textBoxEmail.Location = new System.Drawing.Point(154, 8);
       this.textBoxEmail.Name = "textBoxEmail";
       this.textBoxEmail.Size = new System.Drawing.Size(95, 27);
-      this.textBoxEmail.TabIndex = 6;
+      this.textBoxEmail.TabIndex = 3;
       this.textBoxEmail.Validating += new System.ComponentModel.CancelEventHandler(this.textBoxEmail_Validating);
       // 
       // label3
@@ -158,7 +158,7 @@
       this.textBoxCognome.Location = new System.Drawing.Point(128, 8);
       this.textBoxCognome.Name = "textBoxCognome";
       this.textBoxCognome.Size = new System.Drawing.Size(122, 27);
-      this.textBoxCognome.TabIndex = 8;
+      this.textBoxCognome.TabIndex = 2;
       this.textBoxCognome.Validating += new System.ComponentModel.CancelEventHandler(this.textBoxCognome_Validating);
       // 
       // label4
@@ -190,7 +190,7 @@
       this.textBoxTel2.Location = new System.Drawing.Point(128, 10);
       this.textBoxTel2.Name = "textBoxTel2";
       this.textBoxTel2.Size = new System.Drawing.Size(122, 27);
-      this.textBoxTel2.TabIndex = 12;
+      this.textBoxTel2.TabIndex = 8;
       // 
       // label6
       // 
@@ -209,7 +209,7 @@
       this.textBoxTel1.Location = new System.Drawing.Point(101, 10);
       this.textBoxTel1.Name = "textBoxTel1";
       this.textBoxTel1.Size = new System.Drawing.Size(159, 27);
-      this.textBoxTel1.TabIndex = 14;
+      this.textBoxTel1.TabIndex = 7;
       // 
       // label7
       // 
@@ -230,7 +230,7 @@
       this.textBoxFiscalCode.Location = new System.Drawing.Point(128, 7);
       this.textBoxFiscalCode.Name = "textBoxFiscalCode";
       this.textBoxFiscalCode.Size = new System.Drawing.Size(122, 27);
-      this.textBoxFiscalCode.TabIndex = 16;
+      this.textBoxFiscalCode.TabIndex = 5;
       this.textBoxFiscalCode.Validating += new System.ComponentModel.CancelEventHandler(this.textBoxFiscalCode_Validating);
       // 
       // label8
@@ -250,7 +250,7 @@
       this.textBoxVat.Location = new System.Drawing.Point(101, 7);
       this.textBoxVat.Name = "textBoxVat";
       this.textBoxVat.Size = new System.Drawing.Size(159, 27);
-      this.textBoxVat.TabIndex = 18;
+      this.textBoxVat.TabIndex = 4;
       this.textBoxVat.Validating += new System.ComponentModel.CancelEventHandler(this.textBoxVat_Validating);
       // 
       // groupBox1
@@ -282,7 +282,7 @@
       this.tableLayoutPanel2.Name = "tableLayoutPanel2";
       this.tableLayoutPanel2.RowCount = 1;
       this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-      this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 64F));
+      this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 51F));
       this.tableLayoutPanel2.Size = new System.Drawing.Size(815, 51);
       this.tableLayoutPanel2.TabIndex = 22;
       // 
@@ -314,7 +314,7 @@
       this.textBoxPostalCode.Location = new System.Drawing.Point(84, 16);
       this.textBoxPostalCode.Name = "textBoxPostalCode";
       this.textBoxPostalCode.Size = new System.Drawing.Size(164, 27);
-      this.textBoxPostalCode.TabIndex = 16;
+      this.textBoxPostalCode.TabIndex = 13;
       // 
       // panel10
       // 
@@ -344,7 +344,7 @@
       this.textBoxIndirizzo.Location = new System.Drawing.Point(60, 16);
       this.textBoxIndirizzo.Name = "textBoxIndirizzo";
       this.textBoxIndirizzo.Size = new System.Drawing.Size(189, 27);
-      this.textBoxIndirizzo.TabIndex = 20;
+      this.textBoxIndirizzo.TabIndex = 11;
       // 
       // panel12
       // 
@@ -364,7 +364,7 @@
       this.textBoxCity.Location = new System.Drawing.Point(72, 16);
       this.textBoxCity.Name = "textBoxCity";
       this.textBoxCity.Size = new System.Drawing.Size(182, 27);
-      this.textBoxCity.TabIndex = 18;
+      this.textBoxCity.TabIndex = 12;
       // 
       // label10
       // 
@@ -386,7 +386,7 @@
       this.buttonSave.Location = new System.Drawing.Point(618, 531);
       this.buttonSave.Name = "buttonSave";
       this.buttonSave.Size = new System.Drawing.Size(106, 38);
-      this.buttonSave.TabIndex = 21;
+      this.buttonSave.TabIndex = 16;
       this.buttonSave.Text = "Save";
       this.buttonSave.UseVisualStyleBackColor = false;
       this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
@@ -398,6 +398,21 @@
       // errorProvider2
       // 
       this.errorProvider2.ContainerControl = this;
+      // 
+      // checkBox1
+      // 
+      this.checkBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+      this.checkBox1.AutoSize = true;
+      this.checkBox1.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F);
+      this.errorProvider2.SetIconAlignment(this.checkBox1, System.Windows.Forms.ErrorIconAlignment.MiddleLeft);
+      this.checkBox1.Location = new System.Drawing.Point(751, 501);
+      this.checkBox1.Name = "checkBox1";
+      this.checkBox1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+      this.checkBox1.Size = new System.Drawing.Size(74, 24);
+      this.checkBox1.TabIndex = 14;
+      this.checkBox1.Text = "Privacy";
+      this.checkBox1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+      this.checkBox1.UseVisualStyleBackColor = true;
       // 
       // richTextBoxEx1
       // 
@@ -423,7 +438,7 @@
       this.richTextBoxEx1.SetColorWithFont = true;
       this.richTextBoxEx1.ShowToolStrip = true;
       this.richTextBoxEx1.Size = new System.Drawing.Size(755, 172);
-      this.richTextBoxEx1.TabIndex = 22;
+      this.richTextBoxEx1.TabIndex = 10;
       // 
       // tableLayoutPanel1
       // 
@@ -471,7 +486,7 @@
       this.comboBoxPrices.Location = new System.Drawing.Point(154, 11);
       this.comboBoxPrices.Name = "comboBoxPrices";
       this.comboBoxPrices.Size = new System.Drawing.Size(95, 28);
-      this.comboBoxPrices.TabIndex = 21;
+      this.comboBoxPrices.TabIndex = 9;
       this.comboBoxPrices.Resize += new System.EventHandler(this.comboBoxPrices_Resize);
       // 
       // label14
@@ -525,7 +540,7 @@
       this.comboBoxLanguage.Location = new System.Drawing.Point(154, 7);
       this.comboBoxLanguage.Name = "comboBoxLanguage";
       this.comboBoxLanguage.Size = new System.Drawing.Size(95, 28);
-      this.comboBoxLanguage.TabIndex = 22;
+      this.comboBoxLanguage.TabIndex = 6;
       this.comboBoxLanguage.Resize += new System.EventHandler(this.comboBoxLanguage_Resize);
       // 
       // label13
@@ -614,25 +629,10 @@
       this.buttonCancel.Location = new System.Drawing.Point(740, 531);
       this.buttonCancel.Name = "buttonCancel";
       this.buttonCancel.Size = new System.Drawing.Size(106, 38);
-      this.buttonCancel.TabIndex = 39;
+      this.buttonCancel.TabIndex = 17;
       this.buttonCancel.Text = "Cancel";
       this.buttonCancel.UseVisualStyleBackColor = false;
       this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
-      // 
-      // checkBox1
-      // 
-      this.checkBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-      this.checkBox1.AutoSize = true;
-      this.checkBox1.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F);
-      this.errorProvider2.SetIconAlignment(this.checkBox1, System.Windows.Forms.ErrorIconAlignment.MiddleLeft);
-      this.checkBox1.Location = new System.Drawing.Point(751, 501);
-      this.checkBox1.Name = "checkBox1";
-      this.checkBox1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-      this.checkBox1.Size = new System.Drawing.Size(74, 24);
-      this.checkBox1.TabIndex = 40;
-      this.checkBox1.Text = "Privacy";
-      this.checkBox1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-      this.checkBox1.UseVisualStyleBackColor = true;
       // 
       // buttonOpenPrivacy
       // 
@@ -644,7 +644,7 @@
       this.buttonOpenPrivacy.Location = new System.Drawing.Point(470, 531);
       this.buttonOpenPrivacy.Name = "buttonOpenPrivacy";
       this.buttonOpenPrivacy.Size = new System.Drawing.Size(128, 38);
-      this.buttonOpenPrivacy.TabIndex = 41;
+      this.buttonOpenPrivacy.TabIndex = 18;
       this.buttonOpenPrivacy.Text = "Apri privacy";
       this.buttonOpenPrivacy.UseVisualStyleBackColor = false;
       this.buttonOpenPrivacy.Click += new System.EventHandler(this.buttonOpenPrivacy_Click);

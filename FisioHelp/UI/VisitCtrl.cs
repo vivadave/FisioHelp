@@ -12,6 +12,7 @@ namespace FisioHelp.UI
   {
     private List<DataModels.Treatment> _treatments;
     private DataModels.Visit _visit;
+    private DataModels.Therapist _therapist { get; set; }
     private DataModels.Customer _customer;
     private bool _saveEnabled = false;
 
@@ -22,6 +23,7 @@ namespace FisioHelp.UI
       _customer = customer;
       using (var db = new Db.PhisioDB())
       {
+        _therapist = db.Therapists.FirstOrDefault();
         _treatments = db.Treatments.ToList();
         foreach (var treatment in _treatments)
         {
@@ -71,28 +73,9 @@ namespace FisioHelp.UI
     private void buttonSave_Click(object sender, EventArgs e)
     {
       SetVisit();
-      using (var db = new Db.PhisioDB())
-      {
-        if (_visit.Id > 0)
-        {
-          db.VisitsTreatments.Where(x => x.VisitId == _visit.Id).Delete();
-          foreach(var visitTreatment in _visit.Treatmentsvisitidfkeys)
-            db.Insert(visitTreatment);
-
-          db.Update(_visit);
-        }
-        else
-        {
-          _visit.Id = db.InsertWithInt32Identity(_visit);
-          if (_visit.Treatmentsvisitidfkeys != null)
-            foreach (var visitTreatment in _visit.Treatmentsvisitidfkeys)
-            {
-              visitTreatment.Visit = _visit;
-              visitTreatment.VisitId = _visit.Id;
-              db.Insert(visitTreatment);
-            }
-        }
-      }
+      _visit.TherapistId = _therapist.Id;
+      _visit.SaveToDB();
+      MessageBox.Show("Salvato Correttamente", "Salvataggio", MessageBoxButtons.OK, MessageBoxIcon.Information);
     }
 
     private void textBoxTime_Validated(object sender, EventArgs e)

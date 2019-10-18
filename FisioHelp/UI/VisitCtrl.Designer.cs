@@ -182,7 +182,7 @@
       this.label5.Name = "label5";
       this.label5.Size = new System.Drawing.Size(92, 147);
       this.label5.TabIndex = 33;
-      this.label5.Text = "Conclusioni";
+      this.label5.Text = "Trattamento";
       // 
       // textBoxTime
       // 

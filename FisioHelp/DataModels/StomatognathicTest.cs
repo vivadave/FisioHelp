@@ -4,9 +4,8 @@ using LinqToDB.Mapping;
 namespace FisioHelp.DataModels
 {
   [Table(Schema = "public", Name = "stomatognathic_test")]
-  public partial class StomatognathicTest
+  public partial class StomatognathicTest : BaseModel
   {
-    [Column("id"), PrimaryKey, Identity] public int Id { get; set; } // integer
     [Column("lastissimus_dors_1r"), Nullable] public int? LastissimusDors1r { get; set; } // integer
     [Column("lastissimus_dors_1l"), Nullable] public int? LastissimusDors1l { get; set; } // integer
     [Column("lastissimus_dors_2r"), Nullable] public int? LastissimusDors2r { get; set; } // integer
@@ -104,7 +103,12 @@ namespace FisioHelp.DataModels
     [Column("t2_r"), Nullable] public int? T2R { get; set; } // integer
     [Column("t2_l"), Nullable] public int? T2L { get; set; } // integer
     [Column("t2_d"), Nullable] public int? T2D { get; set; } // integer
-    [Column("customer_id"), NotNull] public int CustomerId { get; set; } // integer
+    [Column("customer_id"), NotNull] public Guid CustomerId { get; set; } // uuid
+
+    public override Guid SaveToDB()
+    {
+      return Helper.DbManagement.SaveToDB(this);
+    }
 
     #region Associations
 

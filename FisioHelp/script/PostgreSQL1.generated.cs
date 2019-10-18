@@ -1479,10 +1479,10 @@ namespace DataModels
 	[Table(Schema="public", Name="addresses")]
 	public partial class Address
 	{
-		[Column("id"),      PrimaryKey,  Identity] public int    Id             { get; set; } // integer
-		[Column("address"),    Nullable          ] public string Address_Column { get; set; } // character varying(256)
-		[Column("cap"),     NotNull              ] public string Cap            { get; set; } // character varying(45)
-		[Column("city"),       Nullable          ] public string City           { get; set; } // character varying(45)
+		[Column("id"),      PrimaryKey,  NotNull] public Guid   Id             { get; set; } // uuid
+		[Column("address"),    Nullable         ] public string Address_Column { get; set; } // character varying(256)
+		[Column("cap"),                  NotNull] public string Cap            { get; set; } // character varying(45)
+		[Column("city"),       Nullable         ] public string City           { get; set; } // character varying(45)
 
 		#region Associations
 
@@ -1498,20 +1498,21 @@ namespace DataModels
 	[Table(Schema="public", Name="customers")]
 	public partial class Customer
 	{
-		[Column("id"),            PrimaryKey,  Identity] public int         Id           { get; set; } // integer
-		[Column("name"),             Nullable          ] public string      Name         { get; set; } // character varying(45)
-		[Column("surname"),       NotNull              ] public string      Surname      { get; set; } // character varying(45)
-		[Column("email"),            Nullable          ] public string      Email        { get; set; } // character varying(45)
-		[Column("vat"),              Nullable          ] public string      Vat          { get; set; } // character varying(45)
-		[Column("fiscalcode"),       Nullable          ] public string      Fiscalcode   { get; set; } // character varying(45)
-		[Column("tel1"),             Nullable          ] public string      Tel1         { get; set; } // character varying(45)
-		[Column("tel2"),             Nullable          ] public string      Tel2         { get; set; } // character varying(45)
-		[Column("address_id"),       Nullable          ] public int?        AddressId    { get; set; } // integer
-		[Column("pricelist_id"),     Nullable          ] public int?        PricelistId  { get; set; } // integer
-		[Column("note"),             Nullable          ] public string      Note         { get; set; } // text
-		[Column("language"),         Nullable          ] public string      Language     { get; set; } // character varying(45)
-		[Column("creation_date"),    Nullable          ] public NpgsqlDate? CreationDate { get; set; } // date
-		[Column("privacy"),          Nullable          ] public bool?       Privacy      { get; set; } // boolean
+		[Column("id"),            PrimaryKey,  NotNull] public Guid        Id           { get; set; } // uuid
+		[Column("name"),             Nullable         ] public string      Name         { get; set; } // character varying(45)
+		[Column("surname"),                    NotNull] public string      Surname      { get; set; } // character varying(45)
+		[Column("email"),            Nullable         ] public string      Email        { get; set; } // character varying(45)
+		[Column("vat"),              Nullable         ] public string      Vat          { get; set; } // character varying(45)
+		[Column("fiscalcode"),       Nullable         ] public string      Fiscalcode   { get; set; } // character varying(45)
+		[Column("tel1"),             Nullable         ] public string      Tel1         { get; set; } // character varying(45)
+		[Column("tel2"),             Nullable         ] public string      Tel2         { get; set; } // character varying(45)
+		[Column("address_id"),       Nullable         ] public Guid?       AddressId    { get; set; } // uuid
+		[Column("pricelist_id"),     Nullable         ] public Guid?       PricelistId  { get; set; } // uuid
+		[Column("therapist_id"),               NotNull] public Guid        TherapistId  { get; set; } // uuid
+		[Column("note"),             Nullable         ] public string      Note         { get; set; } // text
+		[Column("language"),         Nullable         ] public string      Language     { get; set; } // character varying(45)
+		[Column("privacy"),          Nullable         ] public bool?       Privacy      { get; set; } // boolean
+		[Column("creation_date"),    Nullable         ] public NpgsqlDate? CreationDate { get; set; } // date
 
 		#region Associations
 
@@ -1546,6 +1547,12 @@ namespace DataModels
 		public IEnumerable<StomatognathicTest> Stomatognathictestcustomeridfkeys { get; set; }
 
 		/// <summary>
+		/// customers_therapist_id_fkey
+		/// </summary>
+		[Association(ThisKey="TherapistId", OtherKey="Id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="customers_therapist_id_fkey", BackReferenceName="Customerstherapistidfkeys")]
+		public Therapist Therapist { get; set; }
+
+		/// <summary>
 		/// visits_customer_id_fkey_BackReference
 		/// </summary>
 		[Association(ThisKey="Id", OtherKey="CustomerId", CanBeNull=true, Relationship=Relationship.OneToMany, IsBackReference=true)]
@@ -1557,15 +1564,22 @@ namespace DataModels
 	[Table(Schema="public", Name="invoices")]
 	public partial class Invoice
 	{
-		[Column("id"),       PrimaryKey,  Identity] public int        Id       { get; set; } // integer
-		[Column("date"),     NotNull              ] public NpgsqlDate Date     { get; set; } // date
-		[Column("discount"),    Nullable          ] public double?    Discount { get; set; } // double precision
-		[Column("payed"),       Nullable          ] public bool?      Payed    { get; set; } // boolean
-		[Column("text"),        Nullable          ] public string     Text     { get; set; } // text
-		[Column("title"),    NotNull              ] public string     Title    { get; set; } // character varying(25)
-		[Column("deleted"),     Nullable          ] public bool?      Deleted  { get; set; } // boolean
+		[Column("id"),           PrimaryKey,  NotNull] public Guid       Id          { get; set; } // uuid
+		[Column("date"),                      NotNull] public NpgsqlDate Date        { get; set; } // date
+		[Column("discount"),        Nullable         ] public double?    Discount    { get; set; } // double precision
+		[Column("payed"),           Nullable         ] public bool?      Payed       { get; set; } // boolean
+		[Column("therapist_id"),              NotNull] public Guid       TherapistId { get; set; } // uuid
+		[Column("text"),            Nullable         ] public string     Text        { get; set; } // text
+		[Column("title"),                     NotNull] public string     Title       { get; set; } // character varying(25)
+		[Column("deleted"),         Nullable         ] public bool?      Deleted     { get; set; } // boolean
 
 		#region Associations
+
+		/// <summary>
+		/// invoices_therapist_id_fkey
+		/// </summary>
+		[Association(ThisKey="TherapistId", OtherKey="Id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="invoices_therapist_id_fkey", BackReferenceName="Invoicestherapistidfkeys")]
+		public Therapist Therapist { get; set; }
 
 		/// <summary>
 		/// visits_invoice_id_fkey_BackReference
@@ -1579,9 +1593,10 @@ namespace DataModels
 	[Table(Schema="public", Name="price_lists")]
 	public partial class PriceList
 	{
-		[Column("id"),    PrimaryKey, Identity] public int    Id    { get; set; } // integer
-		[Column("name"),  NotNull             ] public string Name  { get; set; } // character varying(256)
-		[Column("price"), NotNull             ] public double Price { get; set; } // double precision
+		[Column("id"),           PrimaryKey, NotNull] public Guid   Id          { get; set; } // uuid
+		[Column("name"),                     NotNull] public string Name        { get; set; } // character varying(256)
+		[Column("price"),                    NotNull] public double Price       { get; set; } // double precision
+		[Column("therapist_id"),             NotNull] public Guid   TherapistId { get; set; } // uuid
 
 		#region Associations
 
@@ -1591,38 +1606,44 @@ namespace DataModels
 		[Association(ThisKey="Id", OtherKey="PricelistId", CanBeNull=true, Relationship=Relationship.OneToMany, IsBackReference=true)]
 		public IEnumerable<Customer> Customerspricelistidfkeys { get; set; }
 
+		/// <summary>
+		/// price_lists_therapist_id_fkey
+		/// </summary>
+		[Association(ThisKey="TherapistId", OtherKey="Id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="price_lists_therapist_id_fkey", BackReferenceName="Priceliststherapistidfkeys")]
+		public Therapist Therapist { get; set; }
+
 		#endregion
 	}
 
 	[Table(Schema="public", Name="recent_anamnesys")]
 	public partial class RecentAnamnesy
 	{
-		[Column("id"),                          PrimaryKey,  Identity] public int         Id                       { get; set; } // integer
-		[Column("main_disease_1"),                 Nullable          ] public string      MainDisease1             { get; set; } // character varying(256)
-		[Column("main_disease_2"),                 Nullable          ] public string      MainDisease2             { get; set; } // character varying(256)
-		[Column("main_disease_3"),                 Nullable          ] public string      MainDisease3             { get; set; } // character varying(256)
-		[Column("main_disease_4"),                 Nullable          ] public string      MainDisease4             { get; set; } // character varying(256)
-		[Column("main_disease_5"),                 Nullable          ] public string      MainDisease5             { get; set; } // character varying(256)
-		[Column("global_health"),                  Nullable          ] public string      GlobalHealth             { get; set; } // character varying(256)
-		[Column("other_diseases"),                 Nullable          ] public string      OtherDiseases            { get; set; } // character varying(256)
-		[Column("disease_in_life"),                Nullable          ] public int?        DiseaseInLife            { get; set; } // integer
-		[Column("disease_in_family"),              Nullable          ] public int?        DiseaseInFamily          { get; set; } // integer
-		[Column("disease_in_work"),                Nullable          ] public int?        DiseaseInWork            { get; set; } // integer
-		[Column("disease_in_social"),              Nullable          ] public int?        DiseaseInSocial          { get; set; } // integer
-		[Column("posture"),                        Nullable          ] public string      Posture                  { get; set; } // character varying(256)
-		[Column("medicine"),                       Nullable          ] public string      Medicine                 { get; set; } // character varying(256)
-		[Column("pre_treatment"),                  Nullable          ] public string      PreTreatment             { get; set; } // character varying(256)
-		[Column("main_disease_intensity"),         Nullable          ] public int?        MainDiseaseIntensity     { get; set; } // integer
-		[Column("main_disease_description"),       Nullable          ] public string      MainDiseaseDescription   { get; set; } // character varying(256)
-		[Column("main_disease_date"),              Nullable          ] public NpgsqlDate? MainDiseaseDate          { get; set; } // date
-		[Column("main_disease_modality"),          Nullable          ] public string      MainDiseaseModality      { get; set; } // character varying(256)
-		[Column("main_disease_course"),            Nullable          ] public string      MainDiseaseCourse        { get; set; } // character varying(256)
-		[Column("main_disease_factor_plus"),       Nullable          ] public string      MainDiseaseFactorPlus    { get; set; } // character varying(256)
-		[Column("main_disease_factor_minor"),      Nullable          ] public string      MainDiseaseFactorMinor   { get; set; } // character varying(256)
-		[Column("main_disease_nervous_system"),    Nullable          ] public string      MainDiseaseNervousSystem { get; set; } // character varying(256)
-		[Column("main_disease_symptoms_24"),       Nullable          ] public string      MainDiseaseSymptoms24    { get; set; } // character varying(256)
-		[Column("images_diagnostics"),             Nullable          ] public string      ImagesDiagnostics        { get; set; } // character varying(256)
-		[Column("customer_id"),                 NotNull              ] public int         CustomerId               { get; set; } // integer
+		[Column("id"),                          PrimaryKey,  NotNull] public Guid        Id                       { get; set; } // uuid
+		[Column("main_disease_1"),                 Nullable         ] public string      MainDisease1             { get; set; } // character varying(256)
+		[Column("main_disease_2"),                 Nullable         ] public string      MainDisease2             { get; set; } // character varying(256)
+		[Column("main_disease_3"),                 Nullable         ] public string      MainDisease3             { get; set; } // character varying(256)
+		[Column("main_disease_4"),                 Nullable         ] public string      MainDisease4             { get; set; } // character varying(256)
+		[Column("main_disease_5"),                 Nullable         ] public string      MainDisease5             { get; set; } // character varying(256)
+		[Column("global_health"),                  Nullable         ] public string      GlobalHealth             { get; set; } // character varying(256)
+		[Column("other_diseases"),                 Nullable         ] public string      OtherDiseases            { get; set; } // character varying(256)
+		[Column("disease_in_life"),                Nullable         ] public int?        DiseaseInLife            { get; set; } // integer
+		[Column("disease_in_family"),              Nullable         ] public int?        DiseaseInFamily          { get; set; } // integer
+		[Column("disease_in_work"),                Nullable         ] public int?        DiseaseInWork            { get; set; } // integer
+		[Column("disease_in_social"),              Nullable         ] public int?        DiseaseInSocial          { get; set; } // integer
+		[Column("posture"),                        Nullable         ] public string      Posture                  { get; set; } // character varying(256)
+		[Column("medicine"),                       Nullable         ] public string      Medicine                 { get; set; } // character varying(256)
+		[Column("pre_treatment"),                  Nullable         ] public string      PreTreatment             { get; set; } // character varying(256)
+		[Column("main_disease_intensity"),         Nullable         ] public int?        MainDiseaseIntensity     { get; set; } // integer
+		[Column("main_disease_description"),       Nullable         ] public string      MainDiseaseDescription   { get; set; } // character varying(256)
+		[Column("main_disease_date"),              Nullable         ] public NpgsqlDate? MainDiseaseDate          { get; set; } // date
+		[Column("main_disease_modality"),          Nullable         ] public string      MainDiseaseModality      { get; set; } // character varying(256)
+		[Column("main_disease_course"),            Nullable         ] public string      MainDiseaseCourse        { get; set; } // character varying(256)
+		[Column("main_disease_factor_plus"),       Nullable         ] public string      MainDiseaseFactorPlus    { get; set; } // character varying(256)
+		[Column("main_disease_factor_minor"),      Nullable         ] public string      MainDiseaseFactorMinor   { get; set; } // character varying(256)
+		[Column("main_disease_nervous_system"),    Nullable         ] public string      MainDiseaseNervousSystem { get; set; } // character varying(256)
+		[Column("main_disease_symptoms_24"),       Nullable         ] public string      MainDiseaseSymptoms24    { get; set; } // character varying(256)
+		[Column("images_diagnostics"),             Nullable         ] public string      ImagesDiagnostics        { get; set; } // character varying(256)
+		[Column("customer_id"),                              NotNull] public Guid        CustomerId               { get; set; } // uuid
 
 		#region Associations
 
@@ -1638,18 +1659,18 @@ namespace DataModels
 	[Table(Schema="public", Name="remote_anamnesys")]
 	public partial class RemoteAnamnesy
 	{
-		[Column("id"),                PrimaryKey,  Identity] public int    Id               { get; set; } // integer
-		[Column("phisical_disease"),     Nullable          ] public string PhisicalDisease  { get; set; } // character varying(256)
-		[Column("psychic_disease"),      Nullable          ] public string PsychicDisease   { get; set; } // character varying(256)
-		[Column("surgery"),              Nullable          ] public string Surgery          { get; set; } // character varying(256)
-		[Column("anesthesias"),          Nullable          ] public string Anesthesias      { get; set; } // character varying(256)
-		[Column("pregnancy"),            Nullable          ] public string Pregnancy        { get; set; } // character varying(256)
-		[Column("traumas"),              Nullable          ] public string Traumas          { get; set; } // character varying(256)
-		[Column("recent_episodes"),      Nullable          ] public string RecentEpisodes   { get; set; } // character varying(256)
-		[Column("recent_treatments"),    Nullable          ] public string RecentTreatments { get; set; } // character varying(256)
-		[Column("medicines"),            Nullable          ] public string Medicines        { get; set; } // character varying(256)
-		[Column("other"),                Nullable          ] public string Other            { get; set; } // character varying(256)
-		[Column("customer_id"),       NotNull              ] public int    CustomerId       { get; set; } // integer
+		[Column("id"),                PrimaryKey,  NotNull] public Guid   Id               { get; set; } // uuid
+		[Column("phisical_disease"),     Nullable         ] public string PhisicalDisease  { get; set; } // character varying(256)
+		[Column("psychic_disease"),      Nullable         ] public string PsychicDisease   { get; set; } // character varying(256)
+		[Column("surgery"),              Nullable         ] public string Surgery          { get; set; } // character varying(256)
+		[Column("anesthesias"),          Nullable         ] public string Anesthesias      { get; set; } // character varying(256)
+		[Column("pregnancy"),            Nullable         ] public string Pregnancy        { get; set; } // character varying(256)
+		[Column("traumas"),              Nullable         ] public string Traumas          { get; set; } // character varying(256)
+		[Column("recent_episodes"),      Nullable         ] public string RecentEpisodes   { get; set; } // character varying(256)
+		[Column("recent_treatments"),    Nullable         ] public string RecentTreatments { get; set; } // character varying(256)
+		[Column("medicines"),            Nullable         ] public string Medicines        { get; set; } // character varying(256)
+		[Column("other"),                Nullable         ] public string Other            { get; set; } // character varying(256)
+		[Column("customer_id"),                    NotNull] public Guid   CustomerId       { get; set; } // uuid
 
 		#region Associations
 
@@ -1665,105 +1686,105 @@ namespace DataModels
 	[Table(Schema="public", Name="stomatognathic_test")]
 	public partial class StomatognathicTest
 	{
-		[Column("id"),                     PrimaryKey,  Identity] public int    Id                  { get; set; } // integer
-		[Column("lastissimus_dors_1r"),       Nullable          ] public int?   LastissimusDors1r   { get; set; } // integer
-		[Column("lastissimus_dors_1l"),       Nullable          ] public int?   LastissimusDors1l   { get; set; } // integer
-		[Column("lastissimus_dors_2r"),       Nullable          ] public int?   LastissimusDors2r   { get; set; } // integer
-		[Column("lastissimus_dors_2l"),       Nullable          ] public int?   LastissimusDors2l   { get; set; } // integer
-		[Column("lastissimus_dors_3r"),       Nullable          ] public int?   LastissimusDors3r   { get; set; } // integer
-		[Column("lastissimus_dors_3l"),       Nullable          ] public int?   LastissimusDors3l   { get; set; } // integer
-		[Column("lastissimus_dors_4r"),       Nullable          ] public int?   LastissimusDors4r   { get; set; } // integer
-		[Column("lastissimus_dors_4l"),       Nullable          ] public int?   LastissimusDors4l   { get; set; } // integer
-		[Column("lastissimus_dors_5r"),       Nullable          ] public int?   LastissimusDors5r   { get; set; } // integer
-		[Column("lastissimus_dors_5l"),       Nullable          ] public int?   LastissimusDors5l   { get; set; } // integer
-		[Column("neck_flex_r"),               Nullable          ] public int?   NeckFlexR           { get; set; } // integer
-		[Column("neck_flex_l"),               Nullable          ] public int?   NeckFlexL           { get; set; } // integer
-		[Column("neck_extflex_r"),            Nullable          ] public int?   NeckExtflexR        { get; set; } // integer
-		[Column("neck_extflex_l"),            Nullable          ] public int?   NeckExtflexL        { get; set; } // integer
-		[Column("sterncleid_r"),              Nullable          ] public int?   SterncleidR         { get; set; } // integer
-		[Column("sterncleid_l"),              Nullable          ] public int?   SterncleidL         { get; set; } // integer
-		[Column("rectfem_r"),                 Nullable          ] public int?   RectfemR            { get; set; } // integer
-		[Column("rectfem_l"),                 Nullable          ] public int?   RectfemL            { get; set; } // integer
-		[Column("pirif_r"),                   Nullable          ] public int?   PirifR              { get; set; } // integer
-		[Column("pirif_l"),                   Nullable          ] public int?   PirifL              { get; set; } // integer
-		[Column("iliopsoas_r"),               Nullable          ] public int?   IliopsoasR          { get; set; } // integer
-		[Column("iliopsoas_l"),               Nullable          ] public int?   IliopsoasL          { get; set; } // integer
-		[Column("cat1_err"),                  Nullable          ] public bool?  Cat1Err             { get; set; } // boolean
-		[Column("cat1_err_pos"),              Nullable          ] public string Cat1ErrPos          { get; set; } // character varying(64)
-		[Column("cat2_err_r"),                Nullable          ] public int?   Cat2ErrR            { get; set; } // integer
-		[Column("cat2_err_l"),                Nullable          ] public int?   Cat2ErrL            { get; set; } // integer
-		[Column("inicator"),                  Nullable          ] public string Inicator            { get; set; } // character varying(64)
-		[Column("tl_okziput"),                Nullable          ] public int?   TlOkziput           { get; set; } // integer
-		[Column("double_tl_cat"),             Nullable          ] public int?   DoubleTlCat         { get; set; } // integer
-		[Column("double_tl_okz"),             Nullable          ] public int?   DoubleTlOkz         { get; set; } // integer
-		[Column("ruheschwebe_r"),             Nullable          ] public string RuheschwebeR        { get; set; } // character varying(64)
-		[Column("ruheschwebe_l"),             Nullable          ] public string RuheschwebeL        { get; set; } // character varying(64)
-		[Column("fester_r"),                  Nullable          ] public string FesterR             { get; set; } // character varying(64)
-		[Column("fester_l"),                  Nullable          ] public string FesterL             { get; set; } // character varying(64)
-		[Column("weite_off_r"),               Nullable          ] public string WeiteOffR           { get; set; } // character varying(64)
-		[Column("weite_off_l"),               Nullable          ] public string WeiteOffL           { get; set; } // character varying(64)
-		[Column("priener_abduck_ein"),        Nullable          ] public bool?  PrienerAbduckEin    { get; set; } // boolean
-		[Column("priener_abduck_ander"),      Nullable          ] public bool?  PrienerAbduckAnder  { get; set; } // boolean
-		[Column("torax_rotat"),               Nullable          ] public bool?  ToraxRotat          { get; set; } // boolean
-		[Column("meersemann"),                Nullable          ] public bool?  Meersemann          { get; set; } // boolean
-		[Column("m_klefergelenk_lat_r"),      Nullable          ] public int?   MKlefergelenkLatR   { get; set; } // integer
-		[Column("m_klefergelenk_lat_l"),      Nullable          ] public int?   MKlefergelenkLatL   { get; set; } // integer
-		[Column("m_klefergelenk_dor_r"),      Nullable          ] public int?   MKlefergelenkDorR   { get; set; } // integer
-		[Column("m_klefergelenk_dor_l"),      Nullable          ] public int?   MKlefergelenkDorL   { get; set; } // integer
-		[Column("m_klefergelenk_kompr_r"),    Nullable          ] public int?   MKlefergelenkKomprR { get; set; } // integer
-		[Column("m_klefergelenk_kompr_l"),    Nullable          ] public int?   MKlefergelenkKomprL { get; set; } // integer
-		[Column("m_masseter_prof_r"),         Nullable          ] public int?   MMasseterProfR      { get; set; } // integer
-		[Column("m_masseter_prof_l"),         Nullable          ] public int?   MMasseterProfL      { get; set; } // integer
-		[Column("m_masseter_sup_r"),          Nullable          ] public int?   MMasseterSupR       { get; set; } // integer
-		[Column("m_masseter_sup_l"),          Nullable          ] public int?   MMasseterSupL       { get; set; } // integer
-		[Column("m_temporalis_ant_r"),        Nullable          ] public int?   MTemporalisAntR     { get; set; } // integer
-		[Column("m_temporalis_ant_l"),        Nullable          ] public int?   MTemporalisAntL     { get; set; } // integer
-		[Column("m_temporalis_post_r"),       Nullable          ] public int?   MTemporalisPostR    { get; set; } // integer
-		[Column("m_temporalis_post_l"),       Nullable          ] public int?   MTemporalisPostL    { get; set; } // integer
-		[Column("m_suboccip_r"),              Nullable          ] public int?   MSuboccipR          { get; set; } // integer
-		[Column("m_suboccip_l"),              Nullable          ] public int?   MSuboccipL          { get; set; } // integer
-		[Column("m_trapezius_r"),             Nullable          ] public int?   MTrapeziusR         { get; set; } // integer
-		[Column("m_trapezius_l"),             Nullable          ] public int?   MTrapeziusL         { get; set; } // integer
-		[Column("m_sterncleid_r"),            Nullable          ] public int?   MSterncleidR        { get; set; } // integer
-		[Column("m_sterncleid_l"),            Nullable          ] public int?   MSterncleidL        { get; set; } // integer
-		[Column("m_digastr_r"),               Nullable          ] public int?   MDigastrR           { get; set; } // integer
-		[Column("m_digastr_l"),               Nullable          ] public int?   MDigastrL           { get; set; } // integer
-		[Column("m_temporaliss_r"),           Nullable          ] public int?   MTemporalissR       { get; set; } // integer
-		[Column("m_temporaliss_l"),           Nullable          ] public int?   MTemporalissL       { get; set; } // integer
-		[Column("m_pterygoid_lat_r"),         Nullable          ] public int?   MPterygoidLatR      { get; set; } // integer
-		[Column("m_pterygoid_lat_l"),         Nullable          ] public int?   MPterygoidLatL      { get; set; } // integer
-		[Column("m_pterygoid_med_r"),         Nullable          ] public int?   MPterygoidMedR      { get; set; } // integer
-		[Column("m_pterygoid_med_l"),         Nullable          ] public int?   MPterygoidMedL      { get; set; } // integer
-		[Column("m_scaleni_r"),               Nullable          ] public int?   MScaleniR           { get; set; } // integer
-		[Column("m_scaleni_l"),               Nullable          ] public int?   MScaleniL           { get; set; } // integer
-		[Column("c0_r"),                      Nullable          ] public int?   C0R                 { get; set; } // integer
-		[Column("c0_l"),                      Nullable          ] public int?   C0L                 { get; set; } // integer
-		[Column("c0_d"),                      Nullable          ] public int?   C0D                 { get; set; } // integer
-		[Column("c1_r"),                      Nullable          ] public int?   C1R                 { get; set; } // integer
-		[Column("c1_l"),                      Nullable          ] public int?   C1L                 { get; set; } // integer
-		[Column("c1_d"),                      Nullable          ] public int?   C1D                 { get; set; } // integer
-		[Column("c2_r"),                      Nullable          ] public int?   C2R                 { get; set; } // integer
-		[Column("c2_l"),                      Nullable          ] public int?   C2L                 { get; set; } // integer
-		[Column("c2_d"),                      Nullable          ] public int?   C2D                 { get; set; } // integer
-		[Column("c3_r"),                      Nullable          ] public int?   C3R                 { get; set; } // integer
-		[Column("c3_l"),                      Nullable          ] public int?   C3L                 { get; set; } // integer
-		[Column("c3_d"),                      Nullable          ] public int?   C3D                 { get; set; } // integer
-		[Column("c4_r"),                      Nullable          ] public int?   C4R                 { get; set; } // integer
-		[Column("c4_l"),                      Nullable          ] public int?   C4L                 { get; set; } // integer
-		[Column("c4_d"),                      Nullable          ] public int?   C4D                 { get; set; } // integer
-		[Column("c5_r"),                      Nullable          ] public int?   C5R                 { get; set; } // integer
-		[Column("c5_l"),                      Nullable          ] public int?   C5L                 { get; set; } // integer
-		[Column("c5_d"),                      Nullable          ] public int?   C5D                 { get; set; } // integer
-		[Column("g_r"),                       Nullable          ] public int?   GR                  { get; set; } // integer
-		[Column("g_l"),                       Nullable          ] public int?   GL                  { get; set; } // integer
-		[Column("g_d"),                       Nullable          ] public int?   GD                  { get; set; } // integer
-		[Column("t1_r"),                      Nullable          ] public int?   T1R                 { get; set; } // integer
-		[Column("t1_l"),                      Nullable          ] public int?   T1L                 { get; set; } // integer
-		[Column("t1_d"),                      Nullable          ] public int?   T1D                 { get; set; } // integer
-		[Column("t2_r"),                      Nullable          ] public int?   T2R                 { get; set; } // integer
-		[Column("t2_l"),                      Nullable          ] public int?   T2L                 { get; set; } // integer
-		[Column("t2_d"),                      Nullable          ] public int?   T2D                 { get; set; } // integer
-		[Column("customer_id"),            NotNull              ] public int    CustomerId          { get; set; } // integer
+		[Column("id"),                     PrimaryKey,  NotNull] public Guid   Id                  { get; set; } // uuid
+		[Column("lastissimus_dors_1r"),       Nullable         ] public int?   LastissimusDors1r   { get; set; } // integer
+		[Column("lastissimus_dors_1l"),       Nullable         ] public int?   LastissimusDors1l   { get; set; } // integer
+		[Column("lastissimus_dors_2r"),       Nullable         ] public int?   LastissimusDors2r   { get; set; } // integer
+		[Column("lastissimus_dors_2l"),       Nullable         ] public int?   LastissimusDors2l   { get; set; } // integer
+		[Column("lastissimus_dors_3r"),       Nullable         ] public int?   LastissimusDors3r   { get; set; } // integer
+		[Column("lastissimus_dors_3l"),       Nullable         ] public int?   LastissimusDors3l   { get; set; } // integer
+		[Column("lastissimus_dors_4r"),       Nullable         ] public int?   LastissimusDors4r   { get; set; } // integer
+		[Column("lastissimus_dors_4l"),       Nullable         ] public int?   LastissimusDors4l   { get; set; } // integer
+		[Column("lastissimus_dors_5r"),       Nullable         ] public int?   LastissimusDors5r   { get; set; } // integer
+		[Column("lastissimus_dors_5l"),       Nullable         ] public int?   LastissimusDors5l   { get; set; } // integer
+		[Column("neck_flex_r"),               Nullable         ] public int?   NeckFlexR           { get; set; } // integer
+		[Column("neck_flex_l"),               Nullable         ] public int?   NeckFlexL           { get; set; } // integer
+		[Column("neck_extflex_r"),            Nullable         ] public int?   NeckExtflexR        { get; set; } // integer
+		[Column("neck_extflex_l"),            Nullable         ] public int?   NeckExtflexL        { get; set; } // integer
+		[Column("sterncleid_r"),              Nullable         ] public int?   SterncleidR         { get; set; } // integer
+		[Column("sterncleid_l"),              Nullable         ] public int?   SterncleidL         { get; set; } // integer
+		[Column("rectfem_r"),                 Nullable         ] public int?   RectfemR            { get; set; } // integer
+		[Column("rectfem_l"),                 Nullable         ] public int?   RectfemL            { get; set; } // integer
+		[Column("pirif_r"),                   Nullable         ] public int?   PirifR              { get; set; } // integer
+		[Column("pirif_l"),                   Nullable         ] public int?   PirifL              { get; set; } // integer
+		[Column("iliopsoas_r"),               Nullable         ] public int?   IliopsoasR          { get; set; } // integer
+		[Column("iliopsoas_l"),               Nullable         ] public int?   IliopsoasL          { get; set; } // integer
+		[Column("cat1_err"),                  Nullable         ] public bool?  Cat1Err             { get; set; } // boolean
+		[Column("cat1_err_pos"),              Nullable         ] public string Cat1ErrPos          { get; set; } // character varying(64)
+		[Column("cat2_err_r"),                Nullable         ] public int?   Cat2ErrR            { get; set; } // integer
+		[Column("cat2_err_l"),                Nullable         ] public int?   Cat2ErrL            { get; set; } // integer
+		[Column("inicator"),                  Nullable         ] public string Inicator            { get; set; } // character varying(64)
+		[Column("tl_okziput"),                Nullable         ] public int?   TlOkziput           { get; set; } // integer
+		[Column("double_tl_cat"),             Nullable         ] public int?   DoubleTlCat         { get; set; } // integer
+		[Column("double_tl_okz"),             Nullable         ] public int?   DoubleTlOkz         { get; set; } // integer
+		[Column("ruheschwebe_r"),             Nullable         ] public string RuheschwebeR        { get; set; } // character varying(64)
+		[Column("ruheschwebe_l"),             Nullable         ] public string RuheschwebeL        { get; set; } // character varying(64)
+		[Column("fester_r"),                  Nullable         ] public string FesterR             { get; set; } // character varying(64)
+		[Column("fester_l"),                  Nullable         ] public string FesterL             { get; set; } // character varying(64)
+		[Column("weite_off_r"),               Nullable         ] public string WeiteOffR           { get; set; } // character varying(64)
+		[Column("weite_off_l"),               Nullable         ] public string WeiteOffL           { get; set; } // character varying(64)
+		[Column("priener_abduck_ein"),        Nullable         ] public bool?  PrienerAbduckEin    { get; set; } // boolean
+		[Column("priener_abduck_ander"),      Nullable         ] public bool?  PrienerAbduckAnder  { get; set; } // boolean
+		[Column("torax_rotat"),               Nullable         ] public bool?  ToraxRotat          { get; set; } // boolean
+		[Column("meersemann"),                Nullable         ] public bool?  Meersemann          { get; set; } // boolean
+		[Column("m_klefergelenk_lat_r"),      Nullable         ] public int?   MKlefergelenkLatR   { get; set; } // integer
+		[Column("m_klefergelenk_lat_l"),      Nullable         ] public int?   MKlefergelenkLatL   { get; set; } // integer
+		[Column("m_klefergelenk_dor_r"),      Nullable         ] public int?   MKlefergelenkDorR   { get; set; } // integer
+		[Column("m_klefergelenk_dor_l"),      Nullable         ] public int?   MKlefergelenkDorL   { get; set; } // integer
+		[Column("m_klefergelenk_kompr_r"),    Nullable         ] public int?   MKlefergelenkKomprR { get; set; } // integer
+		[Column("m_klefergelenk_kompr_l"),    Nullable         ] public int?   MKlefergelenkKomprL { get; set; } // integer
+		[Column("m_masseter_prof_r"),         Nullable         ] public int?   MMasseterProfR      { get; set; } // integer
+		[Column("m_masseter_prof_l"),         Nullable         ] public int?   MMasseterProfL      { get; set; } // integer
+		[Column("m_masseter_sup_r"),          Nullable         ] public int?   MMasseterSupR       { get; set; } // integer
+		[Column("m_masseter_sup_l"),          Nullable         ] public int?   MMasseterSupL       { get; set; } // integer
+		[Column("m_temporalis_ant_r"),        Nullable         ] public int?   MTemporalisAntR     { get; set; } // integer
+		[Column("m_temporalis_ant_l"),        Nullable         ] public int?   MTemporalisAntL     { get; set; } // integer
+		[Column("m_temporalis_post_r"),       Nullable         ] public int?   MTemporalisPostR    { get; set; } // integer
+		[Column("m_temporalis_post_l"),       Nullable         ] public int?   MTemporalisPostL    { get; set; } // integer
+		[Column("m_suboccip_r"),              Nullable         ] public int?   MSuboccipR          { get; set; } // integer
+		[Column("m_suboccip_l"),              Nullable         ] public int?   MSuboccipL          { get; set; } // integer
+		[Column("m_trapezius_r"),             Nullable         ] public int?   MTrapeziusR         { get; set; } // integer
+		[Column("m_trapezius_l"),             Nullable         ] public int?   MTrapeziusL         { get; set; } // integer
+		[Column("m_sterncleid_r"),            Nullable         ] public int?   MSterncleidR        { get; set; } // integer
+		[Column("m_sterncleid_l"),            Nullable         ] public int?   MSterncleidL        { get; set; } // integer
+		[Column("m_digastr_r"),               Nullable         ] public int?   MDigastrR           { get; set; } // integer
+		[Column("m_digastr_l"),               Nullable         ] public int?   MDigastrL           { get; set; } // integer
+		[Column("m_temporaliss_r"),           Nullable         ] public int?   MTemporalissR       { get; set; } // integer
+		[Column("m_temporaliss_l"),           Nullable         ] public int?   MTemporalissL       { get; set; } // integer
+		[Column("m_pterygoid_lat_r"),         Nullable         ] public int?   MPterygoidLatR      { get; set; } // integer
+		[Column("m_pterygoid_lat_l"),         Nullable         ] public int?   MPterygoidLatL      { get; set; } // integer
+		[Column("m_pterygoid_med_r"),         Nullable         ] public int?   MPterygoidMedR      { get; set; } // integer
+		[Column("m_pterygoid_med_l"),         Nullable         ] public int?   MPterygoidMedL      { get; set; } // integer
+		[Column("m_scaleni_r"),               Nullable         ] public int?   MScaleniR           { get; set; } // integer
+		[Column("m_scaleni_l"),               Nullable         ] public int?   MScaleniL           { get; set; } // integer
+		[Column("c0_r"),                      Nullable         ] public int?   C0R                 { get; set; } // integer
+		[Column("c0_l"),                      Nullable         ] public int?   C0L                 { get; set; } // integer
+		[Column("c0_d"),                      Nullable         ] public int?   C0D                 { get; set; } // integer
+		[Column("c1_r"),                      Nullable         ] public int?   C1R                 { get; set; } // integer
+		[Column("c1_l"),                      Nullable         ] public int?   C1L                 { get; set; } // integer
+		[Column("c1_d"),                      Nullable         ] public int?   C1D                 { get; set; } // integer
+		[Column("c2_r"),                      Nullable         ] public int?   C2R                 { get; set; } // integer
+		[Column("c2_l"),                      Nullable         ] public int?   C2L                 { get; set; } // integer
+		[Column("c2_d"),                      Nullable         ] public int?   C2D                 { get; set; } // integer
+		[Column("c3_r"),                      Nullable         ] public int?   C3R                 { get; set; } // integer
+		[Column("c3_l"),                      Nullable         ] public int?   C3L                 { get; set; } // integer
+		[Column("c3_d"),                      Nullable         ] public int?   C3D                 { get; set; } // integer
+		[Column("c4_r"),                      Nullable         ] public int?   C4R                 { get; set; } // integer
+		[Column("c4_l"),                      Nullable         ] public int?   C4L                 { get; set; } // integer
+		[Column("c4_d"),                      Nullable         ] public int?   C4D                 { get; set; } // integer
+		[Column("c5_r"),                      Nullable         ] public int?   C5R                 { get; set; } // integer
+		[Column("c5_l"),                      Nullable         ] public int?   C5L                 { get; set; } // integer
+		[Column("c5_d"),                      Nullable         ] public int?   C5D                 { get; set; } // integer
+		[Column("g_r"),                       Nullable         ] public int?   GR                  { get; set; } // integer
+		[Column("g_l"),                       Nullable         ] public int?   GL                  { get; set; } // integer
+		[Column("g_d"),                       Nullable         ] public int?   GD                  { get; set; } // integer
+		[Column("t1_r"),                      Nullable         ] public int?   T1R                 { get; set; } // integer
+		[Column("t1_l"),                      Nullable         ] public int?   T1L                 { get; set; } // integer
+		[Column("t1_d"),                      Nullable         ] public int?   T1D                 { get; set; } // integer
+		[Column("t2_r"),                      Nullable         ] public int?   T2R                 { get; set; } // integer
+		[Column("t2_l"),                      Nullable         ] public int?   T2L                 { get; set; } // integer
+		[Column("t2_d"),                      Nullable         ] public int?   T2D                 { get; set; } // integer
+		[Column("customer_id"),                         NotNull] public Guid   CustomerId          { get; set; } // uuid
 
 		#region Associations
 
@@ -1779,26 +1800,67 @@ namespace DataModels
 	[Table(Schema="public", Name="therapists")]
 	public partial class Therapist
 	{
-		[Column("id"),              PrimaryKey,  Identity] public int    Id             { get; set; } // integer
-		[Column("address"),            Nullable          ] public string Address        { get; set; } // character varying(256)
-		[Column("full_name"),       NotNull              ] public string FullName       { get; set; } // character varying(45)
-		[Column("tax_number"),         Nullable          ] public string TaxNumber      { get; set; } // character varying(45)
-		[Column("fiscal_code"),        Nullable          ] public string FiscalCode     { get; set; } // character varying(45)
-		[Column("email"),              Nullable          ] public string Email          { get; set; } // character varying(45)
-		[Column("iban"),               Nullable          ] public string Iban           { get; set; } // character varying(45)
-		[Column("postit"),             Nullable          ] public string Postit         { get; set; } // text
-		[Column("invoices_folder"),    Nullable          ] public string InvoicesFolder { get; set; } // text
-		[Column("privacy_folder"),     Nullable          ] public string PrivacyFolder  { get; set; } // text
+		[Column("id"),              PrimaryKey,  NotNull] public Guid   Id             { get; set; } // uuid
+		[Column("address"),            Nullable         ] public string Address        { get; set; } // character varying(256)
+		[Column("full_name"),                    NotNull] public string FullName       { get; set; } // character varying(45)
+		[Column("tax_number"),         Nullable         ] public string TaxNumber      { get; set; } // character varying(45)
+		[Column("fiscal_code"),        Nullable         ] public string FiscalCode     { get; set; } // character varying(45)
+		[Column("iban"),               Nullable         ] public string Iban           { get; set; } // character varying(45)
+		[Column("postit"),             Nullable         ] public string Postit         { get; set; } // text
+		[Column("invoices_folder"),    Nullable         ] public string InvoicesFolder { get; set; } // text
+		[Column("privacy_folder"),     Nullable         ] public string PrivacyFolder  { get; set; } // text
+		[Column("email"),              Nullable         ] public string Email          { get; set; } // text
+
+		#region Associations
+
+		/// <summary>
+		/// customers_therapist_id_fkey_BackReference
+		/// </summary>
+		[Association(ThisKey="Id", OtherKey="TherapistId", CanBeNull=true, Relationship=Relationship.OneToMany, IsBackReference=true)]
+		public IEnumerable<Customer> Customerstherapistidfkeys { get; set; }
+
+		/// <summary>
+		/// invoices_therapist_id_fkey_BackReference
+		/// </summary>
+		[Association(ThisKey="Id", OtherKey="TherapistId", CanBeNull=true, Relationship=Relationship.OneToMany, IsBackReference=true)]
+		public IEnumerable<Invoice> Invoicestherapistidfkeys { get; set; }
+
+		/// <summary>
+		/// price_lists_therapist_id_fkey_BackReference
+		/// </summary>
+		[Association(ThisKey="Id", OtherKey="TherapistId", CanBeNull=true, Relationship=Relationship.OneToMany, IsBackReference=true)]
+		public IEnumerable<PriceList> Priceliststherapistidfkeys { get; set; }
+
+		/// <summary>
+		/// treatments_therapist_id_fkey_BackReference
+		/// </summary>
+		[Association(ThisKey="Id", OtherKey="TherapistId", CanBeNull=true, Relationship=Relationship.OneToMany, IsBackReference=true)]
+		public IEnumerable<Treatment> Treatmentstherapistidfkeys { get; set; }
+
+		/// <summary>
+		/// visits_therapist_id_fkey_BackReference
+		/// </summary>
+		[Association(ThisKey="Id", OtherKey="TherapistId", CanBeNull=true, Relationship=Relationship.OneToMany, IsBackReference=true)]
+		public IEnumerable<Visit> Visitstherapistidfkeys { get; set; }
+
+		#endregion
 	}
 
 	[Table(Schema="public", Name="treatments")]
 	public partial class Treatment
 	{
-		[Column("id"),             PrimaryKey, Identity] public int    Id            { get; set; } // integer
-		[Column("description_de"), NotNull             ] public string DescriptionDe { get; set; } // text
-		[Column("description_it"), NotNull             ] public string DescriptionIt { get; set; } // text
+		[Column("id"),             PrimaryKey, NotNull] public Guid   Id            { get; set; } // uuid
+		[Column("therapist_id"),               NotNull] public Guid   TherapistId   { get; set; } // uuid
+		[Column("description_de"),             NotNull] public string DescriptionDe { get; set; } // text
+		[Column("description_it"),             NotNull] public string DescriptionIt { get; set; } // text
 
 		#region Associations
+
+		/// <summary>
+		/// treatments_therapist_id_fkey
+		/// </summary>
+		[Association(ThisKey="TherapistId", OtherKey="Id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="treatments_therapist_id_fkey", BackReferenceName="Treatmentstherapistidfkeys")]
+		public Therapist Therapist { get; set; }
 
 		/// <summary>
 		/// visits_treatments_treatment_id_fkey_BackReference
@@ -1812,17 +1874,18 @@ namespace DataModels
 	[Table(Schema="public", Name="visits")]
 	public partial class Visit
 	{
-		[Column("id"),                 PrimaryKey,  Identity] public int        Id                { get; set; } // integer
-		[Column("date"),               NotNull              ] public NpgsqlDate Date              { get; set; } // date
-		[Column("customer_id"),        NotNull              ] public int        CustomerId        { get; set; } // integer
-		[Column("invoice_id"),            Nullable          ] public int?       InvoiceId         { get; set; } // integer
-		[Column("price"),                 Nullable          ] public double?    Price             { get; set; } // double precision
-		[Column("duration"),              Nullable          ] public int?       Duration          { get; set; } // integer
-		[Column("invoiced"),              Nullable          ] public bool?      Invoiced          { get; set; } // boolean
-		[Column("payed"),                 Nullable          ] public bool?      Payed             { get; set; } // boolean
-		[Column("initial_evaluetion"),    Nullable          ] public string     InitialEvaluetion { get; set; } // text
-		[Column("start_time"),            Nullable          ] public string     StartTime         { get; set; } // character varying(45)
-		[Column("final_evaluetion"),      Nullable          ] public string     FinalEvaluetion   { get; set; } // text
+		[Column("id"),                 PrimaryKey,  NotNull] public Guid       Id                { get; set; } // uuid
+		[Column("date"),                            NotNull] public NpgsqlDate Date              { get; set; } // date
+		[Column("customer_id"),                     NotNull] public Guid       CustomerId        { get; set; } // uuid
+		[Column("invoice_id"),            Nullable         ] public Guid?      InvoiceId         { get; set; } // uuid
+		[Column("therapist_id"),                    NotNull] public Guid       TherapistId       { get; set; } // uuid
+		[Column("price"),                 Nullable         ] public double?    Price             { get; set; } // double precision
+		[Column("duration"),              Nullable         ] public int?       Duration          { get; set; } // integer
+		[Column("invoiced"),              Nullable         ] public bool?      Invoiced          { get; set; } // boolean
+		[Column("payed"),                 Nullable         ] public bool?      Payed             { get; set; } // boolean
+		[Column("initial_evaluetion"),    Nullable         ] public string     InitialEvaluetion { get; set; } // text
+		[Column("final_evaluetion"),      Nullable         ] public string     FinalEvaluetion   { get; set; } // text
+		[Column("start_time"),            Nullable         ] public string     StartTime         { get; set; } // character varying(45)
 
 		#region Associations
 
@@ -1839,6 +1902,12 @@ namespace DataModels
 		public Invoice Invoice { get; set; }
 
 		/// <summary>
+		/// visits_therapist_id_fkey
+		/// </summary>
+		[Association(ThisKey="TherapistId", OtherKey="Id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="visits_therapist_id_fkey", BackReferenceName="Visitstherapistidfkeys")]
+		public Therapist Therapist { get; set; }
+
+		/// <summary>
 		/// visits_treatments_visit_id_fkey_BackReference
 		/// </summary>
 		[Association(ThisKey="Id", OtherKey="VisitId", CanBeNull=true, Relationship=Relationship.OneToMany, IsBackReference=true)]
@@ -1850,8 +1919,8 @@ namespace DataModels
 	[Table(Schema="public", Name="visits_treatments")]
 	public partial class VisitsTreatment
 	{
-		[Column("visit_id"),     PrimaryKey(1), NotNull] public int VisitId     { get; set; } // integer
-		[Column("treatment_id"), PrimaryKey(2), NotNull] public int TreatmentId { get; set; } // integer
+		[Column("visit_id"),     PrimaryKey(1), NotNull] public Guid VisitId     { get; set; } // uuid
+		[Column("treatment_id"), PrimaryKey(2), NotNull] public Guid TreatmentId { get; set; } // uuid
 
 		#region Associations
 
@@ -24762,10 +24831,60 @@ namespace DataModels
 
 		#endregion
 
+		#region UuidGenerateV1
+
+		[Sql.Function(Name="public.uuid_generate_v1", ServerSideOnly=true)]
+		public static Guid? UuidGenerateV1()
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region UuidGenerateV1mc
+
+		[Sql.Function(Name="public.uuid_generate_v1mc", ServerSideOnly=true)]
+		public static Guid? UuidGenerateV1mc()
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region UuidGenerateV3
+
+		[Sql.Function(Name="public.uuid_generate_v3", ServerSideOnly=true)]
+		public static Guid? UuidGenerateV3(Guid? @namespace, string name)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region UuidGenerateV4
+
+		[Sql.Function(Name="public.uuid_generate_v4", ServerSideOnly=true)]
+		public static Guid? UuidGenerateV4()
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region UuidGenerateV5
+
+		[Sql.Function(Name="public.uuid_generate_v5", ServerSideOnly=true)]
+		public static Guid? UuidGenerateV5(Guid? @namespace, string name)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
 		#region UuidGt
 
 		[Sql.Function(Name="pg_catalog.uuid_gt", ServerSideOnly=true)]
-		public static bool? UuidGt(Guid? par7612, Guid? par7613)
+		public static bool? UuidGt(Guid? par7617, Guid? par7618)
 		{
 			throw new InvalidOperationException();
 		}
@@ -24775,7 +24894,7 @@ namespace DataModels
 		#region UuidHash
 
 		[Sql.Function(Name="pg_catalog.uuid_hash", ServerSideOnly=true)]
-		public static int? UuidHash(Guid? par7615)
+		public static int? UuidHash(Guid? par7620)
 		{
 			throw new InvalidOperationException();
 		}
@@ -24785,7 +24904,7 @@ namespace DataModels
 		#region UuidHashExtended
 
 		[Sql.Function(Name="pg_catalog.uuid_hash_extended", ServerSideOnly=true)]
-		public static long? UuidHashExtended(Guid? par7617, long? par7618)
+		public static long? UuidHashExtended(Guid? par7622, long? par7623)
 		{
 			throw new InvalidOperationException();
 		}
@@ -24795,7 +24914,7 @@ namespace DataModels
 		#region UuidIn
 
 		[Sql.Function(Name="pg_catalog.uuid_in", ServerSideOnly=true)]
-		public static Guid? UuidIn(object par7620)
+		public static Guid? UuidIn(object par7625)
 		{
 			throw new InvalidOperationException();
 		}
@@ -24805,7 +24924,7 @@ namespace DataModels
 		#region UuidLe
 
 		[Sql.Function(Name="pg_catalog.uuid_le", ServerSideOnly=true)]
-		public static bool? UuidLe(Guid? par7622, Guid? par7623)
+		public static bool? UuidLe(Guid? par7627, Guid? par7628)
 		{
 			throw new InvalidOperationException();
 		}
@@ -24815,7 +24934,7 @@ namespace DataModels
 		#region UuidLt
 
 		[Sql.Function(Name="pg_catalog.uuid_lt", ServerSideOnly=true)]
-		public static bool? UuidLt(Guid? par7625, Guid? par7626)
+		public static bool? UuidLt(Guid? par7630, Guid? par7631)
 		{
 			throw new InvalidOperationException();
 		}
@@ -24825,7 +24944,57 @@ namespace DataModels
 		#region UuidNe
 
 		[Sql.Function(Name="pg_catalog.uuid_ne", ServerSideOnly=true)]
-		public static bool? UuidNe(Guid? par7628, Guid? par7629)
+		public static bool? UuidNe(Guid? par7633, Guid? par7634)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region UuidNil
+
+		[Sql.Function(Name="public.uuid_nil", ServerSideOnly=true)]
+		public static Guid? UuidNil()
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region UuidNsDns
+
+		[Sql.Function(Name="public.uuid_ns_dns", ServerSideOnly=true)]
+		public static Guid? UuidNsDns()
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region UuidNsOid
+
+		[Sql.Function(Name="public.uuid_ns_oid", ServerSideOnly=true)]
+		public static Guid? UuidNsOid()
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region UuidNsUrl
+
+		[Sql.Function(Name="public.uuid_ns_url", ServerSideOnly=true)]
+		public static Guid? UuidNsUrl()
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region UuidNsX500
+
+		[Sql.Function(Name="public.uuid_ns_x500", ServerSideOnly=true)]
+		public static Guid? UuidNsX500()
 		{
 			throw new InvalidOperationException();
 		}
@@ -24835,7 +25004,7 @@ namespace DataModels
 		#region UuidOut
 
 		[Sql.Function(Name="pg_catalog.uuid_out", ServerSideOnly=true)]
-		public static object UuidOut(Guid? par7631)
+		public static object UuidOut(Guid? par7641)
 		{
 			throw new InvalidOperationException();
 		}
@@ -24845,7 +25014,7 @@ namespace DataModels
 		#region UuidRecv
 
 		[Sql.Function(Name="pg_catalog.uuid_recv", ServerSideOnly=true)]
-		public static Guid? UuidRecv(object par7633)
+		public static Guid? UuidRecv(object par7643)
 		{
 			throw new InvalidOperationException();
 		}
@@ -24855,7 +25024,7 @@ namespace DataModels
 		#region UuidSend
 
 		[Sql.Function(Name="pg_catalog.uuid_send", ServerSideOnly=true)]
-		public static byte[] UuidSend(Guid? par7635)
+		public static byte[] UuidSend(Guid? par7645)
 		{
 			throw new InvalidOperationException();
 		}
@@ -24865,7 +25034,7 @@ namespace DataModels
 		#region UuidSortsupport
 
 		[Sql.Function(Name="pg_catalog.uuid_sortsupport", ServerSideOnly=true)]
-		public static object UuidSortsupport(object par7636)
+		public static object UuidSortsupport(object par7646)
 		{
 			throw new InvalidOperationException();
 		}
@@ -24875,7 +25044,7 @@ namespace DataModels
 		#region VarPop
 
 		[Sql.Function(Name="pg_catalog.var_pop", ServerSideOnly=true, IsAggregate = true, ArgIndices = new[] { 0 })]
-		public static decimal? VarPop<TSource>(this IEnumerable<TSource> src, Expression<Func<TSource, decimal?>> par7648)
+		public static decimal? VarPop<TSource>(this IEnumerable<TSource> src, Expression<Func<TSource, decimal?>> par7658)
 		{
 			throw new InvalidOperationException();
 		}
@@ -24885,7 +25054,7 @@ namespace DataModels
 		#region VarSamp
 
 		[Sql.Function(Name="pg_catalog.var_samp", ServerSideOnly=true, IsAggregate = true, ArgIndices = new[] { 0 })]
-		public static decimal? VarSamp<TSource>(this IEnumerable<TSource> src, Expression<Func<TSource, decimal?>> par7660)
+		public static decimal? VarSamp<TSource>(this IEnumerable<TSource> src, Expression<Func<TSource, decimal?>> par7670)
 		{
 			throw new InvalidOperationException();
 		}
@@ -24895,7 +25064,7 @@ namespace DataModels
 		#region Varbit
 
 		[Sql.Function(Name="pg_catalog.varbit", ServerSideOnly=true)]
-		public static BitArray Varbit(BitArray par7662, int? par7663, bool? par7664)
+		public static BitArray Varbit(BitArray par7672, int? par7673, bool? par7674)
 		{
 			throw new InvalidOperationException();
 		}
@@ -24905,7 +25074,7 @@ namespace DataModels
 		#region VarbitIn
 
 		[Sql.Function(Name="pg_catalog.varbit_in", ServerSideOnly=true)]
-		public static BitArray VarbitIn(object par7666, int? par7667, int? par7668)
+		public static BitArray VarbitIn(object par7676, int? par7677, int? par7678)
 		{
 			throw new InvalidOperationException();
 		}
@@ -24915,7 +25084,7 @@ namespace DataModels
 		#region VarbitOut
 
 		[Sql.Function(Name="pg_catalog.varbit_out", ServerSideOnly=true)]
-		public static object VarbitOut(BitArray par7670)
+		public static object VarbitOut(BitArray par7680)
 		{
 			throw new InvalidOperationException();
 		}
@@ -24925,7 +25094,7 @@ namespace DataModels
 		#region VarbitRecv
 
 		[Sql.Function(Name="pg_catalog.varbit_recv", ServerSideOnly=true)]
-		public static BitArray VarbitRecv(object par7672, int? par7673, int? par7674)
+		public static BitArray VarbitRecv(object par7682, int? par7683, int? par7684)
 		{
 			throw new InvalidOperationException();
 		}
@@ -24935,7 +25104,7 @@ namespace DataModels
 		#region VarbitSend
 
 		[Sql.Function(Name="pg_catalog.varbit_send", ServerSideOnly=true)]
-		public static byte[] VarbitSend(BitArray par7676)
+		public static byte[] VarbitSend(BitArray par7686)
 		{
 			throw new InvalidOperationException();
 		}
@@ -24945,7 +25114,7 @@ namespace DataModels
 		#region VarbitTransform
 
 		[Sql.Function(Name="pg_catalog.varbit_transform", ServerSideOnly=true)]
-		public static object VarbitTransform(object par7678)
+		public static object VarbitTransform(object par7688)
 		{
 			throw new InvalidOperationException();
 		}
@@ -24955,7 +25124,7 @@ namespace DataModels
 		#region Varbitcmp
 
 		[Sql.Function(Name="pg_catalog.varbitcmp", ServerSideOnly=true)]
-		public static int? Varbitcmp(BitArray par7680, BitArray par7681)
+		public static int? Varbitcmp(BitArray par7690, BitArray par7691)
 		{
 			throw new InvalidOperationException();
 		}
@@ -24965,7 +25134,7 @@ namespace DataModels
 		#region Varbiteq
 
 		[Sql.Function(Name="pg_catalog.varbiteq", ServerSideOnly=true)]
-		public static bool? Varbiteq(BitArray par7683, BitArray par7684)
+		public static bool? Varbiteq(BitArray par7693, BitArray par7694)
 		{
 			throw new InvalidOperationException();
 		}
@@ -24975,7 +25144,7 @@ namespace DataModels
 		#region Varbitge
 
 		[Sql.Function(Name="pg_catalog.varbitge", ServerSideOnly=true)]
-		public static bool? Varbitge(BitArray par7686, BitArray par7687)
+		public static bool? Varbitge(BitArray par7696, BitArray par7697)
 		{
 			throw new InvalidOperationException();
 		}
@@ -24985,7 +25154,7 @@ namespace DataModels
 		#region Varbitgt
 
 		[Sql.Function(Name="pg_catalog.varbitgt", ServerSideOnly=true)]
-		public static bool? Varbitgt(BitArray par7689, BitArray par7690)
+		public static bool? Varbitgt(BitArray par7699, BitArray par7700)
 		{
 			throw new InvalidOperationException();
 		}
@@ -24995,7 +25164,7 @@ namespace DataModels
 		#region Varbitle
 
 		[Sql.Function(Name="pg_catalog.varbitle", ServerSideOnly=true)]
-		public static bool? Varbitle(BitArray par7692, BitArray par7693)
+		public static bool? Varbitle(BitArray par7702, BitArray par7703)
 		{
 			throw new InvalidOperationException();
 		}
@@ -25005,7 +25174,7 @@ namespace DataModels
 		#region Varbitlt
 
 		[Sql.Function(Name="pg_catalog.varbitlt", ServerSideOnly=true)]
-		public static bool? Varbitlt(BitArray par7695, BitArray par7696)
+		public static bool? Varbitlt(BitArray par7705, BitArray par7706)
 		{
 			throw new InvalidOperationException();
 		}
@@ -25015,7 +25184,7 @@ namespace DataModels
 		#region Varbitne
 
 		[Sql.Function(Name="pg_catalog.varbitne", ServerSideOnly=true)]
-		public static bool? Varbitne(BitArray par7698, BitArray par7699)
+		public static bool? Varbitne(BitArray par7708, BitArray par7709)
 		{
 			throw new InvalidOperationException();
 		}
@@ -25025,7 +25194,7 @@ namespace DataModels
 		#region Varbittypmodin
 
 		[Sql.Function(Name="pg_catalog.varbittypmodin", ServerSideOnly=true)]
-		public static int? Varbittypmodin(object par7701)
+		public static int? Varbittypmodin(object par7711)
 		{
 			throw new InvalidOperationException();
 		}
@@ -25035,7 +25204,7 @@ namespace DataModels
 		#region Varbittypmodout
 
 		[Sql.Function(Name="pg_catalog.varbittypmodout", ServerSideOnly=true)]
-		public static object Varbittypmodout(int? par7703)
+		public static object Varbittypmodout(int? par7713)
 		{
 			throw new InvalidOperationException();
 		}
@@ -25045,7 +25214,7 @@ namespace DataModels
 		#region Varchar
 
 		[Sql.Function(Name="pg_catalog.varchar", ServerSideOnly=true)]
-		public static string Varchar(string par7707, int? par7708, bool? par7709)
+		public static string Varchar(string par7717, int? par7718, bool? par7719)
 		{
 			throw new InvalidOperationException();
 		}
@@ -25055,7 +25224,7 @@ namespace DataModels
 		#region VarcharTransform
 
 		[Sql.Function(Name="pg_catalog.varchar_transform", ServerSideOnly=true)]
-		public static object VarcharTransform(object par7711)
+		public static object VarcharTransform(object par7721)
 		{
 			throw new InvalidOperationException();
 		}
@@ -25065,7 +25234,7 @@ namespace DataModels
 		#region Varcharin
 
 		[Sql.Function(Name="pg_catalog.varcharin", ServerSideOnly=true)]
-		public static string Varcharin(object par7713, int? par7714, int? par7715)
+		public static string Varcharin(object par7723, int? par7724, int? par7725)
 		{
 			throw new InvalidOperationException();
 		}
@@ -25075,7 +25244,7 @@ namespace DataModels
 		#region Varcharout
 
 		[Sql.Function(Name="pg_catalog.varcharout", ServerSideOnly=true)]
-		public static object Varcharout(string par7717)
+		public static object Varcharout(string par7727)
 		{
 			throw new InvalidOperationException();
 		}
@@ -25085,7 +25254,7 @@ namespace DataModels
 		#region Varcharrecv
 
 		[Sql.Function(Name="pg_catalog.varcharrecv", ServerSideOnly=true)]
-		public static string Varcharrecv(object par7719, int? par7720, int? par7721)
+		public static string Varcharrecv(object par7729, int? par7730, int? par7731)
 		{
 			throw new InvalidOperationException();
 		}
@@ -25095,7 +25264,7 @@ namespace DataModels
 		#region Varcharsend
 
 		[Sql.Function(Name="pg_catalog.varcharsend", ServerSideOnly=true)]
-		public static byte[] Varcharsend(string par7723)
+		public static byte[] Varcharsend(string par7733)
 		{
 			throw new InvalidOperationException();
 		}
@@ -25105,7 +25274,7 @@ namespace DataModels
 		#region Varchartypmodin
 
 		[Sql.Function(Name="pg_catalog.varchartypmodin", ServerSideOnly=true)]
-		public static int? Varchartypmodin(object par7725)
+		public static int? Varchartypmodin(object par7735)
 		{
 			throw new InvalidOperationException();
 		}
@@ -25115,7 +25284,7 @@ namespace DataModels
 		#region Varchartypmodout
 
 		[Sql.Function(Name="pg_catalog.varchartypmodout", ServerSideOnly=true)]
-		public static object Varchartypmodout(int? par7727)
+		public static object Varchartypmodout(int? par7737)
 		{
 			throw new InvalidOperationException();
 		}
@@ -25125,7 +25294,7 @@ namespace DataModels
 		#region Variance
 
 		[Sql.Function(Name="pg_catalog.variance", ServerSideOnly=true, IsAggregate = true, ArgIndices = new[] { 0 })]
-		public static decimal? Variance<TSource>(this IEnumerable<TSource> src, Expression<Func<TSource, decimal?>> par7739)
+		public static decimal? Variance<TSource>(this IEnumerable<TSource> src, Expression<Func<TSource, decimal?>> par7749)
 		{
 			throw new InvalidOperationException();
 		}
@@ -25145,7 +25314,7 @@ namespace DataModels
 		#region VoidIn
 
 		[Sql.Function(Name="pg_catalog.void_in", ServerSideOnly=true)]
-		public static object VoidIn(object par7741)
+		public static object VoidIn(object par7751)
 		{
 			throw new InvalidOperationException();
 		}
@@ -25155,7 +25324,7 @@ namespace DataModels
 		#region VoidOut
 
 		[Sql.Function(Name="pg_catalog.void_out", ServerSideOnly=true)]
-		public static object VoidOut(object par7743)
+		public static object VoidOut(object par7753)
 		{
 			throw new InvalidOperationException();
 		}
@@ -25165,7 +25334,7 @@ namespace DataModels
 		#region VoidRecv
 
 		[Sql.Function(Name="pg_catalog.void_recv", ServerSideOnly=true)]
-		public static object VoidRecv(object par7744)
+		public static object VoidRecv(object par7754)
 		{
 			throw new InvalidOperationException();
 		}
@@ -25175,7 +25344,7 @@ namespace DataModels
 		#region VoidSend
 
 		[Sql.Function(Name="pg_catalog.void_send", ServerSideOnly=true)]
-		public static byte[] VoidSend(object par7746)
+		public static byte[] VoidSend(object par7756)
 		{
 			throw new InvalidOperationException();
 		}
@@ -25185,7 +25354,7 @@ namespace DataModels
 		#region WebsearchToTsquery
 
 		[Sql.Function(Name="pg_catalog.websearch_to_tsquery", ServerSideOnly=true)]
-		public static object WebsearchToTsquery(string par7751)
+		public static object WebsearchToTsquery(string par7761)
 		{
 			throw new InvalidOperationException();
 		}
@@ -25195,7 +25364,7 @@ namespace DataModels
 		#region Width
 
 		[Sql.Function(Name="pg_catalog.width", ServerSideOnly=true)]
-		public static double? Width(NpgsqlBox? par7753)
+		public static double? Width(NpgsqlBox? par7763)
 		{
 			throw new InvalidOperationException();
 		}
@@ -25205,7 +25374,7 @@ namespace DataModels
 		#region WidthBucket
 
 		[Sql.Function(Name="pg_catalog.width_bucket", ServerSideOnly=true)]
-		public static int? WidthBucket(object par7765, object par7766)
+		public static int? WidthBucket(object par7775, object par7776)
 		{
 			throw new InvalidOperationException();
 		}
@@ -25215,7 +25384,7 @@ namespace DataModels
 		#region WinToUtf8
 
 		[Sql.Function(Name="pg_catalog.win_to_utf8", ServerSideOnly=true)]
-		public static object WinToUtf8(int? par7767, int? par7768, object par7769, object par7770, int? par7771)
+		public static object WinToUtf8(int? par7777, int? par7778, object par7779, object par7780, int? par7781)
 		{
 			throw new InvalidOperationException();
 		}
@@ -25225,7 +25394,7 @@ namespace DataModels
 		#region Win1250ToLatin2
 
 		[Sql.Function(Name="pg_catalog.win1250_to_latin2", ServerSideOnly=true)]
-		public static object Win1250ToLatin2(int? par7772, int? par7773, object par7774, object par7775, int? par7776)
+		public static object Win1250ToLatin2(int? par7782, int? par7783, object par7784, object par7785, int? par7786)
 		{
 			throw new InvalidOperationException();
 		}
@@ -25235,7 +25404,7 @@ namespace DataModels
 		#region Win1250ToMic
 
 		[Sql.Function(Name="pg_catalog.win1250_to_mic", ServerSideOnly=true)]
-		public static object Win1250ToMic(int? par7777, int? par7778, object par7779, object par7780, int? par7781)
+		public static object Win1250ToMic(int? par7787, int? par7788, object par7789, object par7790, int? par7791)
 		{
 			throw new InvalidOperationException();
 		}
@@ -25245,7 +25414,7 @@ namespace DataModels
 		#region Win1251ToIso
 
 		[Sql.Function(Name="pg_catalog.win1251_to_iso", ServerSideOnly=true)]
-		public static object Win1251ToIso(int? par7782, int? par7783, object par7784, object par7785, int? par7786)
+		public static object Win1251ToIso(int? par7792, int? par7793, object par7794, object par7795, int? par7796)
 		{
 			throw new InvalidOperationException();
 		}
@@ -25255,7 +25424,7 @@ namespace DataModels
 		#region Win1251ToKoi8r
 
 		[Sql.Function(Name="pg_catalog.win1251_to_koi8r", ServerSideOnly=true)]
-		public static object Win1251ToKoi8r(int? par7787, int? par7788, object par7789, object par7790, int? par7791)
+		public static object Win1251ToKoi8r(int? par7797, int? par7798, object par7799, object par7800, int? par7801)
 		{
 			throw new InvalidOperationException();
 		}
@@ -25265,7 +25434,7 @@ namespace DataModels
 		#region Win1251ToMic
 
 		[Sql.Function(Name="pg_catalog.win1251_to_mic", ServerSideOnly=true)]
-		public static object Win1251ToMic(int? par7792, int? par7793, object par7794, object par7795, int? par7796)
+		public static object Win1251ToMic(int? par7802, int? par7803, object par7804, object par7805, int? par7806)
 		{
 			throw new InvalidOperationException();
 		}
@@ -25275,7 +25444,7 @@ namespace DataModels
 		#region Win1251ToWin866
 
 		[Sql.Function(Name="pg_catalog.win1251_to_win866", ServerSideOnly=true)]
-		public static object Win1251ToWin866(int? par7797, int? par7798, object par7799, object par7800, int? par7801)
+		public static object Win1251ToWin866(int? par7807, int? par7808, object par7809, object par7810, int? par7811)
 		{
 			throw new InvalidOperationException();
 		}
@@ -25285,7 +25454,7 @@ namespace DataModels
 		#region Win866ToIso
 
 		[Sql.Function(Name="pg_catalog.win866_to_iso", ServerSideOnly=true)]
-		public static object Win866ToIso(int? par7802, int? par7803, object par7804, object par7805, int? par7806)
+		public static object Win866ToIso(int? par7812, int? par7813, object par7814, object par7815, int? par7816)
 		{
 			throw new InvalidOperationException();
 		}
@@ -25295,7 +25464,7 @@ namespace DataModels
 		#region Win866ToKoi8r
 
 		[Sql.Function(Name="pg_catalog.win866_to_koi8r", ServerSideOnly=true)]
-		public static object Win866ToKoi8r(int? par7807, int? par7808, object par7809, object par7810, int? par7811)
+		public static object Win866ToKoi8r(int? par7817, int? par7818, object par7819, object par7820, int? par7821)
 		{
 			throw new InvalidOperationException();
 		}
@@ -25305,7 +25474,7 @@ namespace DataModels
 		#region Win866ToMic
 
 		[Sql.Function(Name="pg_catalog.win866_to_mic", ServerSideOnly=true)]
-		public static object Win866ToMic(int? par7812, int? par7813, object par7814, object par7815, int? par7816)
+		public static object Win866ToMic(int? par7822, int? par7823, object par7824, object par7825, int? par7826)
 		{
 			throw new InvalidOperationException();
 		}
@@ -25315,7 +25484,7 @@ namespace DataModels
 		#region Win866ToWin1251
 
 		[Sql.Function(Name="pg_catalog.win866_to_win1251", ServerSideOnly=true)]
-		public static object Win866ToWin1251(int? par7817, int? par7818, object par7819, object par7820, int? par7821)
+		public static object Win866ToWin1251(int? par7827, int? par7828, object par7829, object par7830, int? par7831)
 		{
 			throw new InvalidOperationException();
 		}
@@ -25325,7 +25494,7 @@ namespace DataModels
 		#region Xideq
 
 		[Sql.Function(Name="pg_catalog.xideq", ServerSideOnly=true)]
-		public static bool? Xideq(int? par7823, int? par7824)
+		public static bool? Xideq(int? par7833, int? par7834)
 		{
 			throw new InvalidOperationException();
 		}
@@ -25335,7 +25504,7 @@ namespace DataModels
 		#region Xideqint4
 
 		[Sql.Function(Name="pg_catalog.xideqint4", ServerSideOnly=true)]
-		public static bool? Xideqint4(int? par7826, int? par7827)
+		public static bool? Xideqint4(int? par7836, int? par7837)
 		{
 			throw new InvalidOperationException();
 		}
@@ -25345,7 +25514,7 @@ namespace DataModels
 		#region Xidin
 
 		[Sql.Function(Name="pg_catalog.xidin", ServerSideOnly=true)]
-		public static int? Xidin(object par7829)
+		public static int? Xidin(object par7839)
 		{
 			throw new InvalidOperationException();
 		}
@@ -25355,7 +25524,7 @@ namespace DataModels
 		#region Xidneq
 
 		[Sql.Function(Name="pg_catalog.xidneq", ServerSideOnly=true)]
-		public static bool? Xidneq(int? par7831, int? par7832)
+		public static bool? Xidneq(int? par7841, int? par7842)
 		{
 			throw new InvalidOperationException();
 		}
@@ -25365,7 +25534,7 @@ namespace DataModels
 		#region Xidneqint4
 
 		[Sql.Function(Name="pg_catalog.xidneqint4", ServerSideOnly=true)]
-		public static bool? Xidneqint4(int? par7834, int? par7835)
+		public static bool? Xidneqint4(int? par7844, int? par7845)
 		{
 			throw new InvalidOperationException();
 		}
@@ -25375,7 +25544,7 @@ namespace DataModels
 		#region Xidout
 
 		[Sql.Function(Name="pg_catalog.xidout", ServerSideOnly=true)]
-		public static object Xidout(int? par7837)
+		public static object Xidout(int? par7847)
 		{
 			throw new InvalidOperationException();
 		}
@@ -25385,7 +25554,7 @@ namespace DataModels
 		#region Xidrecv
 
 		[Sql.Function(Name="pg_catalog.xidrecv", ServerSideOnly=true)]
-		public static int? Xidrecv(object par7839)
+		public static int? Xidrecv(object par7849)
 		{
 			throw new InvalidOperationException();
 		}
@@ -25395,7 +25564,7 @@ namespace DataModels
 		#region Xidsend
 
 		[Sql.Function(Name="pg_catalog.xidsend", ServerSideOnly=true)]
-		public static byte[] Xidsend(int? par7841)
+		public static byte[] Xidsend(int? par7851)
 		{
 			throw new InvalidOperationException();
 		}
@@ -25405,7 +25574,7 @@ namespace DataModels
 		#region Xml
 
 		[Sql.Function(Name="pg_catalog.xml", ServerSideOnly=true)]
-		public static string Xml(string par7843)
+		public static string Xml(string par7853)
 		{
 			throw new InvalidOperationException();
 		}
@@ -25415,7 +25584,7 @@ namespace DataModels
 		#region XmlIn
 
 		[Sql.Function(Name="pg_catalog.xml_in", ServerSideOnly=true)]
-		public static string XmlIn(object par7845)
+		public static string XmlIn(object par7855)
 		{
 			throw new InvalidOperationException();
 		}
@@ -25425,7 +25594,7 @@ namespace DataModels
 		#region XmlIsWellFormed
 
 		[Sql.Function(Name="pg_catalog.xml_is_well_formed", ServerSideOnly=true)]
-		public static bool? XmlIsWellFormed(string par7847)
+		public static bool? XmlIsWellFormed(string par7857)
 		{
 			throw new InvalidOperationException();
 		}
@@ -25435,7 +25604,7 @@ namespace DataModels
 		#region XmlIsWellFormedContent
 
 		[Sql.Function(Name="pg_catalog.xml_is_well_formed_content", ServerSideOnly=true)]
-		public static bool? XmlIsWellFormedContent(string par7849)
+		public static bool? XmlIsWellFormedContent(string par7859)
 		{
 			throw new InvalidOperationException();
 		}
@@ -25445,7 +25614,7 @@ namespace DataModels
 		#region XmlIsWellFormedDocument
 
 		[Sql.Function(Name="pg_catalog.xml_is_well_formed_document", ServerSideOnly=true)]
-		public static bool? XmlIsWellFormedDocument(string par7851)
+		public static bool? XmlIsWellFormedDocument(string par7861)
 		{
 			throw new InvalidOperationException();
 		}
@@ -25455,7 +25624,7 @@ namespace DataModels
 		#region XmlOut
 
 		[Sql.Function(Name="pg_catalog.xml_out", ServerSideOnly=true)]
-		public static object XmlOut(string par7853)
+		public static object XmlOut(string par7863)
 		{
 			throw new InvalidOperationException();
 		}
@@ -25465,7 +25634,7 @@ namespace DataModels
 		#region XmlRecv
 
 		[Sql.Function(Name="pg_catalog.xml_recv", ServerSideOnly=true)]
-		public static string XmlRecv(object par7855)
+		public static string XmlRecv(object par7865)
 		{
 			throw new InvalidOperationException();
 		}
@@ -25475,7 +25644,7 @@ namespace DataModels
 		#region XmlSend
 
 		[Sql.Function(Name="pg_catalog.xml_send", ServerSideOnly=true)]
-		public static byte[] XmlSend(string par7857)
+		public static byte[] XmlSend(string par7867)
 		{
 			throw new InvalidOperationException();
 		}
@@ -25485,7 +25654,7 @@ namespace DataModels
 		#region Xmlagg
 
 		[Sql.Function(Name="pg_catalog.xmlagg", ServerSideOnly=true, IsAggregate = true, ArgIndices = new[] { 0 })]
-		public static string Xmlagg<TSource>(this IEnumerable<TSource> src, Expression<Func<TSource, string>> par7859)
+		public static string Xmlagg<TSource>(this IEnumerable<TSource> src, Expression<Func<TSource, string>> par7869)
 		{
 			throw new InvalidOperationException();
 		}
@@ -25495,7 +25664,7 @@ namespace DataModels
 		#region Xmlcomment
 
 		[Sql.Function(Name="pg_catalog.xmlcomment", ServerSideOnly=true)]
-		public static string Xmlcomment(string par7861)
+		public static string Xmlcomment(string par7871)
 		{
 			throw new InvalidOperationException();
 		}
@@ -25505,7 +25674,7 @@ namespace DataModels
 		#region Xmlconcat2
 
 		[Sql.Function(Name="pg_catalog.xmlconcat2", ServerSideOnly=true)]
-		public static string Xmlconcat2(string par7863, string par7864)
+		public static string Xmlconcat2(string par7873, string par7874)
 		{
 			throw new InvalidOperationException();
 		}
@@ -25515,7 +25684,7 @@ namespace DataModels
 		#region Xmlexists
 
 		[Sql.Function(Name="pg_catalog.xmlexists", ServerSideOnly=true)]
-		public static bool? Xmlexists(string par7866, string par7867)
+		public static bool? Xmlexists(string par7876, string par7877)
 		{
 			throw new InvalidOperationException();
 		}
@@ -25525,7 +25694,7 @@ namespace DataModels
 		#region Xmlvalidate
 
 		[Sql.Function(Name="pg_catalog.xmlvalidate", ServerSideOnly=true)]
-		public static bool? Xmlvalidate(string par7869, string par7870)
+		public static bool? Xmlvalidate(string par7879, string par7880)
 		{
 			throw new InvalidOperationException();
 		}
@@ -25535,7 +25704,7 @@ namespace DataModels
 		#region Xpath
 
 		[Sql.Function(Name="pg_catalog.xpath", ServerSideOnly=true)]
-		public static object Xpath(string par7876, string par7877)
+		public static object Xpath(string par7886, string par7887)
 		{
 			throw new InvalidOperationException();
 		}
@@ -25545,7 +25714,7 @@ namespace DataModels
 		#region XpathExists
 
 		[Sql.Function(Name="pg_catalog.xpath_exists", ServerSideOnly=true)]
-		public static bool? XpathExists(string par7883, string par7884)
+		public static bool? XpathExists(string par7893, string par7894)
 		{
 			throw new InvalidOperationException();
 		}
@@ -25555,67 +25724,67 @@ namespace DataModels
 
 	public static partial class TableExtensions
 	{
-		public static Address Find(this ITable<Address> table, int Id)
+		public static Address Find(this ITable<Address> table, Guid Id)
 		{
 			return table.FirstOrDefault(t =>
 				t.Id == Id);
 		}
 
-		public static Customer Find(this ITable<Customer> table, int Id)
+		public static Customer Find(this ITable<Customer> table, Guid Id)
 		{
 			return table.FirstOrDefault(t =>
 				t.Id == Id);
 		}
 
-		public static Invoice Find(this ITable<Invoice> table, int Id)
+		public static Invoice Find(this ITable<Invoice> table, Guid Id)
 		{
 			return table.FirstOrDefault(t =>
 				t.Id == Id);
 		}
 
-		public static PriceList Find(this ITable<PriceList> table, int Id)
+		public static PriceList Find(this ITable<PriceList> table, Guid Id)
 		{
 			return table.FirstOrDefault(t =>
 				t.Id == Id);
 		}
 
-		public static RecentAnamnesy Find(this ITable<RecentAnamnesy> table, int Id)
+		public static RecentAnamnesy Find(this ITable<RecentAnamnesy> table, Guid Id)
 		{
 			return table.FirstOrDefault(t =>
 				t.Id == Id);
 		}
 
-		public static RemoteAnamnesy Find(this ITable<RemoteAnamnesy> table, int Id)
+		public static RemoteAnamnesy Find(this ITable<RemoteAnamnesy> table, Guid Id)
 		{
 			return table.FirstOrDefault(t =>
 				t.Id == Id);
 		}
 
-		public static StomatognathicTest Find(this ITable<StomatognathicTest> table, int Id)
+		public static StomatognathicTest Find(this ITable<StomatognathicTest> table, Guid Id)
 		{
 			return table.FirstOrDefault(t =>
 				t.Id == Id);
 		}
 
-		public static Therapist Find(this ITable<Therapist> table, int Id)
+		public static Therapist Find(this ITable<Therapist> table, Guid Id)
 		{
 			return table.FirstOrDefault(t =>
 				t.Id == Id);
 		}
 
-		public static Treatment Find(this ITable<Treatment> table, int Id)
+		public static Treatment Find(this ITable<Treatment> table, Guid Id)
 		{
 			return table.FirstOrDefault(t =>
 				t.Id == Id);
 		}
 
-		public static Visit Find(this ITable<Visit> table, int Id)
+		public static Visit Find(this ITable<Visit> table, Guid Id)
 		{
 			return table.FirstOrDefault(t =>
 				t.Id == Id);
 		}
 
-		public static VisitsTreatment Find(this ITable<VisitsTreatment> table, int VisitId, int TreatmentId)
+		public static VisitsTreatment Find(this ITable<VisitsTreatment> table, Guid VisitId, Guid TreatmentId)
 		{
 			return table.FirstOrDefault(t =>
 				t.VisitId     == VisitId &&

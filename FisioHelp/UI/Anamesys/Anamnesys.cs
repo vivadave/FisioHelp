@@ -20,12 +20,12 @@ namespace FisioHelp.UI.Anamesys
       this.Text = $"Schede vaslutazione {_customer.FullName}";
       var recentAnamnesys = new RecentAnamnesys(_customer);
       recentAnamnesys.Location = new System.Drawing.Point(0, 0);
-      recentAnamnesys.Size = new System.Drawing.Size(955, 1381);
+      //recentAnamnesys.Size = new System.Drawing.Size(655, 1381);
       tabPageAnaRecent.Controls.Add(recentAnamnesys);
 
       var remoteAnamnesys = new RemoteAnamnesys(_customer);
       remoteAnamnesys.Location = new System.Drawing.Point(0, 0);
-      remoteAnamnesys.Size = new System.Drawing.Size(955, 834);
+      //remoteAnamnesys.Size = new System.Drawing.Size(655, 834);
       tabPageAnaRemota.Controls.Add(remoteAnamnesys);
 
       var stomatognathic = new Stomatognathic(_customer);
@@ -42,33 +42,13 @@ namespace FisioHelp.UI.Anamesys
         var anaCtrl = (RecentAnamnesys)selectedTab.Controls[0];
         anaCtrl.Save();
         var anamnesys = anaCtrl.RecentAnamnesy;
-        using (var db = new Db.PhisioDB())
-        {
-          if (anamnesys.Id <= 0)
-          {
-            anaCtrl.RecentAnamnesy.Id = db.InsertWithInt32Identity(anamnesys);
-          }
-          else
-          {
-            db.Update(anamnesys);
-          }
-        }
+        anamnesys.SaveToDB();
       } else if (selectedTab == tabPageAnaRemota)
       {
         var anaCtrl = (RemoteAnamnesys)selectedTab.Controls[0];
         anaCtrl.Save();
         var anamnesys = anaCtrl.RemoteAnamnesy;
-        using (var db = new Db.PhisioDB())
-        {
-          if (anamnesys.Id <= 0)
-          {
-            anaCtrl.RemoteAnamnesy.Id = db.InsertWithInt32Identity(anamnesys);
-          }
-          else
-          {
-            db.Update(anamnesys);
-          }
-        }
+        anamnesys.SaveToDB();
       }
     }
 

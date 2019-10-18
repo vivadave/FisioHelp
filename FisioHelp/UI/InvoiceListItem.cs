@@ -22,7 +22,7 @@ namespace FisioHelp.UI
       label1.Text = ((DateTime)Invoice.Date).ToShortDateString();
       label2.Text = Invoice.Visitsinvoiceidfkeys.ToList().Count.ToString();
       label5.Text = $"{Invoice.Total} €";
-      checkBox2.Checked = Invoice.Payed ?? false;
+      checkBox2.Checked = Invoice.Payed;
       _loaded = true;
     }
     private void button1_Click(object sender, EventArgs e)
@@ -35,7 +35,7 @@ namespace FisioHelp.UI
       
       using (var db = new Db.PhisioDB())
       {
-        if (Invoice.Id > 0)
+        if (Invoice.Id != null)
         {
           Invoice.Payed = checkBox2.Checked;
           foreach (var visit in Invoice.Visitsinvoiceidfkeys)

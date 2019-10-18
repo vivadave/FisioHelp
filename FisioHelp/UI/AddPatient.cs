@@ -90,6 +90,8 @@ namespace FisioHelp.UI
       _customer.Vat = textBoxVat.Text;
       _customer.CreationDate = NpgsqlDate.Now;
       _customer.Privacy = checkBox1.Checked;
+      _customer.Therapist = _therapist;
+      _customer.TherapistId = _therapist.Id;
 
       if (comboBoxLanguage.SelectedItem != null)
         _customer.Language = comboBoxLanguage.SelectedItem.ToString();
@@ -118,48 +120,16 @@ namespace FisioHelp.UI
     }
 
     private void buttonSave_Click(object sender, EventArgs e)
-    {
-      
+    {      
       SetCustomer();
-      if (_customer.Id > 0)
-      {
-        using (var db = new Db.PhisioDB())
-        {
-          if (_customer.Address != null && _customer.Address.Id > 0)
-          {
-            db.Update(_customer.Address);
-          }
-          else if (_customer.Address != null)
-          { 
-            _customer.Address.Id = db.InsertWithInt32Identity(_customer.Address);
-            _customer.AddressId = _customer.Address.Id;
-          }
+      
+      if (_customer.Address != null)
+        _customer.AddressId = _customer.Address.SaveToDB();
+      _customer.SaveToDB();
 
-          db.Update(_customer);
-        }
-      }
-      else
-      {
-        using (var db = new Db.PhisioDB())
-        {
-          if (_customer.Address != null)
-          {
-            _customer.Address.Id = db.InsertWithInt32Identity(_customer.Address);
-            _customer.AddressId = _customer.Address.Id;
-          }
-          _customer.Id = db.InsertWithInt32Identity(_customer); 
-          
-          if (_customer.Id > 0)
-          {
-            MessageBox.Show("Utente salvato correttamente");
-            PatientSaved?.Invoke(this, e);
-          }
-          else
-          {
-            MessageBox.Show("Si è verificato un errore");
-          }
-        }
-      }
+      PatientSaved?.Invoke(this, e);
+      MessageBox.Show("Salvato Correttamente", "Salvataggio", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
     }
 
     private void textBoxName_Validating(object sender, CancelEventArgs e)
@@ -186,13 +156,6 @@ namespace FisioHelp.UI
 
     private void textBoxEmail_Validating(object sender, CancelEventArgs e)
     {
-      if (textBoxEmail.Text.Length <= 0)
-      {
-        errorProvider1.SetError(textBoxEmail, "Il campo email è obbligatorio");
-        buttonSave.Enabled = false;
-        return;
-      }
-      buttonSave.Enabled = true;
     }
 
     private void textBoxVat_Validating(object sender, CancelEventArgs e)
@@ -220,21 +183,21 @@ namespace FisioHelp.UI
 
     private void buttonOpenPrivacy_Click(object sender, EventArgs e)
     {
-      if (_customer.Id <= 0)
+      if (_customer.Id == null)
       {
-        MessageBox.Show("Prima di proseguire salvare il cliente");
+        MessageBox.Show("Prima di proseguire salvare il cliente", "Salvataggio", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         return;
       }
 
       if (string.IsNullOrEmpty(_customer.Language))
       {
-        MessageBox.Show("Prima di proseguire scegliere una lingua e salvare");
+        MessageBox.Show("Prima di proseguire scegliere una lingua e salvare", "Salvataggio", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         return;
       }
       var privacyPath = _therapist.PrivacyFolder;
       if (string.IsNullOrEmpty(privacyPath))
       {
-        MessageBox.Show("Prima di proseguire impostare la cartella dei documenti privacy");
+        MessageBox.Show("Prima di proseguire impostare la cartella dei documenti privacy", "Salvataggio", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         return;
       }
       var folder = $"{_customer.Id.ToString("0000")}_{_customer.FullName.Replace(" ", "_")}";

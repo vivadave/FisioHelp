@@ -3,9 +3,8 @@ using LinqToDB.Mapping;
 namespace FisioHelp.DataModels
 {
   [Table(Schema = "public", Name = "remote_anamnesys")]
-  public partial class RemoteAnamnesy
+  public partial class RemoteAnamnesy : BaseModel
   {
-    [Column("id"), PrimaryKey, Identity] public int Id { get; set; } // integer
     [Column("phisical_disease"), Nullable] public string PhisicalDisease { get; set; } // character varying(256)
     [Column("psychic_disease"), Nullable] public string PsychicDisease { get; set; } // character varying(256)
     [Column("surgery"), Nullable] public string Surgery { get; set; } // character varying(256)
@@ -16,7 +15,12 @@ namespace FisioHelp.DataModels
     [Column("recent_treatments"), Nullable] public string RecentTreatments { get; set; } // character varying(256)
     [Column("medicines"), Nullable] public string Medicines { get; set; } // character varying(256)
     [Column("other"), Nullable] public string Other { get; set; } // character varying(256)
-    [Column("customer_id"), NotNull] public int CustomerId { get; set; } // integer
+    [Column("customer_id"), NotNull] public Guid CustomerId { get; set; } // uuid
+
+    public override Guid SaveToDB()
+    {
+      return Helper.DbManagement.SaveToDB(this);
+    }
 
     #region Associations
 

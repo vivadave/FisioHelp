@@ -51,7 +51,6 @@ namespace FisioHelp.UI.Anamesys
     {
       RemoteAnamnesy.Anesthesias = richTextBoxAnestesia.Text;
       RemoteAnamnesy.Other = richTextBoxOther.Text;
-      RemoteAnamnesy.Medicines = richTextBoxPastMedicins.Text;
       RemoteAnamnesy.RecentTreatments = richTextBoxPastTreatments.Text;
       RemoteAnamnesy.Pregnancy = richTextBoxPregnancy.Text;
       RemoteAnamnesy.PhisicalDisease = richTextBoxPsichicalDisease.Text;
@@ -68,14 +67,18 @@ namespace FisioHelp.UI.Anamesys
 
       richTextBoxAnestesia.Text = RemoteAnamnesy.Anesthesias;
       richTextBoxOther.Text = RemoteAnamnesy.Other;
-      richTextBoxPastMedicins.Text = RemoteAnamnesy.Medicines;
       richTextBoxPastTreatments.Text = RemoteAnamnesy.RecentTreatments;
       richTextBoxPregnancy.Text = RemoteAnamnesy.Pregnancy;
-      richTextBoxPsichicalDisease.Text = RemoteAnamnesy.PhisicalDisease;
+      textBoxPhisicalDisease.Text = RemoteAnamnesy.PhisicalDisease;
       richTextBoxPastEpisodes.Text = RemoteAnamnesy.RecentEpisodes;
       richTextBoxSurgery.Text = RemoteAnamnesy.Surgery;
       richTextBoxTraumas.Text = RemoteAnamnesy.Traumas;
       richTextBoxPsichicalDisease.Text = RemoteAnamnesy.PsychicDisease;
+    }
+
+    private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
+    {
+
     }
   }
 }

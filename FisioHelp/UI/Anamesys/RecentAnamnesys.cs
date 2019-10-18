@@ -121,5 +121,10 @@ namespace FisioHelp.UI.Anamesys
 
       richTextBoxImageDiafnostic.Text = RecentAnamnesy.ImagesDiagnostics;
     }
+
+    private void labelNew9_Click(object sender, EventArgs e)
+    {
+
+    }
   }
 }

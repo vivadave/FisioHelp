@@ -40,6 +40,7 @@ namespace FisioHelp.UI
       comboBoxPayed.SelectedItem = _comboBoxValues[0];
       panel2.Width = this.Size.Width;
       labelTitle.Text = type == "economical" ? "Visite: finanza" : "Visite: Relazione";
+      labelAction.Text = type == "economical" ? "Azioni" : "Anamnesi";
     }
 
     private void label1_Click(object sender, EventArgs e)
@@ -110,11 +111,11 @@ namespace FisioHelp.UI
     {
       using (var db = new Db.PhisioDB())
       {
-        var custId = _customer != null ? _customer.Id : -1;
+        Guid? custId = _customer?.Id;
         _visits = db.Visits.LoadWith(e1 => e1.Treatmentsvisitidfkeys)
           .LoadWith(e1 => e1.Invoice)
           .LoadWith(e1 => e1.Customer)
-          .Where(x =>  x.Customer.Id == custId || custId < 0)
+          .Where(x =>  x.Customer.Id == custId || custId == null)
           .Where(x=> x.Date >= new NpgsqlTypes.NpgsqlDate(_dateFromFilter) && x.Date < new NpgsqlTypes.NpgsqlDate(_dateToFilter.AddDays(1)))
           .ToList();
       }
@@ -226,7 +227,7 @@ namespace FisioHelp.UI
       var invoice = Helper.Helper.CreateNewInvoice(_visitsToInvoice, out errors);
       if (!string.IsNullOrEmpty(errors))
       {
-        MessageBox.Show(errors,"ERRORE");
+        MessageBox.Show(errors,"ERRORE", MessageBoxButtons.OK, MessageBoxIcon.Error);
         return;
       }
       UI.InvoiceFrm invoiceFrm = new InvoiceFrm(invoice);

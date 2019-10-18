@@ -12,22 +12,24 @@ namespace FisioHelp.Helper
   {
     public static DataModels.Invoice CreateNewInvoice(List<DataModels.Visit> visits, out string message)
     {
-      if (visits.Any(x => x.Invoiced ?? false))
+      if (visits.Any(x => x.Invoiced))
       {
         message = "Una delle visite selezionate è già stata fatturata!";
         return null;
       }
 
-      if (visits.Any(x => x.Payed ?? false) && !visits.All(x=>x.Payed ?? false))
+      if (visits.Any(x => x.Payed) && !visits.All(x=>x.Payed))
       {
         message = "Non è possibile fatturare un insieme di visite dove solo alcune sono state già pagate";
         return null;
       }
       var invoiceTile = "";
+      Therapist therapist = null;
       using (var db = new Db.PhisioDB())
       {
         var invoices = db.Invoices.Where(x => x.Date >= new NpgsqlTypes.NpgsqlDate(DateTime.Now.Year, DateTime.Now.Month, 1)).ToList();
-        invoiceTile = $"{DateTime.Now.Year}{DateTime.Now.Month.ToString("00")}{(invoices.Count + 1).ToString("000")}";
+        invoiceTile = $"{(invoices.Count + 1).ToString("0000")}/{DateTime.Now.Year}";
+        therapist = db.Therapists.FirstOrDefault();
       }
 
       var newInvoice = new DataModels.Invoice
@@ -38,14 +40,16 @@ namespace FisioHelp.Helper
         Text = "",
         Visitsinvoiceidfkeys = visits,
         Deleted = false,
-        Title = invoiceTile
+        Title = invoiceTile,
+        TaxStamp = false,
+        TherapistId = therapist.Id
       };
 
       message = "";
       return newInvoice;
     }
 
-    public static List<string> GetTratmensByIdS(List<int> ids, string language)
+    public static List<string> GetTratmensByIdS(List<Guid> ids, string language)
     {
       using (var db = new Db.PhisioDB())
       {
@@ -89,7 +93,7 @@ namespace FisioHelp.Helper
 
       template = template.Replace("{{ragione_sociale}}", therapist.FullName);
       template = template.Replace("{{indirizzo}}", therapist.Address);
-      template = template.Replace("{{partita_iva}}", therapist.Vat);
+      template = template.Replace("{{partita_iva}}", therapist.TaxNumber);
       template = template.Replace("{{iban}}", therapist.Iban);
       
       template = template.Replace("{{invoice_number}}", invoice.Title);
@@ -110,16 +114,27 @@ namespace FisioHelp.Helper
         prestazioniHtml += $@"<div style=""display:inline-block; width: 350px; vertical-align: middle;"">";
         foreach ( var treatment in treatments)
           prestazioniHtml += $@"<div>{treatment}</div>";
-        prestazioniHtml += $@"</div><div style=""width: 150px; text-align:right; display:inline-block;"">{prestazioni.Price.Value.ToString("#.00")} €</div>";
+        prestazioniHtml += $@"</div><div style=""width: 150px; text-align:right; display:inline-block;"">{(prestazioni.Price.Value*0.96).ToString("#.00")} €</div>";
       }
 
       prestazioniHtml += "</div>";
       template = template.Replace("{{prestazioni}}", prestazioniHtml);
-      var total = invoice.Visitsinvoiceidfkeys.Sum(x => x.Price);
-      var inps = total * .04;
+
+      var sconto = invoice.Discount??0;
+      var total = invoice.Visitsinvoiceidfkeys.Sum(x => x.Price * 0.96) - (sconto * 0.96);
+      var bollo = invoice.TaxStamp ? 2 : 0;
+      var inps = (invoice.Visitsinvoiceidfkeys.Sum(x => x.Price) - sconto) * .04;
+      template = template.Replace("{{bollo}}", bollo.ToString());
+      var scontoTxt = sconto > 0 ? $@"
+              <div style=""display: block; padding: 15px 0 15px 0px; "">
+                  <div style = ""width: 400px; display: inline-block;""><strong> Sconto:</strong ></div>          
+                  <div style = ""width: 295px; display: inline-block; text-align: right;"">-{(sconto * 0.96).ToString("#.00")} €</div>                 
+              </div>" : "";
+
+      template = template.Replace("{{sconto}}", scontoTxt);
       template = template.Replace("{{total}}", total.Value.ToString("#.00"));
       template = template.Replace("{{inps}}", inps.Value.ToString("#.00"));
-      template = template.Replace("{{total_with_inps}}", (inps+total).Value.ToString("#.00"));
+      template = template.Replace("{{total_with_inps}}", (inps+total+bollo).Value.ToString("#.00"));
 
       return template;
     }

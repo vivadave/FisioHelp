@@ -28,8 +28,8 @@ namespace FisioHelp.UI
       label2.Text = Visit.StartTime.ToString();
       label4.Text = Visit.Customer != null ? Visit.Customer.FullName : "";
       label5.Text = $"{Visit.Price} €";
-      checkBox2.Checked = Visit.Payed ?? false;
-      checkBox1.Checked = Visit.Invoiced ?? false;
+      checkBox2.Checked = Visit.Payed;
+      checkBox1.Checked = Visit.Invoiced;
       Invoiced = checkBox1.Checked;
       _loaded = true;
     }
@@ -52,13 +52,13 @@ namespace FisioHelp.UI
       if ((bool)Visit.Invoiced)
       {
         _autoClick = true;
-        MessageBox.Show("La visita può essere pagata solo attraverso il pagamento della fattura");
+        MessageBox.Show("La visita può essere pagata solo attraverso il pagamento della fattura", "Fatturazione", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         checkBox2.Checked = !checkBox2.Checked;        
         return;
       }
       using (var db = new Db.PhisioDB())
       {
-        if (Visit.Id > 0)
+        if (Visit.Id != null)
         {
           Visit.Payed = checkBox2.Checked;
           db.Update(Visit);
@@ -75,10 +75,10 @@ namespace FisioHelp.UI
         _autoClick = false;
         return;
       }
-      if (Visit.Invoiced ?? false)
+      if (Visit.Invoiced)
       {
         _autoClick = true;
-        MessageBox.Show("Eliminare la fattura per questa visita dalla lista fatture");
+        MessageBox.Show("Eliminare la fattura per questa visita dalla lista fatture", "Fatturazione", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         checkBox1.Checked = true;
         return;
       }

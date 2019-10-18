@@ -1,16 +1,41 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Linq;
 using LinqToDB.Mapping;
-
-using NpgsqlTypes;
+using LinqToDB;
 
 namespace FisioHelp.DataModels
 {
   [Table(Schema = "public", Name = "visits_treatments")]
   public partial class VisitsTreatment
   {
-    [Column("visit_id"), PrimaryKey(1), NotNull] public int VisitId { get; set; } // integer
-    [Column("treatment_id"), PrimaryKey(2), NotNull] public int TreatmentId { get; set; } // integer
+    [Column("visit_id"), PrimaryKey(1), NotNull] public Guid VisitId { get; set; } // uuid
+    [Column("treatment_id"), PrimaryKey(2), NotNull] public Guid TreatmentId { get; set; } // uuid
+
+    public void SaveToDB(Visit _visit)
+    {
+      using (var db = new Db.PhisioDB())
+      {
+        if (_visit.Id != null)
+        {
+          db.VisitsTreatments.Where(x => x.VisitId == _visit.Id).Delete();
+          foreach (var visitTreatment in _visit.Treatmentsvisitidfkeys)
+            db.Insert(visitTreatment);
+
+          db.Update(_visit);
+        }
+        else
+        {
+          _visit.Id = Guid.Parse(db.InsertWithIdentity(_visit).ToString());
+          if (_visit.Treatmentsvisitidfkeys != null)
+            foreach (var visitTreatment in _visit.Treatmentsvisitidfkeys)
+            {
+              visitTreatment.Visit = _visit;
+              visitTreatment.VisitId = _visit.Id;
+              db.Insert(visitTreatment);
+            }
+        }
+      }
+    }
 
     #region Associations
 

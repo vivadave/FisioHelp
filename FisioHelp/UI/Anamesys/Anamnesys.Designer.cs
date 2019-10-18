@@ -32,8 +32,8 @@
       this.tabControl1 = new System.Windows.Forms.TabControl();
       this.tabPageAnaRecent = new System.Windows.Forms.TabPage();
       this.tabPageAnaRemota = new System.Windows.Forms.TabPage();
-      this.buttonSave = new System.Windows.Forms.Button();
       this.tabPageStomato = new System.Windows.Forms.TabPage();
+      this.buttonSave = new System.Windows.Forms.Button();
       this.tabControl1.SuspendLayout();
       this.SuspendLayout();
       // 
@@ -49,7 +49,7 @@
       this.tabControl1.Location = new System.Drawing.Point(-1, 0);
       this.tabControl1.Name = "tabControl1";
       this.tabControl1.SelectedIndex = 0;
-      this.tabControl1.Size = new System.Drawing.Size(1140, 458);
+      this.tabControl1.Size = new System.Drawing.Size(1368, 658);
       this.tabControl1.TabIndex = 0;
       // 
       // tabPageAnaRecent
@@ -59,7 +59,7 @@
       this.tabPageAnaRecent.Location = new System.Drawing.Point(4, 26);
       this.tabPageAnaRecent.Name = "tabPageAnaRecent";
       this.tabPageAnaRecent.Padding = new System.Windows.Forms.Padding(3);
-      this.tabPageAnaRecent.Size = new System.Drawing.Size(1132, 428);
+      this.tabPageAnaRecent.Size = new System.Drawing.Size(1360, 628);
       this.tabPageAnaRecent.TabIndex = 0;
       this.tabPageAnaRecent.Text = "Anamnesi Recente";
       this.tabPageAnaRecent.UseVisualStyleBackColor = true;
@@ -75,21 +75,6 @@
       this.tabPageAnaRemota.Text = "Anamnesi Remota";
       this.tabPageAnaRemota.UseVisualStyleBackColor = true;
       // 
-      // buttonSave
-      // 
-      this.buttonSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-      this.buttonSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
-      this.buttonSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.buttonSave.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.buttonSave.ForeColor = System.Drawing.Color.White;
-      this.buttonSave.Location = new System.Drawing.Point(1021, 464);
-      this.buttonSave.Name = "buttonSave";
-      this.buttonSave.Size = new System.Drawing.Size(106, 38);
-      this.buttonSave.TabIndex = 27;
-      this.buttonSave.Text = "Save";
-      this.buttonSave.UseVisualStyleBackColor = false;
-      this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
-      // 
       // tabPageStomato
       // 
       this.tabPageStomato.AutoScroll = true;
@@ -102,12 +87,27 @@
       this.tabPageStomato.UseVisualStyleBackColor = true;
       this.tabPageStomato.Click += new System.EventHandler(this.tabPage1_Click);
       // 
+      // buttonSave
+      // 
+      this.buttonSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+      this.buttonSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
+      this.buttonSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+      this.buttonSave.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.buttonSave.ForeColor = System.Drawing.Color.White;
+      this.buttonSave.Location = new System.Drawing.Point(1249, 664);
+      this.buttonSave.Name = "buttonSave";
+      this.buttonSave.Size = new System.Drawing.Size(106, 38);
+      this.buttonSave.TabIndex = 27;
+      this.buttonSave.Text = "Save";
+      this.buttonSave.UseVisualStyleBackColor = false;
+      this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
+      // 
       // Anamnesys
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.BackColor = System.Drawing.Color.White;
-      this.ClientSize = new System.Drawing.Size(1139, 514);
+      this.ClientSize = new System.Drawing.Size(1367, 714);
       this.Controls.Add(this.buttonSave);
       this.Controls.Add(this.tabControl1);
       this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

@@ -7,7 +7,6 @@ using System.Linq;
 using System.IO;
 using LinqToDB;
 using System.Windows.Forms;
-using TheArtOfDev.HtmlRenderer.PdfSharp;
 using PdfSharp.Pdf;
 using PdfSharp;
 
@@ -17,6 +16,7 @@ namespace FisioHelp.UI
   {
     public DataModels.Invoice Invoice { get; set; }
     private DataModels.Customer _customer { get; set; }
+    private DataModels.Therapist _therapist { get; set; }
     private const int LineHeight = 20;
     private bool _edit = false;
     public InvoiceCtrl(DataModels.Invoice invoice, bool edit = false)
@@ -24,6 +24,11 @@ namespace FisioHelp.UI
       InitializeComponent();
       Invoice = invoice;
       _edit = edit;
+      
+      using (var db = new Db.PhisioDB())
+      {
+        _therapist = db.Therapists.FirstOrDefault();
+      }
     }
 
     private void InvoiceCtrl_Load(object sender, EventArgs e)
@@ -34,6 +39,8 @@ namespace FisioHelp.UI
       if (_edit)
       {
         buttonSave.Text = "Cancella";
+        textBoxDiscount.ReadOnly = true;
+        checkBox1.Enabled = false;
       }
       if (aVisit != null)
       {
@@ -45,11 +52,14 @@ namespace FisioHelp.UI
       foreach ( var visit in Invoice.Visitsinvoiceidfkeys)
       {
         Panel panelIn = new Panel();
+        panelIn.Dock = DockStyle.Fill;
+        panel1.Controls.Add(panelIn);
+
         Label labelVisit = new Label();
         labelVisit.Location = new Point(0, 0);
         labelVisit.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F);
-        labelVisit.Text = $"•  {((DateTime)visit.Date).ToShortDateString()}";
-        panelIn.Controls.Add(labelVisit);;        
+        labelVisit.Text = $"•  {((DateTime)visit.Date).ToShortDateString()}";        
+        panelIn.Controls.Add(labelVisit);     
 
         var treatments = Helper.Helper.GetTratmensByIdS(visit.Treatmentsvisitidfkeys.Select(x => x.TreatmentId).ToList(), aVisit.Customer.Language);
 
@@ -58,33 +68,59 @@ namespace FisioHelp.UI
         lableTreatment.AutoSize = false;
         lableTreatment.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F);
         lableTreatment.Text = string.Join(Environment.NewLine, treatments);
-        lableTreatment.Size = new Size(panel1.Width - (int)(panel1.Width * .2) - 80, LineHeight * treatments.Count());
+        lableTreatment.Size = new Size(panel1.Width - (int)(panel1.Width * .2) - 200, LineHeight * treatments.Count());
         lableTreatment.Padding = new Padding(20, 0, 0, 0);
         panelIn.Controls.Add(lableTreatment);
 
         Label labelPrice = new Label();
-        labelPrice.Location = new Point((int)(panel1.Width - 80), 0);
+        labelPrice.Location = new Point((int)(panel1.Width - 198), 0);
         labelPrice.Font = new Font("Segoe UI Historic", 11.25F);
         labelPrice.Text = $"{visit.Price} €";
+        labelPrice.AutoSize = false;
+        labelPrice.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+        labelPrice.Size = new Size(60, LineHeight * treatments.Count());
         panelIn.Controls.Add(labelPrice);
+
+        Label labelPriceRivalsa = new Label();
+        labelPriceRivalsa.Location = new Point((int)(panel1.Width - 106), 0);
+        labelPriceRivalsa.Font = new Font("Segoe UI Historic", 11.25F);
+        labelPriceRivalsa.Text = $"{((double)visit.Price * 0.96).ToString("#.00")} €";
+        labelPriceRivalsa.AutoSize = false;
+        labelPriceRivalsa.Size = new Size(60, LineHeight * treatments.Count());
+        labelPriceRivalsa.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+        panelIn.Controls.Add(labelPriceRivalsa);
 
         panelIn.Location = new Point(0, y);
         panelIn.Size = new Size(panel1.Width, Math.Max(labelVisit.Height, lableTreatment.Height) + 10);
-        panel1.Controls.Add(panelIn);
+        
+
+        checkBox1.Checked = Invoice.TaxStamp;
 
         y += panelIn.Height;
       }
-      labelTotal.Text = CalculateTotal().ToString() + " €";
+      var total = CalculateTotal(false);
+      labelRivalsa.Text = (total*0.04).ToString("#.00");
+      labelRivalsaSconto.Text = "0";
+      if (total > 77.47)
+        checkBox1.Checked = true;
+      else
+        checkBox1.Checked = false;
+
+      labelTotal.Text = CalculateTotal(true).ToString();
     }
 
-    private double CalculateTotal()
+    private double CalculateTotal(bool withStamp)
     {
       var sconto = 0.0;
       if (double.TryParse(textBoxDiscount.Text, out double sc))
         sconto = sc;
 
+      var bollo = checkBox1.Checked ? 2 : 0;
+
       double tot = Invoice.Visitsinvoiceidfkeys.Sum(x => x.Price != null ? (double)x.Price : 0.0) - sconto;
-      return tot;
+      tot = withStamp ? tot + bollo: tot;
+
+      return tot ;
     }
 
     private void textBoxDiscount_KeyDown(object sender, KeyEventArgs e)
@@ -107,7 +143,14 @@ namespace FisioHelp.UI
     private void textBoxDiscount_KeyUp(object sender, KeyEventArgs e)
     {
       this.ValidateChildren();
-      labelTotal.Text = CalculateTotal().ToString();
+      var sconto = 0.0;
+      if (double.TryParse(textBoxDiscount.Text, out double sc))
+        sconto = sc;
+
+      labelRivalsaSconto.Text = "- " + (sconto * .96).ToString("#.00");
+      labelRivalsa.Text = (CalculateTotal(false) * 0.04).ToString("#.00");
+      labelTotal.Text = CalculateTotal(true).ToString();
+
     }
 
     private void buttonSave_Click(object sender, EventArgs e)
@@ -124,61 +167,79 @@ namespace FisioHelp.UI
 
     private void CreateInvoice()
     {
-      if (Invoice.Id > 0)
+      if (MessageBox.Show("Una volta salvata la fattura non potrà essere modificata!", "Salvataggio", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+        return;
+
+      if (Invoice.Id != null && Invoice.Id != Guid.Empty)
       {
-        MessageBox.Show("Fattura già salvata!");
+        MessageBox.Show("Fattura già salvata", "Salvataggio", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         return;
       }
 
+      Invoice.TaxStamp = checkBox1.Checked;
+      if (double.TryParse(textBoxDiscount.Text, out double disc))
+        Invoice.Discount = disc;
+
       using (var db = new Db.PhisioDB())
       {
-        var invoiceId = db.InsertWithInt32Identity(Invoice);
-        Invoice.Id = invoiceId;
-        if (invoiceId > 0)
+        Invoice.TherapistId = _therapist.Id;
+        var invoiceID = Invoice.SaveToDB();
+        foreach (var visit in Invoice.Visitsinvoiceidfkeys)
         {
-          foreach (var visit in Invoice.Visitsinvoiceidfkeys)
-          {
-            visit.Invoiced = true;
-            visit.InvoiceId = invoiceId;
-            db.Update(visit);
-          }
-
-          MessageBox.Show("Fattura Salvata!");
+          visit.Invoiced = true;
+          visit.InvoiceId = invoiceID;
+          visit.SaveToDB();
         }
+        MessageBox.Show("Salvato Correttamente", "Salvataggio", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        
       }
     }
 
     private void DeleteInvoice()
     {
-      if (Invoice.Id <= 0)
+      if (MessageBox.Show("Sei sicura di voler cancellare la fattura?", "Cancellazione", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+        return;
+
+      if (Invoice.Id == null)
       {
-        MessageBox.Show("Errore la fattura non è stata caricata correttamente!");
+        MessageBox.Show("Errore la fattura non è stata caricata correttamente!", "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error);
         return;
       }
 
       using (var db = new Db.PhisioDB())
       {
-        var invoiceId = Invoice.Id;
-        if (invoiceId > 0)
+        if (Invoice.Id != null)
         {
+          Invoice.Deleted = true;
           foreach (var visit in Invoice.Visitsinvoiceidfkeys)
           {
             visit.Payed = false;
             visit.InvoiceId = null;
             visit.Invoice = null;
             visit.Invoiced = false;
-            db.Update(visit);
+            visit.SaveToDB();
           }
 
-          db.Delete(Invoice);
+          Invoice.SaveToDB();
           
-          MessageBox.Show("Fattura Eliminata!");
+          MessageBox.Show("Fattura Eliminata!", "Cancellazione", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
       }
     }
 
     private void buttonPrinter_Click(object sender, EventArgs e)
     {
+
+      if (Invoice.Id == null || Invoice.Id == Guid.Empty)
+      {
+        Invoice.TaxStamp = checkBox1.Checked;
+
+        if (double.TryParse(textBoxDiscount.Text, out double disc))
+          Invoice.Discount = disc;
+
+        MessageBox.Show("Si sta visualizzando un anteprima, ricordarsi di salvare la fattura!", "Salvataggio", MessageBoxButtons.OK, MessageBoxIcon.Information);
+      }
+
       DataModels.Therapist therapist = null;
       using (var db = new Db.PhisioDB())
       {
@@ -187,13 +248,13 @@ namespace FisioHelp.UI
 
       if (therapist == null)
       {
-        MessageBox.Show("Qualcosa è andato storto non trovo i parametri generali");
+        MessageBox.Show("Qualcosa è andato storto non trovo i parametri generali", "Stampa", MessageBoxButtons.OK, MessageBoxIcon.Error);
         return;
       }
 
       if (string.IsNullOrEmpty(therapist.InvoicesFolder))
       {
-        MessageBox.Show("Prima di proseguire bisogna impostare la cartella di salvataggio delle fatture");
+        MessageBox.Show("Prima di proseguire bisogna impostare la cartella di salvataggio delle fatture", "Salvataggio", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         return;
       }
 
@@ -210,22 +271,34 @@ namespace FisioHelp.UI
       basePath = Path.Combine(basePath, date);
 
       Directory.CreateDirectory(basePath);      
-      var Renderer = new IronPdf.HtmlToPdf();
-      var PDF = Renderer.RenderHtmlAsPdf(html);
-      var OutputPath = $@"{basePath}\{Invoice.Title}_{_customer.FullName.Replace(" ","_")}.pdf";
+      var pdfPath = $@"{basePath}\{Invoice.Title.Replace(@"/", "_")}_{_customer.FullName.Replace(" ", "_")}.pdf";
+      var htmlPath = $@"{basePath}\{Invoice.Title.Replace("/", "_")}_{_customer.FullName.Replace(" ", "_")}.html";
       try
       {
-        PDF.SaveAs(OutputPath);
+        File.WriteAllText(htmlPath, html);
+        Helper.PdfManager.CreatePdf(pdfPath, htmlPath);
       }
       catch (Exception ee)
       {
-        MessageBox.Show("Il file è già aperto");
+        MessageBox.Show("Il file è già aperto, chiuderlo", "Stampa", MessageBoxButtons.OK, MessageBoxIcon.Error);
         return;
       }
-      Helper.DriveManagement.InsertFilePdf(OutputPath, new List<string> { "Invoice", date });
+      //Helper.DriveManagement.InsertFilePdf(pdfPath, new List<string> { "Invoice", date });
 
-      System.Diagnostics.Process.Start(OutputPath);
+      System.Diagnostics.Process.Start(pdfPath);
      
+    }
+
+    private void checkBox1_CheckedChanged(object sender, EventArgs e)
+    {
+      Invoice.TaxStamp = checkBox1.Checked;
+      labelBollo.Text = checkBox1.Checked ? "2" : "0";
+      labelTotal.Text = CalculateTotal(true).ToString();
+    }
+
+    private void textBoxDiscount_TextChanged(object sender, EventArgs e)
+    {
+
     }
   }
 }

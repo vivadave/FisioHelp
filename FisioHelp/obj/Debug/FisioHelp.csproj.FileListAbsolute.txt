@@ -139,12 +139,8 @@ C:\Progetti\FisioHelp\FisioHelp\obj\Debug\FisioHelp.UI.InvoiceCtrl.resources
 C:\Progetti\FisioHelp\FisioHelp\obj\Debug\FisioHelp.UI.InvoiceFrm.resources
 C:\Progetti\FisioHelp\FisioHelp\obj\Debug\FisioHelp.UI.InvoiceListCtrl.resources
 C:\Progetti\FisioHelp\FisioHelp\obj\Debug\FisioHelp.UI.InvoiceListItem.resources
-C:\Progetti\FisioHelp\FisioHelp\bin\Debug\HtmlRenderer.dll
-C:\Progetti\FisioHelp\FisioHelp\bin\Debug\HtmlRenderer.PdfSharp.dll
 C:\Progetti\FisioHelp\FisioHelp\bin\Debug\PdfSharp.Charting.dll
 C:\Progetti\FisioHelp\FisioHelp\bin\Debug\PdfSharp.dll
-C:\Progetti\FisioHelp\FisioHelp\bin\Debug\HtmlRenderer.pdb
-C:\Progetti\FisioHelp\FisioHelp\bin\Debug\HtmlRenderer.PdfSharp.pdb
 C:\Progetti\FisioHelp\FisioHelp\bin\Debug\PdfSharp.xml
 C:\Progetti\FisioHelp\FisioHelp\bin\Debug\PdfSharp.Charting.xml
 C:\Progetti\FisioHelp\FisioHelp\bin\Debug\de\PdfSharp.resources.dll
@@ -163,8 +159,6 @@ C:\Progetti\FisioHelp\FisioHelp\obj\Debug\FisioHelp.UI.Anamesys.StomatognathicRo
 C:\Progetti\FisioHelp\FisioHelp\obj\Debug\FisioHelp.UI.Anamesys.StomatognathicPalpationRow.resources
 C:\Progetti\FisioHelp\FisioHelp\bin\Debug\WkHtmlToPdf.dll
 C:\Progetti\FisioHelp\FisioHelp\bin\Debug\Template\Elisa-logo2.png
-C:\Progetti\FisioHelp\FisioHelp\bin\Debug\IronPdf.dll
-C:\Progetti\FisioHelp\FisioHelp\bin\Debug\IronPdf.xml
 C:\Progetti\FisioHelp\FisioHelp\bin\Debug\Template\templateInvoice_de.html
 C:\Progetti\FisioHelp\FisioHelp\bin\Debug\Template\templateInvoice_it.html
 C:\Progetti\FisioHelp\FisioHelp\obj\Debug\FisioHelp.UI.Dashboard.Dashboard.resources

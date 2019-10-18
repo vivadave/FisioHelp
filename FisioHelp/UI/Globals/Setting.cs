@@ -47,9 +47,9 @@ namespace FisioHelp.UI.Globals
       {
         textBoxName.Text = _therapist.FullName;
         textBoxEmail.Text = _therapist.Email;
-        textBoxCf.Text = _therapist.Fiscalcode;
+        textBoxCf.Text = _therapist.FiscalCode;
         textBoxIban.Text = _therapist.Iban;
-        textBoxPiva.Text = _therapist.Vat;
+        textBoxPiva.Text = _therapist.TaxNumber;
         textBoxAddress.Text = _therapist.Address;
       } else
         _therapist = new Therapist();
@@ -65,33 +65,29 @@ namespace FisioHelp.UI.Globals
         
         _therapist.FullName = textBoxName.Text;
         _therapist.Email = textBoxEmail.Text;
-        _therapist.Fiscalcode = textBoxCf.Text;
+        _therapist.FiscalCode = textBoxCf.Text;
         _therapist.Iban = textBoxIban.Text;
-        _therapist.Vat = textBoxPiva.Text;
+        _therapist.TaxNumber = textBoxPiva.Text;
         _therapist.Address = textBoxAddress.Text;
 
-        if (_therapist.Id > 0)
+        if (_therapist.Id != null)
           db.Update(_therapist);
         else
-          _therapist.Id = db.InsertWithInt32Identity(_therapist);
+          _therapist.Id = Guid.Parse(db.InsertWithIdentity(_therapist).ToString());
 
         foreach (var a in priceListBindingSource)
         {
           var price = (PriceList)a;
-          if (price.Id > 0)
-            db.Update(price);
-          else
-            price.Id = db.InsertWithInt32Identity(price);
+          price.TherapistId = _therapist.Id;
+          price.SaveToDB();
           _priceLists.Add(price);
 
         }
         foreach (var t in treatmentBindingSource)
         {
           var treatment = (Treatment)t;
-          if (treatment.Id > 0)
-            db.Update(treatment);
-          else
-            treatment.Id = db.InsertWithInt32Identity(treatment);
+          treatment.TherapistId = _therapist.Id;
+          treatment.SaveToDB();
           _treatMentLists.Add(treatment);
         }
 
