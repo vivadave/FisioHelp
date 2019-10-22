@@ -73,39 +73,40 @@ namespace FisioHelp.UI.Anamesys
     private void AnamnesysView_Load(object sender, EventArgs e)
     {
       var panel1 = this.panel1;
-      AddDescritpionField("Altri disturbi", _recentAnamnesy.OtherDiseases, panel1); 
-      AddDescritpionField("Fattori leagati alla professione", _recentAnamnesy.DiseaseInWork?.ToString(), panel1);
-      AddDescritpionField("Fattori legati alla posizione sociale", _recentAnamnesy.DiseaseInSocial?.ToString(), panel1);
-      AddDescritpionField("Fattori legati alla famiglia", _recentAnamnesy.DiseaseInFamily?.ToString(), panel1);
-      AddDescritpionField("Incidenza sulla vita quotidiana", _recentAnamnesy.DiseaseInLife?.ToString(), panel1);
-      AddDescritpionField("Postura Lavorativa", _recentAnamnesy.Posture, panel1);
-      AddDescritpionField("Farmaci", _recentAnamnesy.Medicine, panel1);
-      AddDescritpionField("Trattamenti precedenti", _recentAnamnesy.PreTreatment, panel1);
+            var mainDiseaseDate = _recentAnamnesy?.MainDiseaseDate != null ? ((DateTime)_recentAnamnesy?.MainDiseaseDate).ToShortDateString() : "";
+      AddDescritpionField("Altri disturbi", _recentAnamnesy?.OtherDiseases, panel1); 
+      AddDescritpionField("Fattori leagati alla professione", _recentAnamnesy?.DiseaseInWork?.ToString(), panel1);
+      AddDescritpionField("Fattori legati alla posizione sociale", _recentAnamnesy?.DiseaseInSocial?.ToString(), panel1);
+      AddDescritpionField("Fattori legati alla famiglia", _recentAnamnesy?.DiseaseInFamily?.ToString(), panel1);
+      AddDescritpionField("Incidenza sulla vita quotidiana", _recentAnamnesy?.DiseaseInLife?.ToString(), panel1);
+      AddDescritpionField("Postura Lavorativa", _recentAnamnesy?.Posture, panel1);
+      AddDescritpionField("Farmaci", _recentAnamnesy?.Medicine, panel1);
+      AddDescritpionField("Trattamenti precedenti", _recentAnamnesy?.PreTreatment, panel1);
       AddDescritpionField("SINTOMO DOMINANTE", "---", panel1);
-      AddDescritpionField("Descrizione", _recentAnamnesy.MainDiseaseDescription, panel1);
-      AddDescritpionField("Data insorgenza", ((DateTime)_recentAnamnesy.MainDiseaseDate).ToShortDateString(), panel1);
-      AddDescritpionField("Modalità insorgenza", _recentAnamnesy.MainDiseaseModality, panel1);
-      AddDescritpionField("Decorso", _recentAnamnesy.MainDiseaseCourse, panel1);
-      AddDescritpionField("Fattori Aggravanti", _recentAnamnesy.MainDiseaseFactorPlus, panel1);
-      AddDescritpionField("Fattori Allevianti", _recentAnamnesy.MainDiseaseFactorMinor, panel1);
-      AddDescritpionField("Sintomi sistema nervoso", _recentAnamnesy.MainDiseaseNervousSystem, panel1);
-      AddDescritpionField("Sintomi ultime 24 ore", _recentAnamnesy.MainDiseaseSymptoms24, panel1);
-      AddDescritpionField("Intensità", _recentAnamnesy.MainDiseaseIntensity?.ToString(), panel1);
-      AddDescritpionField("Diagnostica per immagini", _recentAnamnesy.ImagesDiagnostics, panel1);
-      AddDescritpionField("Salute generale", _recentAnamnesy.GlobalHealth, panel1);
-      var mainDeseaes = new List<string> { _recentAnamnesy.MainDisease1, _recentAnamnesy.MainDisease2, _recentAnamnesy.MainDisease3, _recentAnamnesy.MainDisease4, _recentAnamnesy.MainDisease5 };
+      AddDescritpionField("Descrizione", _recentAnamnesy?.MainDiseaseDescription, panel1);
+      AddDescritpionField("Data insorgenza", mainDiseaseDate, panel1);
+      AddDescritpionField("Modalità insorgenza", _recentAnamnesy?.MainDiseaseModality, panel1);
+      AddDescritpionField("Decorso", _recentAnamnesy?.MainDiseaseCourse, panel1);
+      AddDescritpionField("Fattori Aggravanti", _recentAnamnesy?.MainDiseaseFactorPlus, panel1);
+      AddDescritpionField("Fattori Allevianti", _recentAnamnesy?.MainDiseaseFactorMinor, panel1);
+      AddDescritpionField("Sintomi sistema nervoso", _recentAnamnesy?.MainDiseaseNervousSystem, panel1);
+      AddDescritpionField("Sintomi ultime 24 ore", _recentAnamnesy?.MainDiseaseSymptoms24, panel1);
+      AddDescritpionField("Intensità", _recentAnamnesy?.MainDiseaseIntensity?.ToString(), panel1);
+      AddDescritpionField("Diagnostica per immagini", _recentAnamnesy?.ImagesDiagnostics, panel1);
+      AddDescritpionField("Salute generale", _recentAnamnesy?.GlobalHealth, panel1);
+      var mainDeseaes = new List<string> { _recentAnamnesy?.MainDisease1, _recentAnamnesy?.MainDisease2, _recentAnamnesy?.MainDisease3, _recentAnamnesy?.MainDisease4, _recentAnamnesy?.MainDisease5 };
       AddDescritpionField("Disturbi Principali", string.Join(Environment.NewLine, mainDeseaes), panel1);
 
       var panel2 = this.panel2;
-      AddDescritpionField("Altro", _remoteAnamnesy.Other, panel2);
-      AddDescritpionField("Trattamenti precedenti", _remoteAnamnesy.RecentTreatments, panel2);
-      AddDescritpionField("Episodi precedenti", _remoteAnamnesy.RecentEpisodes, panel2);
-      AddDescritpionField("Traumi", _remoteAnamnesy.Traumas, panel2);
-      AddDescritpionField("Gravidanze", _remoteAnamnesy.Pregnancy, panel2);
-      AddDescritpionField("Anestesie generali", _remoteAnamnesy.Anesthesias, panel2);
-      AddDescritpionField("Chirurgie", _remoteAnamnesy.Surgery, panel2);
-      AddDescritpionField("Malattie Psichiatriche", _remoteAnamnesy.PsychicDisease, panel2);
-      AddDescritpionField("Malattie Fisiche", _remoteAnamnesy.PhisicalDisease, panel2);
+      AddDescritpionField("Altro", _remoteAnamnesy?.Other, panel2);
+      AddDescritpionField("Trattamenti precedenti", _remoteAnamnesy?.RecentTreatments, panel2);
+      AddDescritpionField("Episodi precedenti", _remoteAnamnesy?.RecentEpisodes, panel2);
+      AddDescritpionField("Traumi", _remoteAnamnesy?.Traumas, panel2);
+      AddDescritpionField("Gravidanze", _remoteAnamnesy?.Pregnancy, panel2);
+      AddDescritpionField("Anestesie generali", _remoteAnamnesy?.Anesthesias, panel2);
+      AddDescritpionField("Chirurgie", _remoteAnamnesy?.Surgery, panel2);
+      AddDescritpionField("Malattie Psichiatriche", _remoteAnamnesy?.PsychicDisease, panel2);
+      AddDescritpionField("Malattie Fisiche", _remoteAnamnesy?.PhisicalDisease, panel2);
 
     }
 
