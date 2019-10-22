@@ -177,6 +177,12 @@
     <Compile Include="UI\Anamesys\Anamnesys.Designer.cs">
       <DependentUpon>Anamnesys.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Anamesys\AnamnesysView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Anamesys\AnamnesysView.Designer.cs">
+      <DependentUpon>AnamnesysView.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Anamesys\RecentAnamnesys.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -308,6 +314,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Anamesys\Anamnesys.resx">
       <DependentUpon>Anamnesys.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Anamesys\AnamnesysView.resx">
+      <DependentUpon>AnamnesysView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Anamesys\RecentAnamnesys.resx">
       <DependentUpon>RecentAnamnesys.cs</DependentUpon>

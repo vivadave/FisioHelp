@@ -183,3 +183,4 @@ C:\Progetti\FisioHelp\FisioHelp\bin\Debug\Newtonsoft.Json.xml
 C:\Progetti\FisioHelp\FisioHelp\bin\Debug\Template\privacy_de.pdf
 C:\Progetti\FisioHelp\FisioHelp\bin\Debug\Template\privacy_it.pdf
 C:\Progetti\FisioHelp\FisioHelp\bin\Debug\Template\tebaldi.jpg
+C:\Progetti\FisioHelp\FisioHelp\obj\Debug\FisioHelp.UI.Anamesys.AnamnesysView.resources

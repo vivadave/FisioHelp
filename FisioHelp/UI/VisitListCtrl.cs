@@ -21,6 +21,9 @@ namespace FisioHelp.UI
     private DataModels.Customer _customer;
     private List<DataModels.Visit> _visitsToInvoice { get; set; }
     private string _type;
+    private ToolTip _displayAnamnesysTT = new ToolTip();
+    private ToolTip _editAnamnesysTT = new ToolTip();
+    private ToolTip _createInvoiceTT = new ToolTip();
 
     public VisitListCtrl(DataModels.Customer customer, string type = "economical")
     {
@@ -41,6 +44,10 @@ namespace FisioHelp.UI
       panel2.Width = this.Size.Width;
       labelTitle.Text = type == "economical" ? "Visite: finanza" : "Visite: Relazione";
       labelAction.Text = type == "economical" ? "Azioni" : "Anamnesi";
+      labelAction.BringToFront();
+      _displayAnamnesysTT.SetToolTip(this.buttonAnamnesys, "Modifica anamnesi");
+      _editAnamnesysTT.SetToolTip(this.buttonAnamnesysView, "Visualizza anamnesi");
+      _createInvoiceTT.SetToolTip(this.buttonInvoices, "Crea una fattura delle visite selezionate");
     }
 
     private void label1_Click(object sender, EventArgs e)
@@ -138,6 +145,7 @@ namespace FisioHelp.UI
       Color[] colors = { Color.FromArgb(255, 255, 255), Color.FromArgb(255, 241, 240) };
 
       buttonAnamnesys.Visible = false;
+      buttonAnamnesysView.Visible = false;
       buttonInvoices.Visible = false;
 
       foreach (var visit in _visits)
@@ -181,6 +189,7 @@ namespace FisioHelp.UI
       Color[] colors = { Color.FromArgb(255, 255, 255), Color.FromArgb(255, 241, 240) };
 
       buttonAnamnesys.Visible = true;
+      buttonAnamnesysView.Visible = true;
       buttonInvoices.Visible = false;
 
       foreach (var visit in _visits)
@@ -218,6 +227,11 @@ namespace FisioHelp.UI
     private void buttonAnamnesys_Click(object sender, EventArgs e)
     {
       UI.Anamesys.Anamnesys anamnesysFrm = new Anamesys.Anamnesys(_customer);
+      anamnesysFrm.ShowDialog();
+    }
+    private void buttonAnamnesysView_Click(object sender, EventArgs e)
+    {
+      UI.Anamesys.AnamnesysView anamnesysFrm = new Anamesys.AnamnesysView(_customer);
       anamnesysFrm.ShowDialog();
     }
 

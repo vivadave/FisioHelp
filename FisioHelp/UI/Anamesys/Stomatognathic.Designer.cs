@@ -71,23 +71,23 @@
       this.radioButtonDoubleTlOkz1 = new System.Windows.Forms.RadioButton();
       this.label14 = new System.Windows.Forms.Label();
       this.panel15 = new System.Windows.Forms.Panel();
+      this.textBoxRuheschwebeL = new System.Windows.Forms.TextBox();
       this.label15 = new System.Windows.Forms.Label();
       this.groupBox1 = new System.Windows.Forms.GroupBox();
-      this.panel14 = new System.Windows.Forms.Panel();
-      this.textBoxRuheschwebeR = new System.Windows.Forms.TextBox();
-      this.textBoxRuheschwebeL = new System.Windows.Forms.TextBox();
-      this.label16 = new System.Windows.Forms.Label();
-      this.label17 = new System.Windows.Forms.Label();
-      this.panel16 = new System.Windows.Forms.Panel();
-      this.textBoxFesterR = new System.Windows.Forms.TextBox();
-      this.label18 = new System.Windows.Forms.Label();
-      this.panel17 = new System.Windows.Forms.Panel();
-      this.textBoxFesterL = new System.Windows.Forms.TextBox();
       this.panel18 = new System.Windows.Forms.Panel();
       this.textBoxWeiteOffR = new System.Windows.Forms.TextBox();
       this.label19 = new System.Windows.Forms.Label();
+      this.panel16 = new System.Windows.Forms.Panel();
+      this.textBoxFesterR = new System.Windows.Forms.TextBox();
       this.panel19 = new System.Windows.Forms.Panel();
       this.textBoxWeiteOffL = new System.Windows.Forms.TextBox();
+      this.label17 = new System.Windows.Forms.Label();
+      this.label18 = new System.Windows.Forms.Label();
+      this.label16 = new System.Windows.Forms.Label();
+      this.panel17 = new System.Windows.Forms.Panel();
+      this.textBoxFesterL = new System.Windows.Forms.TextBox();
+      this.panel14 = new System.Windows.Forms.Panel();
+      this.textBoxRuheschwebeR = new System.Windows.Forms.TextBox();
       this.panel1.SuspendLayout();
       this.panel3.SuspendLayout();
       this.panel2.SuspendLayout();
@@ -102,11 +102,11 @@
       this.panel13.SuspendLayout();
       this.panel15.SuspendLayout();
       this.groupBox1.SuspendLayout();
-      this.panel14.SuspendLayout();
-      this.panel16.SuspendLayout();
-      this.panel17.SuspendLayout();
       this.panel18.SuspendLayout();
+      this.panel16.SuspendLayout();
       this.panel19.SuspendLayout();
+      this.panel17.SuspendLayout();
+      this.panel14.SuspendLayout();
       this.SuspendLayout();
       // 
       // panel1
@@ -326,9 +326,9 @@
       this.label9.Font = new System.Drawing.Font("Segoe UI Historic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.label9.Location = new System.Drawing.Point(43, 447);
       this.label9.Name = "label9";
-      this.label9.Size = new System.Drawing.Size(85, 17);
+      this.label9.Size = new System.Drawing.Size(36, 51);
       this.label9.TabIndex = 17;
-      this.label9.Text = "Cat. I - Fehler";
+      this.label9.Text = "rter\r\n3234\r\newre\r\n";
       // 
       // panel9
       // 
@@ -524,6 +524,17 @@
       this.panel15.Size = new System.Drawing.Size(150, 30);
       this.panel15.TabIndex = 25;
       // 
+      // textBoxRuheschwebeL
+      // 
+      this.textBoxRuheschwebeL.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.textBoxRuheschwebeL.Cursor = System.Windows.Forms.Cursors.IBeam;
+      this.textBoxRuheschwebeL.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F);
+      this.textBoxRuheschwebeL.Location = new System.Drawing.Point(9, 2);
+      this.textBoxRuheschwebeL.Name = "textBoxRuheschwebeL";
+      this.textBoxRuheschwebeL.Size = new System.Drawing.Size(133, 27);
+      this.textBoxRuheschwebeL.TabIndex = 39;
+      // 
       // label15
       // 
       this.label15.AutoSize = true;
@@ -555,104 +566,6 @@
       this.groupBox1.TabStop = false;
       this.groupBox1.Text = "Derbolowski-Vorlauftest";
       // 
-      // panel14
-      // 
-      this.panel14.Controls.Add(this.textBoxRuheschwebeR);
-      this.panel14.Location = new System.Drawing.Point(389, 22);
-      this.panel14.Name = "panel14";
-      this.panel14.Size = new System.Drawing.Size(163, 30);
-      this.panel14.TabIndex = 24;
-      // 
-      // textBoxRuheschwebeR
-      // 
-      this.textBoxRuheschwebeR.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-      this.textBoxRuheschwebeR.Cursor = System.Windows.Forms.Cursors.IBeam;
-      this.textBoxRuheschwebeR.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F);
-      this.textBoxRuheschwebeR.Location = new System.Drawing.Point(14, 2);
-      this.textBoxRuheschwebeR.Name = "textBoxRuheschwebeR";
-      this.textBoxRuheschwebeR.Size = new System.Drawing.Size(133, 27);
-      this.textBoxRuheschwebeR.TabIndex = 39;
-      // 
-      // textBoxRuheschwebeL
-      // 
-      this.textBoxRuheschwebeL.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-      this.textBoxRuheschwebeL.Cursor = System.Windows.Forms.Cursors.IBeam;
-      this.textBoxRuheschwebeL.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F);
-      this.textBoxRuheschwebeL.Location = new System.Drawing.Point(9, 2);
-      this.textBoxRuheschwebeL.Name = "textBoxRuheschwebeL";
-      this.textBoxRuheschwebeL.Size = new System.Drawing.Size(133, 27);
-      this.textBoxRuheschwebeL.TabIndex = 39;
-      // 
-      // label16
-      // 
-      this.label16.AutoSize = true;
-      this.label16.Font = new System.Drawing.Font("Segoe UI Historic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.label16.Location = new System.Drawing.Point(446, 0);
-      this.label16.Name = "label16";
-      this.label16.Size = new System.Drawing.Size(44, 17);
-      this.label16.TabIndex = 26;
-      this.label16.Text = "Re cm";
-      // 
-      // label17
-      // 
-      this.label17.AutoSize = true;
-      this.label17.Font = new System.Drawing.Font("Segoe UI Historic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.label17.Location = new System.Drawing.Point(632, 0);
-      this.label17.Name = "label17";
-      this.label17.Size = new System.Drawing.Size(38, 17);
-      this.label17.TabIndex = 27;
-      this.label17.Text = "Li cm";
-      // 
-      // panel16
-      // 
-      this.panel16.Controls.Add(this.textBoxFesterR);
-      this.panel16.Location = new System.Drawing.Point(389, 52);
-      this.panel16.Name = "panel16";
-      this.panel16.Size = new System.Drawing.Size(163, 30);
-      this.panel16.TabIndex = 41;
-      // 
-      // textBoxFesterR
-      // 
-      this.textBoxFesterR.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-      this.textBoxFesterR.Cursor = System.Windows.Forms.Cursors.IBeam;
-      this.textBoxFesterR.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F);
-      this.textBoxFesterR.Location = new System.Drawing.Point(15, 2);
-      this.textBoxFesterR.Name = "textBoxFesterR";
-      this.textBoxFesterR.Size = new System.Drawing.Size(133, 27);
-      this.textBoxFesterR.TabIndex = 39;
-      // 
-      // label18
-      // 
-      this.label18.AutoSize = true;
-      this.label18.Font = new System.Drawing.Font("Segoe UI Historic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.label18.Location = new System.Drawing.Point(21, 61);
-      this.label18.Name = "label18";
-      this.label18.Size = new System.Drawing.Size(67, 17);
-      this.label18.TabIndex = 40;
-      this.label18.Text = "fester Biss";
-      // 
-      // panel17
-      // 
-      this.panel17.Controls.Add(this.textBoxFesterL);
-      this.panel17.Location = new System.Drawing.Point(579, 52);
-      this.panel17.Name = "panel17";
-      this.panel17.Size = new System.Drawing.Size(150, 30);
-      this.panel17.TabIndex = 42;
-      // 
-      // textBoxFesterL
-      // 
-      this.textBoxFesterL.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-      this.textBoxFesterL.Cursor = System.Windows.Forms.Cursors.IBeam;
-      this.textBoxFesterL.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F);
-      this.textBoxFesterL.Location = new System.Drawing.Point(9, 2);
-      this.textBoxFesterL.Name = "textBoxFesterL";
-      this.textBoxFesterL.Size = new System.Drawing.Size(133, 27);
-      this.textBoxFesterL.TabIndex = 39;
-      // 
       // panel18
       // 
       this.panel18.Controls.Add(this.textBoxWeiteOffR);
@@ -682,6 +595,25 @@
       this.label19.TabIndex = 43;
       this.label19.Text = "weite Offnun";
       // 
+      // panel16
+      // 
+      this.panel16.Controls.Add(this.textBoxFesterR);
+      this.panel16.Location = new System.Drawing.Point(389, 52);
+      this.panel16.Name = "panel16";
+      this.panel16.Size = new System.Drawing.Size(163, 30);
+      this.panel16.TabIndex = 41;
+      // 
+      // textBoxFesterR
+      // 
+      this.textBoxFesterR.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.textBoxFesterR.Cursor = System.Windows.Forms.Cursors.IBeam;
+      this.textBoxFesterR.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F);
+      this.textBoxFesterR.Location = new System.Drawing.Point(15, 2);
+      this.textBoxFesterR.Name = "textBoxFesterR";
+      this.textBoxFesterR.Size = new System.Drawing.Size(133, 27);
+      this.textBoxFesterR.TabIndex = 39;
+      // 
       // panel19
       // 
       this.panel19.Controls.Add(this.textBoxWeiteOffL);
@@ -700,6 +632,74 @@
       this.textBoxWeiteOffL.Name = "textBoxWeiteOffL";
       this.textBoxWeiteOffL.Size = new System.Drawing.Size(133, 27);
       this.textBoxWeiteOffL.TabIndex = 40;
+      // 
+      // label17
+      // 
+      this.label17.AutoSize = true;
+      this.label17.Font = new System.Drawing.Font("Segoe UI Historic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.label17.Location = new System.Drawing.Point(632, 0);
+      this.label17.Name = "label17";
+      this.label17.Size = new System.Drawing.Size(38, 17);
+      this.label17.TabIndex = 27;
+      this.label17.Text = "Li cm";
+      // 
+      // label18
+      // 
+      this.label18.AutoSize = true;
+      this.label18.Font = new System.Drawing.Font("Segoe UI Historic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.label18.Location = new System.Drawing.Point(21, 61);
+      this.label18.Name = "label18";
+      this.label18.Size = new System.Drawing.Size(67, 17);
+      this.label18.TabIndex = 40;
+      this.label18.Text = "fester Biss";
+      // 
+      // label16
+      // 
+      this.label16.AutoSize = true;
+      this.label16.Font = new System.Drawing.Font("Segoe UI Historic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.label16.Location = new System.Drawing.Point(446, 0);
+      this.label16.Name = "label16";
+      this.label16.Size = new System.Drawing.Size(44, 17);
+      this.label16.TabIndex = 26;
+      this.label16.Text = "Re cm";
+      // 
+      // panel17
+      // 
+      this.panel17.Controls.Add(this.textBoxFesterL);
+      this.panel17.Location = new System.Drawing.Point(579, 52);
+      this.panel17.Name = "panel17";
+      this.panel17.Size = new System.Drawing.Size(150, 30);
+      this.panel17.TabIndex = 42;
+      // 
+      // textBoxFesterL
+      // 
+      this.textBoxFesterL.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.textBoxFesterL.Cursor = System.Windows.Forms.Cursors.IBeam;
+      this.textBoxFesterL.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F);
+      this.textBoxFesterL.Location = new System.Drawing.Point(9, 2);
+      this.textBoxFesterL.Name = "textBoxFesterL";
+      this.textBoxFesterL.Size = new System.Drawing.Size(133, 27);
+      this.textBoxFesterL.TabIndex = 39;
+      // 
+      // panel14
+      // 
+      this.panel14.Controls.Add(this.textBoxRuheschwebeR);
+      this.panel14.Location = new System.Drawing.Point(389, 22);
+      this.panel14.Name = "panel14";
+      this.panel14.Size = new System.Drawing.Size(163, 30);
+      this.panel14.TabIndex = 24;
+      // 
+      // textBoxRuheschwebeR
+      // 
+      this.textBoxRuheschwebeR.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.textBoxRuheschwebeR.Cursor = System.Windows.Forms.Cursors.IBeam;
+      this.textBoxRuheschwebeR.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F);
+      this.textBoxRuheschwebeR.Location = new System.Drawing.Point(14, 2);
+      this.textBoxRuheschwebeR.Name = "textBoxRuheschwebeR";
+      this.textBoxRuheschwebeR.Size = new System.Drawing.Size(133, 27);
+      this.textBoxRuheschwebeR.TabIndex = 39;
       // 
       // Stomatognathic
       // 
@@ -753,16 +753,16 @@
       this.panel15.PerformLayout();
       this.groupBox1.ResumeLayout(false);
       this.groupBox1.PerformLayout();
-      this.panel14.ResumeLayout(false);
-      this.panel14.PerformLayout();
-      this.panel16.ResumeLayout(false);
-      this.panel16.PerformLayout();
-      this.panel17.ResumeLayout(false);
-      this.panel17.PerformLayout();
       this.panel18.ResumeLayout(false);
       this.panel18.PerformLayout();
+      this.panel16.ResumeLayout(false);
+      this.panel16.PerformLayout();
       this.panel19.ResumeLayout(false);
       this.panel19.PerformLayout();
+      this.panel17.ResumeLayout(false);
+      this.panel17.PerformLayout();
+      this.panel14.ResumeLayout(false);
+      this.panel14.PerformLayout();
       this.ResumeLayout(false);
       this.PerformLayout();
 

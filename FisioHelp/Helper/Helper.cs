@@ -129,15 +129,15 @@ namespace FisioHelp.Helper
       var sconto = invoice.Discount??0;
       var total = invoice.Visitsinvoiceidfkeys.Sum(x => x.Price * 0.96) - (sconto * 0.96);
       var bollo = invoice.TaxStamp ? 2 : 0;
+      var bolloDisplay = bollo > 0 ? "block" : "none";
+
       var inps = (invoice.Visitsinvoiceidfkeys.Sum(x => x.Price) - sconto) * .04;
       template = template.Replace("{{bollo}}", bollo.ToString());
-      var scontoTxt = sconto > 0 ? $@"
-              <div style=""display: block; padding: 15px 0 15px 0px; "">
-                  <div style = ""width: 400px; display: inline-block;""><strong> Sconto:</strong ></div>          
-                  <div style = ""width: 295px; display: inline-block; text-align: right;"">-{(sconto * 0.96).ToString("#.00")} €</div>                 
-              </div>" : "";
+      template = template.Replace("{{bollo_display}}", bolloDisplay.ToString());
 
-      template = template.Replace("{{sconto}}", scontoTxt);
+      template = template.Replace("{{sconto}}", (sconto * -0.96).ToString("#.00"));
+      template = template.Replace("{{sconto_display}}", sconto > 0 ? "block" : "none");
+      
       template = template.Replace("{{total}}", total.Value.ToString("#.00"));
       template = template.Replace("{{inps}}", inps.Value.ToString("#.00"));
       template = template.Replace("{{total_with_inps}}", (inps+total+bollo).Value.ToString("#.00"));

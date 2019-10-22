@@ -375,7 +375,7 @@
       this.labelBollo.RightToLeft = System.Windows.Forms.RightToLeft.No;
       this.labelBollo.Size = new System.Drawing.Size(58, 20);
       this.labelBollo.TabIndex = 36;
-      this.labelBollo.Text = "label1";
+      this.labelBollo.Text = "0";
       this.labelBollo.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
       // 
       // InvoiceCtrl

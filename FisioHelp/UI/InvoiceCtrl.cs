@@ -19,11 +19,14 @@ namespace FisioHelp.UI
     private DataModels.Therapist _therapist { get; set; }
     private const int LineHeight = 20;
     private bool _edit = false;
+    private ToolTip _printInvoiceTT = new ToolTip();
+
     public InvoiceCtrl(DataModels.Invoice invoice, bool edit = false)
     {
       InitializeComponent();
       Invoice = invoice;
       _edit = edit;
+      _printInvoiceTT.SetToolTip(this.buttonPrinter, "Stampa la fattura");
       
       using (var db = new Db.PhisioDB())
       {
@@ -34,8 +37,10 @@ namespace FisioHelp.UI
     private void InvoiceCtrl_Load(object sender, EventArgs e)
     {
       textBoxDiscount.Text = "0";
-      labelName.Text = Invoice.Title;
+      labelName.Text = Invoice.Title;  
+
       var aVisit = Invoice.Visitsinvoiceidfkeys.FirstOrDefault();
+      
       if (_edit)
       {
         buttonSave.Text = "Cancella";
@@ -44,6 +49,11 @@ namespace FisioHelp.UI
       }
       if (aVisit != null)
       {
+        using (var db = new Db.PhisioDB())
+        {
+          var cust = db.Customers.LoadWith(e1 => e1.Address).LoadWith(e1 => e1.Pricelist).FirstOrDefault(x => x.Id == aVisit.Customer.Id);
+          aVisit.Customer = cust;
+        }
         _customer = aVisit.Customer;
         labelCustomerName.Text = aVisit.Customer.FullName;
         labelFiscalCode.Text = aVisit.Customer.Fiscalcode;
