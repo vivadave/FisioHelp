@@ -31,6 +31,7 @@
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VisitListCtrl));
       this.panel1 = new System.Windows.Forms.Panel();
       this.buttonAnamnesys = new System.Windows.Forms.Button();
+      this.buttonAnamnesysView = new System.Windows.Forms.Button();
       this.buttonInvoices = new System.Windows.Forms.Button();
       this.labelAction = new System.Windows.Forms.Label();
       this.label7 = new System.Windows.Forms.Label();
@@ -52,7 +53,9 @@
       this.labelTotInvoice = new System.Windows.Forms.Label();
       this.labelTotMoney = new System.Windows.Forms.Label();
       this.labelTotPayed = new System.Windows.Forms.Label();
+      this.toolStrip1 = new System.Windows.Forms.ToolStrip();
       this.panel1.SuspendLayout();
+      this.panel2.SuspendLayout();
       this.panel3.SuspendLayout();
       this.tableLayoutPanel1.SuspendLayout();
       this.SuspendLayout();
@@ -63,6 +66,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
       this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
       this.panel1.Controls.Add(this.buttonAnamnesys);
+      this.panel1.Controls.Add(this.buttonAnamnesysView);
       this.panel1.Controls.Add(this.buttonInvoices);
       this.panel1.Controls.Add(this.labelAction);
       this.panel1.Controls.Add(this.label7);
@@ -89,12 +93,26 @@
       this.buttonAnamnesys.FlatAppearance.BorderSize = 0;
       this.buttonAnamnesys.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
       this.buttonAnamnesys.Image = ((System.Drawing.Image)(resources.GetObject("buttonAnamnesys.Image")));
-      this.buttonAnamnesys.Location = new System.Drawing.Point(942, 16);
+      this.buttonAnamnesys.Location = new System.Drawing.Point(952, 19);
       this.buttonAnamnesys.Name = "buttonAnamnesys";
       this.buttonAnamnesys.Size = new System.Drawing.Size(58, 59);
       this.buttonAnamnesys.TabIndex = 15;
       this.buttonAnamnesys.UseVisualStyleBackColor = true;
       this.buttonAnamnesys.Click += new System.EventHandler(this.buttonAnamnesys_Click);
+      // 
+      // buttonAnamnesysView
+      // 
+      this.buttonAnamnesysView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.buttonAnamnesysView.FlatAppearance.BorderSize = 0;
+      this.buttonAnamnesysView.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+      this.buttonAnamnesysView.Image = ((System.Drawing.Image)(resources.GetObject("buttonAnamnesysView.Image")));
+      this.buttonAnamnesysView.Location = new System.Drawing.Point(882, 19);
+      this.buttonAnamnesysView.Name = "buttonAnamnesysView";
+      this.buttonAnamnesysView.Size = new System.Drawing.Size(58, 59);
+      this.buttonAnamnesysView.TabIndex = 15;
+      this.buttonAnamnesysView.UseVisualStyleBackColor = true;
+      this.buttonAnamnesysView.Click += new System.EventHandler(this.buttonAnamnesysView_Click);
       // 
       // buttonInvoices
       // 
@@ -115,7 +133,7 @@
       this.labelAction.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
       this.labelAction.AutoSize = true;
       this.labelAction.Font = new System.Drawing.Font("Segoe UI Historic", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.labelAction.Location = new System.Drawing.Point(852, 12);
+      this.labelAction.Location = new System.Drawing.Point(851, 11);
       this.labelAction.Name = "labelAction";
       this.labelAction.Size = new System.Drawing.Size(43, 17);
       this.labelAction.TabIndex = 13;
@@ -240,6 +258,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
       this.panel2.AutoScroll = true;
       this.panel2.BackColor = System.Drawing.Color.White;
+      this.panel2.Controls.Add(this.toolStrip1);
       this.panel2.Location = new System.Drawing.Point(0, 83);
       this.panel2.Name = "panel2";
       this.panel2.Size = new System.Drawing.Size(1017, 382);
@@ -345,6 +364,14 @@
       this.labelTotPayed.Text = "#";
       this.labelTotPayed.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
       // 
+      // toolStrip1
+      // 
+      this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+      this.toolStrip1.Name = "toolStrip1";
+      this.toolStrip1.Size = new System.Drawing.Size(1017, 25);
+      this.toolStrip1.TabIndex = 0;
+      this.toolStrip1.Text = "toolStrip1";
+      // 
       // VisitListCtrl
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -358,6 +385,8 @@
       this.Load += new System.EventHandler(this.VisitListCtrl_Load);
       this.panel1.ResumeLayout(false);
       this.panel1.PerformLayout();
+      this.panel2.ResumeLayout(false);
+      this.panel2.PerformLayout();
       this.panel3.ResumeLayout(false);
       this.tableLayoutPanel1.ResumeLayout(false);
       this.tableLayoutPanel1.PerformLayout();
@@ -390,5 +419,7 @@
     private System.Windows.Forms.Label label7;
     private System.Windows.Forms.Button buttonInvoices;
     private System.Windows.Forms.Button buttonAnamnesys;
+    private System.Windows.Forms.Button buttonAnamnesysView;
+    private System.Windows.Forms.ToolStrip toolStrip1;
   }
 }

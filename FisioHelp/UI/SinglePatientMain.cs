@@ -16,11 +16,23 @@ namespace FisioHelp.UI
     private Customer _customer;
     private DataModels.Visit _selectedVist;
     private DataModels.Invoice _selectedInvoice;
+
+    private ToolTip _editPatientTT = new ToolTip();
+    private ToolTip _createVisitTT = new ToolTip();
+    private ToolTip _visitListTT = new ToolTip();
+    private ToolTip _visitEconomicListTT = new ToolTip();
+    private ToolTip _invoiceListTT = new ToolTip();
+
     public SinglePatientMain(Customer customer)
     {
       InitializeComponent();
       _customer = customer;
       labelName.Text = $"{customer.Name} {customer.Surname}".ToUpper();
+      _editPatientTT.SetToolTip(this.buttonCustomer, "Modifica i dati del paziente");
+      _createVisitTT.SetToolTip(this.buttonVisit, $"Crea una nuova visita per {_customer.Name}");
+      _visitListTT.SetToolTip(this.buttonMedicalList, "Visualizza la lista dei referti delle visite e le anamnesi");
+      _visitEconomicListTT.SetToolTip(this.buttonEconomicList, $"Visualizza la lista dei dati finanziari delle visite di {_customer.Name}");
+      _invoiceListTT.SetToolTip(this.buttonInvoice, "Visualizza la lista delle fatture");
     }
 
     private void toolStripButton2_Click(object sender, EventArgs e)

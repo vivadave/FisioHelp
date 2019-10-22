@@ -48,7 +48,10 @@
 
             {{prestazioni}}
 
-            {{sconto}}
+            <div style="display: {{sconto_display}}; padding: 15px 0 15px 0px;">
+                <div style="width: 400px; display: inline-block;"><strong> Sconto:</strong></div>
+                <div style="width: 295px; display: inline-block; text-align: right;">{{sconto}} €</div>
+            </div>
 
             <div style="display: block;padding: 15px 0 15px 0px;">
                 <div style="width: 400px; display: inline-block;"><strong>Imponibile prestazione:</strong></div>
@@ -64,7 +67,7 @@
                 Operazione senza applicazione dell’IVA ai sensi dell’art. 1, comma 58, Legge n.190/2014 e successive modifiche, regime forfetario, senza applicazione della ritenuta alla fonte a titolo d’acconto.
             </div>
 
-            <div style="display: block;padding: 15px 0 15px 0px;">
+            <div style="display: {{bollo_display}};padding: 15px 0 15px 0px;">
                 <div style="width: 400px; display: inline-block;"><strong>Bollo:</strong></div>
                 <div style="width: 295px; display: inline-block; text-align: right;">{{bollo}} €</div>
             </div>

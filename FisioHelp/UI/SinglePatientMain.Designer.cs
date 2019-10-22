@@ -36,8 +36,8 @@
       this.buttonEconomicList = new System.Windows.Forms.Button();
       this.buttonInvoice = new System.Windows.Forms.Button();
       this.labelName = new System.Windows.Forms.Label();
-      this.button2 = new System.Windows.Forms.Button();
-      this.button1 = new System.Windows.Forms.Button();
+      this.buttonVisit = new System.Windows.Forms.Button();
+      this.buttonCustomer = new System.Windows.Forms.Button();
       this.label1 = new System.Windows.Forms.Label();
       this.panel1.SuspendLayout();
       this.panel2.SuspendLayout();
@@ -72,8 +72,8 @@
       this.panel2.Controls.Add(this.buttonEconomicList);
       this.panel2.Controls.Add(this.buttonInvoice);
       this.panel2.Controls.Add(this.labelName);
-      this.panel2.Controls.Add(this.button2);
-      this.panel2.Controls.Add(this.button1);
+      this.panel2.Controls.Add(this.buttonVisit);
+      this.panel2.Controls.Add(this.buttonCustomer);
       this.panel2.Controls.Add(this.label1);
       this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
       this.panel2.Location = new System.Drawing.Point(0, 0);
@@ -133,33 +133,33 @@
       this.labelName.TabIndex = 3;
       this.labelName.Text = "label2";
       // 
-      // button2
+      // buttonVisit
       // 
-      this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+      this.buttonVisit.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-      this.button2.FlatAppearance.BorderSize = 0;
-      this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
-      this.button2.Location = new System.Drawing.Point(643, 0);
-      this.button2.Name = "button2";
-      this.button2.Size = new System.Drawing.Size(58, 59);
-      this.button2.TabIndex = 2;
-      this.button2.UseVisualStyleBackColor = true;
-      this.button2.Click += new System.EventHandler(this.button2_Click);
+      this.buttonVisit.FlatAppearance.BorderSize = 0;
+      this.buttonVisit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+      this.buttonVisit.Image = ((System.Drawing.Image)(resources.GetObject("buttonVisit.Image")));
+      this.buttonVisit.Location = new System.Drawing.Point(643, 0);
+      this.buttonVisit.Name = "buttonVisit";
+      this.buttonVisit.Size = new System.Drawing.Size(58, 59);
+      this.buttonVisit.TabIndex = 2;
+      this.buttonVisit.UseVisualStyleBackColor = true;
+      this.buttonVisit.Click += new System.EventHandler(this.button2_Click);
       // 
-      // button1
+      // buttonCustomer
       // 
-      this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+      this.buttonCustomer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-      this.button1.FlatAppearance.BorderSize = 0;
-      this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-      this.button1.Location = new System.Drawing.Point(722, 0);
-      this.button1.Name = "button1";
-      this.button1.Size = new System.Drawing.Size(58, 59);
-      this.button1.TabIndex = 1;
-      this.button1.UseVisualStyleBackColor = true;
-      this.button1.Click += new System.EventHandler(this.button1_Click);
+      this.buttonCustomer.FlatAppearance.BorderSize = 0;
+      this.buttonCustomer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+      this.buttonCustomer.Image = ((System.Drawing.Image)(resources.GetObject("buttonCustomer.Image")));
+      this.buttonCustomer.Location = new System.Drawing.Point(722, 0);
+      this.buttonCustomer.Name = "buttonCustomer";
+      this.buttonCustomer.Size = new System.Drawing.Size(58, 59);
+      this.buttonCustomer.TabIndex = 1;
+      this.buttonCustomer.UseVisualStyleBackColor = true;
+      this.buttonCustomer.Click += new System.EventHandler(this.button1_Click);
       // 
       // label1
       // 
@@ -190,9 +190,9 @@
     private System.Windows.Forms.Panel panel3;
     private System.Windows.Forms.Panel panel2;
     private System.Windows.Forms.Label label1;
-    private System.Windows.Forms.Button button1;
+    private System.Windows.Forms.Button buttonCustomer;
     private System.Windows.Forms.Label labelName;
-    private System.Windows.Forms.Button button2;
+    private System.Windows.Forms.Button buttonVisit;
     private System.Windows.Forms.Button buttonInvoice;
     private System.Windows.Forms.Button buttonMedicalList;
     private System.Windows.Forms.Button buttonEconomicList;
