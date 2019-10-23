@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
+using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -12,9 +12,11 @@ namespace FisioHelp
 {
   using DataModels;
   using LinqToDB;
+  using Helper;
 
   public partial class Form1 : Form
   {
+    private Therapist _therapist;
     List<FisioHelp.DataModels.Customer> customers;
     public Form1()
     {
@@ -57,6 +59,15 @@ namespace FisioHelp
       //Helper.DriveManagement.DeleteAll();
       CreateNameList();
       AddDashBoard();
+
+      using (var db = new Db.PhisioDB())
+      {
+        _therapist = db.Therapists.FirstOrDefault();
+      }
+
+      if (_therapist != null)
+        BackupManager.SetBackupTimer(_therapist);
+
     }
 
     private void CreateNameList()
@@ -138,6 +149,20 @@ namespace FisioHelp
     {
       CreateNameList();
       AddDashBoard();
+    }
+
+    private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+    {
+      if (string.IsNullOrEmpty(_therapist.SqlbackupFolder))
+        return;
+
+      var loaderFrm = new UI.Globals.Loader("Attendere il salvataggio del database");
+      loaderFrm.Show();
+
+      var file = Path.Combine(_therapist.SqlbackupFolder, $"pisioHelp_{DateTime.Today.ToString("yyyyMMdd")}.sql");
+      DbManagement.PostgreSqlDump(file);
+      DriveManagement.DeleteInFolder("Database_Backup", DataModels.Enums.FileType.sql, 3);
+      DriveManagement.InsertFile(file, new List<string> { "Database_Backup" }, DataModels.Enums.FileType.sql);
     }
   }
 }

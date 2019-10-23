@@ -136,6 +136,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataModels\BaseModel.cs" />
+    <Compile Include="DataModels\Enums\FileType.cs" />
     <Compile Include="DataModels\RecentAnamnesy.cs" />
     <Compile Include="DataModels\RemoteAnamnesy.cs" />
     <Compile Include="DataModels\StomatognathicTest.cs" />
@@ -154,6 +155,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Helper\BackupManager.cs" />
     <Compile Include="Helper\DbManagement.cs" />
     <Compile Include="Helper\DriveManagement.cs" />
     <Compile Include="Helper\Helper.cs" />
@@ -218,6 +220,12 @@
     </Compile>
     <Compile Include="UI\Dashboard\Dashboard.Designer.cs">
       <DependentUpon>Dashboard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Globals\Loader.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Globals\Loader.Designer.cs">
+      <DependentUpon>Loader.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Globals\RichText.cs">
       <SubType>UserControl</SubType>
@@ -336,6 +344,9 @@
     <EmbeddedResource Include="UI\Dashboard\Dashboard.resx">
       <DependentUpon>Dashboard.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Globals\Loader.resx">
+      <DependentUpon>Loader.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Globals\RichText.resx">
       <DependentUpon>RichText.cs</DependentUpon>
     </EmbeddedResource>
@@ -418,6 +429,30 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="LinqToDB.Templates\CopyMe.PostgreSQL.tt.txt" />
+    <Content Include="Resources\PGDUMP\libeay32.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PGDUMP\libiconv-2.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PGDUMP\libintl-9.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PGDUMP\libpq.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PGDUMP\libwinpthread-1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PGDUMP\pg_dump.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PGDUMP\ssleay32.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PGDUMP\zlib1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="script\PostgreSQL.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>PostgreSQL1.generated.cs</LastGenOutput>

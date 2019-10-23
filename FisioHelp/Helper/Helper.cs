@@ -5,6 +5,7 @@ using System.IO;
 using Npgsql;
 using FisioHelp.DataModels;
 using System.Configuration;
+using System.Net;
 
 namespace FisioHelp.Helper
 {
@@ -143,6 +144,20 @@ namespace FisioHelp.Helper
       template = template.Replace("{{total_with_inps}}", (inps+total+bollo).Value.ToString("#.00"));
 
       return template;
+    }
+
+    public static bool CheckForInternetConnection()
+    {
+      try
+      {
+        using (var client = new WebClient())
+        using (client.OpenRead("http://google.com/generate_204"))
+          return true;
+      }
+      catch
+      {
+        return false;
+      }
     }
   }
 }

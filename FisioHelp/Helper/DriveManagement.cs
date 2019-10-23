@@ -9,10 +9,15 @@ using Google.Apis.Drive.v3.Data;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 
+
 namespace FisioHelp.Helper
 {
+  using DataModels.Enums;
+
   public static  class DriveManagement
   {
+    private static string[] _applicationType = { "application/pdf", "application/sql" };
+
     private static DriveService Connect()
     {
       try
@@ -53,6 +58,23 @@ namespace FisioHelp.Helper
         service.Files.Delete(f.Id).Execute();
     }
 
+    public static void DeleteInFolder(string folder, FileType fileType , int olderThenDays)
+    {
+      var service = Connect();
+      var listRequest = service.Files.List();
+      var mimeType = _applicationType[(int)fileType];
+      var folderId = InsertFolder(service, folder, new List<string>());
+
+      var date = DateTime.Today.AddDays((-1) * olderThenDays);
+
+      listRequest.Q = $"mimeType='{mimeType}' and '{folderId}' in parents and createdTime < '{date.ToString("yyyy-MM-dd")}'";
+      listRequest.Spaces = "drive";
+      var result = listRequest.Execute();
+
+      foreach (var f in result.Files)
+        service.Files.Delete(f.Id).Execute();
+    }
+
     private static string InsertFolder(DriveService service, string folderName, List<string> parentIds)
     {
       var listRequest = service.Files.List();
@@ -74,8 +96,15 @@ namespace FisioHelp.Helper
       return UploadFolder(service, folderName, parentIds);
     }
 
-    public static string InsertFilePdf(string filepath, List<string> folderNames)
+    public static string InsertFile(string filepath, List<string> folderNames, FileType fileType)
     {
+      if (!Helper.CheckForInternetConnection())
+      {
+        return "ERROR: no internet connection";
+      }
+
+      var mimeType = _applicationType[(int)fileType];
+
       var service = Connect();
       FileInfo fileInfo = new FileInfo(filepath);
       var fileName = fileInfo.Name;
@@ -87,10 +116,11 @@ namespace FisioHelp.Helper
         folderIds.Add(id);
       }
 
-      var parentsQuery = string.Join(" and ", folderIds.Select(x => $"'{x}' in parents "));
+      var lastParent = folderIds[folderIds.Count - 1];
+      var parentsQuery = $"'{lastParent}' in parents ";
       
       var listRequest = service.Files.List();
-      listRequest.Q = $"mimeType='application/pdf' and name = '{fileName}'";
+      listRequest.Q = $"mimeType='{mimeType}' and name = '{fileName}'";
       if (!string.IsNullOrEmpty(parentsQuery))
         listRequest.Q += $" and {parentsQuery}";
 
@@ -100,19 +130,20 @@ namespace FisioHelp.Helper
       if (folderFound != null)
         return folderFound.Id;
 
-      return UploadFile(service, filepath, folderIds);
+      return UploadFile(service, filepath, folderIds, fileType);
     }
 
-    private static string UploadFile(DriveService service, string filepath, List<string> folderIds)
+    private static string UploadFile(DriveService service, string filepath, List<string> folderIds, FileType fileType)
     {
       FileInfo fileInfo = new FileInfo(filepath);
       var fileName = fileInfo.Name;
       var lastParent = folderIds[folderIds.Count - 1];
+      var mimeType = _applicationType[(int)fileType];
 
       var fileMetadata = new Google.Apis.Drive.v3.Data.File()
       {
         Name = fileName,
-        MimeType = "application/pdf",
+        MimeType = mimeType,
         Parents = new List<string> { lastParent }
       };
 
@@ -122,7 +153,7 @@ namespace FisioHelp.Helper
                               System.IO.FileMode.Open))
       {
         request = service.Files.Create(
-            fileMetadata, stream, "application/pdf");
+            fileMetadata, stream, mimeType);
         request.Fields = "id";
         request.Upload();
       }
@@ -135,7 +166,9 @@ namespace FisioHelp.Helper
       newPermission.Role = "writer";
       try
       {
-         service.Permissions.Create(newPermission, file.Id).Execute();
+        var permission = service.Permissions.Create(newPermission, file.Id);
+        permission.SendNotificationEmail = false;
+        permission.Execute();
       }
       catch (Exception e)
       {

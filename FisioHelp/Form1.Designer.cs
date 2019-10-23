@@ -34,9 +34,9 @@
       this.textBoxFilter = new System.Windows.Forms.TextBox();
       this.panel2 = new System.Windows.Forms.Panel();
       this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-      this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
       this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
       this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+      this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
       this.panel1.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
       this.splitContainer1.Panel1.SuspendLayout();
@@ -113,16 +113,6 @@
       this.toolStrip1.TabIndex = 0;
       this.toolStrip1.Text = "toolStrip1";
       // 
-      // toolStripLabel1
-      // 
-      this.toolStripLabel1.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.toolStripLabel1.ForeColor = System.Drawing.Color.White;
-      this.toolStripLabel1.Margin = new System.Windows.Forms.Padding(20, 1, 0, 2);
-      this.toolStripLabel1.Name = "toolStripLabel1";
-      this.toolStripLabel1.Size = new System.Drawing.Size(110, 39);
-      this.toolStripLabel1.Text = "IMPOSTAZIONI";
-      this.toolStripLabel1.Click += new System.EventHandler(this.toolStripLabel1_Click);
-      // 
       // toolStripLabel2
       // 
       this.toolStripLabel2.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -138,6 +128,16 @@
       this.toolStripSeparator1.Name = "toolStripSeparator1";
       this.toolStripSeparator1.Size = new System.Drawing.Size(6, 42);
       // 
+      // toolStripLabel1
+      // 
+      this.toolStripLabel1.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.toolStripLabel1.ForeColor = System.Drawing.Color.White;
+      this.toolStripLabel1.Margin = new System.Windows.Forms.Padding(20, 1, 0, 2);
+      this.toolStripLabel1.Name = "toolStripLabel1";
+      this.toolStripLabel1.Size = new System.Drawing.Size(110, 39);
+      this.toolStripLabel1.Text = "IMPOSTAZIONI";
+      this.toolStripLabel1.Click += new System.EventHandler(this.toolStripLabel1_Click);
+      // 
       // Form1
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -149,6 +149,7 @@
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
       this.Text = "Gestione visite";
       this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+      this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
       this.Load += new System.EventHandler(this.Form1_Load);
       this.panel1.ResumeLayout(false);
       this.splitContainer1.Panel1.ResumeLayout(false);

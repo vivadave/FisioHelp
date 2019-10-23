@@ -17,6 +17,7 @@ namespace FisioHelp.DataModels
       [Column("postit"), Nullable] public string Postit { get; set; } // text
       [Column("invoices_folder"), Nullable] public string InvoicesFolder { get; set; } // text
       [Column("privacy_folder"), Nullable] public string PrivacyFolder { get; set; } // text
+      [Column("sqlbackup_folder"), Nullable] public string SqlbackupFolder { get; set; } // text
       [Column("email"), Nullable] public string Email { get; set; } // text
 
     public override Guid SaveToDB()

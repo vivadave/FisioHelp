@@ -3,6 +3,7 @@ ALTER TABLE therapists ADD COLUMN IF NOT EXISTS invoices_folder text;
 ALTER TABLE therapists ADD COLUMN IF NOT EXISTS privacy_folder text;
 ALTER TABLE therapists ADD COLUMN IF NOT EXISTS email text;
 ALTER TABLE therapists ADD COLUMN IF NOT EXISTS address_de text;
+ALTER TABLE therapists ADD COLUMN IF NOT EXISTS sqlbackup_folder text;
 
 ALTER TABLE customers ADD COLUMN IF NOT EXISTS privacy boolean not null DEFAULT 'f';
 ALTER TABLE customers ADD COLUMN IF NOT EXISTS creation_date date not null DEFAULT now();
