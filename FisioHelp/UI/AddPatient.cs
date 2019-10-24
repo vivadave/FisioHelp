@@ -200,30 +200,32 @@ namespace FisioHelp.UI
         MessageBox.Show("Prima di proseguire impostare la cartella dei documenti privacy", "Salvataggio", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         return;
       }
+
+      var html = File.ReadAllText("Template/privacy.html");
+      html = Helper.Helper.ReplacePrivacyPlaceHolder(html, _customer);
+
       var folder = $"{_customer.FullName.Replace(" ", "_")}";
       var path = Path.Combine(privacyPath, folder);
       Directory.CreateDirectory(path);
-      var files = Directory.GetFiles(path);
-      if (files.Length == 0)
+      var htmlPath = Path.Combine(path, "privacy.html");
+      var pdfPath = Path.Combine(path, "privacy.pdf");
+
+      if (!File.Exists(pdfPath))
       {
-        var privacyOutPath = "";
-        if (_customer.Language == "german")
+        try
         {
-          privacyOutPath = Path.Combine(path, "privacy_de.pdf");
-          File.Copy(@"Template\privacy_de.pdf", privacyOutPath);
+          File.WriteAllText(htmlPath, html);
+          Helper.PdfManager.CreatePdf(pdfPath, htmlPath);
+          System.Threading.Thread.Sleep(1000);
         }
-        else
+        catch (Exception ee)
         {
-          privacyOutPath = Path.Combine(path, "privacy_it.pdf");
-          File.Copy(@"Template\privacy_it.pdf", privacyOutPath);
+          MessageBox.Show("Il file è già aperto, chiuderlo", "Stampa", MessageBoxButtons.OK, MessageBoxIcon.Error);
+          return;
         }
-        System.Diagnostics.Process.Start(privacyOutPath);
       }
-      else
-      {
-        var privacyOutPath = files.First();
-        System.Diagnostics.Process.Start(privacyOutPath);
-      }
+
+      System.Diagnostics.Process.Start(pdfPath);     
 
     }
   }

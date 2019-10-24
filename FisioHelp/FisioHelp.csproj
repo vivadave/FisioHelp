@@ -417,12 +417,6 @@
     <None Include="Resources\fluted-polymer-256106-8fdab3f72fb5.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Template\privacy_de.pdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Template\privacy_it.pdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -475,7 +469,7 @@
     <Content Include="Template\Elisa-logo2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Template\tebaldi.jpg">
+    <Content Include="Template\privacy.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Template\templateInvoice_de.html">

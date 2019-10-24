@@ -180,9 +180,6 @@ C:\Progetti\FisioHelp\FisioHelp\bin\Debug\Google.Apis.Core.xml
 C:\Progetti\FisioHelp\FisioHelp\bin\Debug\Google.Apis.Drive.v3.pdb
 C:\Progetti\FisioHelp\FisioHelp\bin\Debug\Google.Apis.Drive.v3.xml
 C:\Progetti\FisioHelp\FisioHelp\bin\Debug\Newtonsoft.Json.xml
-C:\Progetti\FisioHelp\FisioHelp\bin\Debug\Template\privacy_de.pdf
-C:\Progetti\FisioHelp\FisioHelp\bin\Debug\Template\privacy_it.pdf
-C:\Progetti\FisioHelp\FisioHelp\bin\Debug\Template\tebaldi.jpg
 C:\Progetti\FisioHelp\FisioHelp\obj\Debug\FisioHelp.UI.Anamesys.AnamnesysView.resources
 C:\Progetti\FisioHelp\FisioHelp\bin\Debug\Resources\PGDUMP\libeay32.dll
 C:\Progetti\FisioHelp\FisioHelp\bin\Debug\Resources\PGDUMP\libiconv-2.dll
@@ -193,3 +190,4 @@ C:\Progetti\FisioHelp\FisioHelp\bin\Debug\Resources\PGDUMP\pg_dump.exe
 C:\Progetti\FisioHelp\FisioHelp\bin\Debug\Resources\PGDUMP\ssleay32.dll
 C:\Progetti\FisioHelp\FisioHelp\bin\Debug\Resources\PGDUMP\zlib1.dll
 C:\Progetti\FisioHelp\FisioHelp\obj\Debug\FisioHelp.UI.Globals.Loader.resources
+C:\Progetti\FisioHelp\FisioHelp\bin\Debug\Template\privacy.html

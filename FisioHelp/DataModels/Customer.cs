@@ -22,6 +22,8 @@ namespace FisioHelp.DataModels
     [Column("language"), Nullable] public string Language { get; set; } // character varying(45)
     [Column("privacy"), NotNull] public bool Privacy { get; set; } // boolean
     [Column("creation_date"), Nullable] public NpgsqlDate? CreationDate { get; set; } // date
+    [Column("legal_representative"), Nullable] public string LegalRepresentative { get; set; }
+    [Column("age"), Nullable] public int Age { get; set; }
 
     public string FullName
     {

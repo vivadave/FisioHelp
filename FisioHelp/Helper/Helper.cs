@@ -88,7 +88,7 @@ namespace FisioHelp.Helper
       }
     }
 
-    public static string ReplaceInvoicePlaceHolder (string template, Customer customer, Invoice invoice)
+    public static string ReplaceInvoicePlaceHolder(string template, Customer customer, Invoice invoice)
     {
       var therapist = GetTherapist();
 
@@ -96,10 +96,10 @@ namespace FisioHelp.Helper
       var cfTxt = customer.Language == "german" ? "Steuercodex: " : "Cod.fisc.: ";
 
       template = template.Replace("{{ragione_sociale}}", therapist.FullName);
-      template = template.Replace("{{indirizzo}}", customer.Language == "german" ? therapist.AddressDe.Replace("-","<br>") : therapist.Address.Replace("-", "<br>"));
+      template = template.Replace("{{indirizzo}}", customer.Language == "german" ? therapist.AddressDe.Replace("-", "<br>") : therapist.Address.Replace("-", "<br>"));
       template = template.Replace("{{partita_iva}}", therapist.TaxNumber);
       template = template.Replace("{{iban}}", therapist.Iban);
-      
+
       template = template.Replace("{{invoice_number}}", invoice.Title);
       template = template.Replace("{{date}}", ((DateTime)invoice.Date).ToShortDateString());
 
@@ -119,15 +119,15 @@ namespace FisioHelp.Helper
         var treatments = Helper.GetTratmensByIdS(prestazioni.Treatmentsvisitidfkeys.Select(x => x.TreatmentId).ToList(), customer.Language);
 
         prestazioniHtml += $@"<div style=""display:inline-block; width: 350px; vertical-align: middle;"">";
-        foreach ( var treatment in treatments)
+        foreach (var treatment in treatments)
           prestazioniHtml += $@"<div>{treatment}</div>";
-        prestazioniHtml += $@"</div><div style=""width: 150px; text-align:right; display:inline-block;"">{(prestazioni.Price.Value*0.96).ToString("#.00")} €</div>";
+        prestazioniHtml += $@"</div><div style=""width: 150px; text-align:right; display:inline-block;"">{(prestazioni.Price.Value * 0.96).ToString("#.00")} €</div>";
       }
 
       prestazioniHtml += "</div>";
       template = template.Replace("{{prestazioni}}", prestazioniHtml);
 
-      var sconto = invoice.Discount??0;
+      var sconto = invoice.Discount ?? 0;
       var total = invoice.Visitsinvoiceidfkeys.Sum(x => x.Price * 0.96) - (sconto * 0.96);
       var bollo = invoice.TaxStamp ? 2 : 0;
       var bolloDisplay = bollo > 0 ? "block" : "none";
@@ -138,11 +138,34 @@ namespace FisioHelp.Helper
 
       template = template.Replace("{{sconto}}", (sconto * -0.96).ToString("#.00"));
       template = template.Replace("{{sconto_display}}", sconto > 0 ? "block" : "none");
-      
+
       template = template.Replace("{{total}}", total.Value.ToString("#.00"));
       template = template.Replace("{{inps}}", inps.Value.ToString("#.00"));
-      template = template.Replace("{{total_with_inps}}", (inps+total+bollo).Value.ToString("#.00"));
+      template = template.Replace("{{total_with_inps}}", (inps + total + bollo).Value.ToString("#.00"));
 
+      return template;
+    }
+
+    public static string ReplacePrivacyPlaceHolder(string template, Customer customer)
+    {
+      var therapist = GetTherapist();
+      
+      template = template.Replace("{{ragione_sociale}}", therapist.FullName);
+      template = template.Replace("{{indirizzo}}", customer.Language == "german" ? therapist.AddressDe.Replace("-", ", ") : therapist.Address.Replace("-", ", "));
+      template = template.Replace("{{partita_iva}}", therapist.TaxNumber);
+      template = template.Replace("{{tessera_aifi}}", therapist.Aifi);
+
+      template = template.Replace("{{date}}", DateTime.Today.ToShortDateString());
+
+      template = template.Replace("{{customer_name}}", customer.FullName);
+      template = template.Replace("{{customer_address}}", $"{customer.Address?.Address_Column}");
+      template = template.Replace("{{customer_cap}}", $"{customer.Address?.Cap}");
+      template = template.Replace("{{customer_city}}", $"{customer.Address?.City}");
+      template = template.Replace("{{customer_tel}}", $"{customer.Tel1}");
+      template = template.Replace("{{customer_email}}", $"{customer.Email}");
+      template = template.Replace("{{customer_rappresentante_legale}}", $"{customer.LegalRepresentative}");
+      template = template.Replace("{{customer_cf}}", string.IsNullOrEmpty(customer.Fiscalcode) ? "" : customer.Fiscalcode);
+      
       return template;
     }
 

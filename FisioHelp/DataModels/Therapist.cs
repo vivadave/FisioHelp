@@ -19,6 +19,7 @@ namespace FisioHelp.DataModels
       [Column("privacy_folder"), Nullable] public string PrivacyFolder { get; set; } // text
       [Column("sqlbackup_folder"), Nullable] public string SqlbackupFolder { get; set; } // text
       [Column("email"), Nullable] public string Email { get; set; } // text
+      [Column("aifi"), Nullable] public string Aifi { get; set; } // text
 
     public override Guid SaveToDB()
     {
