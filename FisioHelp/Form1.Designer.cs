@@ -37,6 +37,7 @@
       this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
       this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
       this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+      this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
       this.panel1.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
       this.splitContainer1.Panel1.SuspendLayout();
@@ -105,7 +106,8 @@
       this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripLabel2,
             this.toolStripSeparator1,
-            this.toolStripLabel1});
+            this.toolStripLabel1,
+            this.toolStripLabel3});
       this.toolStrip1.Location = new System.Drawing.Point(0, 0);
       this.toolStrip1.Name = "toolStrip1";
       this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
@@ -137,6 +139,13 @@
       this.toolStripLabel1.Size = new System.Drawing.Size(110, 39);
       this.toolStripLabel1.Text = "IMPOSTAZIONI";
       this.toolStripLabel1.Click += new System.EventHandler(this.toolStripLabel1_Click);
+      // 
+      // toolStripLabel3
+      // 
+      this.toolStripLabel3.Name = "toolStripLabel3";
+      this.toolStripLabel3.Size = new System.Drawing.Size(54, 39);
+      this.toolStripLabel3.Text = "FATTURE";
+      this.toolStripLabel3.Click += new System.EventHandler(this.toolStripLabel3_Click);
       // 
       // Form1
       // 
@@ -172,6 +181,7 @@
     private System.Windows.Forms.TextBox textBoxFilter;
     private System.Windows.Forms.ToolStripLabel toolStripLabel2;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+    private System.Windows.Forms.ToolStripLabel toolStripLabel3;
   }
 }
 

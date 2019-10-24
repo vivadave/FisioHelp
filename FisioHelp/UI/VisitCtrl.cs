@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using LinqToDB;
+using LinqToDB.Expressions;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
 
@@ -10,6 +11,7 @@ namespace FisioHelp.UI
 {
   public partial class VisitCtrl : UserControl
   {
+    public event EventHandler DeleteVisit;
     private List<DataModels.Treatment> _treatments;
     private DataModels.Visit _visit;
     private DataModels.Therapist _therapist { get; set; }
@@ -21,6 +23,12 @@ namespace FisioHelp.UI
       InitializeComponent();
       _visit = visit;
       _customer = customer;
+
+      if (_visit == null || _visit.Id == null || _visit.Id == Guid.Empty)
+        button1.Visible = false;
+      else
+        button1.Visible = true;
+
       using (var db = new Db.PhisioDB())
       {
         _therapist = db.Therapists.FirstOrDefault();
@@ -135,6 +143,23 @@ namespace FisioHelp.UI
         });
       }
         _visit.Treatmentsvisitidfkeys = a;
+    }
+
+    private void button1_Click(object sender, EventArgs e)
+    {
+      if (_visit.Invoiced)
+      {
+        MessageBox.Show("E' già stata emessa fattura per questa visita, impossibile cancellarla", "Cancellazione", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        
+        return;
+      }
+
+      if (MessageBox.Show("Sicura di voler  cancellare questa visita?", "Cancellazione", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+        return;
+
+      _visit.Deleted = true;
+      _visit.SaveToDB();
+      DeleteVisit?.Invoke(this, e);
     }
   }
 }

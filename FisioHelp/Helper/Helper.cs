@@ -155,7 +155,7 @@ namespace FisioHelp.Helper
       template = template.Replace("{{partita_iva}}", therapist.TaxNumber);
       template = template.Replace("{{tessera_aifi}}", therapist.Aifi);
 
-      template = template.Replace("{{date}}", DateTime.Today.ToShortDateString());
+      template = template.Replace("{{data}}", DateTime.Today.ToShortDateString());
 
       template = template.Replace("{{customer_name}}", customer.FullName);
       template = template.Replace("{{customer_address}}", $"{customer.Address?.Address_Column}");

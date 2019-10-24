@@ -4,23 +4,29 @@ using LinqToDB;
 using System.Linq;
 namespace FisioHelp.UI
 {
+  using DataModels;
+
   public partial class InvoiceListItem : UserControl
   {
     public event EventHandler OnOpenInvoice;
     public event EventHandler ChangePayed;
     public DataModels.Invoice Invoice { get; set; }
     private bool _loaded = false;
+    public Customer Customer;
 
-    public InvoiceListItem(DataModels.Invoice invoice)
+    public InvoiceListItem(DataModels.Invoice invoice, Customer customer)
     {
       InitializeComponent();
       this.Invoice = invoice;
+      Customer = customer;
     }
     private void VisitEconomicCtrl_Load(object sender, EventArgs e)
     {
       if (Invoice == null) return;
       label1.Text = ((DateTime)Invoice.Date).ToShortDateString();
-      label2.Text = Invoice.Visitsinvoiceidfkeys.ToList().Count.ToString();
+      labelName.Text = Invoice.CustomerName;
+      labelTitle.Text = Invoice.Title;
+      label2.Text = $"{Invoice.Visitsinvoiceidfkeys.ToList().Count.ToString()} visite";
       label5.Text = $"{Invoice.Total} €";
       checkBox2.Checked = Invoice.Payed;
       _loaded = true;

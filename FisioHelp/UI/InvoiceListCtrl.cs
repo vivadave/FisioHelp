@@ -17,11 +17,11 @@ namespace FisioHelp.UI
     private string[] _comboBoxValues = new string[] { "Tutti", "Sì", "No" };
     private List<DataModels.Invoice> _invoices;
     public DataModels.Invoice SelectedInvoice { get; set; }
-    private DataModels.Customer _customer;
+    public DataModels.Customer Customer;
 
     public InvoiceListCtrl(DataModels.Customer customer)
     {
-      _customer = customer;
+      Customer = customer;
       InitializeComponent();
       _invoices = new List<DataModels.Invoice>();
       dateTimePickerfrom.Format = DateTimePickerFormat.Custom;
@@ -60,8 +60,7 @@ namespace FisioHelp.UI
     {
       labelTotNr.Text = "Totale fatture: " + _invoices.Count.ToString();
       labelTotMoney.Text = "Totale guadagno: " + _invoices.Sum(x => x.Total).ToString() + " €";
-      labelTotPayed.Text = "Totale incasso: " + _invoices.Where(x => x.Payed != null && x.Payed == true).Sum(x => x.Total).ToString() + " €";
-    
+      labelTotPayed.Text = "Totale incasso: " + _invoices.Where(x => x.Payed == true).Sum(x => x.Total).ToString() + " €";    
     }
 
     private void comboBoxInvoice_SelectedIndexChanged(object sender, EventArgs e)
@@ -85,7 +84,7 @@ namespace FisioHelp.UI
     {
       using (var db = new Db.PhisioDB())
       {
-        Guid? custId = _customer?.Id;
+        Guid? custId = Customer?.Id;
 
         _invoices = db.Invoices.LoadWith(e1 => e1.Visitsinvoiceidfkeys.First().Treatmentsvisitidfkeys.First().Treatment).LoadWith(e1 => e1.Visitsinvoiceidfkeys.First().Customer.Address)
           .Where(x =>  x.Visitsinvoiceidfkeys.Any(xx=>xx.CustomerId == custId) || custId == null)
@@ -110,7 +109,7 @@ namespace FisioHelp.UI
 
       foreach (var invoice in _invoices)
       {
-        var invoiceListItem = new UI.InvoiceListItem(invoice);
+        var invoiceListItem = new UI.InvoiceListItem(invoice, Customer);
         invoiceListItem.Location = new Point(0, pos);
         //visitEconomic.Size = new Size(this.Width, 120);
         invoiceListItem.Dock = DockStyle.Top;

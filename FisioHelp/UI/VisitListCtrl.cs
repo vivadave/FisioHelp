@@ -122,8 +122,8 @@ namespace FisioHelp.UI
         _visits = db.Visits.LoadWith(e1 => e1.Treatmentsvisitidfkeys)
           .LoadWith(e1 => e1.Invoice)
           .LoadWith(e1 => e1.Customer)
-          .Where(x =>  x.Customer.Id == custId || custId == null)
-          .Where(x=> x.Date >= new NpgsqlTypes.NpgsqlDate(_dateFromFilter) && x.Date < new NpgsqlTypes.NpgsqlDate(_dateToFilter.AddDays(1)))
+          .Where(x => x.Customer.Id == custId || custId == null)
+          .Where(x=> x.Deleted == false && x.Date >= new NpgsqlTypes.NpgsqlDate(_dateFromFilter) && x.Date < new NpgsqlTypes.NpgsqlDate(_dateToFilter.AddDays(1)))
           .ToList();
       }
     }

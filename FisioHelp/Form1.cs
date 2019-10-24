@@ -164,5 +164,35 @@ namespace FisioHelp
       DriveManagement.DeleteInFolder("Database_Backup", DataModels.Enums.FileType.sql, 3);
       DriveManagement.InsertFile(file, new List<string> { "Database_Backup" }, DataModels.Enums.FileType.sql);
     }
+
+    private void toolStripLabel3_Click(object sender, EventArgs e)
+    {
+      var dashBoardCtrl = new UI.Dashboard.Dashboard();
+      dashBoardCtrl.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.splitContainer1.Panel2.Controls.Clear();
+      this.splitContainer1.Panel2.Controls.Add(dashBoardCtrl);
+
+      var visitList = new UI.InvoiceListCtrl(null);
+        visitList.Dock = System.Windows.Forms.DockStyle.Fill;
+        visitList.OpenInvoice += OnOpenInvoice;
+      this.splitContainer1.Panel2.Controls.Clear();
+      this.splitContainer1.Panel2.Controls.Add(visitList);
+    }
+
+    private void OnOpenInvoice(object sender, EventArgs e)
+    {
+      var vlc = (UI.InvoiceListCtrl)sender;
+      var selectedInvoice = vlc.SelectedInvoice;
+      OpenInvoice(selectedInvoice);
+    }
+
+    private void OpenInvoice(Invoice invoice)
+    {
+      this.splitContainer1.Panel2.Controls.Clear();
+      var userForm = new UI.SinglePatientMain(invoice.Customer);
+      userForm.OpenInvoice(invoice);
+      userForm.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.splitContainer1.Panel2.Controls.Add(userForm);
+    }
   }
 }

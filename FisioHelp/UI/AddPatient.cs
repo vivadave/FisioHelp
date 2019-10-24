@@ -8,7 +8,6 @@ using NpgsqlTypes;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using FisioHelp.DataModels;
-using LinqToDB;
 
 namespace FisioHelp.UI
 {

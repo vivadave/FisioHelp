@@ -31,9 +31,9 @@ namespace FisioHelp.UI.Dashboard
         var today = DateTime.Today;
         var todayLstMonth = DateTime.Today.AddMonths(-1);
         _therapist = db.Therapists.FirstOrDefault();
-        _visitLatMonth = db.Visits.Where(x => x.Date >= new NpgsqlTypes.NpgsqlDate(today.Year, today.Month, 1)).ToList();
+        _visitLatMonth = db.Visits.Where(x => x.Deleted == false && x.Date >= new NpgsqlTypes.NpgsqlDate(today.Year, today.Month, 1)).ToList();
         _customerLastMonth = db.Customers.Where(x => x.CreationDate >= new NpgsqlTypes.NpgsqlDate(today.Year, today.Month, 1)).ToList();
-        _visitPreviousMonth = db.Visits.Where(x => x.Date >= new NpgsqlTypes.NpgsqlDate(todayLstMonth.Year, todayLstMonth.Month, 1) && x.Date <= new NpgsqlTypes.NpgsqlDate(today.Year, today.Month, 1)).ToList();
+        _visitPreviousMonth = db.Visits.Where(x => x.Deleted == false && x.Date >= new NpgsqlTypes.NpgsqlDate(todayLstMonth.Year, todayLstMonth.Month, 1) && x.Date <= new NpgsqlTypes.NpgsqlDate(today.Year, today.Month, 1)).ToList();
         _customerNoPrivacy = db.Customers.Where(x => x.Privacy == false).ToList();
       }
 

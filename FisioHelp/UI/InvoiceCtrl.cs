@@ -14,6 +14,7 @@ namespace FisioHelp.UI
 {
   public partial class InvoiceCtrl : UserControl
   {
+    public event EventHandler DeletedInvoice;
     public DataModels.Invoice Invoice { get; set; }
     private DataModels.Customer _customer { get; set; }
     private DataModels.Therapist _therapist { get; set; }
@@ -233,6 +234,7 @@ namespace FisioHelp.UI
           Invoice.SaveToDB();
           
           MessageBox.Show("Fattura Eliminata!", "Cancellazione", MessageBoxButtons.OK, MessageBoxIcon.Information);
+          DeletedInvoice?.Invoke(this, new EventArgs());
         }
       }
     }

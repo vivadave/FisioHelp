@@ -44,6 +44,7 @@
       this.label6 = new System.Windows.Forms.Label();
       this.label7 = new System.Windows.Forms.Label();
       this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
+      this.button1 = new System.Windows.Forms.Button();
       ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
       this.SuspendLayout();
       // 
@@ -226,10 +227,26 @@
       this.checkedListBox1.TabIndex = 38;
       this.checkedListBox1.SelectedIndexChanged += new System.EventHandler(this.checkedListBox1_SelectedIndexChanged);
       // 
+      // button1
+      // 
+      this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+      this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
+      this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+      this.button1.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.button1.ForeColor = System.Drawing.Color.White;
+      this.button1.Location = new System.Drawing.Point(668, 548);
+      this.button1.Name = "button1";
+      this.button1.Size = new System.Drawing.Size(106, 38);
+      this.button1.TabIndex = 39;
+      this.button1.Text = "Delete";
+      this.button1.UseVisualStyleBackColor = false;
+      this.button1.Click += new System.EventHandler(this.button1_Click);
+      // 
       // VisitCtrl
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+      this.Controls.Add(this.button1);
       this.Controls.Add(this.checkedListBox1);
       this.Controls.Add(this.label7);
       this.Controls.Add(this.textBoxTime);
@@ -270,5 +287,6 @@
     private System.Windows.Forms.Label label4;
     private System.Windows.Forms.Label label7;
     private System.Windows.Forms.CheckedListBox checkedListBox1;
+    private System.Windows.Forms.Button button1;
   }
 }

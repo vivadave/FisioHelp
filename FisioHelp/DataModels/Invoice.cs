@@ -28,6 +28,27 @@ namespace FisioHelp.DataModels
       }
     }
 
+    public Customer Customer {
+      get
+      {
+        var visit = Visitsinvoiceidfkeys.FirstOrDefault();
+        return visit?.Customer;
+      }
+    }
+
+    public string CustomerName
+    {
+      get
+      {
+        var visit = Visitsinvoiceidfkeys.FirstOrDefault();
+        if (visit != null)
+        {
+          return visit.Customer?.FullName;
+        }
+        return "";
+      }
+    }
+
     public override Guid SaveToDB()
     {
       return Helper.DbManagement.SaveToDB(this);

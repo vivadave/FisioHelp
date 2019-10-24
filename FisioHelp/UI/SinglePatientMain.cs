@@ -56,16 +56,27 @@ namespace FisioHelp.UI
     {
       this.panel3.Controls.Clear();
       var userForm = new UI.VisitCtrl(_customer, visit);
-      userForm.Dock = System.Windows.Forms.DockStyle.Fill;
+      userForm.DeleteVisit += OnDeleteVisit;
+      userForm.Dock = DockStyle.Fill;
       this.panel3.Controls.Add(userForm);
+    }
+
+    private void OnDeleteVisit(object sender, EventArgs e)
+    {
+      MedicalListLoad();
     }
 
     public void OpenInvoice(Invoice invoice)
     {
       this.panel3.Controls.Clear();
       var userForm = new UI.InvoiceCtrl(invoice, true);
-      userForm.Dock = System.Windows.Forms.DockStyle.Fill;
+      userForm.Dock = DockStyle.Fill;
+      userForm.DeletedInvoice += OnDeleteInvoice;
       this.panel3.Controls.Add(userForm);
+    }
+    private void OnDeleteInvoice(object sender, EventArgs e)
+    {
+      InvoiceListLoad();
     }
 
     private void SinglePatientMain_Load(object sender, EventArgs e)
