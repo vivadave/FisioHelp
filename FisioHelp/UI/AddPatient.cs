@@ -52,6 +52,8 @@ namespace FisioHelp.UI
       textBoxTel2.Text = customer.Tel2;
       textBoxFiscalCode.Text = customer.Fiscalcode;
       textBoxVat.Text = customer.Vat;
+      textBoxAge.Text = customer.Age.ToString(); 
+      textBoxLegRapp.Text = customer.LegalRepresentative;
       comboBoxLanguage.SelectedItem = customer.Language;
       comboBoxPrices.Items.AddRange(_priceList);
       comboBoxPrices.SelectedItem = _priceList.FirstOrDefault(p => p.Id == customer.Pricelist?.Id);
@@ -87,6 +89,9 @@ namespace FisioHelp.UI
       _customer.Tel2 = textBoxTel2.Text;
       _customer.Fiscalcode = textBoxFiscalCode.Text;
       _customer.Vat = textBoxVat.Text;
+      int.TryParse(textBoxAge.Text, out int age);
+      _customer.Age = age;
+      _customer.LegalRepresentative = textBoxLegRapp.Text;
       _customer.CreationDate = NpgsqlDate.Now;
       _customer.Privacy = checkBox1.Checked;
       _customer.Therapist = _therapist;

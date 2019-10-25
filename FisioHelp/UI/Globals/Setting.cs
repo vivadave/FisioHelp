@@ -52,6 +52,7 @@ namespace FisioHelp.UI.Globals
         textBoxPiva.Text = _therapist.TaxNumber;
         textBoxAddress.Text = _therapist.Address;
         textBoxAddressDe.Text = _therapist.AddressDe;
+        textBoxAifi.Text = _therapist.Aifi;
       } else
         _therapist = new Therapist();
     }
@@ -71,6 +72,7 @@ namespace FisioHelp.UI.Globals
         _therapist.TaxNumber = textBoxPiva.Text;
         _therapist.Address = textBoxAddress.Text;
         _therapist.AddressDe = textBoxAddressDe.Text;
+        _therapist.Aifi = textBoxAifi.Text;
         _therapist.SaveToDB();
        
         foreach (var a in priceListBindingSource)

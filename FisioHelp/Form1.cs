@@ -117,12 +117,6 @@ namespace FisioHelp
       this.splitContainer1.Panel2.Controls.Add(dashBoardCtrl);
     }
 
-    private void toolStripLabel1_Click(object sender, EventArgs e)
-    {
-      var newPatientForm = new UI.Globals.Setting();
-      newPatientForm.ShowDialog();
-    }
-
     private void OnOpenVisit(object sender, EventArgs e)
     {
       var vc = (UI.VisitListCtrl)sender;
@@ -137,14 +131,7 @@ namespace FisioHelp
     {
       CreateNameList();
     }
-
-    private void toolStripLabel2_Click(object sender, EventArgs e)
-    {
-      var newPatientForm = new UI.NewPatient();
-      newPatientForm.PatientSaved += NewPatient;
-      newPatientForm.ShowDialog();
-    }
-
+    
     private void NewPatient(object sender, EventArgs e)
     {
       CreateNameList();
@@ -164,21 +151,7 @@ namespace FisioHelp
       DriveManagement.DeleteInFolder("Database_Backup", DataModels.Enums.FileType.sql, 3);
       DriveManagement.InsertFile(file, new List<string> { "Database_Backup" }, DataModels.Enums.FileType.sql);
     }
-
-    private void toolStripLabel3_Click(object sender, EventArgs e)
-    {
-      var dashBoardCtrl = new UI.Dashboard.Dashboard();
-      dashBoardCtrl.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.splitContainer1.Panel2.Controls.Clear();
-      this.splitContainer1.Panel2.Controls.Add(dashBoardCtrl);
-
-      var visitList = new UI.InvoiceListCtrl(null);
-        visitList.Dock = System.Windows.Forms.DockStyle.Fill;
-        visitList.OpenInvoice += OnOpenInvoice;
-      this.splitContainer1.Panel2.Controls.Clear();
-      this.splitContainer1.Panel2.Controls.Add(visitList);
-    }
-
+    
     private void OnOpenInvoice(object sender, EventArgs e)
     {
       var vlc = (UI.InvoiceListCtrl)sender;
@@ -190,9 +163,36 @@ namespace FisioHelp
     {
       this.splitContainer1.Panel2.Controls.Clear();
       var userForm = new UI.SinglePatientMain(invoice.Customer);
-      userForm.OpenInvoice(invoice);
       userForm.Dock = System.Windows.Forms.DockStyle.Fill;
       this.splitContainer1.Panel2.Controls.Add(userForm);
+      userForm.OpenInvoice(invoice);
+    }
+
+    private void button1_Click_1(object sender, EventArgs e)
+    {
+      var newPatientForm = new UI.NewPatient();
+      newPatientForm.PatientSaved += NewPatient;
+      newPatientForm.ShowDialog();
+    }
+
+    private void button2_Click(object sender, EventArgs e)
+    {
+      var dashBoardCtrl = new UI.Dashboard.Dashboard();
+      dashBoardCtrl.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.splitContainer1.Panel2.Controls.Clear();
+      this.splitContainer1.Panel2.Controls.Add(dashBoardCtrl);
+
+      var visitList = new UI.InvoiceListCtrl(null);
+      visitList.Dock = System.Windows.Forms.DockStyle.Fill;
+      visitList.OpenInvoice += OnOpenInvoice;
+      this.splitContainer1.Panel2.Controls.Clear();
+      this.splitContainer1.Panel2.Controls.Add(visitList);
+    }
+
+    private void button3_Click(object sender, EventArgs e)
+    {
+      var newPatientForm = new UI.Globals.Setting();
+      newPatientForm.ShowDialog();
     }
   }
 }

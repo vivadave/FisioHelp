@@ -98,6 +98,9 @@ namespace FisioHelp.Helper
 
     public static string InsertFile(string filepath, List<string> folderNames, FileType fileType)
     {
+#if DEBUG
+      return "debug";
+#endif
       if (!Helper.CheckForInternetConnection())
       {
         return "ERROR: no internet connection";

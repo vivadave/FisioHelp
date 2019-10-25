@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Data;
 using System.Linq;
-using System.Text;
+using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using FisioHelp.DataModels;
@@ -22,6 +22,7 @@ namespace FisioHelp.UI
     private ToolTip _visitListTT = new ToolTip();
     private ToolTip _visitEconomicListTT = new ToolTip();
     private ToolTip _invoiceListTT = new ToolTip();
+    private ToolTip _folderTT = new ToolTip();
 
     public SinglePatientMain(Customer customer)
     {
@@ -33,6 +34,7 @@ namespace FisioHelp.UI
       _visitListTT.SetToolTip(this.buttonMedicalList, "Visualizza la lista dei referti delle visite e le anamnesi");
       _visitEconomicListTT.SetToolTip(this.buttonEconomicList, $"Visualizza la lista dei dati finanziari delle visite di {_customer.Name}");
       _invoiceListTT.SetToolTip(this.buttonInvoice, "Visualizza la lista delle fatture");
+      _folderTT.SetToolTip(this.buttonFolder, "Apri cartella cliente");
     }
 
     private void toolStripButton2_Click(object sender, EventArgs e)
@@ -138,6 +140,22 @@ namespace FisioHelp.UI
     private void buttonInvoice_Click(object sender, EventArgs e)
     {
       InvoiceListLoad();
+    }
+
+    private void button1_Click_1(object sender, EventArgs e)
+    {
+      Therapist therapist;
+      using (var db = new Db.PhisioDB())
+      {
+        therapist = db.Therapists.FirstOrDefault();
+      }
+
+      var folderBase = Directory.GetParent(therapist.InvoicesFolder);
+      var customersDirectory = Path.Combine(folderBase.FullName, "Customers");
+      Directory.CreateDirectory(customersDirectory);
+      var customerDirectory = Path.Combine(customersDirectory, _customer.FullName.Replace(" ", "_"));
+      Directory.CreateDirectory(customerDirectory);
+      System.Diagnostics.Process.Start(customerDirectory);
     }
   }
 }

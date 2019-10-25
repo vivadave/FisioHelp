@@ -39,6 +39,7 @@
       this.buttonVisit = new System.Windows.Forms.Button();
       this.buttonCustomer = new System.Windows.Forms.Button();
       this.label1 = new System.Windows.Forms.Label();
+      this.buttonFolder = new System.Windows.Forms.Button();
       this.panel1.SuspendLayout();
       this.panel2.SuspendLayout();
       this.SuspendLayout();
@@ -68,6 +69,7 @@
       // panel2
       // 
       this.panel2.BackColor = System.Drawing.Color.White;
+      this.panel2.Controls.Add(this.buttonFolder);
       this.panel2.Controls.Add(this.buttonMedicalList);
       this.panel2.Controls.Add(this.buttonEconomicList);
       this.panel2.Controls.Add(this.buttonInvoice);
@@ -102,7 +104,7 @@
       this.buttonEconomicList.FlatAppearance.BorderSize = 0;
       this.buttonEconomicList.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
       this.buttonEconomicList.Image = ((System.Drawing.Image)(resources.GetObject("buttonEconomicList.Image")));
-      this.buttonEconomicList.Location = new System.Drawing.Point(287, 0);
+      this.buttonEconomicList.Location = new System.Drawing.Point(280, 0);
       this.buttonEconomicList.Name = "buttonEconomicList";
       this.buttonEconomicList.Size = new System.Drawing.Size(58, 59);
       this.buttonEconomicList.TabIndex = 6;
@@ -116,7 +118,7 @@
       this.buttonInvoice.FlatAppearance.BorderSize = 0;
       this.buttonInvoice.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
       this.buttonInvoice.Image = ((System.Drawing.Image)(resources.GetObject("buttonInvoice.Image")));
-      this.buttonInvoice.Location = new System.Drawing.Point(362, 0);
+      this.buttonInvoice.Location = new System.Drawing.Point(344, 0);
       this.buttonInvoice.Name = "buttonInvoice";
       this.buttonInvoice.Size = new System.Drawing.Size(58, 59);
       this.buttonInvoice.TabIndex = 4;
@@ -170,6 +172,20 @@
       this.label1.Size = new System.Drawing.Size(794, 1);
       this.label1.TabIndex = 0;
       // 
+      // buttonFolder
+      // 
+      this.buttonFolder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+      this.buttonFolder.FlatAppearance.BorderSize = 0;
+      this.buttonFolder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+      this.buttonFolder.Image = ((System.Drawing.Image)(resources.GetObject("buttonFolder.Image")));
+      this.buttonFolder.Location = new System.Drawing.Point(408, 0);
+      this.buttonFolder.Name = "buttonFolder";
+      this.buttonFolder.Size = new System.Drawing.Size(58, 59);
+      this.buttonFolder.TabIndex = 8;
+      this.buttonFolder.UseVisualStyleBackColor = true;
+      this.buttonFolder.Click += new System.EventHandler(this.button1_Click_1);
+      // 
       // SinglePatientMain
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -196,5 +212,6 @@
     private System.Windows.Forms.Button buttonInvoice;
     private System.Windows.Forms.Button buttonMedicalList;
     private System.Windows.Forms.Button buttonEconomicList;
+    private System.Windows.Forms.Button buttonFolder;
   }
 }
