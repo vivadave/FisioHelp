@@ -182,5 +182,16 @@ namespace FisioHelp.Helper
         return false;
       }
     }
+    
+    public static void OpenIncognito()
+    {
+      var process = new System.Diagnostics.Process();
+      process.StartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+      var chrome = Path.Combine(Environment.GetEnvironmentVariable("ProgramFiles(x86)"), @"Google\Chrome\Application\chrome.exe");
+
+      process.StartInfo.FileName = chrome;
+      process.StartInfo.Arguments = $@"https://drive.google.com/drive/u/1/folders/1XqwQ6b48DmewlAqFH0-o_xR-gG1RNEHm --incognito";
+      process.Start();
+    }
   }
 }

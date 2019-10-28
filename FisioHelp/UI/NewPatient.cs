@@ -36,5 +36,15 @@ namespace FisioHelp.UI
       patientControl.Dock = System.Windows.Forms.DockStyle.Fill;
       panel1.Controls.Add(patientControl);
     }
+
+    protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+    {
+      if (keyData == (Keys.Control | Keys.F | Keys.N))
+      {
+        Helper.Helper.OpenIncognito();
+        return true;
+      }
+      return base.ProcessCmdKey(ref msg, keyData);
+    }
   }
 }

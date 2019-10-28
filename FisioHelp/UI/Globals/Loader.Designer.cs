@@ -28,9 +28,10 @@
     /// </summary>
     private void InitializeComponent()
     {
-      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Loader));
+      this.components = new System.ComponentModel.Container();
       this.label1 = new System.Windows.Forms.Label();
       this.pictureBox = new System.Windows.Forms.PictureBox();
+      this.timer1 = new System.Windows.Forms.Timer(this.components);
       ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
       this.SuspendLayout();
       // 
@@ -50,14 +51,18 @@
       // pictureBox
       // 
       this.pictureBox.BackColor = System.Drawing.Color.White;
-      this.pictureBox.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox.Image")));
-      this.pictureBox.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBox.InitialImage")));
+      this.pictureBox.InitialImage = null;
       this.pictureBox.Location = new System.Drawing.Point(3, 35);
       this.pictureBox.Name = "pictureBox";
       this.pictureBox.Size = new System.Drawing.Size(256, 256);
       this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
       this.pictureBox.TabIndex = 0;
       this.pictureBox.TabStop = false;
+      // 
+      // timer1
+      // 
+      this.timer1.Interval = 50;
+      this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
       // 
       // Loader
       // 
@@ -70,6 +75,7 @@
       this.Controls.Add(this.pictureBox);
       this.Name = "Loader";
       this.TopMost = true;
+      this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Loader_FormClosing);
       ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
       this.ResumeLayout(false);
       this.PerformLayout();
@@ -80,5 +86,6 @@
 
     private System.Windows.Forms.Label label1;
     private System.Windows.Forms.PictureBox pictureBox;
+    private System.Windows.Forms.Timer timer1;
   }
 }

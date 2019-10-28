@@ -74,9 +74,9 @@ namespace FisioHelp.UI
 
     private void AddPatient_Load(object sender, EventArgs e)
     {
-
       buttonSave.Enabled = false;
       this.ValidateChildren();
+      textBoxName.Select();
     }
 
     private void SetCustomer()

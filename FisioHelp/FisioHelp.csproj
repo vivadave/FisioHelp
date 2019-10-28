@@ -158,6 +158,7 @@
     <Compile Include="Helper\BackupManager.cs" />
     <Compile Include="Helper\DbManagement.cs" />
     <Compile Include="Helper\DriveManagement.cs" />
+    <Compile Include="Helper\GifImage.cs" />
     <Compile Include="Helper\Helper.cs" />
     <Compile Include="Helper\PdfManager.cs" />
     <Compile Include="Program.cs" />
@@ -467,6 +468,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Template\Elisa-logo2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Template\loader.gif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Template\privacy.html">

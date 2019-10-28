@@ -191,3 +191,4 @@ C:\Progetti\FisioHelp\FisioHelp\bin\Debug\Resources\PGDUMP\ssleay32.dll
 C:\Progetti\FisioHelp\FisioHelp\bin\Debug\Resources\PGDUMP\zlib1.dll
 C:\Progetti\FisioHelp\FisioHelp\obj\Debug\FisioHelp.UI.Globals.Loader.resources
 C:\Progetti\FisioHelp\FisioHelp\bin\Debug\Template\privacy.html
+C:\Progetti\FisioHelp\FisioHelp\bin\Debug\Template\loader.gif
