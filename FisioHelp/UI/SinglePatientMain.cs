@@ -13,6 +13,7 @@ namespace FisioHelp.UI
 {
   public partial class SinglePatientMain : UserControl
   {
+    public event EventHandler PatientSaved;
     private Customer _customer;
     private DataModels.Visit _selectedVist;
     private DataModels.Invoice _selectedInvoice;
@@ -45,8 +46,14 @@ namespace FisioHelp.UI
     {
       this.panel3.Controls.Clear();
       var userForm = new UI.AddPatient(_customer);
+      userForm.PatientSaved += PatientSave;
       userForm.Dock = System.Windows.Forms.DockStyle.Fill;
       this.panel3.Controls.Add(userForm);
+    }
+
+    private void PatientSave(object sender, EventArgs e)
+    {
+      PatientSaved?.Invoke(this, e);
     }
 
     private void button2_Click(object sender, EventArgs e)

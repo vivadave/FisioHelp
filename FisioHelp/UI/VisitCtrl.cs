@@ -35,7 +35,6 @@ namespace FisioHelp.UI
         _treatments = db.Treatments.ToList();
         foreach (var treatment in _treatments)
         {
-
           this.checkedListBox1.DisplayMember = "DescriptionIt";
           if (_customer.Language == "german")
             this.checkedListBox1.DisplayMember = "DescriptionDe";
@@ -80,6 +79,11 @@ namespace FisioHelp.UI
 
     private void buttonSave_Click(object sender, EventArgs e)
     {
+      if (_saveEnabled == false)
+      {
+        MessageBox.Show("Controllare che tutti i campi siano compilati correttamente", "Salvataggio", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        return;
+      }
       SetVisit();
       _visit.TherapistId = _therapist.Id;
       _visit.SaveToDB();
@@ -124,6 +128,7 @@ namespace FisioHelp.UI
         buttonSave.Enabled = true;
 
       buttonSave.Focus();
+      textBoxPrice.Text = string.IsNullOrEmpty(textBoxPrice.Text) ? "0" : textBoxPrice.Text;
     }
 
     private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)

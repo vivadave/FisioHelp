@@ -159,6 +159,7 @@
     <Compile Include="Helper\DbManagement.cs" />
     <Compile Include="Helper\DriveManagement.cs" />
     <Compile Include="Helper\GifImage.cs" />
+    <Compile Include="Helper\Global.cs" />
     <Compile Include="Helper\Helper.cs" />
     <Compile Include="Helper\PdfManager.cs" />
     <Compile Include="Program.cs" />

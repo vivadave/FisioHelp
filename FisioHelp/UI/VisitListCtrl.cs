@@ -32,10 +32,15 @@ namespace FisioHelp.UI
       _type = type;
       InitializeComponent();
       _visits = new List<DataModels.Visit>();
+
+      dateTimePickerfrom.ValueChanged -= dateTimePickerfrom_ValueChanged;
       dateTimePickerfrom.Format = DateTimePickerFormat.Custom;
-      dateTimePickerfrom.Value = DateTime.Today.AddDays(-7);
+      dateTimePickerfrom.Value = Helper.Global.FilterFromData;
       dateTimePickerfrom.CustomFormat = "dd/MM/yyyy";
+      dateTimePickerfrom.ValueChanged += dateTimePickerfrom_ValueChanged;
+
       dateTimePickerTo.Format = DateTimePickerFormat.Custom;
+      dateTimePickerTo.Value = Helper.Global.FilterToData;
       dateTimePickerTo.CustomFormat = "dd/MM/yyyy";
       comboBoxInvoice.Items.AddRange(_comboBoxValues);
       comboBoxPayed.Items.AddRange(_comboBoxValues);
@@ -108,8 +113,10 @@ namespace FisioHelp.UI
 
     private void SetFilters()
     {
-      _dateFromFilter = dateTimePickerfrom.Value;
-      _dateToFilter = dateTimePickerTo.Value;
+      Helper.Global.FilterFromData = dateTimePickerfrom.Value;
+      Helper.Global.FilterToData = dateTimePickerTo.Value;
+      _dateFromFilter = Helper.Global.FilterFromData;
+      _dateToFilter = Helper.Global.FilterToData;
       _filterInvoiced = comboBoxInvoice.SelectedItem == null ? 0 : _comboBoxValues.Select((v, i) => new { c = v, index = i }).First(x => x.c == comboBoxInvoice.SelectedItem?.ToString())?.index ?? 0;
       _filterPayed = comboBoxPayed.SelectedItem == null ? 0 : _comboBoxValues.Select((v, i) => new { c = v, index = i }).First(x => x.c == comboBoxPayed.SelectedItem?.ToString())?.index ?? 0;
     }
@@ -125,6 +132,7 @@ namespace FisioHelp.UI
           .Where(x => x.Customer.Id == custId || custId == null)
           .Where(x=> x.Deleted == false && x.Date >= new NpgsqlTypes.NpgsqlDate(_dateFromFilter) && x.Date < new NpgsqlTypes.NpgsqlDate(_dateToFilter.AddDays(1)))
           .ToList();
+        _visits = _visits.OrderBy(x => x.Date).ToList();
       }
     }
 

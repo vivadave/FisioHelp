@@ -14,3 +14,5 @@ ALTER TABLE customers ADD COLUMN IF NOT EXISTS age integer;
 ALTER TABLE invoices ADD COLUMN IF NOT EXISTS tax_stamp boolean not null DEFAULT 'f';
 
 ALTER TABLE visits ADD COLUMN IF NOT EXISTS deleted boolean not null DEFAULT 'f';
+
+UPDATE visits set deleted = false WHERE deleted IS NULL;

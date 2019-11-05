@@ -61,6 +61,12 @@
       this.checkBox1 = new System.Windows.Forms.CheckBox();
       this.richTextBoxEx1 = new RichTextBoxEx.RichTextBoxEx();
       this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+      this.panel14 = new System.Windows.Forms.Panel();
+      this.label16 = new System.Windows.Forms.Label();
+      this.textBoxAge = new System.Windows.Forms.TextBox();
+      this.panel13 = new System.Windows.Forms.Panel();
+      this.label15 = new System.Windows.Forms.Label();
+      this.textBoxLegRapp = new System.Windows.Forms.TextBox();
       this.panel9 = new System.Windows.Forms.Panel();
       this.comboBoxPrices = new System.Windows.Forms.ComboBox();
       this.label14 = new System.Windows.Forms.Label();
@@ -78,12 +84,7 @@
       this.errorProvider3 = new System.Windows.Forms.ErrorProvider(this.components);
       this.buttonCancel = new System.Windows.Forms.Button();
       this.buttonOpenPrivacy = new System.Windows.Forms.Button();
-      this.panel13 = new System.Windows.Forms.Panel();
-      this.label15 = new System.Windows.Forms.Label();
-      this.textBoxLegRapp = new System.Windows.Forms.TextBox();
-      this.panel14 = new System.Windows.Forms.Panel();
-      this.label16 = new System.Windows.Forms.Label();
-      this.textBoxAge = new System.Windows.Forms.TextBox();
+      this.buttonDelete = new System.Windows.Forms.Button();
       this.groupBox1.SuspendLayout();
       this.tableLayoutPanel2.SuspendLayout();
       this.panel11.SuspendLayout();
@@ -92,6 +93,8 @@
       ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.errorProvider2)).BeginInit();
       this.tableLayoutPanel1.SuspendLayout();
+      this.panel14.SuspendLayout();
+      this.panel13.SuspendLayout();
       this.panel9.SuspendLayout();
       this.panel8.SuspendLayout();
       this.panel7.SuspendLayout();
@@ -102,8 +105,6 @@
       this.panel1.SuspendLayout();
       this.panel2.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.errorProvider3)).BeginInit();
-      this.panel13.SuspendLayout();
-      this.panel14.SuspendLayout();
       this.SuspendLayout();
       // 
       // textBoxName
@@ -391,7 +392,7 @@
       this.buttonSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
       this.buttonSave.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.buttonSave.ForeColor = System.Drawing.Color.White;
-      this.buttonSave.Location = new System.Drawing.Point(618, 531);
+      this.buttonSave.Location = new System.Drawing.Point(628, 531);
       this.buttonSave.Name = "buttonSave";
       this.buttonSave.Size = new System.Drawing.Size(106, 38);
       this.buttonSave.TabIndex = 16;
@@ -476,6 +477,64 @@
       this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
       this.tableLayoutPanel1.Size = new System.Drawing.Size(824, 153);
       this.tableLayoutPanel1.TabIndex = 23;
+      // 
+      // panel14
+      // 
+      this.panel14.Controls.Add(this.label16);
+      this.panel14.Controls.Add(this.textBoxAge);
+      this.panel14.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.panel14.Location = new System.Drawing.Point(3, 117);
+      this.panel14.Name = "panel14";
+      this.panel14.Size = new System.Drawing.Size(274, 33);
+      this.panel14.TabIndex = 16;
+      // 
+      // label16
+      // 
+      this.label16.AutoSize = true;
+      this.label16.Font = new System.Drawing.Font("Segoe UI Historic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.label16.Location = new System.Drawing.Point(12, 8);
+      this.label16.Name = "label16";
+      this.label16.Size = new System.Drawing.Size(23, 15);
+      this.label16.TabIndex = 15;
+      this.label16.Text = "Età";
+      // 
+      // textBoxAge
+      // 
+      this.textBoxAge.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+      this.textBoxAge.Font = new System.Drawing.Font("Segoe UI Historic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.textBoxAge.Location = new System.Drawing.Point(101, 5);
+      this.textBoxAge.Name = "textBoxAge";
+      this.textBoxAge.Size = new System.Drawing.Size(159, 23);
+      this.textBoxAge.TabIndex = 7;
+      // 
+      // panel13
+      // 
+      this.panel13.Controls.Add(this.label15);
+      this.panel13.Controls.Add(this.textBoxLegRapp);
+      this.panel13.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.panel13.Location = new System.Drawing.Point(283, 117);
+      this.panel13.Name = "panel13";
+      this.panel13.Size = new System.Drawing.Size(265, 33);
+      this.panel13.TabIndex = 15;
+      // 
+      // label15
+      // 
+      this.label15.AutoSize = true;
+      this.label15.Font = new System.Drawing.Font("Segoe UI Historic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.label15.Location = new System.Drawing.Point(20, 8);
+      this.label15.Name = "label15";
+      this.label15.Size = new System.Drawing.Size(66, 15);
+      this.label15.TabIndex = 15;
+      this.label15.Text = "Leg. Rappr.";
+      // 
+      // textBoxLegRapp
+      // 
+      this.textBoxLegRapp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+      this.textBoxLegRapp.Font = new System.Drawing.Font("Segoe UI Historic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.textBoxLegRapp.Location = new System.Drawing.Point(92, 5);
+      this.textBoxLegRapp.Name = "textBoxLegRapp";
+      this.textBoxLegRapp.Size = new System.Drawing.Size(159, 23);
+      this.textBoxLegRapp.TabIndex = 7;
       // 
       // panel9
       // 
@@ -651,7 +710,7 @@
       this.buttonOpenPrivacy.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
       this.buttonOpenPrivacy.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.buttonOpenPrivacy.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
-      this.buttonOpenPrivacy.Location = new System.Drawing.Point(470, 531);
+      this.buttonOpenPrivacy.Location = new System.Drawing.Point(377, 531);
       this.buttonOpenPrivacy.Name = "buttonOpenPrivacy";
       this.buttonOpenPrivacy.Size = new System.Drawing.Size(128, 38);
       this.buttonOpenPrivacy.TabIndex = 18;
@@ -659,69 +718,27 @@
       this.buttonOpenPrivacy.UseVisualStyleBackColor = false;
       this.buttonOpenPrivacy.Click += new System.EventHandler(this.buttonOpenPrivacy_Click);
       // 
-      // panel13
+      // buttonDelete
       // 
-      this.panel13.Controls.Add(this.label15);
-      this.panel13.Controls.Add(this.textBoxLegRapp);
-      this.panel13.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.panel13.Location = new System.Drawing.Point(283, 117);
-      this.panel13.Name = "panel13";
-      this.panel13.Size = new System.Drawing.Size(265, 33);
-      this.panel13.TabIndex = 15;
-      // 
-      // label15
-      // 
-      this.label15.AutoSize = true;
-      this.label15.Font = new System.Drawing.Font("Segoe UI Historic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.label15.Location = new System.Drawing.Point(20, 8);
-      this.label15.Name = "label15";
-      this.label15.Size = new System.Drawing.Size(66, 15);
-      this.label15.TabIndex = 15;
-      this.label15.Text = "Leg. Rappr.";
-      // 
-      // textBoxLegRapp
-      // 
-      this.textBoxLegRapp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-      this.textBoxLegRapp.Font = new System.Drawing.Font("Segoe UI Historic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.textBoxLegRapp.Location = new System.Drawing.Point(92, 5);
-      this.textBoxLegRapp.Name = "textBoxLegRapp";
-      this.textBoxLegRapp.Size = new System.Drawing.Size(159, 23);
-      this.textBoxLegRapp.TabIndex = 7;
-      // 
-      // panel14
-      // 
-      this.panel14.Controls.Add(this.label16);
-      this.panel14.Controls.Add(this.textBoxAge);
-      this.panel14.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.panel14.Location = new System.Drawing.Point(3, 117);
-      this.panel14.Name = "panel14";
-      this.panel14.Size = new System.Drawing.Size(274, 33);
-      this.panel14.TabIndex = 16;
-      // 
-      // label16
-      // 
-      this.label16.AutoSize = true;
-      this.label16.Font = new System.Drawing.Font("Segoe UI Historic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.label16.Location = new System.Drawing.Point(12, 8);
-      this.label16.Name = "label16";
-      this.label16.Size = new System.Drawing.Size(23, 15);
-      this.label16.TabIndex = 15;
-      this.label16.Text = "Età";
-      // 
-      // textBoxAge
-      // 
-      this.textBoxAge.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-      this.textBoxAge.Font = new System.Drawing.Font("Segoe UI Historic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.textBoxAge.Location = new System.Drawing.Point(101, 5);
-      this.textBoxAge.Name = "textBoxAge";
-      this.textBoxAge.Size = new System.Drawing.Size(159, 23);
-      this.textBoxAge.TabIndex = 7;
+      this.buttonDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+      this.buttonDelete.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
+      this.buttonDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+      this.buttonDelete.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.buttonDelete.ForeColor = System.Drawing.Color.DarkRed;
+      this.buttonDelete.Location = new System.Drawing.Point(516, 531);
+      this.buttonDelete.Name = "buttonDelete";
+      this.buttonDelete.Size = new System.Drawing.Size(106, 38);
+      this.buttonDelete.TabIndex = 39;
+      this.buttonDelete.Text = "Delete";
+      this.buttonDelete.UseVisualStyleBackColor = false;
+      this.buttonDelete.Click += new System.EventHandler(this.button1_Click);
       // 
       // AddPatient
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.BackColor = System.Drawing.Color.White;
+      this.Controls.Add(this.buttonDelete);
       this.Controls.Add(this.buttonOpenPrivacy);
       this.Controls.Add(this.checkBox1);
       this.Controls.Add(this.buttonCancel);
@@ -745,6 +762,10 @@
       ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.errorProvider2)).EndInit();
       this.tableLayoutPanel1.ResumeLayout(false);
+      this.panel14.ResumeLayout(false);
+      this.panel14.PerformLayout();
+      this.panel13.ResumeLayout(false);
+      this.panel13.PerformLayout();
       this.panel9.ResumeLayout(false);
       this.panel9.PerformLayout();
       this.panel8.ResumeLayout(false);
@@ -764,10 +785,6 @@
       this.panel2.ResumeLayout(false);
       this.panel2.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.errorProvider3)).EndInit();
-      this.panel13.ResumeLayout(false);
-      this.panel13.PerformLayout();
-      this.panel14.ResumeLayout(false);
-      this.panel14.PerformLayout();
       this.ResumeLayout(false);
       this.PerformLayout();
 
@@ -830,5 +847,6 @@
     private System.Windows.Forms.Panel panel13;
     private System.Windows.Forms.Label label15;
     private System.Windows.Forms.TextBox textBoxLegRapp;
+    private System.Windows.Forms.Button buttonDelete;
   }
 }

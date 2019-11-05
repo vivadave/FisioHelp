@@ -21,7 +21,7 @@ namespace FisioHelp.DataModels
     [Column("initial_evaluetion"), Nullable] public string InitialEvaluetion { get; set; } // text
     [Column("final_evaluetion"), Nullable] public string FinalEvaluetion { get; set; } // text
     [Column("start_time"), Nullable] public string StartTime { get; set; } // character varying(45)
-    [Column("deleted"), Nullable] public bool? Deleted { get; set; } // boolean
+    [Column("deleted"), NotNull] public bool Deleted { get; set; } // boolean
 
     public bool HasInvoice()
     {

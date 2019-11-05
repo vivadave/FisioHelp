@@ -46,6 +46,7 @@
       this.dateTimePickerTo = new System.Windows.Forms.DateTimePicker();
       this.dateTimePickerfrom = new System.Windows.Forms.DateTimePicker();
       this.panel2 = new System.Windows.Forms.Panel();
+      this.toolStrip1 = new System.Windows.Forms.ToolStrip();
       this.panel3 = new System.Windows.Forms.Panel();
       this.label8 = new System.Windows.Forms.Label();
       this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -53,7 +54,6 @@
       this.labelTotInvoice = new System.Windows.Forms.Label();
       this.labelTotMoney = new System.Windows.Forms.Label();
       this.labelTotPayed = new System.Windows.Forms.Label();
-      this.toolStrip1 = new System.Windows.Forms.ToolStrip();
       this.panel1.SuspendLayout();
       this.panel2.SuspendLayout();
       this.panel3.SuspendLayout();
@@ -234,6 +234,7 @@
       // 
       // dateTimePickerTo
       // 
+      this.dateTimePickerTo.CustomFormat = "dd/MM/yyyy";
       this.dateTimePickerTo.Font = new System.Drawing.Font("Segoe UI Historic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.dateTimePickerTo.Location = new System.Drawing.Point(289, 38);
       this.dateTimePickerTo.Name = "dateTimePickerTo";
@@ -263,6 +264,14 @@
       this.panel2.Name = "panel2";
       this.panel2.Size = new System.Drawing.Size(1017, 382);
       this.panel2.TabIndex = 1;
+      // 
+      // toolStrip1
+      // 
+      this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+      this.toolStrip1.Name = "toolStrip1";
+      this.toolStrip1.Size = new System.Drawing.Size(1017, 25);
+      this.toolStrip1.TabIndex = 0;
+      this.toolStrip1.Text = "toolStrip1";
       // 
       // panel3
       // 
@@ -363,14 +372,6 @@
       this.labelTotPayed.TabIndex = 12;
       this.labelTotPayed.Text = "#";
       this.labelTotPayed.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-      // 
-      // toolStrip1
-      // 
-      this.toolStrip1.Location = new System.Drawing.Point(0, 0);
-      this.toolStrip1.Name = "toolStrip1";
-      this.toolStrip1.Size = new System.Drawing.Size(1017, 25);
-      this.toolStrip1.TabIndex = 0;
-      this.toolStrip1.Text = "toolStrip1";
       // 
       // VisitListCtrl
       // 

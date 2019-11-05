@@ -42,6 +42,7 @@ namespace FisioHelp
       {
         this.splitContainer1.Panel2.Controls.Clear();
         var userForm = new UI.SinglePatientMain(control.Customer);
+        userForm.PatientSaved += NewPatient;
         userForm.Dock = System.Windows.Forms.DockStyle.Fill;
         this.splitContainer1.Panel2.Controls.Add(userForm);
       }
@@ -122,6 +123,7 @@ namespace FisioHelp
       var vc = (UI.VisitListCtrl)sender;
       this.splitContainer1.Panel2.Controls.Clear();
       var userForm = new UI.SinglePatientMain(vc.SelectedVisit?.Customer);
+      userForm.PatientSaved += NewPatient;
       userForm.Dock = System.Windows.Forms.DockStyle.Fill;
       this.splitContainer1.Panel2.Controls.Add(userForm);
       userForm.OpenVisit(vc.SelectedVisit);
@@ -163,6 +165,7 @@ namespace FisioHelp
     {
       this.splitContainer1.Panel2.Controls.Clear();
       var userForm = new UI.SinglePatientMain(invoice.Customer);
+      userForm.PatientSaved += NewPatient;
       userForm.Dock = System.Windows.Forms.DockStyle.Fill;
       this.splitContainer1.Panel2.Controls.Add(userForm);
       userForm.OpenInvoice(invoice);

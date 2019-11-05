@@ -8,6 +8,7 @@ using NpgsqlTypes;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using FisioHelp.DataModels;
+using LinqToDB;
 
 namespace FisioHelp.UI
 {
@@ -43,6 +44,11 @@ namespace FisioHelp.UI
       Initialize();
 
         _customer = customer;
+
+      if (_customer.Id == null || _customer.Id == Guid.Empty)
+      {
+        buttonDelete.Visible = false;
+      }
 
       textBoxName.Text = customer.Name;
       textBoxCognome.Text = customer.Surname;
@@ -131,6 +137,7 @@ namespace FisioHelp.UI
         _customer.AddressId = _customer.Address.SaveToDB();
       _customer.SaveToDB();
 
+      buttonDelete.Visible = true;
       PatientSaved?.Invoke(this, e);
       MessageBox.Show("Salvato Correttamente", "Salvataggio", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -187,7 +194,7 @@ namespace FisioHelp.UI
 
     private void buttonOpenPrivacy_Click(object sender, EventArgs e)
     {
-      if (_customer.Id == null)
+      if (_customer.Id == null || _customer.Id == Guid.Empty)
       {
         MessageBox.Show("Prima di proseguire salvare il cliente", "Salvataggio", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         return;
@@ -232,5 +239,56 @@ namespace FisioHelp.UI
       System.Diagnostics.Process.Start(pdfPath);     
 
     }
+
+    private void button1_Click(object sender, EventArgs e)
+    {
+      if (_customer.Id == null || _customer.Id == Guid.Empty)
+        return;
+
+      if (MessageBox.Show("Sicura di voler cancellare il cliente?", "Cancellazione", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+        return;
+
+      if (MessageBox.Show("Verranno cancellate anche tutte le visite e le anamnesi del paziente, continuo?", "Cancellazione", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+        return;
+
+      using (var db = new Db.PhisioDB())
+      {
+        var addressId = _customer.AddressId;
+
+        var visits = db.Visits.LoadWith(v => v.Treatmentsvisitidfkeys).LoadWith(x=>x.Invoice).Where(x=> x.CustomerId == _customer.Id ).ToList();
+        if (visits.Any(x => x.Invoice != null))
+        {
+          MessageBox.Show("Non si possono cancellare clienti per cui è stata emessa qualche fattura", "Cancellazione", MessageBoxButtons.OK, MessageBoxIcon.Error);
+          return;
+        }
+        foreach (var visit in visits)
+        {
+          foreach (var treaVis in visit.Treatmentsvisitidfkeys)
+            db.Delete(treaVis);
+
+          db.Delete(visit);
+        }
+
+        var recentAnamnesys = db.RecentAnamnesys.FirstOrDefault(x => x.CustomerId == _customer.Id);
+        if (recentAnamnesys != null)
+          db.Delete(recentAnamnesys);
+        var remoteAnamnesys = db.RemoteAnamnesys.FirstOrDefault(x => x.CustomerId == _customer.Id);
+        if (remoteAnamnesys != null)
+          db.Delete(remoteAnamnesys);
+        var stomatognathicTests = db.StomatognathicTests.FirstOrDefault(x => x.CustomerId == _customer.Id);
+        if (stomatognathicTests != null)
+          db.Delete(stomatognathicTests);
+
+        db.Delete(_customer);
+        var addr = db.Addresses.FirstOrDefault(x => x.Id == addressId);
+
+        if (addr != null)
+          db.Delete(addr);
+
+        MessageBox.Show("Paziente Cancellato", "Cancellazione", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        PatientSaved?.Invoke(this, e);
+      }
+
+      }
   }
 }
