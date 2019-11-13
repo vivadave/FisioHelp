@@ -15,6 +15,7 @@ namespace FisioHelp.UI
   public partial class InvoiceCtrl : UserControl
   {
     public event EventHandler DeletedInvoice;
+    public event EventHandler SavedInvoice;
     public DataModels.ProformaInvoice ProformaInvoice { get; set; }
     private DataModels.Customer _customer { get; set; }
     private DataModels.Therapist _therapist { get; set; }
@@ -233,6 +234,11 @@ namespace FisioHelp.UI
       }
 
       var invoice = Helper.Helper.CreateNewInvoice(ProformaInvoice.Visitsproformainvoiceidfkeys.ToList(), out string errors);
+      if (!string.IsNullOrEmpty(errors))
+      {
+        MessageBox.Show("errors", "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        return;
+      }
 
       invoice.TaxStamp = ProformaInvoice.TaxStamp;
       invoice.Discount = ProformaInvoice.Discount;
@@ -251,7 +257,7 @@ namespace FisioHelp.UI
           visit.SaveToDB();
         }
         MessageBox.Show("Salvato Correttamente", "Salvataggio", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        
+        SavedInvoice?.Invoke(this, new EventArgs());
       }
     }
 
@@ -281,7 +287,7 @@ namespace FisioHelp.UI
           visit.SaveToDB();
         }
         MessageBox.Show("Salvato Correttamente", "Salvataggio", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+        SavedInvoice?.Invoke(this, new EventArgs());
       }
     }
 

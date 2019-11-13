@@ -79,6 +79,7 @@ namespace FisioHelp.UI
     {
       this.panel3.Controls.Clear();
       var userForm = new UI.InvoiceCtrl(proformaInvoice, true);
+      userForm.SavedInvoice += OnSaveInvoice;
       userForm.Dock = DockStyle.Fill;
       userForm.DeletedInvoice += OnDeleteInvoice;
       this.panel3.Controls.Add(userForm);
@@ -86,6 +87,13 @@ namespace FisioHelp.UI
     private void OnDeleteInvoice(object sender, EventArgs e)
     {
       InvoiceListLoad();
+    }
+
+    private void OnSaveInvoice(object sender, EventArgs e)
+    {
+      var ctrl = (InvoiceCtrl)sender;
+      var prof = ctrl.ProformaInvoice;
+      OpenInvoice(prof);
     }
 
     private void SinglePatientMain_Load(object sender, EventArgs e)
