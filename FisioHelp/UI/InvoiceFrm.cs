@@ -12,18 +12,18 @@ namespace FisioHelp.UI
 {
   public partial class InvoiceFrm : Form
   {
-    private DataModels.Invoice _invoice;
-    public InvoiceFrm(DataModels.Invoice invoice)
+    private DataModels.ProformaInvoice _proformaInvoice;
+    public InvoiceFrm(DataModels.ProformaInvoice invoice)
     {
       InitializeComponent();
-      _invoice = invoice;
+      _proformaInvoice = invoice;
       if (invoice == null)
         this.Close();
     }
 
     private void InvoiceFrm_Load(object sender, EventArgs e)
     {
-      var invoiceCtrl = new UI.InvoiceCtrl(_invoice);
+      var invoiceCtrl = new UI.InvoiceCtrl(_proformaInvoice);
       invoiceCtrl.Dock = System.Windows.Forms.DockStyle.Fill;
       panel1.Controls.Add(invoiceCtrl);
     }

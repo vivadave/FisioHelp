@@ -15,8 +15,8 @@ namespace FisioHelp.UI
   {
     public event EventHandler PatientSaved;
     private Customer _customer;
-    private DataModels.Visit _selectedVist;
-    private DataModels.Invoice _selectedInvoice;
+    private Visit _selectedVist;
+    private ProformaInvoice _selectedProformaInvoice;
 
     private ToolTip _editPatientTT = new ToolTip();
     private ToolTip _createVisitTT = new ToolTip();
@@ -75,10 +75,10 @@ namespace FisioHelp.UI
       MedicalListLoad();
     }
 
-    public void OpenInvoice(Invoice invoice)
+    public void OpenInvoice(ProformaInvoice proformaInvoice)
     {
       this.panel3.Controls.Clear();
-      var userForm = new UI.InvoiceCtrl(invoice, true);
+      var userForm = new UI.InvoiceCtrl(proformaInvoice, true);
       userForm.Dock = DockStyle.Fill;
       userForm.DeletedInvoice += OnDeleteInvoice;
       this.panel3.Controls.Add(userForm);
@@ -130,8 +130,8 @@ namespace FisioHelp.UI
     private void OnOpenInvoice(object sender, EventArgs e)
     {
       var vlc = (UI.InvoiceListCtrl)sender;
-      _selectedInvoice = vlc.SelectedInvoice;
-      OpenInvoice(_selectedInvoice);
+      _selectedProformaInvoice = vlc.SelectedInvoice;
+      OpenInvoice(_selectedProformaInvoice);
     }
 
     private void buttonEconomicList_Click(object sender, EventArgs e)

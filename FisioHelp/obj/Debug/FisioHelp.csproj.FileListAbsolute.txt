@@ -192,3 +192,7 @@ C:\Progetti\FisioHelp\FisioHelp\bin\Debug\Resources\PGDUMP\zlib1.dll
 C:\Progetti\FisioHelp\FisioHelp\obj\Debug\FisioHelp.UI.Globals.Loader.resources
 C:\Progetti\FisioHelp\FisioHelp\bin\Debug\Template\privacy.html
 C:\Progetti\FisioHelp\FisioHelp\bin\Debug\Template\loader.gif
+C:\Progetti\FisioHelp\FisioHelp\bin\Debug\sql\dbEliCreate_06.sql
+C:\Progetti\FisioHelp\FisioHelp\bin\Debug\Template\templateProformaInvoice_de.html
+C:\Progetti\FisioHelp\FisioHelp\bin\Debug\Template\templateProformaInvoice_it.html
+C:\Progetti\FisioHelp\FisioHelp\obj\Debug\FisioHelp.UI.InvoiceListHeader.resources

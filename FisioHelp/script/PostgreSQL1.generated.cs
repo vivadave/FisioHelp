@@ -36,6 +36,7 @@ namespace DataModels
 		public ITable<Customer>           Customers           { get { return this.GetTable<Customer>(); } }
 		public ITable<Invoice>            Invoices            { get { return this.GetTable<Invoice>(); } }
 		public ITable<PriceList>          PriceLists          { get { return this.GetTable<PriceList>(); } }
+		public ITable<ProformaInvoice>    ProformaInvoices    { get { return this.GetTable<ProformaInvoice>(); } }
 		public ITable<RecentAnamnesy>     RecentAnamnesys     { get { return this.GetTable<RecentAnamnesy>(); } }
 		public ITable<RemoteAnamnesy>     RemoteAnamnesys     { get { return this.GetTable<RemoteAnamnesy>(); } }
 		public ITable<StomatognathicTest> StomatognathicTests { get { return this.GetTable<StomatognathicTest>(); } }
@@ -1498,21 +1499,23 @@ namespace DataModels
 	[Table(Schema="public", Name="customers")]
 	public partial class Customer
 	{
-		[Column("id"),            PrimaryKey,  NotNull] public Guid        Id           { get; set; } // uuid
-		[Column("name"),             Nullable         ] public string      Name         { get; set; } // character varying(45)
-		[Column("surname"),                    NotNull] public string      Surname      { get; set; } // character varying(45)
-		[Column("email"),            Nullable         ] public string      Email        { get; set; } // character varying(45)
-		[Column("vat"),              Nullable         ] public string      Vat          { get; set; } // character varying(45)
-		[Column("fiscalcode"),       Nullable         ] public string      Fiscalcode   { get; set; } // character varying(45)
-		[Column("tel1"),             Nullable         ] public string      Tel1         { get; set; } // character varying(45)
-		[Column("tel2"),             Nullable         ] public string      Tel2         { get; set; } // character varying(45)
-		[Column("address_id"),       Nullable         ] public Guid?       AddressId    { get; set; } // uuid
-		[Column("pricelist_id"),     Nullable         ] public Guid?       PricelistId  { get; set; } // uuid
-		[Column("therapist_id"),               NotNull] public Guid        TherapistId  { get; set; } // uuid
-		[Column("note"),             Nullable         ] public string      Note         { get; set; } // text
-		[Column("language"),         Nullable         ] public string      Language     { get; set; } // character varying(45)
-		[Column("privacy"),          Nullable         ] public bool?       Privacy      { get; set; } // boolean
-		[Column("creation_date"),    Nullable         ] public NpgsqlDate? CreationDate { get; set; } // date
+		[Column("id"),                   PrimaryKey,  NotNull] public Guid       Id                  { get; set; } // uuid
+		[Column("name"),                    Nullable         ] public string     Name                { get; set; } // character varying(45)
+		[Column("surname"),                           NotNull] public string     Surname             { get; set; } // character varying(45)
+		[Column("email"),                   Nullable         ] public string     Email               { get; set; } // character varying(45)
+		[Column("vat"),                     Nullable         ] public string     Vat                 { get; set; } // character varying(45)
+		[Column("fiscalcode"),              Nullable         ] public string     Fiscalcode          { get; set; } // character varying(45)
+		[Column("tel1"),                    Nullable         ] public string     Tel1                { get; set; } // character varying(45)
+		[Column("tel2"),                    Nullable         ] public string     Tel2                { get; set; } // character varying(45)
+		[Column("address_id"),              Nullable         ] public Guid?      AddressId           { get; set; } // uuid
+		[Column("pricelist_id"),            Nullable         ] public Guid?      PricelistId         { get; set; } // uuid
+		[Column("therapist_id"),                      NotNull] public Guid       TherapistId         { get; set; } // uuid
+		[Column("note"),                    Nullable         ] public string     Note                { get; set; } // text
+		[Column("language"),                Nullable         ] public string     Language            { get; set; } // character varying(45)
+		[Column("privacy"),                           NotNull] public bool       Privacy             { get; set; } // boolean
+		[Column("creation_date"),                     NotNull] public NpgsqlDate CreationDate        { get; set; } // date
+		[Column("legal_representative"),    Nullable         ] public string     LegalRepresentative { get; set; } // text
+		[Column("age"),                     Nullable         ] public int?       Age                 { get; set; } // integer
 
 		#region Associations
 
@@ -1564,16 +1567,29 @@ namespace DataModels
 	[Table(Schema="public", Name="invoices")]
 	public partial class Invoice
 	{
-		[Column("id"),           PrimaryKey,  NotNull] public Guid       Id          { get; set; } // uuid
-		[Column("date"),                      NotNull] public NpgsqlDate Date        { get; set; } // date
-		[Column("discount"),        Nullable         ] public double?    Discount    { get; set; } // double precision
-		[Column("payed"),           Nullable         ] public bool?      Payed       { get; set; } // boolean
-		[Column("therapist_id"),              NotNull] public Guid       TherapistId { get; set; } // uuid
-		[Column("text"),            Nullable         ] public string     Text        { get; set; } // text
-		[Column("title"),                     NotNull] public string     Title       { get; set; } // character varying(25)
-		[Column("deleted"),         Nullable         ] public bool?      Deleted     { get; set; } // boolean
+		[Column("id"),                  PrimaryKey,  NotNull] public Guid       Id                { get; set; } // uuid
+		[Column("date"),                             NotNull] public NpgsqlDate Date              { get; set; } // date
+		[Column("discount"),               Nullable         ] public double?    Discount          { get; set; } // double precision
+		[Column("payed"),                            NotNull] public bool       Payed             { get; set; } // boolean
+		[Column("therapist_id"),                     NotNull] public Guid       TherapistId       { get; set; } // uuid
+		[Column("text"),                   Nullable         ] public string     Text              { get; set; } // text
+		[Column("title"),                            NotNull] public string     Title             { get; set; } // character varying(25)
+		[Column("tax_stamp"),                        NotNull] public bool       TaxStamp          { get; set; } // boolean
+		[Column("proforma_invoice_id"),    Nullable         ] public Guid?      ProformaInvoiceId { get; set; } // uuid
 
 		#region Associations
+
+		/// <summary>
+		/// invoices_proforma_invoice_id_fkey
+		/// </summary>
+		[Association(ThisKey="ProformaInvoiceId", OtherKey="Id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="invoices_proforma_invoice_id_fkey", BackReferenceName="Invoicesproformainvoiceidfkeys")]
+		public ProformaInvoice ProformaInvoice { get; set; }
+
+		/// <summary>
+		/// proforma_invoices_invoice_id_fkey_BackReference
+		/// </summary>
+		[Association(ThisKey="Id", OtherKey="InvoiceId", CanBeNull=true, Relationship=Relationship.OneToMany, IsBackReference=true)]
+		public IEnumerable<ProformaInvoice> Proformainvoiceidfkeys { get; set; }
 
 		/// <summary>
 		/// invoices_therapist_id_fkey
@@ -1611,6 +1627,50 @@ namespace DataModels
 		/// </summary>
 		[Association(ThisKey="TherapistId", OtherKey="Id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="price_lists_therapist_id_fkey", BackReferenceName="Priceliststherapistidfkeys")]
 		public Therapist Therapist { get; set; }
+
+		#endregion
+	}
+
+	[Table(Schema="public", Name="proforma_invoices")]
+	public partial class ProformaInvoice
+	{
+		[Column("id"),           PrimaryKey,  NotNull] public Guid        Id          { get; set; } // uuid
+		[Column("date"),                      NotNull] public NpgsqlDate  Date        { get; set; } // date
+		[Column("discount"),        Nullable         ] public double?     Discount    { get; set; } // double precision
+		[Column("payed"),                     NotNull] public bool        Payed       { get; set; } // boolean
+		[Column("payed_date"),      Nullable         ] public NpgsqlDate? PayedDate   { get; set; } // date
+		[Column("tax_stamp"),                 NotNull] public bool        TaxStamp    { get; set; } // boolean
+		[Column("therapist_id"),              NotNull] public Guid        TherapistId { get; set; } // uuid
+		[Column("title"),                     NotNull] public string      Title       { get; set; } // character varying(25)
+		[Column("deleted"),                   NotNull] public bool        Deleted     { get; set; } // boolean
+		[Column("text"),            Nullable         ] public string      Text        { get; set; } // text
+		[Column("invoice_id"),      Nullable         ] public Guid?       InvoiceId   { get; set; } // uuid
+
+		#region Associations
+
+		/// <summary>
+		/// proforma_invoices_invoice_id_fkey
+		/// </summary>
+		[Association(ThisKey="InvoiceId", OtherKey="Id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="proforma_invoices_invoice_id_fkey", BackReferenceName="Proformainvoiceidfkeys")]
+		public Invoice Invoice { get; set; }
+
+		/// <summary>
+		/// invoices_proforma_invoice_id_fkey_BackReference
+		/// </summary>
+		[Association(ThisKey="Id", OtherKey="ProformaInvoiceId", CanBeNull=true, Relationship=Relationship.OneToMany, IsBackReference=true)]
+		public IEnumerable<Invoice> Invoicesproformainvoiceidfkeys { get; set; }
+
+		/// <summary>
+		/// proforma_invoices_therapist_id_fkey
+		/// </summary>
+		[Association(ThisKey="TherapistId", OtherKey="Id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="proforma_invoices_therapist_id_fkey", BackReferenceName="Proformainvoicestherapistidfkeys")]
+		public Therapist Therapist { get; set; }
+
+		/// <summary>
+		/// visits_proforma_invoice_id_fkey_BackReference
+		/// </summary>
+		[Association(ThisKey="Id", OtherKey="ProformaInvoiceId", CanBeNull=true, Relationship=Relationship.OneToMany, IsBackReference=true)]
+		public IEnumerable<Visit> Visitsproformainvoiceidfkeys { get; set; }
 
 		#endregion
 	}
@@ -1800,16 +1860,19 @@ namespace DataModels
 	[Table(Schema="public", Name="therapists")]
 	public partial class Therapist
 	{
-		[Column("id"),              PrimaryKey,  NotNull] public Guid   Id             { get; set; } // uuid
-		[Column("address"),            Nullable         ] public string Address        { get; set; } // character varying(256)
-		[Column("full_name"),                    NotNull] public string FullName       { get; set; } // character varying(45)
-		[Column("tax_number"),         Nullable         ] public string TaxNumber      { get; set; } // character varying(45)
-		[Column("fiscal_code"),        Nullable         ] public string FiscalCode     { get; set; } // character varying(45)
-		[Column("iban"),               Nullable         ] public string Iban           { get; set; } // character varying(45)
-		[Column("postit"),             Nullable         ] public string Postit         { get; set; } // text
-		[Column("invoices_folder"),    Nullable         ] public string InvoicesFolder { get; set; } // text
-		[Column("privacy_folder"),     Nullable         ] public string PrivacyFolder  { get; set; } // text
-		[Column("email"),              Nullable         ] public string Email          { get; set; } // text
+		[Column("id"),               PrimaryKey,  NotNull] public Guid   Id              { get; set; } // uuid
+		[Column("address"),             Nullable         ] public string Address         { get; set; } // character varying(256)
+		[Column("full_name"),                     NotNull] public string FullName        { get; set; } // character varying(45)
+		[Column("tax_number"),          Nullable         ] public string TaxNumber       { get; set; } // character varying(45)
+		[Column("fiscal_code"),         Nullable         ] public string FiscalCode      { get; set; } // character varying(45)
+		[Column("iban"),                Nullable         ] public string Iban            { get; set; } // character varying(45)
+		[Column("postit"),              Nullable         ] public string Postit          { get; set; } // text
+		[Column("invoices_folder"),     Nullable         ] public string InvoicesFolder  { get; set; } // text
+		[Column("privacy_folder"),      Nullable         ] public string PrivacyFolder   { get; set; } // text
+		[Column("email"),               Nullable         ] public string Email           { get; set; } // text
+		[Column("address_de"),          Nullable         ] public string AddressDe       { get; set; } // text
+		[Column("sqlbackup_folder"),    Nullable         ] public string SqlbackupFolder { get; set; } // text
+		[Column("aifi"),                Nullable         ] public string Aifi            { get; set; } // text
 
 		#region Associations
 
@@ -1830,6 +1893,12 @@ namespace DataModels
 		/// </summary>
 		[Association(ThisKey="Id", OtherKey="TherapistId", CanBeNull=true, Relationship=Relationship.OneToMany, IsBackReference=true)]
 		public IEnumerable<PriceList> Priceliststherapistidfkeys { get; set; }
+
+		/// <summary>
+		/// proforma_invoices_therapist_id_fkey_BackReference
+		/// </summary>
+		[Association(ThisKey="Id", OtherKey="TherapistId", CanBeNull=true, Relationship=Relationship.OneToMany, IsBackReference=true)]
+		public IEnumerable<ProformaInvoice> Proformainvoicestherapistidfkeys { get; set; }
 
 		/// <summary>
 		/// treatments_therapist_id_fkey_BackReference
@@ -1874,18 +1943,21 @@ namespace DataModels
 	[Table(Schema="public", Name="visits")]
 	public partial class Visit
 	{
-		[Column("id"),                 PrimaryKey,  NotNull] public Guid       Id                { get; set; } // uuid
-		[Column("date"),                            NotNull] public NpgsqlDate Date              { get; set; } // date
-		[Column("customer_id"),                     NotNull] public Guid       CustomerId        { get; set; } // uuid
-		[Column("invoice_id"),            Nullable         ] public Guid?      InvoiceId         { get; set; } // uuid
-		[Column("therapist_id"),                    NotNull] public Guid       TherapistId       { get; set; } // uuid
-		[Column("price"),                 Nullable         ] public double?    Price             { get; set; } // double precision
-		[Column("duration"),              Nullable         ] public int?       Duration          { get; set; } // integer
-		[Column("invoiced"),              Nullable         ] public bool?      Invoiced          { get; set; } // boolean
-		[Column("payed"),                 Nullable         ] public bool?      Payed             { get; set; } // boolean
-		[Column("initial_evaluetion"),    Nullable         ] public string     InitialEvaluetion { get; set; } // text
-		[Column("final_evaluetion"),      Nullable         ] public string     FinalEvaluetion   { get; set; } // text
-		[Column("start_time"),            Nullable         ] public string     StartTime         { get; set; } // character varying(45)
+		[Column("id"),                  PrimaryKey,  NotNull] public Guid       Id                { get; set; } // uuid
+		[Column("date"),                             NotNull] public NpgsqlDate Date              { get; set; } // date
+		[Column("customer_id"),                      NotNull] public Guid       CustomerId        { get; set; } // uuid
+		[Column("invoice_id"),             Nullable         ] public Guid?      InvoiceId         { get; set; } // uuid
+		[Column("therapist_id"),                     NotNull] public Guid       TherapistId       { get; set; } // uuid
+		[Column("price"),                  Nullable         ] public double?    Price             { get; set; } // double precision
+		[Column("duration"),               Nullable         ] public string     Duration          { get; set; } // character varying(45)
+		[Column("invoiced"),                         NotNull] public bool       Invoiced          { get; set; } // boolean
+		[Column("payed"),                            NotNull] public bool       Payed             { get; set; } // boolean
+		[Column("initial_evaluetion"),     Nullable         ] public string     InitialEvaluetion { get; set; } // text
+		[Column("final_evaluetion"),       Nullable         ] public string     FinalEvaluetion   { get; set; } // text
+		[Column("start_time"),             Nullable         ] public string     StartTime         { get; set; } // character varying(45)
+		[Column("deleted"),                Nullable         ] public bool?      Deleted           { get; set; } // boolean
+		[Column("proforma_invoice_id"),    Nullable         ] public Guid?      ProformaInvoiceId { get; set; } // uuid
+		[Column("proforma_invoiced"),                NotNull] public bool       ProformaInvoiced  { get; set; } // boolean
 
 		#region Associations
 
@@ -1900,6 +1972,12 @@ namespace DataModels
 		/// </summary>
 		[Association(ThisKey="InvoiceId", OtherKey="Id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="visits_invoice_id_fkey", BackReferenceName="Visitsinvoiceidfkeys")]
 		public Invoice Invoice { get; set; }
+
+		/// <summary>
+		/// visits_proforma_invoice_id_fkey
+		/// </summary>
+		[Association(ThisKey="ProformaInvoiceId", OtherKey="Id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="visits_proforma_invoice_id_fkey", BackReferenceName="Visitsproformainvoiceidfkeys")]
+		public ProformaInvoice ProformaInvoice { get; set; }
 
 		/// <summary>
 		/// visits_therapist_id_fkey
@@ -25743,6 +25821,12 @@ namespace DataModels
 		}
 
 		public static PriceList Find(this ITable<PriceList> table, Guid Id)
+		{
+			return table.FirstOrDefault(t =>
+				t.Id == Id);
+		}
+
+		public static ProformaInvoice Find(this ITable<ProformaInvoice> table, Guid Id)
 		{
 			return table.FirstOrDefault(t =>
 				t.Id == Id);

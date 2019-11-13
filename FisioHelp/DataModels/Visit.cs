@@ -22,6 +22,8 @@ namespace FisioHelp.DataModels
     [Column("final_evaluetion"), Nullable] public string FinalEvaluetion { get; set; } // text
     [Column("start_time"), Nullable] public string StartTime { get; set; } // character varying(45)
     [Column("deleted"), NotNull] public bool Deleted { get; set; } // boolean
+    [Column("proforma_invoice_id"), Nullable] public Guid? ProformaInvoiceId { get; set; } // uuid
+    [Column("proforma_invoiced"), NotNull] public bool ProformaInvoiced { get; set; } // boolean
 
     public bool HasInvoice()
     {
@@ -84,6 +86,12 @@ namespace FisioHelp.DataModels
     /// </summary>
     [Association(ThisKey = "Id", OtherKey = "VisitId", CanBeNull = true, Relationship = Relationship.OneToMany, IsBackReference = true)]
     public IEnumerable<VisitsTreatment> Treatmentsvisitidfkeys { get; set; }
+
+    /// <summary>
+    /// visits_proforma_invoice_id_fkey
+    /// </summary>
+    [Association(ThisKey = "ProformaInvoiceId", OtherKey = "Id", CanBeNull = true, Relationship = Relationship.ManyToOne, KeyName = "visits_proforma_invoice_id_fkey", BackReferenceName = "Visitsproformainvoiceidfkeys")]
+    public ProformaInvoice ProformaInvoice { get; set; }
 
     #endregion
   }

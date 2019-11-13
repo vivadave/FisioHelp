@@ -15,41 +15,65 @@ namespace FisioHelp.UI
   public partial class InvoiceCtrl : UserControl
   {
     public event EventHandler DeletedInvoice;
-    public DataModels.Invoice Invoice { get; set; }
+    public DataModels.ProformaInvoice ProformaInvoice { get; set; }
     private DataModels.Customer _customer { get; set; }
     private DataModels.Therapist _therapist { get; set; }
     private const int LineHeight = 20;
     private bool _edit = false;
     private ToolTip _printInvoiceTT = new ToolTip();
+    private ToolTip _printProInvoiceTT = new ToolTip();
+    private bool _initialization = true;
 
-    public InvoiceCtrl(DataModels.Invoice invoice, bool edit = false)
+    public InvoiceCtrl(DataModels.ProformaInvoice proformaInvoice, bool edit = false)
     {
       InitializeComponent();
-      Invoice = invoice;
+      ProformaInvoice = proformaInvoice;
       _edit = edit;
-      _printInvoiceTT.SetToolTip(this.buttonPrinter, "Stampa la fattura");
-      
+      _printProInvoiceTT.SetToolTip(this.buttonPrintProformaInvoice, "Stampa la fattura proforma");
+      _printInvoiceTT.SetToolTip(this.buttonPrintInvoice, "Stampa la fattura");
+
       using (var db = new Db.PhisioDB())
       {
+        ProformaInvoice.Invoice = db.Invoices.LoadWith(e1 => e1.Visitsinvoiceidfkeys.First().Treatmentsvisitidfkeys.First().Treatment).LoadWith(e1 => e1.Visitsinvoiceidfkeys.First().Customer.Address).FirstOrDefault(inv => inv.ProformaInvoiceId == ProformaInvoice.Id);
+
         _therapist = db.Therapists.FirstOrDefault();
       }
     }
 
     private void InvoiceCtrl_Load(object sender, EventArgs e)
     {
-      textBoxDiscount.Text = "0";
-      labelName.Text = Invoice.Title;  
+      bool invoiced = ProformaInvoice.Invoice != null;
+      labelInviceName.Text = invoiced ? ProformaInvoice.Invoice.Title : "Non ancora fatturato";
+      labelInviceDate.Text = invoiced ? $"del {((DateTime)ProformaInvoice.Invoice.Date).ToShortDateString()}" : "";
 
-      var aVisit = Invoice.Visitsinvoiceidfkeys.FirstOrDefault();
+      textBoxDiscount.Text = "0";
+      labelName.Text = ProformaInvoice.Title;
+      labelProformaData.Text = $"del {((DateTime)ProformaInvoice.Date).ToShortDateString()}";
+
+      var aVisit = ProformaInvoice.Visitsproformainvoiceidfkeys.FirstOrDefault();
       
       if (_edit)
       {
-        buttonSave.Text = "Cancella";
         textBoxDiscount.ReadOnly = true;
         checkBox1.Enabled = false;
+        checkBoxPayed.Enabled = true;
+
+        if (invoiced)
+        {
+          buttonSave.Visible = false;
+        }
+        else
+        {
+          buttonSave.Text = "Genera Fattura";
+        }
       }
-      if (aVisit != null)
+      else
       {
+        checkBoxPayed.Enabled = false;
+      }
+
+      if (aVisit != null)
+      {        
         using (var db = new Db.PhisioDB())
         {
           var cust = db.Customers.LoadWith(e1 => e1.Address).LoadWith(e1 => e1.Pricelist).FirstOrDefault(x => x.Id == aVisit.Customer.Id);
@@ -60,7 +84,7 @@ namespace FisioHelp.UI
         labelFiscalCode.Text = aVisit.Customer.Fiscalcode;
       }
       var y = 0;
-      foreach ( var visit in Invoice.Visitsinvoiceidfkeys)
+      foreach ( var visit in ProformaInvoice.Visitsproformainvoiceidfkeys)
       {
         Panel panelIn = new Panel();
         panelIn.Dock = DockStyle.Top;
@@ -84,33 +108,30 @@ namespace FisioHelp.UI
         panelIn.Controls.Add(lableTreatment);
 
         Label labelPrice = new Label();
-        labelPrice.Location = new Point((int)(panel1.Width - 198), 0);
+        labelPrice.Location = new Point((int)(panel1.Width - 106), 0);
         labelPrice.Font = new Font("Segoe UI Historic", 11.25F);
         labelPrice.Text = $"{visit.Price} €";
         labelPrice.AutoSize = false;
         labelPrice.Anchor = AnchorStyles.Top | AnchorStyles.Right;
         labelPrice.Size = new Size(60, LineHeight * treatments.Count());
         panelIn.Controls.Add(labelPrice);
-
+        /*
         Label labelPriceRivalsa = new Label();
         labelPriceRivalsa.Location = new Point((int)(panel1.Width - 106), 0);
         labelPriceRivalsa.Font = new Font("Segoe UI Historic", 11.25F);
-        labelPriceRivalsa.Text = $"{((double)visit.Price * 0.96).ToString("#.00")} €";
+        labelPriceRivalsa.Text = $"{((double)visit.Price * 1).ToString("#.00")} €";
         labelPriceRivalsa.AutoSize = false;
         labelPriceRivalsa.Size = new Size(60, LineHeight * treatments.Count());
         labelPriceRivalsa.Anchor = AnchorStyles.Top | AnchorStyles.Right;
         panelIn.Controls.Add(labelPriceRivalsa);
-
+        */
         panelIn.Location = new Point(0, y);
         panelIn.Size = new Size(panel1.Width, Math.Max(labelVisit.Height, lableTreatment.Height) + 10);
-        
-
-        checkBox1.Checked = Invoice.TaxStamp;
+        checkBox1.Checked = ProformaInvoice.TaxStamp;
 
         y += panelIn.Height;
       }
       var total = CalculateTotal(false);
-      labelRivalsa.Text = (total*0.04).ToString("#.00");
       labelRivalsaSconto.Text = "0";
       if (total > 77.47)
         checkBox1.Checked = true;
@@ -118,6 +139,23 @@ namespace FisioHelp.UI
         checkBox1.Checked = false;
 
       labelTotal.Text = CalculateTotal(true).ToString();
+
+
+      checkBoxPayed.Checked = ProformaInvoice.Payed;
+      if (ProformaInvoice.Payed == true)
+      {
+        dateTimePickerPayed.Enabled = true;
+        dateTimePickerPayed.Value = (DateTime)ProformaInvoice.PayedDate;
+        dateTimePickerPayed.Format = DateTimePickerFormat.Short;
+      }
+      else
+      {
+        dateTimePickerPayed.Enabled = false;
+        dateTimePickerPayed.Format = DateTimePickerFormat.Custom;
+        dateTimePickerPayed.CustomFormat = " ";
+      }
+
+      _initialization = false;
     }
 
     private double CalculateTotal(bool withStamp)
@@ -128,7 +166,7 @@ namespace FisioHelp.UI
 
       var bollo = checkBox1.Checked ? 2 : 0;
 
-      double tot = Invoice.Visitsinvoiceidfkeys.Sum(x => x.Price != null ? (double)x.Price : 0.0) - sconto;
+      double tot = ProformaInvoice.Visitsproformainvoiceidfkeys.Sum(x => x.Price != null ? (double)x.Price : 0.0) - sconto;
       tot = withStamp ? tot + bollo: tot;
 
       return tot ;
@@ -158,8 +196,7 @@ namespace FisioHelp.UI
       if (double.TryParse(textBoxDiscount.Text, out double sc))
         sconto = sc;
 
-      labelRivalsaSconto.Text = "- " + (sconto * .96).ToString("#.00");
-      labelRivalsa.Text = (CalculateTotal(false) * 0.04).ToString("#.00");
+      labelRivalsaSconto.Text = "- " + (sconto * 1).ToString("#.00");
       labelTotal.Text = CalculateTotal(true).ToString();
 
     }
@@ -168,11 +205,12 @@ namespace FisioHelp.UI
     {
       if (_edit)
       {
-        DeleteInvoice();
+        //DeleteInvoice();
+        CreateInvoice();
       }
       else
       {
-        CreateInvoice();
+        CreateProformaInvoice();
       }
     }
 
@@ -181,28 +219,69 @@ namespace FisioHelp.UI
       if (MessageBox.Show("Una volta salvata la fattura non potrà essere modificata!", "Salvataggio", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
         return;
 
-      if (Invoice.Id != null && Invoice.Id != Guid.Empty)
+      if (ProformaInvoice.Invoice != null && ProformaInvoice.Invoice.Id != null && ProformaInvoice.Invoice.Id != Guid.Empty)
       {
         MessageBox.Show("Fattura già salvata", "Salvataggio", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         return;
       }
 
-      Invoice.TaxStamp = checkBox1.Checked;
-      if (double.TryParse(textBoxDiscount.Text, out double disc))
-        Invoice.Discount = disc;
+
+      if (ProformaInvoice.Payed == false)
+      {
+        if (MessageBox.Show("La fattura proforma non è ancora stata pagata, continuare?", "Salvataggio", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.No)
+          return;
+      }
+
+      var invoice = Helper.Helper.CreateNewInvoice(ProformaInvoice.Visitsproformainvoiceidfkeys.ToList(), out string errors);
+
+      invoice.TaxStamp = ProformaInvoice.TaxStamp;
+      invoice.Discount = ProformaInvoice.Discount;
 
       using (var db = new Db.PhisioDB())
       {
-        Invoice.TherapistId = _therapist.Id;
-        var invoiceID = Invoice.SaveToDB();
-        foreach (var visit in Invoice.Visitsinvoiceidfkeys)
+        invoice.TherapistId = ProformaInvoice.TherapistId;
+        invoice.ProformaInvoiceId = ProformaInvoice.Id;
+        ProformaInvoice.Invoice = invoice;
+        ProformaInvoice.InvoiceId = invoice.SaveToDB();
+        ProformaInvoice.SaveToDB();
+        foreach (var visit in ProformaInvoice.Visitsproformainvoiceidfkeys)
         {
           visit.Invoiced = true;
-          visit.InvoiceId = invoiceID;
+          visit.InvoiceId = ProformaInvoice.Invoice.Id;
           visit.SaveToDB();
         }
         MessageBox.Show("Salvato Correttamente", "Salvataggio", MessageBoxButtons.OK, MessageBoxIcon.Information);
         
+      }
+    }
+
+    private void CreateProformaInvoice()
+    {
+      if (MessageBox.Show("Una volta salvata la fattura non potrà essere modificata!", "Salvataggio", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+        return;
+
+      if (ProformaInvoice.Id != null && ProformaInvoice.Id != Guid.Empty)
+      {
+        MessageBox.Show("Fattura già salvata", "Salvataggio", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        return;
+      }
+
+      ProformaInvoice.TaxStamp = checkBox1.Checked;
+      if (double.TryParse(textBoxDiscount.Text, out double disc))
+        ProformaInvoice.Discount = disc;
+
+      using (var db = new Db.PhisioDB())
+      {
+        ProformaInvoice.TherapistId = _therapist.Id;
+        var proformaInvoiceID = ProformaInvoice.SaveToDB();
+        foreach (var visit in ProformaInvoice.Visitsproformainvoiceidfkeys)
+        {
+          visit.ProformaInvoiced = true;
+          visit.ProformaInvoiceId = proformaInvoiceID;
+          visit.SaveToDB();
+        }
+        MessageBox.Show("Salvato Correttamente", "Salvataggio", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
       }
     }
 
@@ -211,7 +290,7 @@ namespace FisioHelp.UI
       if (MessageBox.Show("Sei sicura di voler cancellare la fattura?", "Cancellazione", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
         return;
 
-      if (Invoice.Id == null)
+      if (ProformaInvoice.Id == null)
       {
         MessageBox.Show("Errore la fattura non è stata caricata correttamente!", "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error);
         return;
@@ -219,10 +298,10 @@ namespace FisioHelp.UI
 
       using (var db = new Db.PhisioDB())
       {
-        if (Invoice.Id != null)
+        if (ProformaInvoice.Id != null)
         {
-          Invoice.Deleted = true;
-          foreach (var visit in Invoice.Visitsinvoiceidfkeys)
+          //Invoice.Deleted = true;
+          foreach (var visit in ProformaInvoice.Visitsproformainvoiceidfkeys)
           {
             visit.Payed = false;
             visit.InvoiceId = null;
@@ -231,7 +310,7 @@ namespace FisioHelp.UI
             visit.SaveToDB();
           }
 
-          Invoice.SaveToDB();
+          ProformaInvoice.SaveToDB();
           
           MessageBox.Show("Fattura Eliminata!", "Cancellazione", MessageBoxButtons.OK, MessageBoxIcon.Information);
           DeletedInvoice?.Invoke(this, new EventArgs());
@@ -239,15 +318,15 @@ namespace FisioHelp.UI
       }
     }
 
-    private void buttonPrinter_Click(object sender, EventArgs e)
+    private void PrintInvoice(DataModels.Invoice invoice)
     {
 
-      if (Invoice.Id == null || Invoice.Id == Guid.Empty)
+      if (invoice.Id == null || invoice.Id == Guid.Empty)
       {
-        Invoice.TaxStamp = checkBox1.Checked;
+        invoice.TaxStamp = checkBox1.Checked;
 
         if (double.TryParse(textBoxDiscount.Text, out double disc))
-          Invoice.Discount = disc;
+          invoice.Discount = disc;
 
         MessageBox.Show("Si sta visualizzando un anteprima, ricordarsi di salvare la fattura!", "Salvataggio", MessageBoxButtons.OK, MessageBoxIcon.Information);
       }
@@ -277,14 +356,78 @@ namespace FisioHelp.UI
       else
         html = File.ReadAllText("Template/templateInvoice_it.html");
 
-      html = Helper.Helper.ReplaceInvoicePlaceHolder(html, _customer, Invoice);
-      var basePath = therapist.InvoicesFolder;
-      var date = $"{Invoice.Date.Year}{Invoice.Date.Month}";
+      html = Helper.Helper.ReplaceInvoicePlaceHolder(html, _customer, invoice);
+
+      var basePath = therapist.InvoicesFolder + "_Proforma";
+      var date = $"{ProformaInvoice.Date.Year}{ProformaInvoice.Date.Month}";
+      basePath = Path.Combine(basePath, date);
+
+      Directory.CreateDirectory(basePath);
+      var pdfPath = $@"{basePath}\{invoice.Title.Replace(@"/", "_")}_{_customer.FullName.Replace(" ", "_")}.pdf";
+      var htmlPath = $@"{basePath}\{invoice.Title.Replace("/", "_")}_{_customer.FullName.Replace(" ", "_")}.html";
+      try
+      {
+        File.WriteAllText(htmlPath, html);
+        Helper.PdfManager.CreatePdf(pdfPath, htmlPath);
+      }
+      catch (Exception ee)
+      {
+        MessageBox.Show("Il file è già aperto, chiuderlo", "Stampa", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        return;
+      }
+      //Helper.DriveManagement.InsertFilePdf(pdfPath, new List<string> { "Invoice", date });
+
+      System.Diagnostics.Process.Start(pdfPath);
+
+    }
+
+    private void PrintProforma(DataModels.ProformaInvoice invoice )
+    {
+
+      if (invoice.Id == null || invoice.Id == Guid.Empty)
+      {
+        invoice.TaxStamp = checkBox1.Checked;
+
+        if (double.TryParse(textBoxDiscount.Text, out double disc))
+          invoice.Discount = disc;
+
+        MessageBox.Show("Si sta visualizzando un anteprima, ricordarsi di salvare la fattura!", "Salvataggio", MessageBoxButtons.OK, MessageBoxIcon.Information);
+      }
+
+      DataModels.Therapist therapist = null;
+      using (var db = new Db.PhisioDB())
+      {
+        therapist = db.Therapists.FirstOrDefault();
+      }
+
+      if (therapist == null)
+      {
+        MessageBox.Show("Qualcosa è andato storto non trovo i parametri generali", "Stampa", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        return;
+      }
+
+      if (string.IsNullOrEmpty(therapist.InvoicesFolder))
+      {
+        MessageBox.Show("Prima di proseguire bisogna impostare la cartella di salvataggio delle fatture", "Salvataggio", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        return;
+      }
+
+      string html = "";
+
+      if (_customer.Language == "german")
+        html = File.ReadAllText("Template/templateProformaInvoice_de.html");
+      else
+        html = File.ReadAllText("Template/templateProformaInvoice_it.html");
+
+      html = Helper.Helper.ReplaceProformaInvoicePlaceHolder(html, _customer, invoice);
+
+      var basePath = therapist.InvoicesFolder + "_Proforma";
+      var date = $"{ProformaInvoice.Date.Year}{ProformaInvoice.Date.Month}";
       basePath = Path.Combine(basePath, date);
 
       Directory.CreateDirectory(basePath);      
-      var pdfPath = $@"{basePath}\{Invoice.Title.Replace(@"/", "_")}_{_customer.FullName.Replace(" ", "_")}.pdf";
-      var htmlPath = $@"{basePath}\{Invoice.Title.Replace("/", "_")}_{_customer.FullName.Replace(" ", "_")}.html";
+      var pdfPath = $@"{basePath}\{invoice.Title.Replace(@"/", "_")}_{_customer.FullName.Replace(" ", "_")}.pdf";
+      var htmlPath = $@"{basePath}\{invoice.Title.Replace("/", "_")}_{_customer.FullName.Replace(" ", "_")}.html";
       try
       {
         File.WriteAllText(htmlPath, html);
@@ -303,7 +446,7 @@ namespace FisioHelp.UI
 
     private void checkBox1_CheckedChanged(object sender, EventArgs e)
     {
-      Invoice.TaxStamp = checkBox1.Checked;
+      ProformaInvoice.TaxStamp = checkBox1.Checked;
       labelBollo.Text = checkBox1.Checked ? "2" : "0";
       labelTotal.Text = CalculateTotal(true).ToString();
     }
@@ -311,6 +454,55 @@ namespace FisioHelp.UI
     private void textBoxDiscount_TextChanged(object sender, EventArgs e)
     {
 
+    }
+
+    private void buttonPrintProformaInvoice_Click(object sender, EventArgs e)
+    {
+      PrintProforma(ProformaInvoice);
+    }
+
+    private void buttonPrintInvoice_Click(object sender, EventArgs e)
+    {
+      if (ProformaInvoice.Invoice == null)
+      {
+        MessageBox.Show("La fattura non è ancora stata generata", "Stampa", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        return;
+      }
+      PrintInvoice(ProformaInvoice.Invoice);
+    }
+
+    private void checkBox2_CheckedChanged(object sender, EventArgs e)
+    {
+      if (_initialization)
+        return;
+
+      if (checkBoxPayed.Checked == true)
+      {
+        dateTimePickerPayed.Enabled = true;
+        dateTimePickerPayed.Value = DateTime.Now;
+        dateTimePickerPayed.Format = DateTimePickerFormat.Short;
+      }
+      else
+      {
+        dateTimePickerPayed.Enabled = false;
+        dateTimePickerPayed.Format = DateTimePickerFormat.Custom;
+        dateTimePickerPayed.CustomFormat = " ";
+      }
+
+      if (ProformaInvoice.IsInitialized())
+      {
+        ProformaInvoice.Payed = checkBoxPayed.Checked;
+        ProformaInvoice.SaveToDB();
+      }
+    }
+
+    private void dateTimePickerPayed_ValueChanged(object sender, EventArgs e)
+    {
+      if (_initialization)
+        return;
+
+      ProformaInvoice.PayedDate = new NpgsqlTypes.NpgsqlDate(dateTimePickerPayed.Value);
+      ProformaInvoice.SaveToDB();
     }
   }
 }

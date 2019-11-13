@@ -16,8 +16,8 @@ namespace FisioHelp.DataModels
     [Column("therapist_id"), NotNull] public Guid TherapistId { get; set; } // uuid
     [Column("text"), Nullable] public string Text { get; set; } // text
     [Column("title"), NotNull] public string Title { get; set; } // character varying(25)
-    [Column("deleted"), Nullable] public bool? Deleted { get; set; } // boolean
     [Column("tax_stamp"), NotNull] public bool TaxStamp { get; set; } // boolean
+    [Column("proforma_invoice_id"), Nullable] public Guid? ProformaInvoiceId { get; set; } // uuid
 
     public double Total
     {
@@ -54,6 +54,12 @@ namespace FisioHelp.DataModels
       return Helper.DbManagement.SaveToDB(this);
     }
     #region Associations
+
+    /// <summary>
+    /// invoices_proforma_invoice_id_fkey
+    /// </summary>
+    [Association(ThisKey = "ProformaInvoiceId", OtherKey = "Id", CanBeNull = true, Relationship = Relationship.ManyToOne, KeyName = "invoices_proforma_invoice_id_fkey", BackReferenceName = "Invoicesproformainvoiceidfkeys")]
+    public ProformaInvoice ProformaInvoice { get; set; }
 
     /// <summary>
     /// invoices_therapist_id_fkey

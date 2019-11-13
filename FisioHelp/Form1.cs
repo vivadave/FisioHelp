@@ -17,7 +17,7 @@ namespace FisioHelp
   public partial class Form1 : Form
   {
     private Therapist _therapist;
-    List<FisioHelp.DataModels.Customer> customers;
+    List<Customer> customers;
     public Form1()
     {
       Helper.Helper.GenerateDB();
@@ -43,7 +43,7 @@ namespace FisioHelp
         this.splitContainer1.Panel2.Controls.Clear();
         var userForm = new UI.SinglePatientMain(control.Customer);
         userForm.PatientSaved += NewPatient;
-        userForm.Dock = System.Windows.Forms.DockStyle.Fill;
+        userForm.Dock = DockStyle.Fill;
         this.splitContainer1.Panel2.Controls.Add(userForm);
       }
 
@@ -161,14 +161,14 @@ namespace FisioHelp
       OpenInvoice(selectedInvoice);
     }
 
-    private void OpenInvoice(Invoice invoice)
+    private void OpenInvoice(ProformaInvoice proformaInvoice)
     {
       this.splitContainer1.Panel2.Controls.Clear();
-      var userForm = new UI.SinglePatientMain(invoice.Customer);
+      var userForm = new UI.SinglePatientMain(proformaInvoice.Customer);
       userForm.PatientSaved += NewPatient;
       userForm.Dock = System.Windows.Forms.DockStyle.Fill;
       this.splitContainer1.Panel2.Controls.Add(userForm);
-      userForm.OpenInvoice(invoice);
+      userForm.OpenInvoice(proformaInvoice);
     }
 
     private void button1_Click_1(object sender, EventArgs e)

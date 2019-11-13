@@ -37,6 +37,7 @@
       this.label3 = new System.Windows.Forms.Label();
       this.label4 = new System.Windows.Forms.Label();
       this.label5 = new System.Windows.Forms.Label();
+      this.checkBoxProforma = new System.Windows.Forms.CheckBox();
       this.SuspendLayout();
       // 
       // label1
@@ -63,6 +64,7 @@
       // 
       this.checkBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
       this.checkBox1.AutoSize = true;
+      this.checkBox1.Enabled = false;
       this.checkBox1.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F);
       this.checkBox1.ForeColor = System.Drawing.Color.Black;
       this.checkBox1.Location = new System.Drawing.Point(570, 71);
@@ -133,11 +135,26 @@
       this.label5.TabIndex = 7;
       this.label5.Text = "label5";
       // 
+      // checkBoxProforma
+      // 
+      this.checkBoxProforma.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+      this.checkBoxProforma.AutoSize = true;
+      this.checkBoxProforma.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F);
+      this.checkBoxProforma.ForeColor = System.Drawing.Color.Black;
+      this.checkBoxProforma.Location = new System.Drawing.Point(570, 46);
+      this.checkBoxProforma.Name = "checkBoxProforma";
+      this.checkBoxProforma.Size = new System.Drawing.Size(140, 24);
+      this.checkBoxProforma.TabIndex = 8;
+      this.checkBoxProforma.Text = "Fattura Proforma";
+      this.checkBoxProforma.UseVisualStyleBackColor = true;
+      this.checkBoxProforma.CheckedChanged += new System.EventHandler(this.checkBoxProforma_CheckedChanged);
+      // 
       // VisitEconomicCtrl
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.BackColor = System.Drawing.Color.White;
+      this.Controls.Add(this.checkBoxProforma);
       this.Controls.Add(this.label5);
       this.Controls.Add(this.label4);
       this.Controls.Add(this.label3);
@@ -164,5 +181,6 @@
     private System.Windows.Forms.Label label3;
     private System.Windows.Forms.Label label4;
     private System.Windows.Forms.Label label5;
+    private System.Windows.Forms.CheckBox checkBoxProforma;
   }
 }

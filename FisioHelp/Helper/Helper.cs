@@ -40,7 +40,6 @@ namespace FisioHelp.Helper
         Payed = false,
         Text = "",
         Visitsinvoiceidfkeys = visits,
-        Deleted = false,
         Title = invoiceTile,
         TaxStamp = false,
         TherapistId = therapist.Id
@@ -48,6 +47,45 @@ namespace FisioHelp.Helper
 
       message = "";
       return newInvoice;
+    }
+
+    public static DataModels.ProformaInvoice CreateNewProformaInvoice(List<DataModels.Visit> visits, out string message)
+    {
+      if (visits.Any(x => x.Invoiced))
+      {
+        message = "Una delle visite selezionate è già stata fatturata!";
+        return null;
+      }
+
+      if (visits.Any(x => x.Payed) && !visits.All(x => x.Payed))
+      {
+        message = "Non è possibile fatturare un insieme di visite dove solo alcune sono state già pagate";
+        return null;
+      }
+      var invoiceTile = "";
+      Therapist therapist = null;
+      using (var db = new Db.PhisioDB())
+      {
+        var proformaInvoices = db.ProformaInvoices.Where(x => x.Date >= new NpgsqlTypes.NpgsqlDate(DateTime.Now.Year, DateTime.Now.Month, 1)).ToList();
+        invoiceTile = $"{(proformaInvoices.Count + 1).ToString("0000")}/{DateTime.Now.Year}";
+        therapist = db.Therapists.FirstOrDefault();
+      }
+
+      var newProformaInvoice = new DataModels.ProformaInvoice
+      {
+        Date = new NpgsqlTypes.NpgsqlDate(DateTime.Now),
+        Discount = 0,
+        Payed = false,
+        Text = "",
+        Visitsproformainvoiceidfkeys = visits,
+        Title = invoiceTile,
+        TaxStamp = false,
+        TherapistId = therapist.Id,
+        Deleted = false        
+      };
+
+      message = "";
+      return newProformaInvoice;
     }
 
     public static List<string> GetTratmensByIdS(List<Guid> ids, string language)
@@ -90,6 +128,9 @@ namespace FisioHelp.Helper
 
     public static string ReplaceInvoicePlaceHolder(string template, Customer customer, Invoice invoice)
     {
+      double rivalsa = 0;
+      double prezPrieno = 1 - rivalsa;
+
       var therapist = GetTherapist();
 
       var pivaTxt = customer.Language == "german" ? "MwSt.-Nr: " : "Part.IVA : ";
@@ -121,27 +162,85 @@ namespace FisioHelp.Helper
         prestazioniHtml += $@"<div style=""display:inline-block; width: 350px; vertical-align: middle;"">";
         foreach (var treatment in treatments)
           prestazioniHtml += $@"<div>{treatment}</div>";
-        prestazioniHtml += $@"</div><div style=""width: 150px; text-align:right; display:inline-block;"">{(prestazioni.Price.Value * 0.96).ToString("#.00")} €</div>";
+        prestazioniHtml += $@"</div><div style=""width: 150px; text-align:right; display:inline-block;"">{(prestazioni.Price.Value * prezPrieno).ToString("#.00")} €</div>";
       }
 
       prestazioniHtml += "</div>";
       template = template.Replace("{{prestazioni}}", prestazioniHtml);
 
       var sconto = invoice.Discount ?? 0;
-      var total = invoice.Visitsinvoiceidfkeys.Sum(x => x.Price * 0.96) - (sconto * 0.96);
+      var total = invoice.Visitsinvoiceidfkeys.Sum(x => x.Price * prezPrieno) - (sconto * prezPrieno);
       var bollo = invoice.TaxStamp ? 2 : 0;
       var bolloDisplay = bollo > 0 ? "block" : "none";
 
-      var inps = (invoice.Visitsinvoiceidfkeys.Sum(x => x.Price) - sconto) * .04;
       template = template.Replace("{{bollo}}", bollo.ToString());
       template = template.Replace("{{bollo_display}}", bolloDisplay.ToString());
 
-      template = template.Replace("{{sconto}}", (sconto * -0.96).ToString("#.00"));
+      template = template.Replace("{{sconto}}", (sconto * -prezPrieno).ToString("#.00"));
       template = template.Replace("{{sconto_display}}", sconto > 0 ? "block" : "none");
 
       template = template.Replace("{{total}}", total.Value.ToString("#.00"));
-      template = template.Replace("{{inps}}", inps.Value.ToString("#.00"));
-      template = template.Replace("{{total_with_inps}}", (inps + total + bollo).Value.ToString("#.00"));
+      template = template.Replace("{{total_with_inps}}", (total + bollo).Value.ToString("#.00"));
+
+      return template;
+    }
+
+    public static string ReplaceProformaInvoicePlaceHolder(string template, Customer customer, ProformaInvoice invoice)
+    {
+      double rivalsa = 0;
+      double prezPrieno = 1 - rivalsa;
+
+      var therapist = GetTherapist();
+
+      var pivaTxt = customer.Language == "german" ? "MwSt.-Nr: " : "Part.IVA : ";
+      var cfTxt = customer.Language == "german" ? "Steuercodex: " : "Cod.fisc.: ";
+
+      template = template.Replace("{{ragione_sociale}}", therapist.FullName);
+      template = template.Replace("{{indirizzo}}", customer.Language == "german" ? therapist.AddressDe.Replace("-", "<br>") : therapist.Address.Replace("-", "<br>"));
+      template = template.Replace("{{partita_iva}}", therapist.TaxNumber);
+      template = template.Replace("{{iban}}", therapist.Iban);
+
+      template = template.Replace("{{invoice_number}}", invoice.Title);
+      template = template.Replace("{{date}}", ((DateTime)invoice.Date).ToShortDateString());
+
+      template = template.Replace("{{customer_name}}", customer.FullName);
+      template = template.Replace("{{customer_address}}", $"{customer.Address?.Address_Column}");
+      template = template.Replace("{{customer_cap}}", $"{customer.Address?.Cap}");
+      template = template.Replace("{{customer_city}}", $"{customer.Address?.City}");
+      template = template.Replace("{{customer_piva}}", string.IsNullOrEmpty(customer.Vat) ? "" : pivaTxt + customer.Vat);
+      template = template.Replace("{{customer_cf}}", string.IsNullOrEmpty(customer.Fiscalcode) ? "" : cfTxt + customer.Fiscalcode);
+
+      var prestazioniHtml = @"<div style=""display: block; padding: 15px 0 15px 0px;"">";
+
+      foreach (var prestazioni in invoice.Visitsproformainvoiceidfkeys)
+      {
+        prestazioniHtml += $@"<div style=""width: 200px; display:inline-block;"">{((DateTime)prestazioni.Date).ToShortDateString()}</div>";
+
+        var treatments = Helper.GetTratmensByIdS(prestazioni.Treatmentsvisitidfkeys.Select(x => x.TreatmentId).ToList(), customer.Language);
+
+        prestazioniHtml += $@"<div style=""display:inline-block; width: 350px; vertical-align: middle;"">";
+        foreach (var treatment in treatments)
+          prestazioniHtml += $@"<div>{treatment}</div>";
+        prestazioniHtml += $@"</div><div style=""width: 150px; text-align:right; display:inline-block;"">{(prestazioni.Price.Value * prezPrieno).ToString("#.00")} €</div>";
+      }
+
+      prestazioniHtml += "</div>";
+      template = template.Replace("{{prestazioni}}", prestazioniHtml);
+
+      var sconto = invoice.Discount ?? 0;
+      var total = invoice.Visitsproformainvoiceidfkeys.Sum(x => x.Price * prezPrieno) - (sconto * prezPrieno);
+      var bollo = invoice.TaxStamp ? 2 : 0;
+      var bolloDisplay = bollo > 0 ? "block" : "none";
+
+      template = template.Replace("{{bollo}}", bollo.ToString());
+      template = template.Replace("{{bollo_display}}", bolloDisplay.ToString());
+
+      template = template.Replace("{{sconto}}", (sconto * -prezPrieno).ToString("#.00"));
+      template = template.Replace("{{sconto_display}}", sconto > 0 ? "block" : "none");
+
+      template = template.Replace("{{total}}", total.Value.ToString("#.00"));
+
+      template = template.Replace("{{total_with_inps}}", (total + bollo).Value.ToString("#.00"));
 
       return template;
     }

@@ -246,7 +246,7 @@ namespace FisioHelp.UI
     private void buttonInvoices_Click(object sender, EventArgs e)
     {
       var errors = "";
-      var invoice = Helper.Helper.CreateNewInvoice(_visitsToInvoice, out errors);
+      var invoice = Helper.Helper.CreateNewProformaInvoice(_visitsToInvoice, out errors);
       if (!string.IsNullOrEmpty(errors))
       {
         MessageBox.Show(errors,"ERRORE", MessageBoxButtons.OK, MessageBoxIcon.Error);

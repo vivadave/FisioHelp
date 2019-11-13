@@ -10,5 +10,10 @@ namespace FisioHelp.DataModels
     [Column("id"), PrimaryKey, NotNull] public Guid Id { get; set; } // uuid
 
     public abstract Guid SaveToDB();
+
+    public bool IsInitialized()
+    {
+      return Id != null && Id != Guid.Empty;
+    }
   }
 }

@@ -10,25 +10,26 @@ namespace FisioHelp.UI
   {
     public event EventHandler OnOpenInvoice;
     public event EventHandler ChangePayed;
-    public DataModels.Invoice Invoice { get; set; }
+    public DataModels.ProformaInvoice ProformaInvoice { get; set; }
     private bool _loaded = false;
     public Customer Customer;
 
-    public InvoiceListItem(DataModels.Invoice invoice, Customer customer)
+    public InvoiceListItem(DataModels.ProformaInvoice invoice, Customer customer)
     {
       InitializeComponent();
-      this.Invoice = invoice;
+      this.ProformaInvoice = invoice;
       Customer = customer;
     }
     private void VisitEconomicCtrl_Load(object sender, EventArgs e)
     {
-      if (Invoice == null) return;
-      label1.Text = ((DateTime)Invoice.Date).ToShortDateString();
-      labelName.Text = Invoice.CustomerName;
-      labelTitle.Text = Invoice.Title;
-      label2.Text = $"{Invoice.Visitsinvoiceidfkeys.ToList().Count.ToString()} visite";
-      label5.Text = $"{Invoice.Total} €";
-      checkBox2.Checked = Invoice.Payed;
+      if (ProformaInvoice == null) return;
+      label1.Text = ((DateTime)ProformaInvoice.Date).ToShortDateString();
+      labelName.Text = ProformaInvoice.CustomerName;
+      labelTitle.Text = ProformaInvoice.Title;
+      labelInvoice.Text = ProformaInvoice.Invoice != null ? ProformaInvoice.Invoice.Title : "NO";
+      label2.Text = $"{ProformaInvoice.Visitsproformainvoiceidfkeys.ToList().Count.ToString()} visite";
+      label5.Text = $"{ProformaInvoice.Total} €";
+      checkBox2.Checked = ProformaInvoice.Payed;
       _loaded = true;
     }
     private void button1_Click(object sender, EventArgs e)
@@ -41,16 +42,16 @@ namespace FisioHelp.UI
       
       using (var db = new Db.PhisioDB())
       {
-        if (Invoice.Id != null)
+        if (ProformaInvoice.Id != null)
         {
-          Invoice.Payed = checkBox2.Checked;
-          foreach (var visit in Invoice.Visitsinvoiceidfkeys)
+          ProformaInvoice.Payed = checkBox2.Checked;
+          foreach (var visit in ProformaInvoice.Visitsproformainvoiceidfkeys)
           {
             visit.Payed = checkBox2.Checked;
             db.Update(visit);
           }
 
-          db.Update(Invoice);
+          db.Update(ProformaInvoice);
           ChangePayed?.Invoke(this, e);
         }
       }

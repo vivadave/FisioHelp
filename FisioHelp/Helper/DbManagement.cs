@@ -5,6 +5,7 @@ using System.Linq;
 using System.Data.SqlClient;
 using System.Text;
 using System.Diagnostics;
+using System.Reflection;
 
 namespace FisioHelp.Helper
 {
@@ -12,18 +13,19 @@ namespace FisioHelp.Helper
   {
     public static Guid SaveToDB<T>(T model)
     {
-      var a = model as DataModels.BaseModel;
+      var propertyInfo = typeof(T).GetProperty("Id");
+      var id = (Guid)propertyInfo.GetValue(model);
       using (var db = new Db.PhisioDB())
       {
-        if (a.Id != null && a.Id != Guid.Empty)
+        if (id != null && id != Guid.Empty)
           db.Update(model);
         else
         {
-          a.Id = Guid.NewGuid();
-          a.Id = Guid.Parse(db.InsertWithIdentity(model).ToString());
+          propertyInfo.SetValue(model, Guid.NewGuid());
+          id = Guid.Parse(db.InsertWithIdentity(model).ToString());
         }
 
-        return a.Id;
+        return id;
       }
     }
 

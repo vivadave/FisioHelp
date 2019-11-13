@@ -15,15 +15,15 @@ namespace FisioHelp.UI
     private DateTime _dateToFilter;
     private int _filterPayed = 0;
     private string[] _comboBoxValues = new string[] { "Tutti", "Sì", "No" };
-    private List<DataModels.Invoice> _invoices;
-    public DataModels.Invoice SelectedInvoice { get; set; }
+    private List<DataModels.ProformaInvoice> _proformaInvoices;
+    public DataModels.ProformaInvoice SelectedInvoice { get; set; }
     public DataModels.Customer Customer;
 
     public InvoiceListCtrl(DataModels.Customer customer)
     {
       Customer = customer;
       InitializeComponent();
-      _invoices = new List<DataModels.Invoice>();
+      _proformaInvoices = new List<DataModels.ProformaInvoice>();
 
       dateTimePickerfrom.ValueChanged -= dateTimePickerfrom_ValueChanged;
       dateTimePickerfrom.Format = DateTimePickerFormat.Custom;
@@ -36,6 +36,10 @@ namespace FisioHelp.UI
       dateTimePickerTo.CustomFormat = "dd/MM/yyyy";
       comboBoxPayed.Items.AddRange(_comboBoxValues);
       comboBoxPayed.SelectedItem = _comboBoxValues[0];
+
+      InvoiceListHeader invoiceListHeader = new InvoiceListHeader();
+      invoiceListHeader.Dock = DockStyle.Top;
+      panel2.Controls.Add(invoiceListHeader);
       panel2.Width = this.Size.Width;
     }
     
@@ -63,9 +67,9 @@ namespace FisioHelp.UI
 
     private void CalculateTotals()
     {
-      labelTotNr.Text = "Totale fatture: " + _invoices.Count.ToString();
-      labelTotMoney.Text = "Totale guadagno: " + _invoices.Sum(x => x.Total).ToString() + " €";
-      labelTotPayed.Text = "Totale incasso: " + _invoices.Where(x => x.Payed == true).Sum(x => x.Total).ToString() + " €";    
+      labelTotNr.Text = "Totale fatture: " + _proformaInvoices.Count.ToString();
+      labelTotMoney.Text = "Totale guadagno: " + _proformaInvoices.Sum(x => x.Total).ToString() + " €";
+      labelTotPayed.Text = "Totale incasso: " + _proformaInvoices.Where(x => x.Payed == true).Sum(x => x.Total).ToString() + " €";    
     }
 
     private void comboBoxInvoice_SelectedIndexChanged(object sender, EventArgs e)
@@ -93,11 +97,16 @@ namespace FisioHelp.UI
       {
         Guid? custId = Customer?.Id;
 
-        _invoices = db.Invoices.LoadWith(e1 => e1.Visitsinvoiceidfkeys.First().Treatmentsvisitidfkeys.First().Treatment).LoadWith(e1 => e1.Visitsinvoiceidfkeys.First().Customer.Address)
-          .Where(x =>  x.Visitsinvoiceidfkeys.Any(xx=>xx.CustomerId == custId) || custId == null)
-          .Where(x=> x.Date >= new NpgsqlTypes.NpgsqlDate(_dateFromFilter) && x.Date < new NpgsqlTypes.NpgsqlDate(_dateToFilter.AddDays(1)) && x.Deleted != true)
+        _proformaInvoices = db.ProformaInvoices.LoadWith(e1 => e1.Visitsproformainvoiceidfkeys.First().Treatmentsvisitidfkeys.First().Treatment).LoadWith(e1 => e1.Visitsproformainvoiceidfkeys.First().Customer.Address).LoadWith(x=>x.Invoice)
+          .Where(x =>  x.Visitsproformainvoiceidfkeys.Any(xx=>xx.CustomerId == custId) || custId == null)
+          .Where(x => x.Date >= new NpgsqlTypes.NpgsqlDate(_dateFromFilter) && x.Date < new NpgsqlTypes.NpgsqlDate(_dateToFilter.AddDays(1)))
           .ToList();
-        _invoices = _invoices.OrderBy(x => x.Date).ToList();
+        _proformaInvoices = _proformaInvoices.OrderBy(x => x.Date).OrderBy(x => x.Invoice == null).ToList();
+
+        if (_filterPayed > 0)
+        {
+          _proformaInvoices = _proformaInvoices.Where(x => x.Payed == (_filterPayed == 1)).ToList();
+        }
       }
     }
 
@@ -115,9 +124,9 @@ namespace FisioHelp.UI
       Color[] colors = { Color.FromArgb(255, 255, 255), Color.FromArgb(255, 241, 240) };
 
 
-      foreach (var invoice in _invoices)
+      foreach (var proformaInvoice in _proformaInvoices)
       {
-        var invoiceListItem = new UI.InvoiceListItem(invoice, Customer);
+        var invoiceListItem = new UI.InvoiceListItem(proformaInvoice, Customer);
         invoiceListItem.Location = new Point(0, pos);
         //visitEconomic.Size = new Size(this.Width, 120);
         invoiceListItem.Dock = DockStyle.Top;
@@ -137,7 +146,7 @@ namespace FisioHelp.UI
     private void OnOpenInvoice(object sender, EventArgs e)
     { 
       var invCtrl = (UI.InvoiceListItem)sender;
-      SelectedInvoice = invCtrl.Invoice;
+      SelectedInvoice = invCtrl.ProformaInvoice;
       
       OpenInvoice?.Invoke(this, e);
     }

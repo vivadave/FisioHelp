@@ -30,7 +30,8 @@ namespace FisioHelp.UI
       label5.Text = $"{Visit.Price} €";
       checkBox2.Checked = Visit.Payed;
       checkBox1.Checked = Visit.Invoiced;
-      Invoiced = checkBox1.Checked;
+      checkBoxProforma.Checked = Visit.ProformaInvoiced;
+      Invoiced = checkBoxProforma.Checked;
       _loaded = true;
     }
 
@@ -83,13 +84,31 @@ namespace FisioHelp.UI
         return;
       }
 
-      Invoiced = checkBox1.Checked;
-      ChangeInvoiced?.Invoke(this, e);
-      if (Invoiced)
-        checkBox1.ForeColor = System.Drawing.Color.Coral;
-      else
-        checkBox1.ForeColor = System.Drawing.Color.Black;
     }
 
+    private void checkBoxProforma_CheckedChanged(object sender, EventArgs e)
+    {
+      if (!_loaded) return;
+      if (_autoClick)
+      {
+        _autoClick = false;
+        return;
+      }
+      if (Visit.Invoiced)
+      {
+        _autoClick = true;
+        MessageBox.Show("Eliminare la fattura per questa visita dalla lista fatture", "Fatturazione", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        checkBoxProforma.Checked = true;
+        return;
+      }
+
+      Invoiced = checkBoxProforma.Checked;
+      ChangeInvoiced?.Invoke(this, e);
+      if (Invoiced)
+        checkBoxProforma.ForeColor = System.Drawing.Color.Coral;
+      else
+        checkBoxProforma.ForeColor = System.Drawing.Color.Black;
+
+    }
   }
 }
