@@ -116,7 +116,6 @@ C:\Progetti\FisioHelp\FisioHelp\obj\Debug\FisioHelp.exe.config
 C:\Progetti\FisioHelp\FisioHelp\obj\Debug\FisioHelp.Form1.resources
 C:\Progetti\FisioHelp\FisioHelp\obj\Debug\FisioHelp.Properties.Resources.resources
 C:\Progetti\FisioHelp\FisioHelp\obj\Debug\FisioHelp.csproj.GenerateResource.cache
-C:\Progetti\FisioHelp\FisioHelp\obj\Debug\FisioHelp.csproj.CoreCompileInputs.cache
 C:\Progetti\FisioHelp\FisioHelp\obj\Debug\FisioHelp.csproj.CopyComplete
 C:\Progetti\FisioHelp\FisioHelp\obj\Debug\FisioHelp.exe
 C:\Progetti\FisioHelp\FisioHelp\obj\Debug\FisioHelp.pdb

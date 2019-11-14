@@ -60,6 +60,13 @@ namespace FisioHelp.Helper
 
     public static void DeleteInFolder(string folder, FileType fileType , int olderThenDays)
     {
+
+        if (!Helper.CheckForInternetConnection())
+        {
+            //"ERROR: no internet connection"
+            return;
+        }
+
       var service = Connect();
       var listRequest = service.Files.List();
       var mimeType = _applicationType[(int)fileType];

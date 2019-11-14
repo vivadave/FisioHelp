@@ -86,6 +86,7 @@ namespace FisioHelp
         customers = customers.OrderByDescending(x => x.FullName).ToList();
         customers.Add(null);
         this.panel2.Controls.Clear();
+                var panelHeight = 0;
         foreach (var customer in customers)
         {
           var listItemName = new UI.PatientListItem(customer);
@@ -97,7 +98,9 @@ namespace FisioHelp
           if (customer == null)
             listItemName.BackColor = Color.FromArgb(255, 236, 236);
           this.panel2.Controls.Add(listItemName);
-        }
+          panelHeight += 75;
+        }        
+        this.panel2.Size = new Size(this.panel4.Size.Width - 10, panelHeight);
       }
     }
 

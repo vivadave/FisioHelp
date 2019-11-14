@@ -146,12 +146,17 @@ namespace FisioHelp.Helper
 
       template = template.Replace("{{customer_name}}", customer.FullName);
       template = template.Replace("{{customer_address}}", $"{customer.Address?.Address_Column}");
-      template = template.Replace("{{customer_cap}}", $"{customer.Address?.Cap}");
-      template = template.Replace("{{customer_city}}", $"{customer.Address?.City}");
-      template = template.Replace("{{customer_piva}}", string.IsNullOrEmpty(customer.Vat) ? "" : pivaTxt + customer.Vat);
-      template = template.Replace("{{customer_cf}}", string.IsNullOrEmpty(customer.Fiscalcode) ? "" : cfTxt + customer.Fiscalcode);
+        template = template.Replace("{{address_display}}", $"{(string.IsNullOrEmpty(customer.Address?.Address_Column) ? "none" : "inherit")}");
+        template = template.Replace("{{customer_cap}}", $"{customer.Address?.Cap}");
+        template = template.Replace("{{cap_display}}", $"{(string.IsNullOrEmpty(customer.Address?.Cap) ? "none" : "inherit")}");
+        template = template.Replace("{{customer_city}}", $"{customer.Address?.City}");
+        template = template.Replace("{{city_display}}", $"{(string.IsNullOrEmpty(customer.Address?.City) ? "none" : "inherit")}");
+        template = template.Replace("{{customer_piva}}", string.IsNullOrEmpty(customer.Vat) ? "" : pivaTxt + customer.Vat);
+        template = template.Replace("{{piva_display}}", $"{(string.IsNullOrEmpty(customer.Vat) ? "none" : "inherit")}");
+        template = template.Replace("{{customer_cf}}", string.IsNullOrEmpty(customer.Fiscalcode) ? "" : cfTxt + customer.Fiscalcode);
+        template = template.Replace("{{cf_display}}", $"{(string.IsNullOrEmpty(customer.Fiscalcode) ? "none" : "inherit")}");
 
-      var prestazioniHtml = @"<div style=""display: block; padding: 15px 0 15px 0px;"">";
+        var prestazioniHtml = @"<div style=""display: block; padding: 15px 0 15px 0px;"">";
 
       foreach (var prestazioni in invoice.Visitsinvoiceidfkeys)
       {
@@ -198,19 +203,24 @@ namespace FisioHelp.Helper
       template = template.Replace("{{ragione_sociale}}", therapist.FullName);
       template = template.Replace("{{indirizzo}}", customer.Language == "german" ? therapist.AddressDe.Replace("-", "<br>") : therapist.Address.Replace("-", "<br>"));
       template = template.Replace("{{partita_iva}}", therapist.TaxNumber);
-      template = template.Replace("{{iban}}", therapist.Iban);
+      template = template.Replace("{{iban}}", therapist.Iban); 
 
-      template = template.Replace("{{invoice_number}}", invoice.Title);
+       template = template.Replace("{{invoice_number}}", invoice.Title);
       template = template.Replace("{{date}}", ((DateTime)invoice.Date).ToShortDateString());
 
       template = template.Replace("{{customer_name}}", customer.FullName);
-      template = template.Replace("{{customer_address}}", $"{customer.Address?.Address_Column}");
-      template = template.Replace("{{customer_cap}}", $"{customer.Address?.Cap}");
-      template = template.Replace("{{customer_city}}", $"{customer.Address?.City}");
-      template = template.Replace("{{customer_piva}}", string.IsNullOrEmpty(customer.Vat) ? "" : pivaTxt + customer.Vat);
-      template = template.Replace("{{customer_cf}}", string.IsNullOrEmpty(customer.Fiscalcode) ? "" : cfTxt + customer.Fiscalcode);
+        template = template.Replace("{{customer_address}}", $"{customer.Address?.Address_Column}");
+        template = template.Replace("{{address_display}}", $"{(string.IsNullOrEmpty(customer.Address?.Address_Column) ? "none" : "inherit")}");
+        template = template.Replace("{{customer_cap}}", $"{customer.Address?.Cap}");
+        template = template.Replace("{{cap_display}}", $"{(string.IsNullOrEmpty(customer.Address?.Cap) ? "none" : "inherit")}");
+        template = template.Replace("{{customer_city}}", $"{customer.Address?.City}");
+        template = template.Replace("{{city_display}}", $"{(string.IsNullOrEmpty(customer.Address?.City) ? "none" : "inherit")}");
+        template = template.Replace("{{customer_piva}}", string.IsNullOrEmpty(customer.Vat) ? "" : pivaTxt + customer.Vat);
+        template = template.Replace("{{piva_display}}", $"{(string.IsNullOrEmpty(customer.Vat) ? "none" : "inherit")}");
+        template = template.Replace("{{customer_cf}}", string.IsNullOrEmpty(customer.Fiscalcode) ? "" : cfTxt + customer.Fiscalcode);
+        template = template.Replace("{{cf_display}}", $"{(string.IsNullOrEmpty(customer.Fiscalcode) ? "none" : "inherit")}");
 
-      var prestazioniHtml = @"<div style=""display: block; padding: 15px 0 15px 0px;"">";
+        var prestazioniHtml = @"<div style=""display: block; padding: 15px 0 15px 0px;"">";
 
       foreach (var prestazioni in invoice.Visitsproformainvoiceidfkeys)
       {

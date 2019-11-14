@@ -29,11 +29,11 @@
                 <div style="text-align: initial;">
                     An<br>
                     <strong>{{customer_name}}</strong><br>
-                    {{customer_address}}<br>
-                    {{customer_cap}}<br>
-                    {{customer_city}}<br>
-                    {{customer_cf}}<br>
-                    {{customer_piva}}
+                    <span style="display: {{address_display}}">{{customer_address}}<br></span>
+                    <span style="display: {{cap_display}}">{{customer_cap}}<br></span>
+                    <span style="display: {{city_display}}">{{customer_city}}<br></span>
+                    <span style="display: {{cf_display}}">{{customer_cf}}<br></span>
+                    <span style="display: {{piva_display}}">{{customer_piva}}</span>
                 </div>
             </div>
         </div>
@@ -82,7 +82,7 @@
                 <div>Bei Zahlung bitte Patientenname angeben</strong></div>
             </div>
 
-            <div style="padding: 25px 0 25px 0px; width: 500px; font-size: 12px;">
+            <div style="padding: 15px 0 0px 0px; width: 500px; font-size: 12px;">
                 Il presente documento non costituisce in maniera assoluta fattura ai sensi dell’art. 21 del D.P.R. 633/72 e quindi non genera esigibilità di imposta per il prestatore.
             </div>
         </div>

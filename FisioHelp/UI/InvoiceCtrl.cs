@@ -33,10 +33,14 @@ namespace FisioHelp.UI
       _printProInvoiceTT.SetToolTip(this.buttonPrintProformaInvoice, "Stampa la fattura proforma");
       _printInvoiceTT.SetToolTip(this.buttonPrintInvoice, "Stampa la fattura");
 
+       ProformaInvoice.Visitsproformainvoiceidfkeys = ProformaInvoice.Visitsproformainvoiceidfkeys.Where(x=>x.Deleted == false);
+
+
       using (var db = new Db.PhisioDB())
       {
         ProformaInvoice.Invoice = db.Invoices.LoadWith(e1 => e1.Visitsinvoiceidfkeys.First().Treatmentsvisitidfkeys.First().Treatment).LoadWith(e1 => e1.Visitsinvoiceidfkeys.First().Customer.Address).FirstOrDefault(inv => inv.ProformaInvoiceId == ProformaInvoice.Id);
-
+        if(ProformaInvoice.Invoice?.Visitsinvoiceidfkeys != null)
+            ProformaInvoice.Invoice.Visitsinvoiceidfkeys = ProformaInvoice.Invoice.Visitsinvoiceidfkeys.Where(x => x.Deleted == false);
         _therapist = db.Therapists.FirstOrDefault();
       }
     }
