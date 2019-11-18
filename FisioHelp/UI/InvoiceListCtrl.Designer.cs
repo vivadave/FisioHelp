@@ -28,7 +28,9 @@
     /// </summary>
     private void InitializeComponent()
     {
+      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InvoiceListCtrl));
       this.panel1 = new System.Windows.Forms.Panel();
+      this.buttonExcel = new System.Windows.Forms.Button();
       this.label9 = new System.Windows.Forms.Label();
       this.label7 = new System.Windows.Forms.Label();
       this.label6 = new System.Windows.Forms.Label();
@@ -47,6 +49,7 @@
       this.labelTotInvoice = new System.Windows.Forms.Label();
       this.labelTotMoney = new System.Windows.Forms.Label();
       this.labelTotPayed = new System.Windows.Forms.Label();
+      this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
       this.panel1.SuspendLayout();
       this.panel3.SuspendLayout();
       this.tableLayoutPanel1.SuspendLayout();
@@ -57,6 +60,7 @@
       this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
       this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
+      this.panel1.Controls.Add(this.buttonExcel);
       this.panel1.Controls.Add(this.label9);
       this.panel1.Controls.Add(this.label7);
       this.panel1.Controls.Add(this.label6);
@@ -71,6 +75,20 @@
       this.panel1.Name = "panel1";
       this.panel1.Size = new System.Drawing.Size(1017, 85);
       this.panel1.TabIndex = 0;
+      // 
+      // buttonExcel
+      // 
+      this.buttonExcel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.buttonExcel.FlatAppearance.BorderSize = 0;
+      this.buttonExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+      this.buttonExcel.Image = ((System.Drawing.Image)(resources.GetObject("buttonExcel.Image")));
+      this.buttonExcel.Location = new System.Drawing.Point(946, 23);
+      this.buttonExcel.Name = "buttonExcel";
+      this.buttonExcel.Size = new System.Drawing.Size(58, 59);
+      this.buttonExcel.TabIndex = 16;
+      this.buttonExcel.UseVisualStyleBackColor = true;
+      this.buttonExcel.Click += new System.EventHandler(this.buttonExcel_Click);
       // 
       // label9
       // 
@@ -286,6 +304,11 @@
       this.labelTotPayed.Text = "#";
       this.labelTotPayed.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
       // 
+      // saveFileDialog1
+      // 
+      this.saveFileDialog1.DefaultExt = "xlsx";
+      this.saveFileDialog1.Filter = "Excel files|*.xlsx";
+      // 
       // InvoiceListCtrl
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -326,5 +349,7 @@
     private System.Windows.Forms.Label label8;
     private System.Windows.Forms.Label label9;
     private System.Windows.Forms.Label label7;
+    private System.Windows.Forms.Button buttonExcel;
+    private System.Windows.Forms.SaveFileDialog saveFileDialog1;
   }
 }

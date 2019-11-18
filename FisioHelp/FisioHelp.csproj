@@ -57,6 +57,10 @@
     <Reference Include="linq2db, Version=2.9.0.0, Culture=neutral, PublicKeyToken=e41013125f9e410a, processorArchitecture=MSIL">
       <HintPath>..\packages\linq2db.2.9.0\lib\net46\linq2db.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1000\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="NetSpell.SpellChecker, Version=2.1.7.41329, Culture=neutral, PublicKeyToken=318b389f0db66e46">
       <HintPath>..\packages\NetSpell.2.1.7\lib\NetSpell.SpellChecker.dll</HintPath>
     </Reference>
@@ -159,6 +163,7 @@
     <Compile Include="Helper\BackupManager.cs" />
     <Compile Include="Helper\DbManagement.cs" />
     <Compile Include="Helper\DriveManagement.cs" />
+    <Compile Include="Helper\ExcelManagement.cs" />
     <Compile Include="Helper\GifImage.cs" />
     <Compile Include="Helper\Global.cs" />
     <Compile Include="Helper\Helper.cs" />
@@ -431,7 +436,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="LinqToDB.Templates\CopyMe.PostgreSQL.tt.txt" />

@@ -195,3 +195,4 @@ C:\Progetti\FisioHelp\FisioHelp\bin\Debug\sql\dbEliCreate_06.sql
 C:\Progetti\FisioHelp\FisioHelp\bin\Debug\Template\templateProformaInvoice_de.html
 C:\Progetti\FisioHelp\FisioHelp\bin\Debug\Template\templateProformaInvoice_it.html
 C:\Progetti\FisioHelp\FisioHelp\obj\Debug\FisioHelp.UI.InvoiceListHeader.resources
+C:\Progetti\FisioHelp\FisioHelp\obj\Debug\FisioHelp.csproj.CoreCompileInputs.cache

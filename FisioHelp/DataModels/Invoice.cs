@@ -24,6 +24,7 @@ namespace FisioHelp.DataModels
       get
       {
         var discount = Discount != null ? (double)Discount : 0.0;
+        if (Visitsinvoiceidfkeys == null) return 0;
         return Visitsinvoiceidfkeys.Sum(x => x.Price != null ? (double)x.Price : 0.0) - discount;
       }
     }

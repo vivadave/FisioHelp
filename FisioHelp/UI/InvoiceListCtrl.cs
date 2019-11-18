@@ -151,5 +151,21 @@ namespace FisioHelp.UI
       OpenInvoice?.Invoke(this, e);
     }
 
+    private void buttonExcel_Click(object sender, EventArgs e)
+    {
+      if (saveFileDialog1.ShowDialog() != DialogResult.OK)
+        return;
+      var curs = this.Cursor;
+      this.Cursor = Cursors.WaitCursor;
+      var path = saveFileDialog1.FileName;
+      Helper.ExcelManagement.CreateExel(path, _proformaInvoices);
+      this.Cursor = curs;
+      MessageBox.Show("File Salvato!", "Salvataggio", MessageBoxButtons.OK, MessageBoxIcon.Information);
+    }
+
+    private void openFileDialog1_FileOk(object sender, System.ComponentModel.CancelEventArgs e)
+    {
+
+    }
   }
 }
