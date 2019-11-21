@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.IO;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace FisioHelp.Helper
 {
@@ -20,7 +21,7 @@ namespace FisioHelp.Helper
       // set the Chrome path as local variable in powershell and run
       process.StartInfo.Arguments = $@"$chrome='{ chrome }'; & $chrome --headless --print-to-pdf='{pdfPath}' '{htmlPath}'";
       process.Start();
-      Thread.Sleep(1000);
+      Thread.Sleep(1500);
     }
 
   }

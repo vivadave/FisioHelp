@@ -81,7 +81,8 @@ namespace FisioHelp.Helper
         Title = invoiceTile,
         TaxStamp = false,
         TherapistId = therapist.Id,
-        Deleted = false        
+        Deleted = false,
+        GroupVisits = false
       };
 
       message = "";
@@ -126,7 +127,7 @@ namespace FisioHelp.Helper
       }
     }
 
-    public static string ReplaceInvoicePlaceHolder(string template, Customer customer, Invoice invoice)
+    public static string ReplaceInvoicePlaceHolder(string template, Customer customer, Invoice invoice, bool groupVisits)
     {
       double rivalsa = 0;
       double prezPrieno = 1 - rivalsa;
@@ -146,28 +147,55 @@ namespace FisioHelp.Helper
 
       template = template.Replace("{{customer_name}}", customer.FullName);
       template = template.Replace("{{customer_address}}", $"{customer.Address?.Address_Column}");
-        template = template.Replace("{{address_display}}", $"{(string.IsNullOrEmpty(customer.Address?.Address_Column) ? "none" : "inherit")}");
-        template = template.Replace("{{customer_cap}}", $"{customer.Address?.Cap}");
-        template = template.Replace("{{cap_display}}", $"{(string.IsNullOrEmpty(customer.Address?.Cap) ? "none" : "inherit")}");
-        template = template.Replace("{{customer_city}}", $"{customer.Address?.City}");
-        template = template.Replace("{{city_display}}", $"{(string.IsNullOrEmpty(customer.Address?.City) ? "none" : "inherit")}");
-        template = template.Replace("{{customer_piva}}", string.IsNullOrEmpty(customer.Vat) ? "" : pivaTxt + customer.Vat);
-        template = template.Replace("{{piva_display}}", $"{(string.IsNullOrEmpty(customer.Vat) ? "none" : "inherit")}");
-        template = template.Replace("{{customer_cf}}", string.IsNullOrEmpty(customer.Fiscalcode) ? "" : cfTxt + customer.Fiscalcode);
-        template = template.Replace("{{cf_display}}", $"{(string.IsNullOrEmpty(customer.Fiscalcode) ? "none" : "inherit")}");
+      template = template.Replace("{{address_display}}", $"{(string.IsNullOrEmpty(customer.Address?.Address_Column) ? "none" : "inherit")}");
+      template = template.Replace("{{customer_cap}}", $"{customer.Address?.Cap}");
+      template = template.Replace("{{cap_display}}", $"{(string.IsNullOrEmpty(customer.Address?.Cap) ? "none" : "inherit")}");
+      template = template.Replace("{{customer_city}}", $"{customer.Address?.City}");
+      template = template.Replace("{{city_display}}", $"{(string.IsNullOrEmpty(customer.Address?.City) ? "none" : "inherit")}");
+      template = template.Replace("{{customer_piva}}", string.IsNullOrEmpty(customer.Vat) ? "" : pivaTxt + customer.Vat);
+      template = template.Replace("{{piva_display}}", $"{(string.IsNullOrEmpty(customer.Vat) ? "none" : "inherit")}");
+      template = template.Replace("{{customer_cf}}", string.IsNullOrEmpty(customer.Fiscalcode) ? "" : cfTxt + customer.Fiscalcode);
+      template = template.Replace("{{cf_display}}", $"{(string.IsNullOrEmpty(customer.Fiscalcode) ? "none" : "inherit")}");
+      template = template.Replace("{{group_display}}", $"{(groupVisits ? "inline-block" : "none" )}");
+      var prestazioniHtml = @"<div style=""display: block; padding: 15px 0 15px 0px;"">";
 
-        var prestazioniHtml = @"<div style=""display: block; padding: 15px 0 15px 0px;"">";
-
-      foreach (var prestazioni in invoice.Visitsinvoiceidfkeys)
+      if (groupVisits)
       {
-        prestazioniHtml += $@"<div style=""width: 200px; display:inline-block;"">{((DateTime)prestazioni.Date).ToShortDateString()}</div>";
+        var prestPriceList = new List<Tuple<string, double>>();
+        foreach (var prestazioni in invoice.Visitsinvoiceidfkeys)
+        {
+          var prestazioniHtm = "";
+          var treatments = Helper.GetTratmensByIdS(prestazioni.Treatmentsvisitidfkeys.Select(x => x.TreatmentId).ToList(), customer.Language);
+          foreach (var treatment in treatments)
+            prestazioniHtm += $@"<div>{treatment}</div>";
 
-        var treatments = Helper.GetTratmensByIdS(prestazioni.Treatmentsvisitidfkeys.Select(x => x.TreatmentId).ToList(), customer.Language);
+          prestPriceList.Add(new Tuple<string, double>(prestazioniHtm, prestazioni.Price.Value));
+        }
 
-        prestazioniHtml += $@"<div style=""display:inline-block; width: 350px; vertical-align: middle;"">";
-        foreach (var treatment in treatments)
-          prestazioniHtml += $@"<div>{treatment}</div>";
-        prestazioniHtml += $@"</div><div style=""width: 150px; text-align:right; display:inline-block;"">{(prestazioni.Price.Value * prezPrieno).ToString("#.00")} €</div>";
+        var list = prestPriceList.Distinct();
+
+        foreach (var el in list)
+        {
+          var qt = prestPriceList.Count(pl => pl.Item1 == el.Item1);
+          prestazioniHtml += $@"<div style=""width: 350px; display:inline-block;""> {el.Item1}</div>";
+          prestazioniHtml += $@"<div style=""width: 100px; display:inline-block; text-align: right;""> {qt}</div>";
+          prestazioniHtml += $@"<div style=""width: 100px; display:inline-block; text-align: right;""> {el.Item2.ToString("#.00")} €</div>";
+          prestazioniHtml += $@"<div style=""width: 150px; text-align:right; display:inline-block;""> {(el.Item2 * qt).ToString("#.00")} €</div>";
+        }
+      }
+      else
+      {
+        foreach (var prestazioni in invoice.Visitsinvoiceidfkeys)
+        {
+          prestazioniHtml += $@"<div style=""width: 200px; display:inline-block;"">{((DateTime)prestazioni.Date).ToShortDateString()}</div>";
+
+          var treatments = Helper.GetTratmensByIdS(prestazioni.Treatmentsvisitidfkeys.Select(x => x.TreatmentId).ToList(), customer.Language);
+
+          prestazioniHtml += $@"<div style=""display:inline-block; width: 350px; vertical-align: middle;"">";
+          foreach (var treatment in treatments)
+            prestazioniHtml += $@"<div>{treatment}</div>";
+          prestazioniHtml += $@"</div><div style=""width: 150px; text-align:right; display:inline-block;"">{(prestazioni.Price.Value * prezPrieno).ToString("#.00")} €</div>";
+        }
       }
 
       prestazioniHtml += "</div>";
@@ -190,7 +218,7 @@ namespace FisioHelp.Helper
       return template;
     }
 
-    public static string ReplaceProformaInvoicePlaceHolder(string template, Customer customer, ProformaInvoice invoice)
+    public static string ReplaceProformaInvoicePlaceHolder(string template, Customer customer, ProformaInvoice invoice, bool groupVisits)
     {
       double rivalsa = 0;
       double prezPrieno = 1 - rivalsa;
@@ -209,29 +237,57 @@ namespace FisioHelp.Helper
       template = template.Replace("{{date}}", ((DateTime)invoice.Date).ToShortDateString());
 
       template = template.Replace("{{customer_name}}", customer.FullName);
-        template = template.Replace("{{customer_address}}", $"{customer.Address?.Address_Column}");
-        template = template.Replace("{{address_display}}", $"{(string.IsNullOrEmpty(customer.Address?.Address_Column) ? "none" : "inherit")}");
-        template = template.Replace("{{customer_cap}}", $"{customer.Address?.Cap}");
-        template = template.Replace("{{cap_display}}", $"{(string.IsNullOrEmpty(customer.Address?.Cap) ? "none" : "inherit")}");
-        template = template.Replace("{{customer_city}}", $"{customer.Address?.City}");
-        template = template.Replace("{{city_display}}", $"{(string.IsNullOrEmpty(customer.Address?.City) ? "none" : "inherit")}");
-        template = template.Replace("{{customer_piva}}", string.IsNullOrEmpty(customer.Vat) ? "" : pivaTxt + customer.Vat);
-        template = template.Replace("{{piva_display}}", $"{(string.IsNullOrEmpty(customer.Vat) ? "none" : "inherit")}");
-        template = template.Replace("{{customer_cf}}", string.IsNullOrEmpty(customer.Fiscalcode) ? "" : cfTxt + customer.Fiscalcode);
-        template = template.Replace("{{cf_display}}", $"{(string.IsNullOrEmpty(customer.Fiscalcode) ? "none" : "inherit")}");
+      template = template.Replace("{{customer_address}}", $"{customer.Address?.Address_Column}");
+      template = template.Replace("{{address_display}}", $"{(string.IsNullOrEmpty(customer.Address?.Address_Column) ? "none" : "inherit")}");
+      template = template.Replace("{{customer_cap}}", $"{customer.Address?.Cap}");
+      template = template.Replace("{{cap_display}}", $"{(string.IsNullOrEmpty(customer.Address?.Cap) ? "none" : "inherit")}");
+      template = template.Replace("{{customer_city}}", $"{customer.Address?.City}");
+      template = template.Replace("{{city_display}}", $"{(string.IsNullOrEmpty(customer.Address?.City) ? "none" : "inherit")}");
+      template = template.Replace("{{customer_piva}}", string.IsNullOrEmpty(customer.Vat) ? "" : pivaTxt + customer.Vat);
+      template = template.Replace("{{piva_display}}", $"{(string.IsNullOrEmpty(customer.Vat) ? "none" : "inherit")}");
+      template = template.Replace("{{customer_cf}}", string.IsNullOrEmpty(customer.Fiscalcode) ? "" : cfTxt + customer.Fiscalcode);
+      template = template.Replace("{{cf_display}}", $"{(string.IsNullOrEmpty(customer.Fiscalcode) ? "none" : "inherit")}");
+      template = template.Replace("{{group_display}}", $"{(groupVisits ? "inline-block" : "none")}");
 
-        var prestazioniHtml = @"<div style=""display: block; padding: 15px 0 15px 0px;"">";
+      var prestazioniHtml = @"<div style=""display: block; padding: 15px 0 15px 0px;"">";
 
-      foreach (var prestazioni in invoice.Visitsproformainvoiceidfkeys)
+      if (groupVisits)
       {
-        prestazioniHtml += $@"<div style=""width: 200px; display:inline-block;"">{((DateTime)prestazioni.Date).ToShortDateString()}</div>";
+        var prestPriceList = new List<Tuple<string, double>>();
+        foreach (var prestazioni in invoice.Visitsproformainvoiceidfkeys)
+        {
+          var prestazioniHtm = "";
+          var treatments = Helper.GetTratmensByIdS(prestazioni.Treatmentsvisitidfkeys.Select(x => x.TreatmentId).ToList(), customer.Language);
+          foreach (var treatment in treatments)
+            prestazioniHtm += $@"<div>{treatment}</div>";
 
-        var treatments = Helper.GetTratmensByIdS(prestazioni.Treatmentsvisitidfkeys.Select(x => x.TreatmentId).ToList(), customer.Language);
+          prestPriceList.Add(new Tuple<string, double>(prestazioniHtm, prestazioni.Price.Value));
+        }
 
-        prestazioniHtml += $@"<div style=""display:inline-block; width: 350px; vertical-align: middle;"">";
-        foreach (var treatment in treatments)
-          prestazioniHtml += $@"<div>{treatment}</div>";
-        prestazioniHtml += $@"</div><div style=""width: 150px; text-align:right; display:inline-block;"">{(prestazioni.Price.Value * prezPrieno).ToString("#.00")} €</div>";
+        var list = prestPriceList.Distinct();
+
+        foreach (var el in list)
+        {
+          var qt = prestPriceList.Count(pl => pl.Item1 == el.Item1);
+          prestazioniHtml += $@"<div style=""width: 350px; display:inline-block;""> {el.Item1}</div>";
+          prestazioniHtml += $@"<div style=""width: 100px; display:inline-block; text-align: right;""> {qt}</div>";
+          prestazioniHtml += $@"<div style=""width: 100px; display:inline-block; text-align: right;""> {el.Item2.ToString("#.00")} €</div>";
+          prestazioniHtml += $@"<div style=""width: 150px; text-align:right; display:inline-block;""> {(el.Item2 * qt).ToString("#.00")} €</div>";
+        }
+      }
+      else
+      {
+        foreach (var prestazioni in invoice.Visitsproformainvoiceidfkeys)
+        {
+          prestazioniHtml += $@"<div style=""width: 200px; display:inline-block;"">{((DateTime)prestazioni.Date).ToShortDateString()}</div>";
+
+          var treatments = Helper.GetTratmensByIdS(prestazioni.Treatmentsvisitidfkeys.Select(x => x.TreatmentId).ToList(), customer.Language);
+
+          prestazioniHtml += $@"<div style=""display:inline-block; width: 350px; vertical-align: middle;"">";
+          foreach (var treatment in treatments)
+            prestazioniHtml += $@"<div>{treatment}</div>";
+          prestazioniHtml += $@"</div><div style=""width: 150px; text-align:right; display:inline-block;"">{(prestazioni.Price.Value * prezPrieno).ToString("#.00")} €</div>";
+        }
       }
 
       prestazioniHtml += "</div>";

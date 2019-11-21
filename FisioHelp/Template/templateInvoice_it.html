@@ -42,12 +42,14 @@
                 <strong style="font-size: medium;">
                     Fattura n° {{invoice_number}}
                 </strong><br><br>
-                Marlengo, {{date}}
+                Merano, {{date}}
             </div>
 
             <div style="display: block;padding: 15px 0 15px 0px;">
-                <div style="width: 400px; display: inline-block;"><strong>Descrizione</strong></div>
-                <div style="width: 295px; display: inline-block; text-align: right;">Importo</div>
+                <div style="width: 350px; display: inline-block;"><strong>Descrizione</strong></div>
+                <div style="width: 100px; display: {{group_display}}; text-align: right;">Quantità</div>
+                <div style="width: 95px; display: {{group_display}}; text-align: right;">Prezzo</div>
+                <div style="display: inline-block; float: right;">Importo</div>
             </div>
 
             {{prestazioni}}

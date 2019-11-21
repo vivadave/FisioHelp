@@ -61,6 +61,7 @@
       this.checkBoxPayed = new System.Windows.Forms.CheckBox();
       this.labelProformaData = new System.Windows.Forms.Label();
       this.labelInviceDate = new System.Windows.Forms.Label();
+      this.checkBoxGroup = new System.Windows.Forms.CheckBox();
       ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
       this.SuspendLayout();
       // 
@@ -79,7 +80,7 @@
       this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.label1.AutoSize = true;
       this.label1.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.label1.Location = new System.Drawing.Point(48, 317);
+      this.label1.Location = new System.Drawing.Point(48, 320);
       this.label1.Name = "label1";
       this.label1.Size = new System.Drawing.Size(61, 20);
       this.label1.TabIndex = 2;
@@ -89,7 +90,7 @@
       // 
       this.textBoxDiscount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.textBoxDiscount.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F);
-      this.textBoxDiscount.Location = new System.Drawing.Point(119, 314);
+      this.textBoxDiscount.Location = new System.Drawing.Point(119, 317);
       this.textBoxDiscount.Name = "textBoxDiscount";
       this.textBoxDiscount.Size = new System.Drawing.Size(108, 27);
       this.textBoxDiscount.TabIndex = 13;
@@ -216,7 +217,7 @@
       this.checkBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.checkBox1.AutoSize = true;
       this.checkBox1.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F, System.Drawing.FontStyle.Bold);
-      this.checkBox1.Location = new System.Drawing.Point(47, 357);
+      this.checkBox1.Location = new System.Drawing.Point(47, 361);
       this.checkBox1.Name = "checkBox1";
       this.checkBox1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
       this.checkBox1.Size = new System.Drawing.Size(68, 24);
@@ -424,11 +425,25 @@
       this.labelInviceDate.TabIndex = 47;
       this.labelInviceDate.Text = "label1";
       // 
+      // checkBoxGroup
+      // 
+      this.checkBoxGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+      this.checkBoxGroup.AutoSize = true;
+      this.checkBoxGroup.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F, System.Drawing.FontStyle.Bold);
+      this.checkBoxGroup.Location = new System.Drawing.Point(47, 400);
+      this.checkBoxGroup.Name = "checkBoxGroup";
+      this.checkBoxGroup.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+      this.checkBoxGroup.Size = new System.Drawing.Size(175, 24);
+      this.checkBoxGroup.TabIndex = 48;
+      this.checkBoxGroup.Text = "Raggruppa le visite";
+      this.checkBoxGroup.UseVisualStyleBackColor = true;
+      // 
       // InvoiceCtrl
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.BackColor = System.Drawing.SystemColors.ControlLightLight;
+      this.Controls.Add(this.checkBoxGroup);
       this.Controls.Add(this.labelInviceDate);
       this.Controls.Add(this.labelProformaData);
       this.Controls.Add(this.checkBoxPayed);
@@ -503,5 +518,6 @@
     private System.Windows.Forms.DateTimePicker dateTimePickerPayed;
     private System.Windows.Forms.Label labelInviceDate;
     private System.Windows.Forms.Label labelProformaData;
+    private System.Windows.Forms.CheckBox checkBoxGroup;
   }
 }

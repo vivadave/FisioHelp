@@ -47,3 +47,6 @@ BEGIN
     END IF;
 END;
 $$;
+
+ALTER TABLE proforma_invoices ADD COLUMN IF NOT EXISTS group_visits boolean not null DEFAULT 'f';
+UPDATE proforma_invoices set group_visits = false WHERE group_visits IS NULL;

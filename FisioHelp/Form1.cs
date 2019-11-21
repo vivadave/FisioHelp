@@ -153,7 +153,7 @@ namespace FisioHelp
 
       var file = Path.Combine(_therapist.SqlbackupFolder, $"pisioHelp_{DateTime.Today.ToString("yyyyMMdd")}.sql");
       DbManagement.PostgreSqlDump(file);
-      DriveManagement.DeleteInFolder("Database_Backup", DataModels.Enums.FileType.sql, 3);
+      DriveManagement.DeleteInFolder("Database_Backup", DataModels.Enums.FileType.sql, 7);
       DriveManagement.InsertFile(file, new List<string> { "Database_Backup" }, DataModels.Enums.FileType.sql);
     }
     

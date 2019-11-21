@@ -56,7 +56,8 @@ namespace FisioHelp.UI
       labelProformaData.Text = $"del {((DateTime)ProformaInvoice.Date).ToShortDateString()}";
 
       var aVisit = ProformaInvoice.Visitsproformainvoiceidfkeys.FirstOrDefault();
-      
+      checkBoxGroup.Checked = ProformaInvoice.GroupVisits;
+
       if (_edit)
       {
         textBoxDiscount.ReadOnly = true;
@@ -138,10 +139,12 @@ namespace FisioHelp.UI
       }
       var total = CalculateTotal(false);
       labelRivalsaSconto.Text = "0";
-      if (total > 77.47)
-        checkBox1.Checked = true;
-      else
-        checkBox1.Checked = false;
+
+      if (!ProformaInvoice.IsInitialized())
+        if (total > 77.47)
+          checkBox1.Checked = true;
+        else
+          checkBox1.Checked = false;
 
       labelTotal.Text = CalculateTotal(true).ToString();
 
@@ -277,6 +280,8 @@ namespace FisioHelp.UI
       }
 
       ProformaInvoice.TaxStamp = checkBox1.Checked;
+      ProformaInvoice.GroupVisits = checkBoxGroup.Checked;
+
       if (double.TryParse(textBoxDiscount.Text, out double disc))
         ProformaInvoice.Discount = disc;
 
@@ -361,14 +366,16 @@ namespace FisioHelp.UI
 
       string html = "";
 
+      var groupVisits = checkBoxGroup.Checked;
+
       if (_customer.Language == "german")
         html = File.ReadAllText("Template/templateInvoice_de.html");
       else
         html = File.ReadAllText("Template/templateInvoice_it.html");
 
-      html = Helper.Helper.ReplaceInvoicePlaceHolder(html, _customer, invoice);
+      html = Helper.Helper.ReplaceInvoicePlaceHolder(html, _customer, invoice, groupVisits);
 
-      var basePath = therapist.InvoicesFolder + "_Proforma";
+      var basePath = therapist.InvoicesFolder;
       var date = $"{ProformaInvoice.Date.Year}{ProformaInvoice.Date.Month}";
       basePath = Path.Combine(basePath, date);
 
@@ -386,7 +393,7 @@ namespace FisioHelp.UI
         return;
       }
       //Helper.DriveManagement.InsertFilePdf(pdfPath, new List<string> { "Invoice", date });
-
+      File.Delete(htmlPath);
       System.Diagnostics.Process.Start(pdfPath);
 
     }
@@ -429,7 +436,8 @@ namespace FisioHelp.UI
       else
         html = File.ReadAllText("Template/templateProformaInvoice_it.html");
 
-      html = Helper.Helper.ReplaceProformaInvoicePlaceHolder(html, _customer, invoice);
+      var groupVisits = checkBoxGroup.Checked;
+      html = Helper.Helper.ReplaceProformaInvoicePlaceHolder(html, _customer, invoice, groupVisits);
 
       var basePath = therapist.InvoicesFolder + "_Proforma";
       var date = $"{ProformaInvoice.Date.Year}{ProformaInvoice.Date.Month}";
@@ -449,7 +457,7 @@ namespace FisioHelp.UI
         return;
       }
       //Helper.DriveManagement.InsertFilePdf(pdfPath, new List<string> { "Invoice", date });
-
+      File.Delete(htmlPath);
       System.Diagnostics.Process.Start(pdfPath);
      
     }
