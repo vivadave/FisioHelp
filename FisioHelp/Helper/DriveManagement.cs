@@ -55,6 +55,32 @@ namespace FisioHelp.Helper
       var result = listRequest.Execute();
 
       foreach (var f in result.Files)
+      {
+        DeleteInFolderWithId(f.Id, DataModels.Enums.FileType.pdf, 0);
+        var skip = "";
+      }
+    }
+
+    public static void DeleteInFolderWithId(string folderId, FileType fileType, int olderThenDays)
+    {
+
+      if (!Helper.CheckForInternetConnection())
+      {
+        //"ERROR: no internet connection"
+        return;
+      }
+
+      var service = Connect();
+      var listRequest = service.Files.List();
+      var mimeType = _applicationType[(int)fileType];
+
+      var date = DateTime.Today.AddDays((-1) * olderThenDays);
+
+      listRequest.Q = $"mimeType='{mimeType}' and '{folderId}' in parents and createdTime < '{date.ToString("yyyy-MM-dd")}'";
+      listRequest.Spaces = "drive";
+      var result = listRequest.Execute();
+
+      foreach (var f in result.Files)
         service.Files.Delete(f.Id).Execute();
     }
 

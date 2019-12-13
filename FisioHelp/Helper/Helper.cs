@@ -28,7 +28,7 @@ namespace FisioHelp.Helper
       Therapist therapist = null;
       using (var db = new Db.PhisioDB())
       {
-        var invoices = db.Invoices.Where(x => x.Date >= new NpgsqlTypes.NpgsqlDate(DateTime.Now.Year, DateTime.Now.Month, 1)).ToList();
+        var invoices = db.Invoices.Where(x => x.Date >= new NpgsqlTypes.NpgsqlDate(DateTime.Now.Year, 1, 1)).ToList();
         invoiceTile = $"{(invoices.Count + 1).ToString("0000")}/{DateTime.Now.Year}";
         therapist = db.Therapists.FirstOrDefault();
       }
@@ -66,7 +66,7 @@ namespace FisioHelp.Helper
       Therapist therapist = null;
       using (var db = new Db.PhisioDB())
       {
-        var proformaInvoices = db.ProformaInvoices.Where(x => x.Date >= new NpgsqlTypes.NpgsqlDate(DateTime.Now.Year, DateTime.Now.Month, 1)).ToList();
+        var proformaInvoices = db.ProformaInvoices.Where(x => x.Date >= new NpgsqlTypes.NpgsqlDate(DateTime.Now.Year, 1, 1)).ToList();
         invoiceTile = $"{(proformaInvoices.Count + 1).ToString("0000")}/{DateTime.Now.Year}";
         therapist = db.Therapists.FirstOrDefault();
       }
@@ -140,6 +140,7 @@ namespace FisioHelp.Helper
       template = template.Replace("{{ragione_sociale}}", therapist.FullName);
       template = template.Replace("{{indirizzo}}", customer.Language == "german" ? therapist.AddressDe.Replace("-", "<br>") : therapist.Address.Replace("-", "<br>"));
       template = template.Replace("{{partita_iva}}", therapist.TaxNumber);
+      template = template.Replace("{{cf}}", therapist.FiscalCode);
       template = template.Replace("{{iban}}", therapist.Iban);
 
       template = template.Replace("{{invoice_number}}", invoice.Title);
@@ -231,6 +232,7 @@ namespace FisioHelp.Helper
       template = template.Replace("{{ragione_sociale}}", therapist.FullName);
       template = template.Replace("{{indirizzo}}", customer.Language == "german" ? therapist.AddressDe.Replace("-", "<br>") : therapist.Address.Replace("-", "<br>"));
       template = template.Replace("{{partita_iva}}", therapist.TaxNumber);
+      template = template.Replace("{{cf}}", therapist.FiscalCode);
       template = template.Replace("{{iban}}", therapist.Iban); 
 
        template = template.Replace("{{invoice_number}}", invoice.Title);

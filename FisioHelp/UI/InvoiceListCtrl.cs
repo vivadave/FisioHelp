@@ -107,6 +107,18 @@ namespace FisioHelp.UI
         {
           _proformaInvoices = _proformaInvoices.Where(x => x.Payed == (_filterPayed == 1)).ToList();
         }
+
+        _proformaInvoices = _proformaInvoices.OrderBy(x => x.Invoice?.Title).ThenBy(x=>x.Date).ThenBy(x => x.Title).ToList();
+
+        var noinvoices = _proformaInvoices.Where(x => x.Invoice == null).ToList();
+        foreach (var proformaInvoice in noinvoices)
+        {
+          if (proformaInvoice.Invoice == null)
+          {
+            _proformaInvoices.Remove(proformaInvoice);
+            _proformaInvoices.Add(proformaInvoice);
+          }
+        }
       }
     }
 
