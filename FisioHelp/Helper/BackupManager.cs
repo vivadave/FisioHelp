@@ -44,7 +44,7 @@ namespace FisioHelp.Helper
         DateTime dtMonthsDir = Directory.GetCreationTime(monthsDir);
 
         //avoid checking  obsolete directory
-        if (DateTime.Now.Subtract(dtMonthsDir).TotalDays > (31 + checkDateDays))
+        if (DateTime.Now.Subtract(dtMonthsDir).TotalDays > (81 + checkDateDays))
           continue;
 
         var files = Directory.GetFiles(monthsDir);

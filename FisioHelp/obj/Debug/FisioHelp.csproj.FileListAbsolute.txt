@@ -111,7 +111,6 @@ C:\Progetti\FisioHelp\FisioHelp\bin\Debug\System.Numerics.Vectors.xml
 C:\Progetti\FisioHelp\FisioHelp\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 C:\Progetti\FisioHelp\FisioHelp\bin\Debug\System.Threading.Tasks.Extensions.xml
 C:\Progetti\FisioHelp\FisioHelp\bin\Debug\System.ValueTuple.xml
-C:\Progetti\FisioHelp\FisioHelp\obj\Debug\FisioHelp.csprojAssemblyReference.cache
 C:\Progetti\FisioHelp\FisioHelp\obj\Debug\FisioHelp.exe.config
 C:\Progetti\FisioHelp\FisioHelp\obj\Debug\FisioHelp.Form1.resources
 C:\Progetti\FisioHelp\FisioHelp\obj\Debug\FisioHelp.Properties.Resources.resources
@@ -196,3 +195,4 @@ C:\Progetti\FisioHelp\FisioHelp\bin\Debug\Template\templateProformaInvoice_de.ht
 C:\Progetti\FisioHelp\FisioHelp\bin\Debug\Template\templateProformaInvoice_it.html
 C:\Progetti\FisioHelp\FisioHelp\obj\Debug\FisioHelp.UI.InvoiceListHeader.resources
 C:\Progetti\FisioHelp\FisioHelp\obj\Debug\FisioHelp.csproj.CoreCompileInputs.cache
+C:\Progetti\FisioHelp\FisioHelp\obj\Debug\FisioHelp.csprojAssemblyReference.cache
