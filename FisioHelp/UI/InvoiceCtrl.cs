@@ -382,6 +382,9 @@ namespace FisioHelp.UI
       Directory.CreateDirectory(basePath);
       var pdfPath = $@"{basePath}\{invoice.Title.Replace(@"/", "_")}_{_customer.FullName.Replace(" ", "_")}.pdf";
       var htmlPath = $@"{basePath}\{invoice.Title.Replace("/", "_")}_{_customer.FullName.Replace(" ", "_")}.html";
+
+            pdfPath = pdfPath.Replace("'", "_");
+            htmlPath = htmlPath.Replace("'", "_");
       try
       {
         File.WriteAllText(htmlPath, html);
@@ -394,8 +397,14 @@ namespace FisioHelp.UI
       }
       //Helper.DriveManagement.InsertFilePdf(pdfPath, new List<string> { "Invoice", date });
       File.Delete(htmlPath);
-      System.Diagnostics.Process.Start(pdfPath);
-
+        if (File.Exists(pdfPath))
+        {
+            System.Diagnostics.Process.Start(pdfPath);
+        }
+        else
+        {
+            MessageBox.Show("Il pdf non è stato creato!", "Stampa", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
     }
 
     private void PrintProforma(DataModels.ProformaInvoice invoice )
