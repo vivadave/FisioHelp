@@ -129,15 +129,20 @@ namespace FisioHelp.UI
 
       buttonSave.Focus();
       textBoxPrice.Text = string.IsNullOrEmpty(textBoxPrice.Text) ? "0" : textBoxPrice.Text;
+      if (checkedListBox1.Items.Count > 0)
+      {
+        checkedListBox1.SetItemChecked(0, true);
+        ManageChecking();
+      }
     }
 
-    private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
+    private void ManageChecking()
     {
       var items = checkedListBox1.CheckedItems;
       _visit.Treatmentsvisitidfkeys = Enumerable.Empty<DataModels.VisitsTreatment>();
-        List<DataModels.VisitsTreatment> a = new List<DataModels.VisitsTreatment>();
+      List<DataModels.VisitsTreatment> a = new List<DataModels.VisitsTreatment>();
 
-      foreach(var item in items)
+      foreach (var item in items)
       {
         a.Add(new DataModels.VisitsTreatment
         {
@@ -147,7 +152,12 @@ namespace FisioHelp.UI
           VisitId = _visit.Id
         });
       }
-        _visit.Treatmentsvisitidfkeys = a;
+      _visit.Treatmentsvisitidfkeys = a;
+    }
+
+    private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
+    {
+      ManageChecking();
     }
 
     private void button1_Click(object sender, EventArgs e)

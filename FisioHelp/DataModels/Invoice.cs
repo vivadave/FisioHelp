@@ -18,6 +18,7 @@ namespace FisioHelp.DataModels
     [Column("title"), NotNull] public string Title { get; set; } // character varying(25)
     [Column("tax_stamp"), NotNull] public bool TaxStamp { get; set; } // boolean
     [Column("proforma_invoice_id"), Nullable] public Guid? ProformaInvoiceId { get; set; } // uuid
+    [Column("contanti"), NotNull] public bool Contanti { get; set; } // boolean
 
     public double Total
     {

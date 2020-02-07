@@ -42,7 +42,8 @@ namespace FisioHelp.Helper
         Visitsinvoiceidfkeys = visits,
         Title = invoiceTile,
         TaxStamp = false,
-        TherapistId = therapist.Id
+        TherapistId = therapist.Id,
+        Contanti = false
       };
 
       message = "";

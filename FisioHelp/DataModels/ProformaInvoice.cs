@@ -21,6 +21,7 @@ namespace FisioHelp.DataModels
       [Column("text"), Nullable] public string Text { get; set; } // text
       [Column("invoice_id"), Nullable] public Guid? InvoiceId { get; set; } // uuid
       [Column("group_visits"), NotNull] public bool GroupVisits { get; set; } // boolean
+    [Column("contanti"), NotNull] public bool Contanti { get; set; } // boolean
 
 
     public double Total

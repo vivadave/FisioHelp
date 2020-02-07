@@ -175,6 +175,13 @@ namespace FisioHelp.UI
 
     private void textBoxFiscalCode_Validating(object sender, CancelEventArgs e)
     {
+      if (textBoxFiscalCode.Text.Length <= 0)
+      {
+        errorProvider1.SetError(textBoxFiscalCode, "Il campo codice fiscale è obbligatorio");
+        buttonSave.Enabled = false;
+        return;
+      }
+      buttonSave.Enabled = true;
     }
 
     private void comboBoxLanguage_Resize(object sender, EventArgs e)

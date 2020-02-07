@@ -134,6 +134,7 @@ namespace FisioHelp.UI
         panelIn.Location = new Point(0, y);
         panelIn.Size = new Size(panel1.Width, Math.Max(labelVisit.Height, lableTreatment.Height) + 10);
         checkBox1.Checked = ProformaInvoice.TaxStamp;
+        checkBoxContanti.Checked = ProformaInvoice.Contanti;
 
         y += panelIn.Height;
       }
@@ -520,6 +521,12 @@ namespace FisioHelp.UI
       {
         ProformaInvoice.Payed = checkBoxPayed.Checked;
         ProformaInvoice.SaveToDB();
+
+        if (ProformaInvoice.Invoice != null && ProformaInvoice.Invoice.IsInitialized())
+        {
+          ProformaInvoice.Invoice.Payed = checkBoxPayed.Checked;
+          ProformaInvoice.Invoice.SaveToDB();
+        }
       }
     }
 
@@ -530,6 +537,29 @@ namespace FisioHelp.UI
 
       ProformaInvoice.PayedDate = new NpgsqlTypes.NpgsqlDate(dateTimePickerPayed.Value);
       ProformaInvoice.SaveToDB();
+    }
+
+    private void checkBoxGroup_CheckedChanged(object sender, EventArgs e)
+    {
+
+    }
+
+    private void checkBoxContanti_CheckedChanged(object sender, EventArgs e)
+    {
+      if (_initialization)
+        return;
+
+      if (ProformaInvoice.IsInitialized())
+      {
+        ProformaInvoice.Contanti = checkBoxContanti.Checked;
+        ProformaInvoice.SaveToDB();
+
+        if (ProformaInvoice.Invoice != null && ProformaInvoice.Invoice.IsInitialized())
+        {
+          ProformaInvoice.Invoice.Contanti = checkBoxContanti.Checked;
+          ProformaInvoice.Invoice.SaveToDB();
+        }
+      }
     }
   }
 }

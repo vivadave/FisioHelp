@@ -36,7 +36,10 @@ namespace FisioHelp.UI
       dateTimePickerTo.CustomFormat = "dd/MM/yyyy";
       comboBoxPayed.Items.AddRange(_comboBoxValues);
       comboBoxPayed.SelectedItem = _comboBoxValues[0];
+    }
 
+    public void InsertHeader()
+    {
       InvoiceListHeader invoiceListHeader = new InvoiceListHeader();
       invoiceListHeader.Dock = DockStyle.Top;
       panel2.Controls.Add(invoiceListHeader);
@@ -99,7 +102,7 @@ namespace FisioHelp.UI
 
         _proformaInvoices = db.ProformaInvoices.LoadWith(e1 => e1.Visitsproformainvoiceidfkeys.First().Treatmentsvisitidfkeys.First().Treatment).LoadWith(e1 => e1.Visitsproformainvoiceidfkeys.First().Customer.Address).LoadWith(x=>x.Invoice)
           .Where(x =>  x.Visitsproformainvoiceidfkeys.Any(xx=>xx.CustomerId == custId) || custId == null)
-          .Where(x => x.Date >= new NpgsqlTypes.NpgsqlDate(_dateFromFilter) && x.Date < new NpgsqlTypes.NpgsqlDate(_dateToFilter.AddDays(1)) && x.Deleted == false)
+          .Where(x => (x.Date >= new NpgsqlTypes.NpgsqlDate(_dateFromFilter) && x.Date < new NpgsqlTypes.NpgsqlDate(_dateToFilter.AddDays(1)) || x.Invoice.Date >= new NpgsqlTypes.NpgsqlDate(_dateFromFilter) && x.Invoice.Date < new NpgsqlTypes.NpgsqlDate(_dateToFilter.AddDays(1)) ) && x.Deleted == false)
           .ToList();
         _proformaInvoices = _proformaInvoices.OrderBy(x => x.Date).OrderBy(x => x.Invoice == null).ToList();
 
@@ -127,6 +130,7 @@ namespace FisioHelp.UI
       panel2.Controls.Clear();
       panel2.AutoScroll = true;
       DrawInvoces();
+      InsertHeader();
     }
 
     private void DrawInvoces()

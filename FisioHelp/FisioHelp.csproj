@@ -470,6 +470,9 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>PostgreSQL1.generated.cs</LastGenOutput>
     </Content>
+    <Content Include="sql\dbEliCreate_07.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="sql\dbEliCreate_06.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
