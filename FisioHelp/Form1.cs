@@ -100,7 +100,7 @@ namespace FisioHelp
           this.panel2.Controls.Add(listItemName);
           panelHeight += 75;
         }        
-        this.panel2.Size = new Size(this.panel4.Size.Width - 10, panelHeight);
+        this.panel2.Size = new Size(this.panel4.Size.Width, panelHeight);
       }
     }
 
@@ -156,7 +156,7 @@ namespace FisioHelp
       DriveManagement.DeleteInFolder("Database_Backup", DataModels.Enums.FileType.sql, 7);
       DriveManagement.InsertFile(file, new List<string> { "Database_Backup" }, DataModels.Enums.FileType.sql);
     }
-    
+
     private void OnOpenInvoice(object sender, EventArgs e)
     {
       var vlc = (UI.InvoiceListCtrl)sender;
@@ -169,7 +169,7 @@ namespace FisioHelp
       this.splitContainer1.Panel2.Controls.Clear();
       var userForm = new UI.SinglePatientMain(proformaInvoice.Customer);
       userForm.PatientSaved += NewPatient;
-      userForm.Dock = System.Windows.Forms.DockStyle.Fill;
+      userForm.Dock = DockStyle.Fill;
       this.splitContainer1.Panel2.Controls.Add(userForm);
       userForm.OpenInvoice(proformaInvoice);
     }
@@ -199,6 +199,20 @@ namespace FisioHelp
     {
       var newPatientForm = new UI.Globals.Setting();
       newPatientForm.ShowDialog();
+    }
+
+    private void buttonVisits_Click(object sender, EventArgs e)
+    {
+      var dashBoardCtrl = new UI.Dashboard.Dashboard();
+      dashBoardCtrl.Dock = DockStyle.Fill;
+      this.splitContainer1.Panel2.Controls.Clear();
+      this.splitContainer1.Panel2.Controls.Add(dashBoardCtrl);
+
+      var visitList = new UI.VisitListCtrl(null, "economical");
+      visitList.Dock = System.Windows.Forms.DockStyle.Fill;
+      visitList.OpenVisit += OnOpenVisit;
+      this.splitContainer1.Panel2.Controls.Clear();
+      this.splitContainer1.Panel2.Controls.Add(visitList);
     }
   }
 }

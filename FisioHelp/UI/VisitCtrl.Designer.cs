@@ -45,6 +45,8 @@
       this.label7 = new System.Windows.Forms.Label();
       this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
       this.button1 = new System.Windows.Forms.Button();
+      this.buttonTriage = new System.Windows.Forms.Button();
+      this.labelFuture = new System.Windows.Forms.Label();
       ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
       this.SuspendLayout();
       // 
@@ -70,17 +72,18 @@
       this.richTextBoxExInitial.Location = new System.Drawing.Point(132, 220);
       this.richTextBoxExInitial.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.richTextBoxExInitial.Name = "richTextBoxExInitial";
-      this.richTextBoxExInitial.Rtf = "{\\rtf1\\ansi\\ansicpg1252\\deff0\\deflang1040{\\fonttbl{\\f0\\fnil\\fcharset0 Segoe UI Hi" +
-    "storic;}}\r\n\\viewkind4\\uc1\\pard\\f0\\fs23\\par\r\n}\r\n";
+      this.richTextBoxExInitial.Rtf = "{\\rtf1\\ansi\\ansicpg1252\\deff0\\nouicompat\\deflang1040{\\fonttbl{\\f0\\fnil\\fcharset0 " +
+    "Segoe UI Historic;}}\r\n{\\*\\generator Riched20 10.0.17763}\\viewkind4\\uc1 \r\n\\pard\\f" +
+    "0\\fs23\\par\r\n}\r\n";
       this.richTextBoxExInitial.SetColorWithFont = true;
       this.richTextBoxExInitial.ShowToolStrip = true;
-      this.richTextBoxExInitial.Size = new System.Drawing.Size(754, 131);
+      this.richTextBoxExInitial.Size = new System.Drawing.Size(876, 131);
       this.richTextBoxExInitial.TabIndex = 27;
       // 
       // textBoxPrice
       // 
       this.textBoxPrice.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F);
-      this.textBoxPrice.Location = new System.Drawing.Point(752, 72);
+      this.textBoxPrice.Location = new System.Drawing.Point(688, 75);
       this.textBoxPrice.Name = "textBoxPrice";
       this.textBoxPrice.Size = new System.Drawing.Size(108, 27);
       this.textBoxPrice.TabIndex = 12;
@@ -93,7 +96,7 @@
       this.buttonSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
       this.buttonSave.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.buttonSave.ForeColor = System.Drawing.Color.White;
-      this.buttonSave.Location = new System.Drawing.Point(780, 548);
+      this.buttonSave.Location = new System.Drawing.Point(902, 548);
       this.buttonSave.Name = "buttonSave";
       this.buttonSave.Size = new System.Drawing.Size(106, 38);
       this.buttonSave.TabIndex = 26;
@@ -115,7 +118,7 @@
       // 
       this.label1.AutoSize = true;
       this.label1.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F);
-      this.label1.Location = new System.Drawing.Point(693, 77);
+      this.label1.Location = new System.Drawing.Point(629, 80);
       this.label1.Name = "label1";
       this.label1.Size = new System.Drawing.Size(53, 20);
       this.label1.TabIndex = 28;
@@ -148,6 +151,7 @@
       this.dateTimePicker1.Name = "dateTimePicker1";
       this.dateTimePicker1.Size = new System.Drawing.Size(222, 27);
       this.dateTimePicker1.TabIndex = 32;
+      this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
       // 
       // richTextBoxExFinal
       // 
@@ -168,11 +172,12 @@
       this.richTextBoxExFinal.Location = new System.Drawing.Point(133, 361);
       this.richTextBoxExFinal.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.richTextBoxExFinal.Name = "richTextBoxExFinal";
-      this.richTextBoxExFinal.Rtf = "{\\rtf1\\ansi\\ansicpg1252\\deff0\\deflang1040{\\fonttbl{\\f0\\fnil\\fcharset0 Segoe UI Hi" +
-    "storic;}}\r\n\\viewkind4\\uc1\\pard\\f0\\fs23\\par\r\n}\r\n";
+      this.richTextBoxExFinal.Rtf = "{\\rtf1\\ansi\\ansicpg1252\\deff0\\nouicompat\\deflang1040{\\fonttbl{\\f0\\fnil\\fcharset0 " +
+    "Segoe UI Historic;}}\r\n{\\*\\generator Riched20 10.0.17763}\\viewkind4\\uc1 \r\n\\pard\\f" +
+    "0\\fs23\\par\r\n}\r\n";
       this.richTextBoxExFinal.SetColorWithFont = true;
       this.richTextBoxExFinal.ShowToolStrip = true;
-      this.richTextBoxExFinal.Size = new System.Drawing.Size(754, 179);
+      this.richTextBoxExFinal.Size = new System.Drawing.Size(876, 179);
       this.richTextBoxExFinal.TabIndex = 34;
       // 
       // label5
@@ -188,7 +193,7 @@
       // textBoxTime
       // 
       this.textBoxTime.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F);
-      this.textBoxTime.Location = new System.Drawing.Point(482, 72);
+      this.textBoxTime.Location = new System.Drawing.Point(471, 75);
       this.textBoxTime.Name = "textBoxTime";
       this.textBoxTime.Size = new System.Drawing.Size(123, 27);
       this.textBoxTime.TabIndex = 36;
@@ -199,7 +204,7 @@
       // 
       this.label6.AutoSize = true;
       this.label6.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F);
-      this.label6.Location = new System.Drawing.Point(406, 77);
+      this.label6.Location = new System.Drawing.Point(395, 80);
       this.label6.Name = "label6";
       this.label6.Size = new System.Drawing.Size(51, 20);
       this.label6.TabIndex = 35;
@@ -223,7 +228,7 @@
       this.checkedListBox1.FormattingEnabled = true;
       this.checkedListBox1.Location = new System.Drawing.Point(133, 142);
       this.checkedListBox1.Name = "checkedListBox1";
-      this.checkedListBox1.Size = new System.Drawing.Size(753, 70);
+      this.checkedListBox1.Size = new System.Drawing.Size(875, 70);
       this.checkedListBox1.TabIndex = 38;
       this.checkedListBox1.SelectedIndexChanged += new System.EventHandler(this.checkedListBox1_SelectedIndexChanged);
       // 
@@ -234,7 +239,7 @@
       this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
       this.button1.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.button1.ForeColor = System.Drawing.Color.White;
-      this.button1.Location = new System.Drawing.Point(668, 548);
+      this.button1.Location = new System.Drawing.Point(790, 548);
       this.button1.Name = "button1";
       this.button1.Size = new System.Drawing.Size(106, 38);
       this.button1.TabIndex = 39;
@@ -242,10 +247,38 @@
       this.button1.UseVisualStyleBackColor = false;
       this.button1.Click += new System.EventHandler(this.button1_Click);
       // 
+      // buttonTriage
+      // 
+      this.buttonTriage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+      this.buttonTriage.BackColor = System.Drawing.Color.White;
+      this.buttonTriage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+      this.buttonTriage.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.buttonTriage.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
+      this.buttonTriage.Location = new System.Drawing.Point(678, 548);
+      this.buttonTriage.Name = "buttonTriage";
+      this.buttonTriage.Size = new System.Drawing.Size(106, 38);
+      this.buttonTriage.TabIndex = 40;
+      this.buttonTriage.Text = "Triage";
+      this.buttonTriage.UseVisualStyleBackColor = false;
+      this.buttonTriage.Click += new System.EventHandler(this.buttonTriage_Click);
+      // 
+      // labelFuture
+      // 
+      this.labelFuture.AutoSize = true;
+      this.labelFuture.Font = new System.Drawing.Font("Segoe UI Historic", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.labelFuture.Location = new System.Drawing.Point(854, 71);
+      this.labelFuture.Name = "labelFuture";
+      this.labelFuture.Size = new System.Drawing.Size(78, 30);
+      this.labelFuture.TabIndex = 41;
+      this.labelFuture.Text = "Futura";
+      // 
       // VisitCtrl
       // 
+      this.AllowDrop = true;
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+      this.Controls.Add(this.labelFuture);
+      this.Controls.Add(this.buttonTriage);
       this.Controls.Add(this.button1);
       this.Controls.Add(this.checkedListBox1);
       this.Controls.Add(this.label7);
@@ -262,7 +295,7 @@
       this.Controls.Add(this.buttonSave);
       this.Controls.Add(this.label4);
       this.Name = "VisitCtrl";
-      this.Size = new System.Drawing.Size(923, 611);
+      this.Size = new System.Drawing.Size(1045, 611);
       this.Load += new System.EventHandler(this.VisitCtrl_Load);
       ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
       this.ResumeLayout(false);
@@ -288,5 +321,7 @@
     private System.Windows.Forms.Label label7;
     private System.Windows.Forms.CheckedListBox checkedListBox1;
     private System.Windows.Forms.Button button1;
-  }
+        private System.Windows.Forms.Button buttonTriage;
+        private System.Windows.Forms.Label labelFuture;
+    }
 }

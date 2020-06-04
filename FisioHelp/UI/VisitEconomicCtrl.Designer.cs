@@ -44,7 +44,7 @@
       // 
       this.label1.AutoSize = true;
       this.label1.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F);
-      this.label1.Location = new System.Drawing.Point(38, 50);
+      this.label1.Location = new System.Drawing.Point(34, 35);
       this.label1.Name = "label1";
       this.label1.Size = new System.Drawing.Size(50, 20);
       this.label1.TabIndex = 0;
@@ -54,7 +54,7 @@
       // 
       this.label2.AutoSize = true;
       this.label2.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F);
-      this.label2.Location = new System.Drawing.Point(181, 50);
+      this.label2.Location = new System.Drawing.Point(177, 35);
       this.label2.Name = "label2";
       this.label2.Size = new System.Drawing.Size(50, 20);
       this.label2.TabIndex = 1;
@@ -67,7 +67,7 @@
       this.checkBox1.Enabled = false;
       this.checkBox1.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F);
       this.checkBox1.ForeColor = System.Drawing.Color.Black;
-      this.checkBox1.Location = new System.Drawing.Point(570, 71);
+      this.checkBox1.Location = new System.Drawing.Point(570, 59);
       this.checkBox1.Name = "checkBox1";
       this.checkBox1.Size = new System.Drawing.Size(74, 24);
       this.checkBox1.TabIndex = 2;
@@ -80,7 +80,7 @@
       this.checkBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
       this.checkBox2.AutoSize = true;
       this.checkBox2.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F);
-      this.checkBox2.Location = new System.Drawing.Point(570, 22);
+      this.checkBox2.Location = new System.Drawing.Point(570, 10);
       this.checkBox2.Name = "checkBox2";
       this.checkBox2.Size = new System.Drawing.Size(104, 24);
       this.checkBox2.TabIndex = 3;
@@ -95,7 +95,7 @@
       this.button1.FlatAppearance.BorderSize = 0;
       this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
       this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-      this.button1.Location = new System.Drawing.Point(722, 31);
+      this.button1.Location = new System.Drawing.Point(730, 17);
       this.button1.Name = "button1";
       this.button1.Size = new System.Drawing.Size(58, 59);
       this.button1.TabIndex = 4;
@@ -108,7 +108,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
       this.label3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
       this.label3.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F);
-      this.label3.Location = new System.Drawing.Point(-3, 118);
+      this.label3.Location = new System.Drawing.Point(-3, 92);
       this.label3.Name = "label3";
       this.label3.Size = new System.Drawing.Size(806, 2);
       this.label3.TabIndex = 5;
@@ -118,7 +118,7 @@
       // 
       this.label4.AutoSize = true;
       this.label4.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F);
-      this.label4.Location = new System.Drawing.Point(327, 50);
+      this.label4.Location = new System.Drawing.Point(323, 35);
       this.label4.Name = "label4";
       this.label4.Size = new System.Drawing.Size(50, 20);
       this.label4.TabIndex = 6;
@@ -129,7 +129,7 @@
       this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
       this.label5.AutoSize = true;
       this.label5.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F);
-      this.label5.Location = new System.Drawing.Point(423, 50);
+      this.label5.Location = new System.Drawing.Point(419, 35);
       this.label5.Name = "label5";
       this.label5.Size = new System.Drawing.Size(50, 20);
       this.label5.TabIndex = 7;
@@ -141,7 +141,7 @@
       this.checkBoxProforma.AutoSize = true;
       this.checkBoxProforma.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F);
       this.checkBoxProforma.ForeColor = System.Drawing.Color.Black;
-      this.checkBoxProforma.Location = new System.Drawing.Point(570, 46);
+      this.checkBoxProforma.Location = new System.Drawing.Point(570, 34);
       this.checkBoxProforma.Name = "checkBoxProforma";
       this.checkBoxProforma.Size = new System.Drawing.Size(140, 24);
       this.checkBoxProforma.TabIndex = 8;
@@ -164,7 +164,7 @@
       this.Controls.Add(this.label2);
       this.Controls.Add(this.label1);
       this.Name = "VisitEconomicCtrl";
-      this.Size = new System.Drawing.Size(802, 120);
+      this.Size = new System.Drawing.Size(802, 94);
       this.Load += new System.EventHandler(this.VisitEconomicCtrl_Load);
       this.ResumeLayout(false);
       this.PerformLayout();

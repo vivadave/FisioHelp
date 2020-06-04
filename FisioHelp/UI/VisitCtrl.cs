@@ -6,6 +6,8 @@ using LinqToDB;
 using LinqToDB.Expressions;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
+using System.IO;
+using FisioHelp.DataModels;
 
 namespace FisioHelp.UI
 {
@@ -134,6 +136,8 @@ namespace FisioHelp.UI
         checkedListBox1.SetItemChecked(0, true);
         ManageChecking();
       }
+
+      if (_visit != null) labelFuture.Visible = _visit.Future;
     }
 
     private void ManageChecking()
@@ -175,6 +179,43 @@ namespace FisioHelp.UI
       _visit.Deleted = true;
       _visit.SaveToDB();
       DeleteVisit?.Invoke(this, e);
+    }
+
+    private void buttonTriage_Click(object sender, EventArgs e)
+    {
+      var directory = getDirectory();
+      var triageDirectory = Path.Combine(directory, "Triage");
+      Directory.CreateDirectory(triageDirectory);
+      var date = (DateTime)_visit.Date != DateTime.MinValue ? (DateTime)_visit.Date : DateTime.Today;
+      var newFile = Path.Combine(triageDirectory, $"Visit_{date.Year}{date.Month.ToString("00")}{date.Day.ToString("00")}_{_customer.FullName.Replace(" ", "_")}.pdf");
+      if (!File.Exists(newFile))
+        File.Copy(@"Template/covid2.pdf", newFile);
+
+      if (File.Exists(newFile))
+        System.Diagnostics.Process.Start(newFile);
+    }
+
+    private string getDirectory()
+    {
+      Therapist therapist;
+      using (var db = new Db.PhisioDB())
+      {
+        therapist = db.Therapists.FirstOrDefault();
+      }
+
+      var folderBase = Directory.GetParent(therapist.InvoicesFolder);
+      var customersDirectory = Path.Combine(folderBase.FullName, "Customers");
+      Directory.CreateDirectory(customersDirectory);
+      var customerDirectory = Path.Combine(customersDirectory, _customer.FullName.Replace(" ", "_"));
+      Directory.CreateDirectory(customerDirectory);
+      return customerDirectory;
+    }
+
+    private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+    {
+      _visit.Future = dateTimePicker1.Value.Date > DateTime.Today;
+      labelFuture.Visible = _visit.Future;
+
     }
   }
 }

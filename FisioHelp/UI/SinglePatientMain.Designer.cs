@@ -32,6 +32,8 @@
       this.panel1 = new System.Windows.Forms.Panel();
       this.panel3 = new System.Windows.Forms.Panel();
       this.panel2 = new System.Windows.Forms.Panel();
+      this.buttonVirus = new System.Windows.Forms.Button();
+      this.buttonFolder = new System.Windows.Forms.Button();
       this.buttonMedicalList = new System.Windows.Forms.Button();
       this.buttonEconomicList = new System.Windows.Forms.Button();
       this.buttonInvoice = new System.Windows.Forms.Button();
@@ -39,7 +41,7 @@
       this.buttonVisit = new System.Windows.Forms.Button();
       this.buttonCustomer = new System.Windows.Forms.Button();
       this.label1 = new System.Windows.Forms.Label();
-      this.buttonFolder = new System.Windows.Forms.Button();
+      this.buttonManyVisits = new System.Windows.Forms.Button();
       this.panel1.SuspendLayout();
       this.panel2.SuspendLayout();
       this.SuspendLayout();
@@ -69,6 +71,8 @@
       // panel2
       // 
       this.panel2.BackColor = System.Drawing.Color.White;
+      this.panel2.Controls.Add(this.buttonManyVisits);
+      this.panel2.Controls.Add(this.buttonVirus);
       this.panel2.Controls.Add(this.buttonFolder);
       this.panel2.Controls.Add(this.buttonMedicalList);
       this.panel2.Controls.Add(this.buttonEconomicList);
@@ -82,6 +86,34 @@
       this.panel2.Name = "panel2";
       this.panel2.Size = new System.Drawing.Size(794, 60);
       this.panel2.TabIndex = 0;
+      // 
+      // buttonVirus
+      // 
+      this.buttonVirus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+      this.buttonVirus.FlatAppearance.BorderSize = 0;
+      this.buttonVirus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+      this.buttonVirus.Image = ((System.Drawing.Image)(resources.GetObject("buttonVirus.Image")));
+      this.buttonVirus.Location = new System.Drawing.Point(472, 0);
+      this.buttonVirus.Name = "buttonVirus";
+      this.buttonVirus.Size = new System.Drawing.Size(58, 59);
+      this.buttonVirus.TabIndex = 9;
+      this.buttonVirus.UseVisualStyleBackColor = true;
+      this.buttonVirus.Click += new System.EventHandler(this.buttonVirus_Click);
+      // 
+      // buttonFolder
+      // 
+      this.buttonFolder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+      this.buttonFolder.FlatAppearance.BorderSize = 0;
+      this.buttonFolder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+      this.buttonFolder.Image = ((System.Drawing.Image)(resources.GetObject("buttonFolder.Image")));
+      this.buttonFolder.Location = new System.Drawing.Point(408, 0);
+      this.buttonFolder.Name = "buttonFolder";
+      this.buttonFolder.Size = new System.Drawing.Size(58, 59);
+      this.buttonFolder.TabIndex = 8;
+      this.buttonFolder.UseVisualStyleBackColor = true;
+      this.buttonFolder.Click += new System.EventHandler(this.button1_Click_1);
       // 
       // buttonMedicalList
       // 
@@ -142,7 +174,7 @@
       this.buttonVisit.FlatAppearance.BorderSize = 0;
       this.buttonVisit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
       this.buttonVisit.Image = ((System.Drawing.Image)(resources.GetObject("buttonVisit.Image")));
-      this.buttonVisit.Location = new System.Drawing.Point(643, 0);
+      this.buttonVisit.Location = new System.Drawing.Point(658, 0);
       this.buttonVisit.Name = "buttonVisit";
       this.buttonVisit.Size = new System.Drawing.Size(58, 59);
       this.buttonVisit.TabIndex = 2;
@@ -172,19 +204,19 @@
       this.label1.Size = new System.Drawing.Size(794, 1);
       this.label1.TabIndex = 0;
       // 
-      // buttonFolder
+      // buttonManyVisits
       // 
-      this.buttonFolder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-      this.buttonFolder.FlatAppearance.BorderSize = 0;
-      this.buttonFolder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.buttonFolder.Image = ((System.Drawing.Image)(resources.GetObject("buttonFolder.Image")));
-      this.buttonFolder.Location = new System.Drawing.Point(408, 0);
-      this.buttonFolder.Name = "buttonFolder";
-      this.buttonFolder.Size = new System.Drawing.Size(58, 59);
-      this.buttonFolder.TabIndex = 8;
-      this.buttonFolder.UseVisualStyleBackColor = true;
-      this.buttonFolder.Click += new System.EventHandler(this.button1_Click_1);
+      this.buttonManyVisits.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.buttonManyVisits.FlatAppearance.BorderSize = 0;
+      this.buttonManyVisits.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+      this.buttonManyVisits.Image = ((System.Drawing.Image)(resources.GetObject("buttonManyVisits.Image")));
+      this.buttonManyVisits.Location = new System.Drawing.Point(594, 0);
+      this.buttonManyVisits.Name = "buttonManyVisits";
+      this.buttonManyVisits.Size = new System.Drawing.Size(58, 59);
+      this.buttonManyVisits.TabIndex = 10;
+      this.buttonManyVisits.UseVisualStyleBackColor = true;
+      this.buttonManyVisits.Click += new System.EventHandler(this.buttonManyVisits_Click);
       // 
       // SinglePatientMain
       // 
@@ -213,5 +245,7 @@
     private System.Windows.Forms.Button buttonMedicalList;
     private System.Windows.Forms.Button buttonEconomicList;
     private System.Windows.Forms.Button buttonFolder;
-  }
+        private System.Windows.Forms.Button buttonVirus;
+        private System.Windows.Forms.Button buttonManyVisits;
+    }
 }

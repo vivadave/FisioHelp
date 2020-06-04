@@ -29,6 +29,8 @@ namespace FisioHelp.UI
     {
       InitializeComponent();
       _customer = customer;
+      if (customer == null)
+        return;
       labelName.Text = $"{customer.Name} {customer.Surname}".ToUpper();
       _editPatientTT.SetToolTip(this.buttonCustomer, "Modifica i dati del paziente");
       _createVisitTT.SetToolTip(this.buttonVisit, $"Crea una nuova visita per {_customer.Name}");
@@ -159,6 +161,25 @@ namespace FisioHelp.UI
 
     private void button1_Click_1(object sender, EventArgs e)
     {
+      
+      System.Diagnostics.Process.Start(getDirectory());
+    }
+
+    private void buttonVirus_Click(object sender, EventArgs e)
+    {
+      var directory = getDirectory();
+      var triageDirectory = Path.Combine(directory, "Triage");
+      Directory.CreateDirectory(triageDirectory);
+      var newFile = Path.Combine(triageDirectory, $"Triage_{_customer.FullName.Replace(" ", "_")}.pdf");
+      if (!File.Exists(newFile))
+        File.Copy(@"Template/covid1.pdf", newFile);
+
+      if (File.Exists(newFile))
+        System.Diagnostics.Process.Start(newFile);
+    } 
+    
+    private string getDirectory()
+    {
       Therapist therapist;
       using (var db = new Db.PhisioDB())
       {
@@ -170,7 +191,13 @@ namespace FisioHelp.UI
       Directory.CreateDirectory(customersDirectory);
       var customerDirectory = Path.Combine(customersDirectory, _customer.FullName.Replace(" ", "_"));
       Directory.CreateDirectory(customerDirectory);
-      System.Diagnostics.Process.Start(customerDirectory);
+      return customerDirectory;
+    }
+
+    private void buttonManyVisits_Click(object sender, EventArgs e)
+    {
+      MultipleVisits mv = new MultipleVisits(_customer);
+      mv.ShowDialog();
     }
   }
 }

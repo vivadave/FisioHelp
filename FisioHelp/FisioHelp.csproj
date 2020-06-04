@@ -265,6 +265,12 @@
     <Compile Include="UI\InvoiceListHeader.Designer.cs">
       <DependentUpon>InvoiceListHeader.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\MultipleVisits.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\MultipleVisits.Designer.cs">
+      <DependentUpon>MultipleVisits.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\NewPatient.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -376,6 +382,9 @@
     <EmbeddedResource Include="UI\InvoiceListHeader.resx">
       <DependentUpon>InvoiceListHeader.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\MultipleVisits.resx">
+      <DependentUpon>MultipleVisits.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\NewPatient.resx">
       <DependentUpon>NewPatient.cs</DependentUpon>
     </EmbeddedResource>
@@ -422,6 +431,7 @@
     <None Include="packages.config" />
     <None Include="Properties\DataSources\DataModels.PriceList.datasource" />
     <None Include="Properties\DataSources\FisioHelp.DataModels.Treatment.datasource" />
+    <None Include="Properties\DataSources\FisioHelp.UI.VisitListCtrl.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -433,6 +443,12 @@
     </Compile>
     <None Include="Resources\fluted-polymer-256106-8fdab3f72fb5.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Template\covid1.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Template\covid2.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -469,6 +485,9 @@
     <Content Include="script\PostgreSQL.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>PostgreSQL1.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="sql\dbEliCreate_08.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="sql\dbEliCreate_07.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

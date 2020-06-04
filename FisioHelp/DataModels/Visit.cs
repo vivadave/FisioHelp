@@ -24,6 +24,7 @@ namespace FisioHelp.DataModels
     [Column("deleted"), NotNull] public bool Deleted { get; set; } // boolean
     [Column("proforma_invoice_id"), Nullable] public Guid? ProformaInvoiceId { get; set; } // uuid
     [Column("proforma_invoiced"), NotNull] public bool ProformaInvoiced { get; set; } // boolean
+    [Column("future"), NotNull] public bool Future { get; set; } // boolean
 
     public bool HasInvoice()
     {
