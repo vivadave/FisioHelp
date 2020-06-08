@@ -55,6 +55,13 @@
       this.panel12 = new System.Windows.Forms.Panel();
       this.listBox1 = new System.Windows.Forms.ListBox();
       this.label2 = new System.Windows.Forms.Label();
+      this.panel13 = new System.Windows.Forms.Panel();
+      this.panel14 = new System.Windows.Forms.Panel();
+      this.label4 = new System.Windows.Forms.Label();
+      this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+      this.dataGridView1 = new System.Windows.Forms.DataGridView();
+      this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.panel1.SuspendLayout();
       this.panel2.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -76,6 +83,10 @@
       this.panel10.SuspendLayout();
       this.panel11.SuspendLayout();
       this.panel12.SuspendLayout();
+      this.panel13.SuspendLayout();
+      this.panel14.SuspendLayout();
+      this.tableLayoutPanel2.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
       this.SuspendLayout();
       // 
       // panel1
@@ -146,7 +157,7 @@
       // 
       // splitContainer1.Panel2
       // 
-      this.splitContainer1.Panel2.Controls.Add(this.panel11);
+      this.splitContainer1.Panel2.Controls.Add(this.tableLayoutPanel2);
       this.splitContainer1.Size = new System.Drawing.Size(851, 648);
       this.splitContainer1.SplitterDistance = 425;
       this.splitContainer1.TabIndex = 1;
@@ -404,8 +415,9 @@
       this.richTextBoxExPostit.Location = new System.Drawing.Point(15, 47);
       this.richTextBoxExPostit.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.richTextBoxExPostit.Name = "richTextBoxExPostit";
-      this.richTextBoxExPostit.Rtf = "{\\rtf1\\ansi\\ansicpg1252\\deff0\\deflang1040{\\fonttbl{\\f0\\fnil\\fcharset0 Segoe UI Hi" +
-    "storic;}}\r\n\\viewkind4\\uc1\\pard\\f0\\fs23\\par\r\n}\r\n";
+      this.richTextBoxExPostit.Rtf = "{\\rtf1\\ansi\\ansicpg1252\\deff0\\nouicompat\\deflang1040{\\fonttbl{\\f0\\fnil\\fcharset0 " +
+    "Segoe UI Historic;}}\r\n{\\*\\generator Riched20 10.0.17763}\\viewkind4\\uc1 \r\n\\pard\\f" +
+    "0\\fs23\\par\r\n}\r\n";
       this.richTextBoxExPostit.SetColorWithFont = true;
       this.richTextBoxExPostit.ShowToolStrip = true;
       this.richTextBoxExPostit.Size = new System.Drawing.Size(344, 232);
@@ -419,9 +431,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
       this.panel11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
       this.panel11.Controls.Add(this.panel12);
-      this.panel11.Location = new System.Drawing.Point(21, 20);
+      this.panel11.Location = new System.Drawing.Point(20, 20);
+      this.panel11.Margin = new System.Windows.Forms.Padding(20);
       this.panel11.Name = "panel11";
-      this.panel11.Size = new System.Drawing.Size(381, 610);
+      this.panel11.Size = new System.Drawing.Size(382, 284);
       this.panel11.TabIndex = 1;
       // 
       // panel12
@@ -435,7 +448,7 @@
       this.panel12.Location = new System.Drawing.Point(3, 3);
       this.panel12.Margin = new System.Windows.Forms.Padding(5);
       this.panel12.Name = "panel12";
-      this.panel12.Size = new System.Drawing.Size(375, 604);
+      this.panel12.Size = new System.Drawing.Size(376, 278);
       this.panel12.TabIndex = 1;
       // 
       // listBox1
@@ -445,10 +458,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
       this.listBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
       this.listBox1.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.listBox1.ItemHeight = 30;
+      this.listBox1.ItemHeight = 20;
       this.listBox1.Location = new System.Drawing.Point(15, 62);
       this.listBox1.Name = "listBox1";
-      this.listBox1.Size = new System.Drawing.Size(343, 500);
+      this.listBox1.Size = new System.Drawing.Size(344, 200);
       this.listBox1.TabIndex = 3;
       // 
       // label2
@@ -461,6 +474,91 @@
       this.label2.Size = new System.Drawing.Size(222, 30);
       this.label2.TabIndex = 2;
       this.label2.Text = "Clienti senza privacy";
+      // 
+      // panel13
+      // 
+      this.panel13.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.panel13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
+      this.panel13.Controls.Add(this.panel14);
+      this.panel13.Location = new System.Drawing.Point(20, 344);
+      this.panel13.Margin = new System.Windows.Forms.Padding(20);
+      this.panel13.Name = "panel13";
+      this.panel13.Size = new System.Drawing.Size(382, 284);
+      this.panel13.TabIndex = 2;
+      // 
+      // panel14
+      // 
+      this.panel14.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.panel14.BackColor = System.Drawing.Color.White;
+      this.panel14.Controls.Add(this.dataGridView1);
+      this.panel14.Controls.Add(this.label4);
+      this.panel14.Location = new System.Drawing.Point(3, 3);
+      this.panel14.Margin = new System.Windows.Forms.Padding(5);
+      this.panel14.Name = "panel14";
+      this.panel14.Size = new System.Drawing.Size(376, 278);
+      this.panel14.TabIndex = 1;
+      // 
+      // label4
+      // 
+      this.label4.AutoSize = true;
+      this.label4.Font = new System.Drawing.Font("Segoe UI Historic", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
+      this.label4.Location = new System.Drawing.Point(10, 12);
+      this.label4.Name = "label4";
+      this.label4.Size = new System.Drawing.Size(338, 30);
+      this.label4.TabIndex = 2;
+      this.label4.Text = "Visite già pagate non effettuate";
+      // 
+      // tableLayoutPanel2
+      // 
+      this.tableLayoutPanel2.ColumnCount = 1;
+      this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+      this.tableLayoutPanel2.Controls.Add(this.panel13, 0, 1);
+      this.tableLayoutPanel2.Controls.Add(this.panel11, 0, 0);
+      this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
+      this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+      this.tableLayoutPanel2.RowCount = 2;
+      this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+      this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+      this.tableLayoutPanel2.Size = new System.Drawing.Size(422, 648);
+      this.tableLayoutPanel2.TabIndex = 3;
+      // 
+      // dataGridView1
+      // 
+      this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
+      this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+      this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+      this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column1,
+            this.Column2});
+      this.dataGridView1.GridColor = System.Drawing.SystemColors.ActiveBorder;
+      this.dataGridView1.Location = new System.Drawing.Point(15, 60);
+      this.dataGridView1.Name = "dataGridView1";
+      this.dataGridView1.RowHeadersVisible = false;
+      this.dataGridView1.Size = new System.Drawing.Size(344, 195);
+      this.dataGridView1.TabIndex = 3;
+      // 
+      // Column1
+      // 
+      this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+      this.Column1.HeaderText = "Cliente";
+      this.Column1.Name = "Column1";
+      this.Column1.ReadOnly = true;
+      // 
+      // Column2
+      // 
+      this.Column2.HeaderText = "Visite Aperte";
+      this.Column2.Name = "Column2";
+      this.Column2.ReadOnly = true;
+      this.Column2.Width = 120;
       // 
       // Dashboard
       // 
@@ -497,6 +595,11 @@
       this.panel11.ResumeLayout(false);
       this.panel12.ResumeLayout(false);
       this.panel12.PerformLayout();
+      this.panel13.ResumeLayout(false);
+      this.panel14.ResumeLayout(false);
+      this.panel14.PerformLayout();
+      this.tableLayoutPanel2.ResumeLayout(false);
+      ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
       this.ResumeLayout(false);
 
     }
@@ -530,5 +633,12 @@
     private System.Windows.Forms.Panel panel12;
     private System.Windows.Forms.ListBox listBox1;
     private System.Windows.Forms.Label label2;
-  }
+        private System.Windows.Forms.Panel panel13;
+        private System.Windows.Forms.Panel panel14;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+    }
 }
