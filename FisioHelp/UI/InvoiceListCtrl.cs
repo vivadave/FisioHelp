@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 using LinqToDB;
+using System.IO;
 
 namespace FisioHelp.UI
 {
@@ -18,6 +19,7 @@ namespace FisioHelp.UI
     private List<DataModels.ProformaInvoice> _proformaInvoices;
     public DataModels.ProformaInvoice SelectedInvoice { get; set; }
     public DataModels.Customer Customer;
+    DataModels.Therapist _therapist = null;
 
     public InvoiceListCtrl(DataModels.Customer customer)
     {
@@ -36,6 +38,13 @@ namespace FisioHelp.UI
       dateTimePickerTo.CustomFormat = "dd/MM/yyyy";
       comboBoxPayed.Items.AddRange(_comboBoxValues);
       comboBoxPayed.SelectedItem = _comboBoxValues[0];
+
+      var col = this.dataGridView1.Columns[1];
+      col.DefaultCellStyle.Format = "dd.MM.yyyy";
+      using (var db = new Db.PhisioDB())
+      {
+        _therapist = db.Therapists.FirstOrDefault();
+      }
     }
 
     public void InsertHeader()
@@ -44,6 +53,7 @@ namespace FisioHelp.UI
       invoiceListHeader.Dock = DockStyle.Top;
       panel2.Controls.Add(invoiceListHeader);
       panel2.Width = this.Size.Width;
+
     }
     
     private void dateTimePickerfrom_ValueChanged(object sender, EventArgs e)
@@ -107,6 +117,8 @@ namespace FisioHelp.UI
 
         _proformaInvoices = _proformaInvoices.OrderBy(x => x.Date).OrderBy(x => x.Invoice == null).ToList();
 
+        //Remove proforma with deleted visits
+        _proformaInvoices = _proformaInvoices.Where(x => x.Visitsproformainvoiceidfkeys.Count() > 0).ToList();
         if (_filterPayed > 0)
         {
           _proformaInvoices = _proformaInvoices.Where(x => x.Payed == (_filterPayed == 1)).ToList();
@@ -131,7 +143,8 @@ namespace FisioHelp.UI
       panel2.Controls.Clear();
       panel2.AutoScroll = true;
       DrawInvoces();
-      InsertHeader();
+      if (Customer != null)
+        InsertHeader();
     }
 
     private void DrawInvoces()
@@ -139,8 +152,7 @@ namespace FisioHelp.UI
       var pos = 0;
       int odd = 0;
       Color[] colors = { Color.FromArgb(255, 255, 255), Color.FromArgb(255, 241, 240) };
-
-
+      var invoiceListItemList = new List<InvoiceListItem>();
       foreach (var proformaInvoice in _proformaInvoices)
       {
         var invoiceListItem = new UI.InvoiceListItem(proformaInvoice, Customer);
@@ -149,10 +161,44 @@ namespace FisioHelp.UI
         invoiceListItem.Dock = DockStyle.Top;
         pos += 120;
         invoiceListItem.OnOpenInvoice += OnOpenInvoice;
-        panel2.Controls.Add(invoiceListItem);
         invoiceListItem.BackColor = colors[odd];
         invoiceListItem.ChangePayed += CalculateTotals;
+        invoiceListItemList.Add(invoiceListItem);
         odd = (odd + 1) % 2;
+      }
+      
+      if (Customer != null)
+      {
+        dataGridView1.Visible = false;
+        panel2.Controls.AddRange(invoiceListItemList.ToArray());
+      }
+      else
+      {
+        this.panel2.Controls.Add(dataGridView1);
+        dataGridView1.Rows.Clear();
+        int i = 0;
+        dataGridView1.Visible = true;
+        foreach (var proforma in _proformaInvoices)
+        {
+          var invoiceDate = proforma.Invoice != null ? ((DateTime)proforma.Invoice.Date) : ((DateTime)proforma.Date);
+          var r = (DataGridViewRow)dataGridView1.Rows[0].Clone();
+
+          var invTit = proforma.Invoice == null ? "" : proforma.Invoice.Title;
+          var invoiceTitle = new InvoiceTitle(invTit);
+          r.Cells[0].Value = invoiceTitle;
+          r.Cells[1].Value = invoiceDate;
+          r.Cells[2].Value = proforma.Title;
+          r.Cells[3].Value = proforma.Customer?.FullName;
+          r.Cells[4].Value = proforma.Total;
+          r.Cells[5].Value = proforma.Visitsproformainvoiceidfkeys.ToList().Count.ToString();
+          r.Cells[6].Value = proforma.Payed;
+          r.Cells[7].Value = imageList1.Images[0];
+          r.Cells[8].Value = imageList1.Images[1];
+          r.Cells[9].Value = proforma.Id;
+          r.DefaultCellStyle.BackColor = colors[odd];
+          dataGridView1.Rows.Add(r);
+          odd = (odd + 1) % 2;
+        }
       }
 
       panel3.Visible = true;
@@ -184,5 +230,73 @@ namespace FisioHelp.UI
     {
 
     }
+
+    private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+    {
+      if (e.RowIndex < 0) return;
+      var id = dataGridView1[9, e.RowIndex].Value;
+
+      SelectedInvoice = _proformaInvoices.FirstOrDefault(x => x.Id == new Guid(id.ToString()));
+      if (e.ColumnIndex == 7) //fatture
+      { 
+        if(SelectedInvoice.Invoice == null)
+        {
+          MessageBox.Show("La fattura non è ancora disponibile");
+        } 
+        else
+        {
+          var basePath = _therapist.InvoicesFolder;
+          var date = $"{SelectedInvoice.Invoice.Date.Year}{SelectedInvoice.Invoice.Date.Month}";
+          basePath = Path.Combine(basePath, date);
+          if (Directory.Exists(basePath))
+            System.Diagnostics.Process.Start(basePath);
+          else
+            MessageBox.Show("La cartella non esiste ancora stampare prima la fattura");
+        }
+      }
+      else if(e.ColumnIndex == 8) //dettagli
+      {
+        OpenInvoice?.Invoke(this, e);
+      }
+    }
   }
+
+  public class InvoiceTitle
+  {
+    private string _title;
+    private string _sortTitle;
+    public InvoiceTitle(string title)
+    {
+      _title = title;
+      var temp = title.Split('/').ToList();
+      if (temp.Count >= 2)
+      {
+        _sortTitle = temp[1] + temp[0];
+      }
+      else
+      {
+        _sortTitle = title;
+      }
+    }
+    public override bool Equals(object obj)
+    {
+      var item = obj as InvoiceTitle;
+
+      if (item == null)
+      {
+        return false;
+      }
+
+      return this._sortTitle.Equals(item._sortTitle);
+    }
+    public override int GetHashCode()
+    {
+      return this._sortTitle.GetHashCode();
+    }
+    public override string ToString()
+    {
+      return _title;
+    }
+  }
+
 }

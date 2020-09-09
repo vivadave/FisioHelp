@@ -12,6 +12,7 @@ namespace FisioHelp.UI
 {
   public partial class MultipleVisits : Form
   {
+    public event EventHandler VisitCreated;
     private DataModels.Therapist _therapist { get; set; }
     private DataModels.Customer _customer;
     private List<DataModels.Treatment> _treatments;
@@ -74,6 +75,26 @@ namespace FisioHelp.UI
       this.Close();
     }
 
+    private DataModels.Visit ManageChecking(DataModels.Visit visit)
+    {
+      var items = checkedListBox1.CheckedItems;
+      visit.Treatmentsvisitidfkeys = Enumerable.Empty<DataModels.VisitsTreatment>();
+      List<DataModels.VisitsTreatment> a = new List<DataModels.VisitsTreatment>();
+
+      foreach (var item in items)
+      {
+        a.Add(new DataModels.VisitsTreatment
+        {
+          Treatment = (DataModels.Treatment)item,
+          TreatmentId = ((DataModels.Treatment)item).Id,
+          Visit = visit,
+          VisitId = visit.Id
+        });
+      }
+      visit.Treatmentsvisitidfkeys = a;
+      return visit;
+    }
+
     private void buttonSave_Click(object sender, EventArgs e)
     {
       double tot = _visitNr == 0 ? 0.0 : (_visitTot / _visitNr);
@@ -94,7 +115,13 @@ namespace FisioHelp.UI
         visit.Future = true;
         visit.TherapistId = _therapist.Id;
         visit.SaveToDB();
+        visit = ManageChecking(visit);
+        visit.SaveToDB();
       }
+
+      MessageBox.Show($"Sono state create {_visitNr} visite future", "Terminato", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+      VisitCreated?.Invoke(this, e);
     }
   }
 }

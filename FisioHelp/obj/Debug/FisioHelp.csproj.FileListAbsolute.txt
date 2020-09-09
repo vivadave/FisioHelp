@@ -135,7 +135,6 @@ C:\Progetti\FisioHelp\FisioHelp\obj\Debug\FisioHelp.UI.VisitListCtrl.resources
 C:\Progetti\FisioHelp\FisioHelp\obj\Debug\FisioHelp.UI.VisitMedicalCtrl.resources
 C:\Progetti\FisioHelp\FisioHelp\obj\Debug\FisioHelp.UI.InvoiceCtrl.resources
 C:\Progetti\FisioHelp\FisioHelp\obj\Debug\FisioHelp.UI.InvoiceFrm.resources
-C:\Progetti\FisioHelp\FisioHelp\obj\Debug\FisioHelp.UI.InvoiceListCtrl.resources
 C:\Progetti\FisioHelp\FisioHelp\obj\Debug\FisioHelp.UI.InvoiceListItem.resources
 C:\Progetti\FisioHelp\FisioHelp\bin\Debug\PdfSharp.Charting.dll
 C:\Progetti\FisioHelp\FisioHelp\bin\Debug\PdfSharp.dll
@@ -200,3 +199,4 @@ C:\Progetti\FisioHelp\FisioHelp\bin\Debug\Template\covid1.pdf
 C:\Progetti\FisioHelp\FisioHelp\bin\Debug\Template\covid2.pdf
 C:\Progetti\FisioHelp\FisioHelp\bin\Debug\sql\dbEliCreate_08.sql
 C:\Progetti\FisioHelp\FisioHelp\obj\Debug\FisioHelp.UI.MultipleVisits.resources
+C:\Progetti\FisioHelp\FisioHelp\obj\Debug\FisioHelp.UI.InvoiceListCtrl.resources

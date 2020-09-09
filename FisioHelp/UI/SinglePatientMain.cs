@@ -160,8 +160,7 @@ namespace FisioHelp.UI
     }
 
     private void button1_Click_1(object sender, EventArgs e)
-    {
-      
+    {      
       System.Diagnostics.Process.Start(getDirectory());
     }
 
@@ -197,7 +196,13 @@ namespace FisioHelp.UI
     private void buttonManyVisits_Click(object sender, EventArgs e)
     {
       MultipleVisits mv = new MultipleVisits(_customer);
+      mv.VisitCreated += ReloadVisits;
       mv.ShowDialog();
+    }
+
+    private void ReloadVisits(object sender, EventArgs e)
+    {
+      EconomicListLoad();
     }
   }
 }

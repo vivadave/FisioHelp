@@ -28,7 +28,16 @@
     /// </summary>
     private void InitializeComponent()
     {
+      this.components = new System.ComponentModel.Container();
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InvoiceListCtrl));
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
       this.panel1 = new System.Windows.Forms.Panel();
       this.buttonExcel = new System.Windows.Forms.Button();
       this.label9 = new System.Windows.Forms.Label();
@@ -42,6 +51,7 @@
       this.dateTimePickerTo = new System.Windows.Forms.DateTimePicker();
       this.dateTimePickerfrom = new System.Windows.Forms.DateTimePicker();
       this.panel2 = new System.Windows.Forms.Panel();
+      this.dataGridView1 = new System.Windows.Forms.DataGridView();
       this.panel3 = new System.Windows.Forms.Panel();
       this.label8 = new System.Windows.Forms.Label();
       this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -50,7 +60,20 @@
       this.labelTotMoney = new System.Windows.Forms.Label();
       this.labelTotPayed = new System.Windows.Forms.Label();
       this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+      this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+      this.invoiceNr = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.proformaNr = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.customerCl = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.VisitNr = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.payed = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+      this.toInvoice = new System.Windows.Forms.DataGridViewImageColumn();
+      this.toFolder = new System.Windows.Forms.DataGridViewImageColumn();
+      this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.panel1.SuspendLayout();
+      this.panel2.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
       this.panel3.SuspendLayout();
       this.tableLayoutPanel1.SuspendLayout();
       this.SuspendLayout();
@@ -199,10 +222,50 @@
             | System.Windows.Forms.AnchorStyles.Right)));
       this.panel2.AutoScroll = true;
       this.panel2.BackColor = System.Drawing.Color.White;
+      this.panel2.Controls.Add(this.dataGridView1);
       this.panel2.Location = new System.Drawing.Point(0, 83);
       this.panel2.Name = "panel2";
       this.panel2.Size = new System.Drawing.Size(1017, 382);
       this.panel2.TabIndex = 1;
+      // 
+      // dataGridView1
+      // 
+      this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
+      this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+      dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+      dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI Historic", 10.25F);
+      dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+      dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+      dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+      dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+      this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+      this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+      this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.invoiceNr,
+            this.date,
+            this.proformaNr,
+            this.customerCl,
+            this.price,
+            this.VisitNr,
+            this.payed,
+            this.toInvoice,
+            this.toFolder,
+            this.id});
+      dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+      dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI Historic", 10.25F);
+      dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
+      dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+      dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+      dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+      this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle8;
+      this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.dataGridView1.Location = new System.Drawing.Point(0, 0);
+      this.dataGridView1.Name = "dataGridView1";
+      this.dataGridView1.Size = new System.Drawing.Size(1017, 382);
+      this.dataGridView1.TabIndex = 0;
+      this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
       // 
       // panel3
       // 
@@ -309,6 +372,92 @@
       this.saveFileDialog1.DefaultExt = "xlsx";
       this.saveFileDialog1.Filter = "Excel files|*.xlsx";
       // 
+      // imageList1
+      // 
+      this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+      this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+      this.imageList1.Images.SetKeyName(0, "bill.png");
+      this.imageList1.Images.SetKeyName(1, "record.png");
+      // 
+      // invoiceNr
+      // 
+      dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI Historic", 10.25F);
+      this.invoiceNr.DefaultCellStyle = dataGridViewCellStyle2;
+      this.invoiceNr.HeaderText = "Nr. Fattura";
+      this.invoiceNr.Name = "invoiceNr";
+      this.invoiceNr.ReadOnly = true;
+      // 
+      // date
+      // 
+      dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI Historic", 10.25F);
+      this.date.DefaultCellStyle = dataGridViewCellStyle3;
+      this.date.HeaderText = "Data";
+      this.date.Name = "date";
+      this.date.ReadOnly = true;
+      // 
+      // proformaNr
+      // 
+      dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI Historic", 10.25F);
+      this.proformaNr.DefaultCellStyle = dataGridViewCellStyle4;
+      this.proformaNr.HeaderText = "Nr. Proforma";
+      this.proformaNr.Name = "proformaNr";
+      this.proformaNr.ReadOnly = true;
+      this.proformaNr.Width = 120;
+      // 
+      // customerCl
+      // 
+      this.customerCl.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+      dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI Historic", 10.25F);
+      this.customerCl.DefaultCellStyle = dataGridViewCellStyle5;
+      this.customerCl.HeaderText = "Cliente";
+      this.customerCl.Name = "customerCl";
+      this.customerCl.ReadOnly = true;
+      // 
+      // price
+      // 
+      dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI Historic", 10.25F);
+      this.price.DefaultCellStyle = dataGridViewCellStyle6;
+      this.price.HeaderText = "Importo";
+      this.price.Name = "price";
+      this.price.ReadOnly = true;
+      // 
+      // VisitNr
+      // 
+      dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI Historic", 10.25F);
+      this.VisitNr.DefaultCellStyle = dataGridViewCellStyle7;
+      this.VisitNr.HeaderText = "Numero Visite";
+      this.VisitNr.Name = "VisitNr";
+      this.VisitNr.ReadOnly = true;
+      this.VisitNr.Width = 120;
+      // 
+      // payed
+      // 
+      this.payed.HeaderText = "Pagato";
+      this.payed.Name = "payed";
+      this.payed.ReadOnly = true;
+      this.payed.Width = 60;
+      // 
+      // toInvoice
+      // 
+      this.toInvoice.HeaderText = "Alla fattura";
+      this.toInvoice.Image = ((System.Drawing.Image)(resources.GetObject("toInvoice.Image")));
+      this.toInvoice.Name = "toInvoice";
+      this.toInvoice.ReadOnly = true;
+      // 
+      // toFolder
+      // 
+      this.toFolder.HeaderText = "Al documento";
+      this.toFolder.Image = ((System.Drawing.Image)(resources.GetObject("toFolder.Image")));
+      this.toFolder.Name = "toFolder";
+      this.toFolder.ReadOnly = true;
+      this.toFolder.Width = 120;
+      // 
+      // id
+      // 
+      this.id.HeaderText = "id";
+      this.id.Name = "id";
+      this.id.Visible = false;
+      // 
       // InvoiceListCtrl
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -321,6 +470,8 @@
       this.Size = new System.Drawing.Size(1017, 529);
       this.panel1.ResumeLayout(false);
       this.panel1.PerformLayout();
+      this.panel2.ResumeLayout(false);
+      ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
       this.panel3.ResumeLayout(false);
       this.tableLayoutPanel1.ResumeLayout(false);
       this.tableLayoutPanel1.PerformLayout();
@@ -351,5 +502,17 @@
     private System.Windows.Forms.Label label7;
     private System.Windows.Forms.Button buttonExcel;
     private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.ImageList imageList1;
+    private System.Windows.Forms.DataGridViewTextBoxColumn invoiceNr;
+    private System.Windows.Forms.DataGridViewTextBoxColumn date;
+    private System.Windows.Forms.DataGridViewTextBoxColumn proformaNr;
+    private System.Windows.Forms.DataGridViewTextBoxColumn customerCl;
+    private System.Windows.Forms.DataGridViewTextBoxColumn price;
+    private System.Windows.Forms.DataGridViewTextBoxColumn VisitNr;
+    private System.Windows.Forms.DataGridViewCheckBoxColumn payed;
+    private System.Windows.Forms.DataGridViewImageColumn toInvoice;
+    private System.Windows.Forms.DataGridViewImageColumn toFolder;
+    private System.Windows.Forms.DataGridViewTextBoxColumn id;
   }
 }

@@ -30,14 +30,18 @@
     {
       this.components = new System.ComponentModel.Container();
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VisitListCtrl));
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
       System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
       this.panel1 = new System.Windows.Forms.Panel();
+      this.checkBoxFuture = new System.Windows.Forms.CheckBox();
+      this.label5 = new System.Windows.Forms.Label();
+      this.comboBoxProforma = new System.Windows.Forms.ComboBox();
       this.buttonAnamnesys = new System.Windows.Forms.Button();
       this.buttonAnamnesysView = new System.Windows.Forms.Button();
       this.buttonInvoices = new System.Windows.Forms.Button();
@@ -45,26 +49,15 @@
       this.label7 = new System.Windows.Forms.Label();
       this.label6 = new System.Windows.Forms.Label();
       this.labelTitle = new System.Windows.Forms.Label();
+      this.label4 = new System.Windows.Forms.Label();
+      this.label3 = new System.Windows.Forms.Label();
       this.label2 = new System.Windows.Forms.Label();
       this.label1 = new System.Windows.Forms.Label();
+      this.comboBoxInvoice = new System.Windows.Forms.ComboBox();
+      this.comboBoxPayed = new System.Windows.Forms.ComboBox();
       this.dateTimePickerTo = new System.Windows.Forms.DateTimePicker();
       this.dateTimePickerfrom = new System.Windows.Forms.DateTimePicker();
       this.panel2 = new System.Windows.Forms.Panel();
-      this.panel3 = new System.Windows.Forms.Panel();
-      this.label8 = new System.Windows.Forms.Label();
-      this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-      this.labelTotInvoice = new System.Windows.Forms.Label();
-      this.labelTotNr = new System.Windows.Forms.Label();
-      this.labelTotMoney = new System.Windows.Forms.Label();
-      this.labelTotPayed = new System.Windows.Forms.Label();
-      this.labelTotProforma = new System.Windows.Forms.Label();
-      this.checkBoxFuture = new System.Windows.Forms.CheckBox();
-      this.comboBoxPayed = new System.Windows.Forms.ComboBox();
-      this.comboBoxInvoice = new System.Windows.Forms.ComboBox();
-      this.label3 = new System.Windows.Forms.Label();
-      this.label4 = new System.Windows.Forms.Label();
-      this.comboBoxProforma = new System.Windows.Forms.ComboBox();
-      this.label5 = new System.Windows.Forms.Label();
       this.dataGridView1 = new System.Windows.Forms.DataGridView();
       this.Cliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.Data = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -74,13 +67,21 @@
       this.Proforma = new System.Windows.Forms.DataGridViewCheckBoxColumn();
       this.Fattura = new System.Windows.Forms.DataGridViewCheckBoxColumn();
       this.Link = new System.Windows.Forms.DataGridViewLinkColumn();
-      this.visitListCtrlBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.panel3 = new System.Windows.Forms.Panel();
+      this.label8 = new System.Windows.Forms.Label();
+      this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+      this.labelTotInvoice = new System.Windows.Forms.Label();
+      this.labelTotNr = new System.Windows.Forms.Label();
+      this.labelTotMoney = new System.Windows.Forms.Label();
+      this.labelTotPayed = new System.Windows.Forms.Label();
+      this.labelTotProforma = new System.Windows.Forms.Label();
+      this.visitListCtrlBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.panel1.SuspendLayout();
       this.panel2.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
       this.panel3.SuspendLayout();
       this.tableLayoutPanel1.SuspendLayout();
-      ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.visitListCtrlBindingSource)).BeginInit();
       this.SuspendLayout();
       // 
@@ -112,6 +113,41 @@
       this.panel1.Size = new System.Drawing.Size(1156, 85);
       this.panel1.TabIndex = 0;
       this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+      // 
+      // checkBoxFuture
+      // 
+      this.checkBoxFuture.AutoSize = true;
+      this.checkBoxFuture.Checked = true;
+      this.checkBoxFuture.CheckState = System.Windows.Forms.CheckState.Checked;
+      this.checkBoxFuture.Font = new System.Drawing.Font("Segoe UI Historic", 10F);
+      this.checkBoxFuture.Location = new System.Drawing.Point(899, 39);
+      this.checkBoxFuture.Name = "checkBoxFuture";
+      this.checkBoxFuture.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+      this.checkBoxFuture.Size = new System.Drawing.Size(68, 23);
+      this.checkBoxFuture.TabIndex = 18;
+      this.checkBoxFuture.Text = "Future";
+      this.checkBoxFuture.UseVisualStyleBackColor = true;
+      this.checkBoxFuture.CheckedChanged += new System.EventHandler(this.checkBoxFuture_CheckedChanged);
+      // 
+      // label5
+      // 
+      this.label5.AutoSize = true;
+      this.label5.Font = new System.Drawing.Font("Segoe UI Historic", 10F);
+      this.label5.Location = new System.Drawing.Point(589, 41);
+      this.label5.Name = "label5";
+      this.label5.Size = new System.Drawing.Size(66, 19);
+      this.label5.TabIndex = 17;
+      this.label5.Text = "Proforma";
+      // 
+      // comboBoxProforma
+      // 
+      this.comboBoxProforma.Font = new System.Drawing.Font("Segoe UI Historic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.comboBoxProforma.FormattingEnabled = true;
+      this.comboBoxProforma.Location = new System.Drawing.Point(659, 38);
+      this.comboBoxProforma.Name = "comboBoxProforma";
+      this.comboBoxProforma.Size = new System.Drawing.Size(68, 25);
+      this.comboBoxProforma.TabIndex = 16;
+      this.comboBoxProforma.SelectedIndexChanged += new System.EventHandler(this.comboBoxProforma_SelectedIndexChanged);
       // 
       // buttonAnamnesys
       // 
@@ -198,6 +234,26 @@
       this.labelTitle.TabIndex = 10;
       this.labelTitle.Text = "Visite";
       // 
+      // label4
+      // 
+      this.label4.AutoSize = true;
+      this.label4.Font = new System.Drawing.Font("Segoe UI Historic", 10F);
+      this.label4.Location = new System.Drawing.Point(750, 41);
+      this.label4.Name = "label4";
+      this.label4.Size = new System.Drawing.Size(52, 19);
+      this.label4.TabIndex = 9;
+      this.label4.Text = "Pagato";
+      // 
+      // label3
+      // 
+      this.label3.AutoSize = true;
+      this.label3.Font = new System.Drawing.Font("Segoe UI Historic", 10F);
+      this.label3.Location = new System.Drawing.Point(431, 41);
+      this.label3.Name = "label3";
+      this.label3.Size = new System.Drawing.Size(66, 19);
+      this.label3.TabIndex = 8;
+      this.label3.Text = "Fatturato";
+      // 
       // label2
       // 
       this.label2.AutoSize = true;
@@ -218,6 +274,26 @@
       this.label1.TabIndex = 6;
       this.label1.Text = "Da";
       this.label1.Click += new System.EventHandler(this.label1_Click);
+      // 
+      // comboBoxInvoice
+      // 
+      this.comboBoxInvoice.Font = new System.Drawing.Font("Segoe UI Historic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.comboBoxInvoice.FormattingEnabled = true;
+      this.comboBoxInvoice.Location = new System.Drawing.Point(501, 38);
+      this.comboBoxInvoice.Name = "comboBoxInvoice";
+      this.comboBoxInvoice.Size = new System.Drawing.Size(68, 25);
+      this.comboBoxInvoice.TabIndex = 5;
+      this.comboBoxInvoice.SelectedIndexChanged += new System.EventHandler(this.comboBoxInvoice_SelectedIndexChanged);
+      // 
+      // comboBoxPayed
+      // 
+      this.comboBoxPayed.Font = new System.Drawing.Font("Segoe UI Historic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.comboBoxPayed.FormattingEnabled = true;
+      this.comboBoxPayed.Location = new System.Drawing.Point(806, 38);
+      this.comboBoxPayed.Name = "comboBoxPayed";
+      this.comboBoxPayed.Size = new System.Drawing.Size(68, 25);
+      this.comboBoxPayed.TabIndex = 4;
+      this.comboBoxPayed.SelectedIndexChanged += new System.EventHandler(this.comboBoxPayed_SelectedIndexChanged);
       // 
       // dateTimePickerTo
       // 
@@ -251,6 +327,113 @@
       this.panel2.Name = "panel2";
       this.panel2.Size = new System.Drawing.Size(1156, 382);
       this.panel2.TabIndex = 1;
+      // 
+      // dataGridView1
+      // 
+      this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
+      this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+      dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+      dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI Historic", 10.25F);
+      dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+      dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+      dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+      dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+      this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+      this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+      this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Cliente,
+            this.Data,
+            this.Ora,
+            this.Costo,
+            this.Pagato,
+            this.Proforma,
+            this.Fattura,
+            this.Link,
+            this.id});
+      this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.dataGridView1.Location = new System.Drawing.Point(0, 0);
+      this.dataGridView1.Name = "dataGridView1";
+      this.dataGridView1.Size = new System.Drawing.Size(1156, 382);
+      this.dataGridView1.TabIndex = 0;
+      this.dataGridView1.Visible = false;
+      this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
+      // 
+      // Cliente
+      // 
+      this.Cliente.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+      dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI Historic", 10F);
+      this.Cliente.DefaultCellStyle = dataGridViewCellStyle2;
+      this.Cliente.HeaderText = "Cliente";
+      this.Cliente.Name = "Cliente";
+      // 
+      // Data
+      // 
+      dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI Historic", 10F);
+      dataGridViewCellStyle3.Format = "d";
+      dataGridViewCellStyle3.NullValue = null;
+      this.Data.DefaultCellStyle = dataGridViewCellStyle3;
+      this.Data.HeaderText = "Data";
+      this.Data.Name = "Data";
+      // 
+      // Ora
+      // 
+      dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI Historic", 10F);
+      this.Ora.DefaultCellStyle = dataGridViewCellStyle4;
+      this.Ora.HeaderText = "Ora";
+      this.Ora.Name = "Ora";
+      // 
+      // Costo
+      // 
+      dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI Historic", 10F);
+      this.Costo.DefaultCellStyle = dataGridViewCellStyle5;
+      this.Costo.HeaderText = "Costo";
+      this.Costo.Name = "Costo";
+      // 
+      // Pagato
+      // 
+      dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+      dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI Historic", 10F);
+      dataGridViewCellStyle6.NullValue = false;
+      this.Pagato.DefaultCellStyle = dataGridViewCellStyle6;
+      this.Pagato.HeaderText = "Pagato";
+      this.Pagato.Name = "Pagato";
+      this.Pagato.ReadOnly = true;
+      this.Pagato.Width = 50;
+      // 
+      // Proforma
+      // 
+      dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+      dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI Historic", 10F);
+      dataGridViewCellStyle7.NullValue = false;
+      this.Proforma.DefaultCellStyle = dataGridViewCellStyle7;
+      this.Proforma.HeaderText = "Proforma";
+      this.Proforma.Name = "Proforma";
+      this.Proforma.ReadOnly = true;
+      this.Proforma.Width = 60;
+      // 
+      // Fattura
+      // 
+      dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+      dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI Historic", 10F);
+      dataGridViewCellStyle8.NullValue = false;
+      this.Fattura.DefaultCellStyle = dataGridViewCellStyle8;
+      this.Fattura.HeaderText = "Fattura";
+      this.Fattura.Name = "Fattura";
+      this.Fattura.ReadOnly = true;
+      this.Fattura.Width = 50;
+      // 
+      // Link
+      // 
+      this.Link.HeaderText = "Link";
+      this.Link.Name = "Link";
+      this.Link.ReadOnly = true;
+      // 
+      // id
+      // 
+      this.id.HeaderText = "id";
+      this.id.Name = "id";
+      this.id.Visible = false;
       // 
       // panel3
       // 
@@ -367,181 +550,9 @@
       this.labelTotProforma.Text = "#";
       this.labelTotProforma.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
       // 
-      // checkBoxFuture
-      // 
-      this.checkBoxFuture.AutoSize = true;
-      this.checkBoxFuture.Checked = true;
-      this.checkBoxFuture.CheckState = System.Windows.Forms.CheckState.Checked;
-      this.checkBoxFuture.Font = new System.Drawing.Font("Segoe UI Historic", 10F);
-      this.checkBoxFuture.Location = new System.Drawing.Point(899, 39);
-      this.checkBoxFuture.Name = "checkBoxFuture";
-      this.checkBoxFuture.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-      this.checkBoxFuture.Size = new System.Drawing.Size(68, 23);
-      this.checkBoxFuture.TabIndex = 18;
-      this.checkBoxFuture.Text = "Future";
-      this.checkBoxFuture.UseVisualStyleBackColor = true;
-      this.checkBoxFuture.CheckedChanged += new System.EventHandler(this.checkBoxFuture_CheckedChanged);
-      // 
-      // comboBoxPayed
-      // 
-      this.comboBoxPayed.Font = new System.Drawing.Font("Segoe UI Historic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.comboBoxPayed.FormattingEnabled = true;
-      this.comboBoxPayed.Location = new System.Drawing.Point(806, 38);
-      this.comboBoxPayed.Name = "comboBoxPayed";
-      this.comboBoxPayed.Size = new System.Drawing.Size(68, 25);
-      this.comboBoxPayed.TabIndex = 4;
-      this.comboBoxPayed.SelectedIndexChanged += new System.EventHandler(this.comboBoxPayed_SelectedIndexChanged);
-      // 
-      // comboBoxInvoice
-      // 
-      this.comboBoxInvoice.Font = new System.Drawing.Font("Segoe UI Historic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.comboBoxInvoice.FormattingEnabled = true;
-      this.comboBoxInvoice.Location = new System.Drawing.Point(501, 38);
-      this.comboBoxInvoice.Name = "comboBoxInvoice";
-      this.comboBoxInvoice.Size = new System.Drawing.Size(68, 25);
-      this.comboBoxInvoice.TabIndex = 5;
-      this.comboBoxInvoice.SelectedIndexChanged += new System.EventHandler(this.comboBoxInvoice_SelectedIndexChanged);
-      // 
-      // label3
-      // 
-      this.label3.AutoSize = true;
-      this.label3.Font = new System.Drawing.Font("Segoe UI Historic", 10F);
-      this.label3.Location = new System.Drawing.Point(431, 41);
-      this.label3.Name = "label3";
-      this.label3.Size = new System.Drawing.Size(66, 19);
-      this.label3.TabIndex = 8;
-      this.label3.Text = "Fatturato";
-      // 
-      // label4
-      // 
-      this.label4.AutoSize = true;
-      this.label4.Font = new System.Drawing.Font("Segoe UI Historic", 10F);
-      this.label4.Location = new System.Drawing.Point(750, 41);
-      this.label4.Name = "label4";
-      this.label4.Size = new System.Drawing.Size(52, 19);
-      this.label4.TabIndex = 9;
-      this.label4.Text = "Pagato";
-      // 
-      // comboBoxProforma
-      // 
-      this.comboBoxProforma.Font = new System.Drawing.Font("Segoe UI Historic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.comboBoxProforma.FormattingEnabled = true;
-      this.comboBoxProforma.Location = new System.Drawing.Point(659, 38);
-      this.comboBoxProforma.Name = "comboBoxProforma";
-      this.comboBoxProforma.Size = new System.Drawing.Size(68, 25);
-      this.comboBoxProforma.TabIndex = 16;
-      this.comboBoxProforma.SelectedIndexChanged += new System.EventHandler(this.comboBoxProforma_SelectedIndexChanged);
-      // 
-      // label5
-      // 
-      this.label5.AutoSize = true;
-      this.label5.Font = new System.Drawing.Font("Segoe UI Historic", 10F);
-      this.label5.Location = new System.Drawing.Point(589, 41);
-      this.label5.Name = "label5";
-      this.label5.Size = new System.Drawing.Size(66, 19);
-      this.label5.TabIndex = 17;
-      this.label5.Text = "Proforma";
-      // 
-      // dataGridView1
-      // 
-      this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-      this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Cliente,
-            this.Data,
-            this.Ora,
-            this.Costo,
-            this.Pagato,
-            this.Proforma,
-            this.Fattura,
-            this.Link,
-            this.id});
-      this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.dataGridView1.Location = new System.Drawing.Point(0, 0);
-      this.dataGridView1.Name = "dataGridView1";
-      this.dataGridView1.Size = new System.Drawing.Size(1156, 382);
-      this.dataGridView1.TabIndex = 0;
-      this.dataGridView1.Visible = false;
-      this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
-      // 
-      // Cliente
-      // 
-      this.Cliente.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-      dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI Historic", 10F);
-      this.Cliente.DefaultCellStyle = dataGridViewCellStyle8;
-      this.Cliente.HeaderText = "Cliente";
-      this.Cliente.Name = "Cliente";
-      // 
-      // Data
-      // 
-      dataGridViewCellStyle9.Font = new System.Drawing.Font("Segoe UI Historic", 10F);
-      dataGridViewCellStyle9.Format = "d";
-      dataGridViewCellStyle9.NullValue = null;
-      this.Data.DefaultCellStyle = dataGridViewCellStyle9;
-      this.Data.HeaderText = "Data";
-      this.Data.Name = "Data";
-      // 
-      // Ora
-      // 
-      dataGridViewCellStyle10.Font = new System.Drawing.Font("Segoe UI Historic", 10F);
-      this.Ora.DefaultCellStyle = dataGridViewCellStyle10;
-      this.Ora.HeaderText = "Ora";
-      this.Ora.Name = "Ora";
-      // 
-      // Costo
-      // 
-      dataGridViewCellStyle11.Font = new System.Drawing.Font("Segoe UI Historic", 10F);
-      this.Costo.DefaultCellStyle = dataGridViewCellStyle11;
-      this.Costo.HeaderText = "Costo";
-      this.Costo.Name = "Costo";
-      // 
-      // Pagato
-      // 
-      dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-      dataGridViewCellStyle12.Font = new System.Drawing.Font("Segoe UI Historic", 10F);
-      dataGridViewCellStyle12.NullValue = false;
-      this.Pagato.DefaultCellStyle = dataGridViewCellStyle12;
-      this.Pagato.HeaderText = "Pagato";
-      this.Pagato.Name = "Pagato";
-      this.Pagato.ReadOnly = true;
-      this.Pagato.Width = 50;
-      // 
-      // Proforma
-      // 
-      dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-      dataGridViewCellStyle13.Font = new System.Drawing.Font("Segoe UI Historic", 10F);
-      dataGridViewCellStyle13.NullValue = false;
-      this.Proforma.DefaultCellStyle = dataGridViewCellStyle13;
-      this.Proforma.HeaderText = "Proforma";
-      this.Proforma.Name = "Proforma";
-      this.Proforma.ReadOnly = true;
-      this.Proforma.Width = 60;
-      // 
-      // Fattura
-      // 
-      dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-      dataGridViewCellStyle14.Font = new System.Drawing.Font("Segoe UI Historic", 10F);
-      dataGridViewCellStyle14.NullValue = false;
-      this.Fattura.DefaultCellStyle = dataGridViewCellStyle14;
-      this.Fattura.HeaderText = "Fattura";
-      this.Fattura.Name = "Fattura";
-      this.Fattura.ReadOnly = true;
-      this.Fattura.Width = 50;
-      // 
-      // Link
-      // 
-      this.Link.HeaderText = "Link";
-      this.Link.Name = "Link";
-      this.Link.ReadOnly = true;
-      // 
       // visitListCtrlBindingSource
       // 
       this.visitListCtrlBindingSource.DataSource = typeof(FisioHelp.UI.VisitListCtrl);
-      // 
-      // id
-      // 
-      this.id.HeaderText = "id";
-      this.id.Name = "id";
-      this.id.Visible = false;
       // 
       // VisitListCtrl
       // 
@@ -557,10 +568,10 @@
       this.panel1.ResumeLayout(false);
       this.panel1.PerformLayout();
       this.panel2.ResumeLayout(false);
+      ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
       this.panel3.ResumeLayout(false);
       this.tableLayoutPanel1.ResumeLayout(false);
       this.tableLayoutPanel1.PerformLayout();
-      ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.visitListCtrlBindingSource)).EndInit();
       this.ResumeLayout(false);
 

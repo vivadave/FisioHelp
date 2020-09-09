@@ -102,13 +102,27 @@ namespace FisioHelp.Helper
         return treatments.Select(x => x.DescriptionIt).ToList();
       }
     }
-
+    
     public static DataModels.Therapist GetTherapist()
     {
       using (var db = new Db.PhisioDB())
       {
         return db.Therapists.FirstOrDefault();
       }
+    }
+
+    public static List<string>  GetATreatment(string language)
+    {
+      using (var db = new Db.PhisioDB())
+      {
+        var treatment = db.Treatments.FirstOrDefault();
+
+        if (language == "german")
+          return new List<string> { treatment.DescriptionDe };
+
+        return new List<string> { treatment.DescriptionIt };
+      }
+
     }
 
     public static void GenerateDB()
@@ -168,6 +182,10 @@ namespace FisioHelp.Helper
         {
           var prestazioniHtm = "";
           var treatments = Helper.GetTratmensByIdS(prestazioni.Treatmentsvisitidfkeys.Select(x => x.TreatmentId).ToList(), customer.Language);
+          if (!treatments.Any())
+          {
+            treatments = Helper.GetATreatment(customer.Language);
+          }
           foreach (var treatment in treatments)
             prestazioniHtm += $@"<div>{treatment}</div>";
 
@@ -192,7 +210,10 @@ namespace FisioHelp.Helper
           prestazioniHtml += $@"<div style=""width: 200px; display:inline-block;"">{((DateTime)prestazioni.Date).ToShortDateString()}</div>";
 
           var treatments = Helper.GetTratmensByIdS(prestazioni.Treatmentsvisitidfkeys.Select(x => x.TreatmentId).ToList(), customer.Language);
-
+          if (!treatments.Any())
+          {
+            treatments = Helper.GetATreatment(customer.Language);
+          }
           prestazioniHtml += $@"<div style=""display:inline-block; width: 350px; vertical-align: middle;"">";
           foreach (var treatment in treatments)
             prestazioniHtml += $@"<div>{treatment}</div>";
@@ -261,6 +282,10 @@ namespace FisioHelp.Helper
         {
           var prestazioniHtm = "";
           var treatments = Helper.GetTratmensByIdS(prestazioni.Treatmentsvisitidfkeys.Select(x => x.TreatmentId).ToList(), customer.Language);
+          if (!treatments.Any())
+          {
+            treatments = Helper.GetATreatment(customer.Language);
+          }
           foreach (var treatment in treatments)
             prestazioniHtm += $@"<div>{treatment}</div>";
 
@@ -285,7 +310,10 @@ namespace FisioHelp.Helper
           prestazioniHtml += $@"<div style=""width: 200px; display:inline-block;"">{((DateTime)prestazioni.Date).ToShortDateString()}</div>";
 
           var treatments = Helper.GetTratmensByIdS(prestazioni.Treatmentsvisitidfkeys.Select(x => x.TreatmentId).ToList(), customer.Language);
-
+          if (!treatments.Any())
+          {
+            treatments = Helper.GetATreatment(customer.Language);
+          }
           prestazioniHtml += $@"<div style=""display:inline-block; width: 350px; vertical-align: middle;"">";
           foreach (var treatment in treatments)
             prestazioniHtml += $@"<div>{treatment}</div>";

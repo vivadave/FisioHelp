@@ -33,7 +33,7 @@ namespace FisioHelp.UI
       _printProInvoiceTT.SetToolTip(this.buttonPrintProformaInvoice, "Stampa la fattura proforma");
       _printInvoiceTT.SetToolTip(this.buttonPrintInvoice, "Stampa la fattura");
 
-       ProformaInvoice.Visitsproformainvoiceidfkeys = ProformaInvoice.Visitsproformainvoiceidfkeys.Where(x=>x.Deleted == false);
+       ProformaInvoice.Visitsproformainvoiceidfkeys = ProformaInvoice.Visitsproformainvoiceidfkeys.Where(x=>x.Deleted == false).ToList();
 
 
       using (var db = new Db.PhisioDB())
@@ -103,6 +103,12 @@ namespace FisioHelp.UI
         panelIn.Controls.Add(labelVisit);     
 
         var treatments = Helper.Helper.GetTratmensByIdS(visit.Treatmentsvisitidfkeys.Select(x => x.TreatmentId).ToList(), aVisit.Customer.Language);
+        
+        if (treatments.Count == 0)
+        {
+          treatments = Helper.Helper.GetATreatment(aVisit.Customer.Language);
+        }
+
 
         Label lableTreatment = new Label();
         lableTreatment.Location = new Point((int)(panel1.Width * .2) , 0);
@@ -377,7 +383,7 @@ namespace FisioHelp.UI
       html = Helper.Helper.ReplaceInvoicePlaceHolder(html, _customer, invoice, groupVisits);
 
       var basePath = therapist.InvoicesFolder;
-      var date = $"{ProformaInvoice.Date.Year}{ProformaInvoice.Date.Month}";
+      var date = $"{invoice.Date.Year}{invoice.Date.Month}";
       basePath = Path.Combine(basePath, date);
 
       Directory.CreateDirectory(basePath);
