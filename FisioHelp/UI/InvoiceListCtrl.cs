@@ -236,6 +236,8 @@ namespace FisioHelp.UI
       if (e.RowIndex < 0) return;
       var id = dataGridView1[9, e.RowIndex].Value;
 
+      if (e.RowIndex + 1 >= dataGridView1.RowCount)
+        return;
       SelectedInvoice = _proformaInvoices.FirstOrDefault(x => x.Id == new Guid(id.ToString()));
       if (e.ColumnIndex == 7) //fatture
       { 

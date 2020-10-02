@@ -460,8 +460,8 @@ namespace FisioHelp.UI
       basePath = Path.Combine(basePath, date);
 
       Directory.CreateDirectory(basePath);      
-      var pdfPath = $@"{basePath}\{invoice.Title.Replace(@"/", "_")}_{_customer.FullName.Replace(" ", "_")}.pdf";
-      var htmlPath = $@"{basePath}\{invoice.Title.Replace("/", "_")}_{_customer.FullName.Replace(" ", "_")}.html";
+      var pdfPath = $@"{basePath}\{invoice.Title.Replace(@"/", "_")}_{_customer.FullName.Replace(" ", "_").Replace("'", "")}.pdf";
+      var htmlPath = $@"{basePath}\{invoice.Title.Replace("/", "_")}_{_customer.FullName.Replace(" ", "_").Replace("'", "")}.html";
       try
       {
         File.WriteAllText(htmlPath, html);
@@ -474,7 +474,13 @@ namespace FisioHelp.UI
       }
       //Helper.DriveManagement.InsertFilePdf(pdfPath, new List<string> { "Invoice", date });
       File.Delete(htmlPath);
-      System.Diagnostics.Process.Start(pdfPath);
+      if (File.Exists(pdfPath))
+      {
+        System.Diagnostics.Process.Start(pdfPath);
+      } else
+      {
+        MessageBox.Show("ERRORE! Non risco a visualizzare il PDF per il file: " + Environment.NewLine + pdfPath + Environment.NewLine + "Dillo a Davide");
+      }
      
     }
 
