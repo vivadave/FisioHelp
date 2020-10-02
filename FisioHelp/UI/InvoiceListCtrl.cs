@@ -124,8 +124,13 @@ namespace FisioHelp.UI
           _proformaInvoices = _proformaInvoices.Where(x => x.Payed == (_filterPayed == 1)).ToList();
         }
 
-        _proformaInvoices = _proformaInvoices.OrderBy(x => x.Invoice?.Title).ThenBy(x=>x.Date).ThenBy(x => x.Title).ToList();
+        if (checkBox1.Checked)
+        {
+          _proformaInvoices = _proformaInvoices.Where(x => x.Invoice != null).ToList();
+        }
 
+        _proformaInvoices = _proformaInvoices.OrderBy(x => x.Invoice?.Title).ThenBy(x=>x.Date).ThenBy(x => x.Title).ToList();
+        /*
         var noinvoices = _proformaInvoices.Where(x => x.Invoice == null).ToList();
         foreach (var proformaInvoice in noinvoices)
         {
@@ -134,7 +139,7 @@ namespace FisioHelp.UI
             _proformaInvoices.Remove(proformaInvoice);
             _proformaInvoices.Add(proformaInvoice);
           }
-        }
+        }*/
       }
     }
 
@@ -260,6 +265,13 @@ namespace FisioHelp.UI
       {
         OpenInvoice?.Invoke(this, e);
       }
+    }
+
+    private void checkBox1_CheckedChanged(object sender, EventArgs e)
+    {
+      SetFilters();
+      GetInvoices();
+      DrawVisits();
     }
   }
 
