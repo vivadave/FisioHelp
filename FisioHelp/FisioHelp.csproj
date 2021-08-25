@@ -486,6 +486,12 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>PostgreSQL1.generated.cs</LastGenOutput>
     </Content>
+    <Content Include="sql\dbEliCreate_10.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sql\dbEliCreate_09.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="sql\dbEliCreate_08.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -529,6 +535,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Template\templateInvoice_it.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="UI\dbEliCreate_08.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

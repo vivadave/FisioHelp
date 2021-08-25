@@ -186,8 +186,10 @@ namespace FisioHelp.Helper
           {
             treatments = Helper.GetATreatment(customer.Language);
           }
-          foreach (var treatment in treatments)
-            prestazioniHtm += $@"<div>{treatment}</div>";
+          foreach (var treatment in treatments) {
+            var text = string.IsNullOrWhiteSpace(invoice.CustomText) ? treatment : invoice.CustomText;
+            prestazioniHtm += $@"<div>{text}</div>";
+          }
 
           prestPriceList.Add(new Tuple<string, double>(prestazioniHtm, prestazioni.Price.Value));
         }
@@ -287,7 +289,10 @@ namespace FisioHelp.Helper
             treatments = Helper.GetATreatment(customer.Language);
           }
           foreach (var treatment in treatments)
-            prestazioniHtm += $@"<div>{treatment}</div>";
+          {
+            var text = string.IsNullOrWhiteSpace(invoice.CustomText) ? treatment : invoice.CustomText;
+            prestazioniHtm += $@"<div>{text}</div>";
+          }
 
           prestPriceList.Add(new Tuple<string, double>(prestazioniHtm, prestazioni.Price.Value));
         }

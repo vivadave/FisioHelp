@@ -201,3 +201,6 @@ C:\Progetti\FisioHelp\FisioHelp\bin\Debug\sql\dbEliCreate_08.sql
 C:\Progetti\FisioHelp\FisioHelp\obj\Debug\FisioHelp.UI.MultipleVisits.resources
 C:\Progetti\FisioHelp\FisioHelp\obj\Debug\FisioHelp.UI.InvoiceListCtrl.resources
 C:\Progetti\FisioHelp\FisioHelp\obj\Debug\FisioHelp.csproj.CoreCompileInputs.cache
+C:\Progetti\FisioHelp\FisioHelp\bin\Debug\sql\dbEliCreate_09.sql
+C:\Progetti\FisioHelp\FisioHelp\bin\Debug\UI\dbEliCreate_08.sql
+C:\Progetti\FisioHelp\FisioHelp\bin\Debug\sql\dbEliCreate_10.sql

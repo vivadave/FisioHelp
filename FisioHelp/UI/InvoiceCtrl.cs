@@ -57,6 +57,8 @@ namespace FisioHelp.UI
 
       var aVisit = ProformaInvoice.Visitsproformainvoiceidfkeys.FirstOrDefault();
       checkBoxGroup.Checked = ProformaInvoice.GroupVisits;
+      textBoxCustomText.Text = ProformaInvoice.Invoice == null ? ProformaInvoice.CustomText : ProformaInvoice.Invoice.CustomText;
+      buttonDeleteProforma.Visible = false;
 
       if (_edit)
       {
@@ -70,6 +72,7 @@ namespace FisioHelp.UI
         }
         else
         {
+          buttonDeleteProforma.Visible = true;
           buttonSave.Text = "Genera Fattura";
         }
       }
@@ -256,6 +259,7 @@ namespace FisioHelp.UI
 
       invoice.TaxStamp = ProformaInvoice.TaxStamp;
       invoice.Discount = ProformaInvoice.Discount;
+      invoice.CustomText = string.IsNullOrWhiteSpace(textBoxCustomText.Text) ? ProformaInvoice.CustomText : textBoxCustomText.Text;
 
       using (var db = new Db.PhisioDB())
       {
@@ -291,6 +295,8 @@ namespace FisioHelp.UI
 
       if (double.TryParse(textBoxDiscount.Text, out double disc))
         ProformaInvoice.Discount = disc;
+
+      ProformaInvoice.CustomText = textBoxCustomText.Text;
 
       using (var db = new Db.PhisioDB())
       {
@@ -359,6 +365,8 @@ namespace FisioHelp.UI
         therapist = db.Therapists.FirstOrDefault();
       }
 
+      invoice.CustomText = textBoxCustomText.Text;
+
       if (therapist == null)
       {
         MessageBox.Show("Qualcosa è andato storto non trovo i parametri generali", "Stampa", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -423,6 +431,8 @@ namespace FisioHelp.UI
 
         if (double.TryParse(textBoxDiscount.Text, out double disc))
           invoice.Discount = disc;
+
+        invoice.CustomText = textBoxCustomText.Text;
 
         MessageBox.Show("Si sta visualizzando un anteprima, ricordarsi di salvare la fattura!", "Salvataggio", MessageBoxButtons.OK, MessageBoxIcon.Information);
       }
@@ -571,6 +581,15 @@ namespace FisioHelp.UI
           ProformaInvoice.Invoice.Contanti = checkBoxContanti.Checked;
           ProformaInvoice.Invoice.SaveToDB();
         }
+      }
+    }
+
+    private void buttonDeleteProforma_Click(object sender, EventArgs e)
+    {
+      bool invoiced = ProformaInvoice.Invoice != null;
+      if (!invoiced)
+      {
+        DeleteInvoice();
       }
     }
   }

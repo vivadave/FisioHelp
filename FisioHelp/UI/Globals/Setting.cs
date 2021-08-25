@@ -26,10 +26,14 @@ namespace FisioHelp.UI.Globals
       using (var db = new Db.PhisioDB())
       {
         _priceLists = db.PriceLists.ToList();
-        _treatMentLists = db.Treatments.ToList();
+        _treatMentLists = db.Treatments.OrderBy(x => x.Disabled).ToList();
         _therapist = db.Therapists.FirstOrDefault();
       }
       FillDataBindings();
+
+      foreach (DataGridViewRow row in dataGridView2.Rows)
+        if (Convert.ToBoolean(row.Cells[0].Value))
+          row.DefaultCellStyle.ForeColor = Color.Gray;
     }
 
     private void FillDataBindings()
@@ -98,6 +102,24 @@ namespace FisioHelp.UI.Globals
     private void pricelis_Enter(object sender, EventArgs e)
     {
 
+    }
+
+    private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
+    {
+      foreach (DataGridViewRow row in dataGridView2.Rows)
+        if (Convert.ToBoolean(row.Cells[0].Value))
+          row.DefaultCellStyle.ForeColor = Color.Gray;
+        else
+          row.DefaultCellStyle.ForeColor = Color.Black;
+    }
+
+    private void dataGridView2_CellClick(object sender, DataGridViewCellEventArgs e)
+    {
+      foreach (DataGridViewRow row in dataGridView2.Rows)
+        if (Convert.ToBoolean(row.Cells[0].Value))
+          row.DefaultCellStyle.ForeColor = Color.Gray;
+        else
+          row.DefaultCellStyle.ForeColor = Color.Black;
     }
   }
 }

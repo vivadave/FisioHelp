@@ -31,7 +31,7 @@ namespace FisioHelp.Helper
         worksheet.Cells[i, 1] = proformaInvoice.Invoice.Title;
         worksheet.Cells[i, 2] = proformaInvoice.CustomerName;
         worksheet.Cells[i, 3] = ((DateTime)proformaInvoice.Invoice.Date).ToShortDateString();
-        worksheet.Cells[i, 4] = ((DateTime)proformaInvoice.PayedDate).ToShortDateString();
+        worksheet.Cells[i, 4] = proformaInvoice.PayedDate != null ? ((DateTime)proformaInvoice.PayedDate).ToShortDateString() : "";
         worksheet.Cells[i, 5] = proformaInvoice.Total;
         worksheet.Cells[i, 5].NumberFormat = "#.##0,00 €";
         total += proformaInvoice.Total;

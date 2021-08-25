@@ -110,10 +110,20 @@ namespace FisioHelp.UI
       {
         Guid? custId = Customer?.Id;
 
-        _proformaInvoices = db.ProformaInvoices.LoadWith(e1 => e1.Visitsproformainvoiceidfkeys.First().Treatmentsvisitidfkeys.First().Treatment).LoadWith(e1 => e1.Visitsproformainvoiceidfkeys.First().Customer.Address).LoadWith(x=>x.Invoice)
-          .Where(x =>  x.Visitsproformainvoiceidfkeys.Any(xx=>xx.CustomerId == custId ) || custId == null)
-          .Where(x => (x.Date >= new NpgsqlTypes.NpgsqlDate(_dateFromFilter) && x.Date < new NpgsqlTypes.NpgsqlDate(_dateToFilter.AddDays(1)) || x.Invoice.Date >= new NpgsqlTypes.NpgsqlDate(_dateFromFilter) && x.Invoice.Date < new NpgsqlTypes.NpgsqlDate(_dateToFilter.AddDays(1)) ) && x.Deleted == false)
-          .ToList();
+        if (!checkBox1.Checked)
+        {
+          _proformaInvoices = db.ProformaInvoices.LoadWith(e1 => e1.Visitsproformainvoiceidfkeys.First().Treatmentsvisitidfkeys.First().Treatment).LoadWith(e1 => e1.Visitsproformainvoiceidfkeys.First().Customer.Address).LoadWith(x => x.Invoice)
+            .Where(x => x.Visitsproformainvoiceidfkeys.Any(xx => xx.CustomerId == custId) || custId == null)
+            .Where(x => (x.Date >= new NpgsqlTypes.NpgsqlDate(_dateFromFilter) && x.Date < new NpgsqlTypes.NpgsqlDate(_dateToFilter.AddDays(1)) || x.Invoice.Date >= new NpgsqlTypes.NpgsqlDate(_dateFromFilter) && x.Invoice.Date < new NpgsqlTypes.NpgsqlDate(_dateToFilter.AddDays(1))) && x.Deleted == false)
+            .ToList();
+        } else
+        {
+          _proformaInvoices = db.ProformaInvoices.LoadWith(e1 => e1.Visitsproformainvoiceidfkeys.First().Treatmentsvisitidfkeys.First().Treatment).LoadWith(e1 => e1.Visitsproformainvoiceidfkeys.First().Customer.Address).LoadWith(x => x.Invoice)
+            .Where(x => x.Visitsproformainvoiceidfkeys.Any(xx => xx.CustomerId == custId) || custId == null).Where(x => x.Invoice != null)
+            .Where(x => (x.Invoice.Date >= new NpgsqlTypes.NpgsqlDate(_dateFromFilter) && x.Invoice.Date < new NpgsqlTypes.NpgsqlDate(_dateToFilter.AddDays(1))) && x.Deleted == false)
+            .ToList();
+
+        }
 
         _proformaInvoices = _proformaInvoices.OrderBy(x => x.Date).OrderBy(x => x.Invoice == null).ToList();
 

@@ -35,8 +35,12 @@ namespace FisioHelp.UI
       {
         _therapist = db.Therapists.FirstOrDefault();
         _treatments = db.Treatments.ToList();
+        var visitTreatment = _visit.Treatmentsvisitidfkeys?.Select(x => x.TreatmentId).FirstOrDefault();
         foreach (var treatment in _treatments)
         {
+          if (treatment.Disabled && treatment.Id != visitTreatment)
+            continue;
+
           this.checkedListBox1.DisplayMember = "DescriptionIt";
           if (_customer.Language == "german")
             this.checkedListBox1.DisplayMember = "DescriptionDe";
@@ -54,17 +58,20 @@ namespace FisioHelp.UI
       richTextBoxExFinal.Rtf = _visit.FinalEvaluetion;
       richTextBoxExInitial.Rtf = _visit.InitialEvaluetion;
       if (_visit.Treatmentsvisitidfkeys == null) return;
+      var noOneSelected = true;
 
       foreach(var treatmeent in _treatments.Where(t => _visit.Treatmentsvisitidfkeys.Select(x=>x.TreatmentId).Contains(t.Id)))
       {
-        var text = treatmeent.DescriptionIt;
-        if (_customer.Language == "german")
-          text = treatmeent.DescriptionDe;
-
-          var index = checkedListBox1.Items.IndexOf(treatmeent);
+        var index = checkedListBox1.Items.IndexOf(treatmeent);
         if (index >= 0)
+        {
+          noOneSelected = false;
           checkedListBox1.SetItemChecked(index, true);
+        }
       }
+
+      if (noOneSelected)
+        checkedListBox1.SetItemChecked(0, true);
     }
 
     private void SetVisit()
@@ -133,7 +140,7 @@ namespace FisioHelp.UI
       textBoxPrice.Text = string.IsNullOrEmpty(textBoxPrice.Text) ? "0" : textBoxPrice.Text;
       if (checkedListBox1.Items.Count > 0)
       {
-        checkedListBox1.SetItemChecked(0, true);
+        //checkedListBox1.SetItemChecked(0, true);
         ManageChecking();
       }
 
@@ -157,11 +164,6 @@ namespace FisioHelp.UI
         });
       }
       _visit.Treatmentsvisitidfkeys = a;
-    }
-
-    private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
-    {
-      ManageChecking();
     }
 
     private void button1_Click(object sender, EventArgs e)
@@ -216,6 +218,17 @@ namespace FisioHelp.UI
       _visit.Future = dateTimePicker1.Value.Date > DateTime.Today;
       labelFuture.Visible = _visit.Future;
 
+    }
+
+    private void checkedListBox1_ItemCheck(object sender, ItemCheckEventArgs e)
+    {
+      for (int ix = 0; ix < checkedListBox1.Items.Count; ++ix)
+        if (ix != e.Index) checkedListBox1.SetItemChecked(ix, false);
+    }
+
+    private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
+    {
+      ManageChecking();
     }
   }
 }

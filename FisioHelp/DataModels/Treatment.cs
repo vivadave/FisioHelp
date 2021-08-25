@@ -12,6 +12,7 @@ namespace FisioHelp.DataModels
     [Column("therapist_id"), NotNull] public Guid TherapistId { get; set; } // uuid
     [Column("description_de"), NotNull] public string DescriptionDe { get; set; } // text
     [Column("description_it"), NotNull] public string DescriptionIt { get; set; } // text
+    [Column("disabled"), NotNull] public bool Disabled { get; set; } // boolean
 
     public override Guid SaveToDB()
     {

@@ -73,7 +73,7 @@
       this.richTextBoxExInitial.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.richTextBoxExInitial.Name = "richTextBoxExInitial";
       this.richTextBoxExInitial.Rtf = "{\\rtf1\\ansi\\ansicpg1252\\deff0\\nouicompat\\deflang1040{\\fonttbl{\\f0\\fnil\\fcharset0 " +
-    "Segoe UI Historic;}}\r\n{\\*\\generator Riched20 10.0.17763}\\viewkind4\\uc1 \r\n\\pard\\f" +
+    "Segoe UI Historic;}}\r\n{\\*\\generator Riched20 10.0.18362}\\viewkind4\\uc1 \r\n\\pard\\f" +
     "0\\fs23\\par\r\n}\r\n";
       this.richTextBoxExInitial.SetColorWithFont = true;
       this.richTextBoxExInitial.ShowToolStrip = true;
@@ -173,7 +173,7 @@
       this.richTextBoxExFinal.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.richTextBoxExFinal.Name = "richTextBoxExFinal";
       this.richTextBoxExFinal.Rtf = "{\\rtf1\\ansi\\ansicpg1252\\deff0\\nouicompat\\deflang1040{\\fonttbl{\\f0\\fnil\\fcharset0 " +
-    "Segoe UI Historic;}}\r\n{\\*\\generator Riched20 10.0.17763}\\viewkind4\\uc1 \r\n\\pard\\f" +
+    "Segoe UI Historic;}}\r\n{\\*\\generator Riched20 10.0.18362}\\viewkind4\\uc1 \r\n\\pard\\f" +
     "0\\fs23\\par\r\n}\r\n";
       this.richTextBoxExFinal.SetColorWithFont = true;
       this.richTextBoxExFinal.ShowToolStrip = true;
@@ -224,12 +224,14 @@
       // 
       this.checkedListBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+      this.checkedListBox1.CheckOnClick = true;
       this.checkedListBox1.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F);
       this.checkedListBox1.FormattingEnabled = true;
       this.checkedListBox1.Location = new System.Drawing.Point(133, 142);
       this.checkedListBox1.Name = "checkedListBox1";
       this.checkedListBox1.Size = new System.Drawing.Size(875, 70);
       this.checkedListBox1.TabIndex = 38;
+      this.checkedListBox1.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBox1_ItemCheck);
       this.checkedListBox1.SelectedIndexChanged += new System.EventHandler(this.checkedListBox1_SelectedIndexChanged);
       // 
       // button1

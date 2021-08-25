@@ -32,16 +32,11 @@
       this.buttonSave = new System.Windows.Forms.Button();
       this.pricelis = new System.Windows.Forms.GroupBox();
       this.dataGridView1 = new System.Windows.Forms.DataGridView();
-      this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.priceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.priceListBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.groupBox1 = new System.Windows.Forms.GroupBox();
       this.dataGridView2 = new System.Windows.Forms.DataGridView();
-      this.Indice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.treatmentBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.groupBox2 = new System.Windows.Forms.GroupBox();
+      this.textBoxAifi = new System.Windows.Forms.TextBox();
+      this.label8 = new System.Windows.Forms.Label();
       this.textBoxAddressDe = new System.Windows.Forms.TextBox();
       this.label7 = new System.Windows.Forms.Label();
       this.textBoxIban = new System.Windows.Forms.TextBox();
@@ -56,15 +51,20 @@
       this.label2 = new System.Windows.Forms.Label();
       this.textBoxName = new System.Windows.Forms.TextBox();
       this.label1 = new System.Windows.Forms.Label();
-      this.textBoxAifi = new System.Windows.Forms.TextBox();
-      this.label8 = new System.Windows.Forms.Label();
+      this.Disabled = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+      this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.treatmentBindingSource = new System.Windows.Forms.BindingSource(this.components);
+      this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.priceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.priceListBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.pricelis.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)(this.priceListBindingSource)).BeginInit();
       this.groupBox1.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)(this.treatmentBindingSource)).BeginInit();
       this.groupBox2.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.treatmentBindingSource)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.priceListBindingSource)).BeginInit();
       this.SuspendLayout();
       // 
       // buttonSave
@@ -74,7 +74,7 @@
       this.buttonSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
       this.buttonSave.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.buttonSave.ForeColor = System.Drawing.Color.White;
-      this.buttonSave.Location = new System.Drawing.Point(916, 463);
+      this.buttonSave.Location = new System.Drawing.Point(923, 517);
       this.buttonSave.Name = "buttonSave";
       this.buttonSave.Size = new System.Drawing.Size(106, 38);
       this.buttonSave.TabIndex = 28;
@@ -90,7 +90,7 @@
       this.pricelis.Font = new System.Drawing.Font("Segoe UI Historic", 9.75F);
       this.pricelis.Location = new System.Drawing.Point(366, 13);
       this.pricelis.Name = "pricelis";
-      this.pricelis.Size = new System.Drawing.Size(656, 262);
+      this.pricelis.Size = new System.Drawing.Size(663, 262);
       this.pricelis.TabIndex = 29;
       this.pricelis.TabStop = false;
       this.pricelis.Text = "Price List";
@@ -110,25 +110,8 @@
       this.dataGridView1.DataSource = this.priceListBindingSource;
       this.dataGridView1.Location = new System.Drawing.Point(6, 19);
       this.dataGridView1.Name = "dataGridView1";
-      this.dataGridView1.Size = new System.Drawing.Size(626, 237);
+      this.dataGridView1.Size = new System.Drawing.Size(633, 237);
       this.dataGridView1.TabIndex = 0;
-      // 
-      // nameDataGridViewTextBoxColumn
-      // 
-      this.nameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-      this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
-      this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
-      this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-      // 
-      // priceDataGridViewTextBoxColumn
-      // 
-      this.priceDataGridViewTextBoxColumn.DataPropertyName = "Price";
-      this.priceDataGridViewTextBoxColumn.HeaderText = "Price";
-      this.priceDataGridViewTextBoxColumn.Name = "priceDataGridViewTextBoxColumn";
-      // 
-      // priceListBindingSource
-      // 
-      this.priceListBindingSource.DataSource = typeof(FisioHelp.DataModels.PriceList);
       // 
       // groupBox1
       // 
@@ -139,7 +122,7 @@
       this.groupBox1.Font = new System.Drawing.Font("Segoe UI Historic", 9.75F);
       this.groupBox1.Location = new System.Drawing.Point(12, 275);
       this.groupBox1.Name = "groupBox1";
-      this.groupBox1.Size = new System.Drawing.Size(1010, 181);
+      this.groupBox1.Size = new System.Drawing.Size(1017, 235);
       this.groupBox1.TabIndex = 30;
       this.groupBox1.TabStop = false;
       this.groupBox1.Text = "Trattamenti";
@@ -153,39 +136,16 @@
       this.dataGridView2.BackgroundColor = System.Drawing.Color.White;
       this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Indice,
+            this.Disabled,
             this.dataGridViewTextBoxColumn4,
             this.dataGridViewTextBoxColumn5});
       this.dataGridView2.DataSource = this.treatmentBindingSource;
       this.dataGridView2.Location = new System.Drawing.Point(6, 19);
       this.dataGridView2.Name = "dataGridView2";
-      this.dataGridView2.Size = new System.Drawing.Size(980, 156);
+      this.dataGridView2.Size = new System.Drawing.Size(987, 210);
       this.dataGridView2.TabIndex = 0;
-      // 
-      // Indice
-      // 
-      this.Indice.DataPropertyName = "Id";
-      this.Indice.HeaderText = "Indice";
-      this.Indice.Name = "Indice";
-      this.Indice.ReadOnly = true;
-      // 
-      // dataGridViewTextBoxColumn4
-      // 
-      this.dataGridViewTextBoxColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-      this.dataGridViewTextBoxColumn4.DataPropertyName = "DescriptionDe";
-      this.dataGridViewTextBoxColumn4.HeaderText = "DescriptionDe";
-      this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-      // 
-      // dataGridViewTextBoxColumn5
-      // 
-      this.dataGridViewTextBoxColumn5.DataPropertyName = "DescriptionIt";
-      this.dataGridViewTextBoxColumn5.HeaderText = "DescriptionIt";
-      this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-      this.dataGridViewTextBoxColumn5.Width = 400;
-      // 
-      // treatmentBindingSource
-      // 
-      this.treatmentBindingSource.DataSource = typeof(FisioHelp.DataModels.Treatment);
+      this.dataGridView2.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellClick);
+      this.dataGridView2.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellContentClick);
       // 
       // groupBox2
       // 
@@ -212,6 +172,26 @@
       this.groupBox2.TabIndex = 31;
       this.groupBox2.TabStop = false;
       this.groupBox2.Text = "Generale";
+      // 
+      // textBoxAifi
+      // 
+      this.textBoxAifi.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+      this.textBoxAifi.Font = new System.Drawing.Font("Segoe UI Historic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.textBoxAifi.Location = new System.Drawing.Point(89, 227);
+      this.textBoxAifi.Name = "textBoxAifi";
+      this.textBoxAifi.Size = new System.Drawing.Size(247, 23);
+      this.textBoxAifi.TabIndex = 28;
+      // 
+      // label8
+      // 
+      this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+      this.label8.AutoSize = true;
+      this.label8.Font = new System.Drawing.Font("Segoe UI Historic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.label8.Location = new System.Drawing.Point(13, 231);
+      this.label8.Name = "label8";
+      this.label8.Size = new System.Drawing.Size(62, 13);
+      this.label8.TabIndex = 27;
+      this.label8.Text = "Codice Aifi";
       // 
       // textBoxAddressDe
       // 
@@ -353,31 +333,52 @@
       this.label1.TabIndex = 14;
       this.label1.Text = "Nome";
       // 
-      // textBoxAifi
+      // Disabled
       // 
-      this.textBoxAifi.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-      this.textBoxAifi.Font = new System.Drawing.Font("Segoe UI Historic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.textBoxAifi.Location = new System.Drawing.Point(89, 227);
-      this.textBoxAifi.Name = "textBoxAifi";
-      this.textBoxAifi.Size = new System.Drawing.Size(247, 23);
-      this.textBoxAifi.TabIndex = 28;
+      this.Disabled.DataPropertyName = "Disabled";
+      this.Disabled.HeaderText = "Disabled";
+      this.Disabled.Name = "Disabled";
       // 
-      // label8
+      // dataGridViewTextBoxColumn4
       // 
-      this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-      this.label8.AutoSize = true;
-      this.label8.Font = new System.Drawing.Font("Segoe UI Historic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.label8.Location = new System.Drawing.Point(13, 231);
-      this.label8.Name = "label8";
-      this.label8.Size = new System.Drawing.Size(62, 13);
-      this.label8.TabIndex = 27;
-      this.label8.Text = "Codice Aifi";
+      this.dataGridViewTextBoxColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+      this.dataGridViewTextBoxColumn4.DataPropertyName = "DescriptionDe";
+      this.dataGridViewTextBoxColumn4.HeaderText = "DescriptionDe";
+      this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+      // 
+      // dataGridViewTextBoxColumn5
+      // 
+      this.dataGridViewTextBoxColumn5.DataPropertyName = "DescriptionIt";
+      this.dataGridViewTextBoxColumn5.HeaderText = "DescriptionIt";
+      this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+      this.dataGridViewTextBoxColumn5.Width = 400;
+      // 
+      // treatmentBindingSource
+      // 
+      this.treatmentBindingSource.DataSource = typeof(FisioHelp.DataModels.Treatment);
+      // 
+      // nameDataGridViewTextBoxColumn
+      // 
+      this.nameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+      this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+      this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
+      this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+      // 
+      // priceDataGridViewTextBoxColumn
+      // 
+      this.priceDataGridViewTextBoxColumn.DataPropertyName = "Price";
+      this.priceDataGridViewTextBoxColumn.HeaderText = "Price";
+      this.priceDataGridViewTextBoxColumn.Name = "priceDataGridViewTextBoxColumn";
+      // 
+      // priceListBindingSource
+      // 
+      this.priceListBindingSource.DataSource = typeof(FisioHelp.DataModels.PriceList);
       // 
       // Setting
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(1034, 513);
+      this.ClientSize = new System.Drawing.Size(1041, 567);
       this.Controls.Add(this.groupBox2);
       this.Controls.Add(this.groupBox1);
       this.Controls.Add(this.pricelis);
@@ -387,12 +388,12 @@
       this.Load += new System.EventHandler(this.Setting_Load);
       this.pricelis.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-      ((System.ComponentModel.ISupportInitialize)(this.priceListBindingSource)).EndInit();
       this.groupBox1.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
-      ((System.ComponentModel.ISupportInitialize)(this.treatmentBindingSource)).EndInit();
       this.groupBox2.ResumeLayout(false);
       this.groupBox2.PerformLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.treatmentBindingSource)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.priceListBindingSource)).EndInit();
       this.ResumeLayout(false);
 
     }
@@ -421,12 +422,12 @@
     private System.Windows.Forms.Label label2;
     private System.Windows.Forms.TextBox textBoxName;
     private System.Windows.Forms.Label label1;
-    private System.Windows.Forms.DataGridViewTextBoxColumn Indice;
-    private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-    private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
     private System.Windows.Forms.TextBox textBoxAddressDe;
     private System.Windows.Forms.Label label7;
     private System.Windows.Forms.TextBox textBoxAifi;
     private System.Windows.Forms.Label label8;
+    private System.Windows.Forms.DataGridViewCheckBoxColumn Disabled;
+    private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+    private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
   }
 }
