@@ -412,14 +412,14 @@ namespace FisioHelp.UI
       }
       //Helper.DriveManagement.InsertFilePdf(pdfPath, new List<string> { "Invoice", date });
       File.Delete(htmlPath);
-        if (File.Exists(pdfPath))
-        {
-            System.Diagnostics.Process.Start(pdfPath);
-        }
-        else
-        {
-            MessageBox.Show("Il pdf non è stato creato!", "Stampa", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
+      if (File.Exists(pdfPath))
+      {
+          System.Diagnostics.Process.Start(pdfPath);
+      }
+      else
+      {
+          MessageBox.Show("Il pdf non è stato creato!", "Stampa", MessageBoxButtons.OK, MessageBoxIcon.Error);
+      }
     }
 
     private void PrintProforma(DataModels.ProformaInvoice invoice )
