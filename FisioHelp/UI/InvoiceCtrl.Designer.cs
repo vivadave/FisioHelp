@@ -67,6 +67,10 @@
       this.label16 = new System.Windows.Forms.Label();
       this.textBoxCustomText = new System.Windows.Forms.TextBox();
       this.buttonDeleteProforma = new System.Windows.Forms.Button();
+      this.dateTimePickerProfData = new System.Windows.Forms.DateTimePicker();
+      this.dateTimePickerInvoiceDate = new System.Windows.Forms.DateTimePicker();
+      this.checkBoxChangeDates = new System.Windows.Forms.CheckBox();
+      this.buttonUpdateDates = new System.Windows.Forms.Button();
       ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
       this.SuspendLayout();
       // 
@@ -381,7 +385,7 @@
       // dateTimePickerPayed
       // 
       this.dateTimePickerPayed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-      this.dateTimePickerPayed.Location = new System.Drawing.Point(163, 500);
+      this.dateTimePickerPayed.Location = new System.Drawing.Point(148, 496);
       this.dateTimePickerPayed.Name = "dateTimePickerPayed";
       this.dateTimePickerPayed.Size = new System.Drawing.Size(200, 20);
       this.dateTimePickerPayed.TabIndex = 43;
@@ -504,11 +508,60 @@
       this.buttonDeleteProforma.UseVisualStyleBackColor = false;
       this.buttonDeleteProforma.Click += new System.EventHandler(this.buttonDeleteProforma_Click);
       // 
+      // dateTimePickerProfData
+      // 
+      this.dateTimePickerProfData.Location = new System.Drawing.Point(347, 72);
+      this.dateTimePickerProfData.Name = "dateTimePickerProfData";
+      this.dateTimePickerProfData.Size = new System.Drawing.Size(160, 20);
+      this.dateTimePickerProfData.TabIndex = 54;
+      // 
+      // dateTimePickerInvoiceDate
+      // 
+      this.dateTimePickerInvoiceDate.Location = new System.Drawing.Point(317, 29);
+      this.dateTimePickerInvoiceDate.Name = "dateTimePickerInvoiceDate";
+      this.dateTimePickerInvoiceDate.Size = new System.Drawing.Size(178, 20);
+      this.dateTimePickerInvoiceDate.TabIndex = 55;
+      // 
+      // checkBoxChangeDates
+      // 
+      this.checkBoxChangeDates.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+      this.checkBoxChangeDates.AutoSize = true;
+      this.checkBoxChangeDates.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F, System.Drawing.FontStyle.Bold);
+      this.checkBoxChangeDates.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
+      this.checkBoxChangeDates.Location = new System.Drawing.Point(604, 142);
+      this.checkBoxChangeDates.Name = "checkBoxChangeDates";
+      this.checkBoxChangeDates.RightToLeft = System.Windows.Forms.RightToLeft.No;
+      this.checkBoxChangeDates.Size = new System.Drawing.Size(146, 24);
+      this.checkBoxChangeDates.TabIndex = 56;
+      this.checkBoxChangeDates.Text = "Cambia Le date";
+      this.checkBoxChangeDates.UseVisualStyleBackColor = true;
+      this.checkBoxChangeDates.CheckedChanged += new System.EventHandler(this.checkBoxChangeDates_CheckedChanged);
+      // 
+      // buttonUpdateDates
+      // 
+      this.buttonUpdateDates.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+      this.buttonUpdateDates.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
+      this.buttonUpdateDates.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+      this.buttonUpdateDates.Font = new System.Drawing.Font("Segoe UI Historic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.buttonUpdateDates.ForeColor = System.Drawing.Color.White;
+      this.buttonUpdateDates.Location = new System.Drawing.Point(590, 521);
+      this.buttonUpdateDates.Name = "buttonUpdateDates";
+      this.buttonUpdateDates.Size = new System.Drawing.Size(170, 38);
+      this.buttonUpdateDates.TabIndex = 57;
+      this.buttonUpdateDates.Text = "Aggiorna Date";
+      this.buttonUpdateDates.UseVisualStyleBackColor = false;
+      this.buttonUpdateDates.Visible = false;
+      this.buttonUpdateDates.Click += new System.EventHandler(this.buttonUpdateDates_Click);
+      // 
       // InvoiceCtrl
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.BackColor = System.Drawing.SystemColors.ControlLightLight;
+      this.Controls.Add(this.buttonUpdateDates);
+      this.Controls.Add(this.checkBoxChangeDates);
+      this.Controls.Add(this.dateTimePickerInvoiceDate);
+      this.Controls.Add(this.dateTimePickerProfData);
       this.Controls.Add(this.buttonDeleteProforma);
       this.Controls.Add(this.textBoxCustomText);
       this.Controls.Add(this.label16);
@@ -595,5 +648,9 @@
     private System.Windows.Forms.TextBox textBoxCustomText;
     private System.Windows.Forms.Label label16;
     private System.Windows.Forms.Button buttonDeleteProforma;
+    private System.Windows.Forms.DateTimePicker dateTimePickerInvoiceDate;
+    private System.Windows.Forms.DateTimePicker dateTimePickerProfData;
+    private System.Windows.Forms.CheckBox checkBoxChangeDates;
+    private System.Windows.Forms.Button buttonUpdateDates;
   }
 }

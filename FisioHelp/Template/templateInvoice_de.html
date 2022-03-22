@@ -37,53 +37,59 @@
                 </div>
             </div>
         </div>
-        <div>
-            <div style="padding: 10px 0px">
-                <strong style="font-size: medium;">
-					Rechnung n° {{invoice_number}}
-				</strong><br><br>
-                Meran, {{date}}
-            </div>
+    <div>
+      <div style="padding: 10px 0px">
+        <strong style="font-size: medium;">
+          Rechnung n° {{invoice_number}}
+        </strong><br><br>
+        Meran, {{date}}
+      </div>
 
-            <div style="display: block;padding: 12px 0px;">
-                <div style="width: 350px; display: inline-block;"><strong>Leistungsbeschreibung</strong></div>
-                <div style="width: 100px; display: {{group_display}}; text-align: right;">Anzahl</div>
-                <div style="width: 95px; display: {{group_display}}; text-align: right;">Preis</div>
-                <div style="display: inline-block; float: right;">Betrag</div>
-            </div>
+      <div style="display: block;padding: 12px 0px;">
+        <div style="width: 350px; display: inline-block;"><strong>Leistungsbeschreibung</strong></div>
+        <div style="width: 100px; display: {{group_display}}; text-align: right;">Anzahl</div>
+        <div style="width: 95px; display: {{group_display}}; text-align: right;">Preis</div>
+        <div style="display: inline-block; float: right;">Betrag</div>
+      </div>
 
-            {{prestazioni}}
-			<div style="padding: 10px 0px;" ></div>
-            <div style="display: {{sconto_display}}; padding: 10px 0 8px 0px;">
-                <div style="width: 400px; display: inline-block;"><strong> Sconto:</strong></div>
-                <div style="width: 295px; display: inline-block; text-align: right;">{{sconto}} €</div>
-            </div>
+      {{prestazioni}}
+      <div style="padding: 10px 0px;"></div>
+      <div style="display: {{sconto_display}}; padding: 10px 0 8px 0px;">
+        <div style="width: 400px; display: inline-block;"><strong> Sconto:</strong></div>
+        <div style="width: 295px; display: inline-block; text-align: right;">{{sconto}} €</div>
+      </div>
 
-            <div style="display: block;padding: 8px 0px;">
-                <div style="width: 400px; display: inline-block;"><strong>Totale geleistete Arbeit:</strong></div>
-                <div style="width: 295px; display: inline-block; text-align: right;">{{total}} €</div>
-            </div>
+      <div style="display: block;padding: 8px 0px;">
+        <div style="width: 400px; display: inline-block;"><strong>Totale geleistete Arbeit:</strong></div>
+        <div style="width: 295px; display: inline-block; text-align: right;">{{total}} €</div>
+      </div>
 
-            <div style="padding: 22px 0 22px 0px; width: 500px; font-size: 12px;">
-                Operazione senza applicazione dell’IVA ai sensi dell’art. 1, comma 58, Legge n.190/2014 e successive modifiche, regime forfetario, senza applicazione della ritenuta alla fonte a titolo d’acconto.
-            </div>
+      <div style="padding: 22px 0 0 0; width: 500px; font-size: 12px;">
+        Nicht MwSt. pflichtige Tätigkeit; der Steuerpflichtige unterliegt der Ersatzbesteuerung gemäß Art. 1, Abs. 58 bis 89, Gesetz Nr. 190/2014 ff.
+      </div>
+      <div style="padding: 10px 0; width: 500px; font-size: 12px;">
+        Quellensteuerbefreit gemäß Art.1, Abs.67, Gesetz N. 190/2014
+      </div>
+      <div style="padding: 0 0 22px 0; width: 500px; font-size: 12px;">
+        Stempelsteuer 2 Euro auf dem Original bei Beträgen von über 77,47 Euro.
+      </div>
 
-            <div style="display: {{bollo_display}};padding: 10px 0px;">
-                <div style="width: 400px; display: inline-block;"><strong>Stempelmarke:</strong></div>
-                <div style="width: 295px; display: inline-block; text-align: right;">{{bollo}} €</div>
-            </div>
+      <div style="display: {{bollo_display}};padding: 10px 0px;">
+        <div style="width: 400px; display: inline-block;"><strong>Stempelmarke:</strong></div>
+        <div style="width: 295px; display: inline-block; text-align: right;">{{bollo}} €</div>
+      </div>
 
-            <div style="display: block;padding: 12px 0 35px 0px;">
-                <div style="width: 400px; display: inline-block;"><strong>Rechnungsbetrag:</strong></div>
-                <div style="width: 295px; display: inline-block; text-align: right;"><strong>{{total_with_inps}} €</strong></div>
-            </div>
-			<div style="background-color: #f9a392; height: 3px;"></div>
-			
-			<div style="display: block; padding: 30px 0 0px 0px; font-style: italic; font-size: 12px;">
-                <div>Iban: {{iban}}</div>
-                <div>Bei Zahlung bitte Patientenname angeben</strong></div>
-            </div>
-        </div>
+      <div style="display: block;padding: 12px 0 35px 0px;">
+        <div style="width: 400px; display: inline-block;"><strong>Rechnungsbetrag:</strong></div>
+        <div style="width: 295px; display: inline-block; text-align: right;"><strong>{{total_with_inps}} €</strong></div>
+      </div>
+      <div style="background-color: #f9a392; height: 3px;"></div>
+
+      <div style="display: block; padding: 30px 0 0px 0px; font-style: italic; font-size: 12px;">
+        <div>Iban: {{iban}}</div>
+        <div>Bei Zahlung bitte Patientenname angeben</strong></div>
+      </div>
+    </div>
     </div>
 
 </body>
