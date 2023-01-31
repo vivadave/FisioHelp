@@ -186,6 +186,7 @@
       this.textBoxFilter.Size = new System.Drawing.Size(114, 27);
       this.textBoxFilter.TabIndex = 38;
       this.textBoxFilter.TextChanged += new System.EventHandler(this.textBoxFilter_TextChanged);
+      this.textBoxFilter.Enter += new System.EventHandler(this.textBoxFilter_Enter);
       // 
       // Form1
       // 

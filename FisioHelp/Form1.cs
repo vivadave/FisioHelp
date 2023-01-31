@@ -13,6 +13,7 @@ namespace FisioHelp
   using DataModels;
   using LinqToDB;
   using Helper;
+  using System.Collections.ObjectModel;
 
   public partial class Form1 : Form
   {
@@ -83,7 +84,7 @@ namespace FisioHelp
 
       if (customers != null)
       {
-        customers = customers.OrderByDescending(x => x.FullName).ToList();
+        customers = customers.OrderByDescending(x => x.FullName).Skip(Math.Max(0, customers.Count() - 60)).ToList();
         customers.Add(null);
         this.panel2.Controls.Clear();
                 var panelHeight = 0;
@@ -132,14 +133,20 @@ namespace FisioHelp
       userForm.OpenVisit(vc.SelectedVisit);
     }
 
-    private void textBoxFilter_TextChanged(object sender, EventArgs e)
+    private async void textBoxFilter_TextChanged(object sender, EventArgs e)
     {
-      CreateNameList();
+      TextBox tb = (TextBox)sender;
+      int startLength = tb.Text.Length;
+
+      await Task.Delay(500);
+      if (startLength == tb.Text.Length)
+        CreateNameList();
     }
     
     private void NewPatient(object sender, EventArgs e)
     {
-      CreateNameList();
+      new Task(CreateNameList).Start();
+      // CreateNameList();
       AddDashBoard();
     }
 
@@ -213,6 +220,11 @@ namespace FisioHelp
       visitList.OpenVisit += OnOpenVisit;
       this.splitContainer1.Panel2.Controls.Clear();
       this.splitContainer1.Panel2.Controls.Add(visitList);
+    }
+
+    private void textBoxFilter_Enter(object sender, EventArgs e)
+    {
+      // CreateNameList();
     }
   }
 }

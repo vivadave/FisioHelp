@@ -59,7 +59,7 @@ namespace FisioHelp.UI
         labelProformaData.Text = $"del {((DateTime)ProformaInvoice.Date).ToShortDateString()}";
         dateTimePickerProfData.Visible = false;
         labelInviceDate.Text = "del";
-        dateTimePickerInvoiceDate.Value = (DateTime)ProformaInvoice.Date;
+        dateTimePickerInvoiceDate.Value = DateTime.Today;
         dateTimePickerInvoiceDate.Visible = true;
       }
       else

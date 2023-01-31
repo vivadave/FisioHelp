@@ -193,7 +193,6 @@ C:\Progetti\FisioHelp\FisioHelp\bin\Debug\sql\dbEliCreate_06.sql
 C:\Progetti\FisioHelp\FisioHelp\bin\Debug\Template\templateProformaInvoice_de.html
 C:\Progetti\FisioHelp\FisioHelp\bin\Debug\Template\templateProformaInvoice_it.html
 C:\Progetti\FisioHelp\FisioHelp\obj\Debug\FisioHelp.UI.InvoiceListHeader.resources
-C:\Progetti\FisioHelp\FisioHelp\obj\Debug\FisioHelp.csprojAssemblyReference.cache
 C:\Progetti\FisioHelp\FisioHelp\bin\Debug\sql\dbEliCreate_07.sql
 C:\Progetti\FisioHelp\FisioHelp\bin\Debug\Template\covid1.pdf
 C:\Progetti\FisioHelp\FisioHelp\bin\Debug\Template\covid2.pdf
@@ -204,3 +203,5 @@ C:\Progetti\FisioHelp\FisioHelp\obj\Debug\FisioHelp.csproj.CoreCompileInputs.cac
 C:\Progetti\FisioHelp\FisioHelp\bin\Debug\sql\dbEliCreate_09.sql
 C:\Progetti\FisioHelp\FisioHelp\bin\Debug\UI\dbEliCreate_08.sql
 C:\Progetti\FisioHelp\FisioHelp\bin\Debug\sql\dbEliCreate_10.sql
+C:\Progetti\FisioHelp\FisioHelp\obj\Debug\FisioHelp.csproj.AssemblyReference.cache
+C:\Progetti\FisioHelp\FisioHelp\obj\Debug\FisioHelp.csproj.SuggestedBindingRedirects.cache
