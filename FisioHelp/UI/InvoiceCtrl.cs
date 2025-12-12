@@ -452,20 +452,21 @@ namespace FisioHelp.UI
         File.WriteAllText(htmlPath, html);
         Helper.PdfManager.CreatePdf(pdfPath, htmlPath);
       }
-      catch (Exception ee)
+      catch (Exception)
       {
         MessageBox.Show("Il file è già aperto, chiuderlo", "Stampa", MessageBoxButtons.OK, MessageBoxIcon.Error);
         return;
       }
       //Helper.DriveManagement.InsertFilePdf(pdfPath, new List<string> { "Invoice", date });
-      File.Delete(htmlPath);
+      //File.Delete(htmlPath);
       if (File.Exists(pdfPath))
       {
           System.Diagnostics.Process.Start(pdfPath);
       }
       else
       {
-          MessageBox.Show("Il pdf non è stato creato!", "Stampa", MessageBoxButtons.OK, MessageBoxIcon.Error);
+           System.Diagnostics.Process.Start(htmlPath);
+                // MessageBox.Show("Il pdf non è stato creato!", "Stampa", MessageBoxButtons.OK, MessageBoxIcon.Error);
       }
     }
 
@@ -524,19 +525,20 @@ namespace FisioHelp.UI
         File.WriteAllText(htmlPath, html);
         Helper.PdfManager.CreatePdf(pdfPath, htmlPath);
       }
-      catch (Exception ee)
+      catch (Exception)
       {
         MessageBox.Show("Il file è già aperto, chiuderlo", "Stampa", MessageBoxButtons.OK, MessageBoxIcon.Error);
         return;
       }
       //Helper.DriveManagement.InsertFilePdf(pdfPath, new List<string> { "Invoice", date });
-      File.Delete(htmlPath);
+      //File.Delete(htmlPath);
       if (File.Exists(pdfPath))
       {
         System.Diagnostics.Process.Start(pdfPath);
       } else
       {
-        MessageBox.Show("ERRORE! Non risco a visualizzare il PDF per il file: " + Environment.NewLine + pdfPath + Environment.NewLine + "Dillo a Davide");
+          System.Diagnostics.Process.Start(htmlPath);
+          //MessageBox.Show("ERRORE! Non risco a visualizzare il PDF per il file: " + Environment.NewLine + pdfPath + Environment.NewLine + "Dillo a Davide");
       }
      
     }

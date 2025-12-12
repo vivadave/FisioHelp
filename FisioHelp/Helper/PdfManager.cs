@@ -19,7 +19,7 @@ namespace FisioHelp.Helper
       // use powershell
       process.StartInfo.FileName = "powershell";
       // set the Chrome path as local variable in powershell and run
-      process.StartInfo.Arguments = $@"$chrome='{ chrome }'; & $chrome --headless --print-to-pdf='{pdfPath}' '{htmlPath}'";
+      process.StartInfo.Arguments = $@"$chrome='{ chrome }'; & $chrome --headless=old --print-to-pdf='{pdfPath}' '{htmlPath}'";
       process.Start();
       Thread.Sleep(4000);
     }

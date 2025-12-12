@@ -43,7 +43,7 @@ namespace FisioHelp.Helper
       {
         wbook.SaveAs(path);
       }
-      catch (Exception e)
+      catch (Exception)
       {
         //do something
       }

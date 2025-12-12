@@ -191,7 +191,6 @@ namespace FisioHelp.UI
       {
         this.panel2.Controls.Add(dataGridView1);
         dataGridView1.Rows.Clear();
-        int i = 0;
         dataGridView1.Visible = true;
         foreach (var proforma in _proformaInvoices)
         {

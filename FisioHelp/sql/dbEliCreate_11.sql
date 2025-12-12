@@ -1,0 +1,1 @@
+ALTER TABLE therapists ADD COLUMN IF NOT EXISTS google_file text;

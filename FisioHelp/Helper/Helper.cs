@@ -198,7 +198,7 @@ namespace FisioHelp.Helper
 
         foreach (var el in list)
         {
-          var qt = prestPriceList.Count(pl => pl.Item1 == el.Item1);
+          var qt = prestPriceList.Count(pl => pl.Item1 == el.Item1 && pl.Item2 == el.Item2);
           prestazioniHtml += $@"<div style=""width: 350px; display:inline-block;""> {el.Item1}</div>";
           prestazioniHtml += $@"<div style=""width: 100px; display:inline-block; text-align: right;""> {qt}</div>";
           prestazioniHtml += $@"<div style=""width: 100px; display:inline-block; text-align: right;""> {el.Item2.ToString("#.00")} €</div>";
@@ -301,7 +301,7 @@ namespace FisioHelp.Helper
 
         foreach (var el in list)
         {
-          var qt = prestPriceList.Count(pl => pl.Item1 == el.Item1);
+          var qt = prestPriceList.Count(pl => pl.Item1 == el.Item1 && pl.Item2 == el.Item2);
           prestazioniHtml += $@"<div style=""width: 350px; display:inline-block;""> {el.Item1}</div>";
           prestazioniHtml += $@"<div style=""width: 100px; display:inline-block; text-align: right;""> {qt}</div>";
           prestazioniHtml += $@"<div style=""width: 100px; display:inline-block; text-align: right;""> {el.Item2.ToString("#.00")} €</div>";

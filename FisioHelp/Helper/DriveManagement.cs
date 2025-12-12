@@ -22,8 +22,8 @@ namespace FisioHelp.Helper
     {
       try
       {
-        // Get active credential
-        string serviceAccountCredentialFilePath = @"Resources/fluted-polymer-256106-8fdab3f72fb5.json";
+         // Get active credential
+        string serviceAccountCredentialFilePath = @"Resources/fluted-polymer-256106-807538c38adc.json";
 
         string[] scopes = new string[] { DriveService.Scope.Drive, DriveService.Scope.DriveFile };
         GoogleCredential credential;
@@ -57,7 +57,6 @@ namespace FisioHelp.Helper
       foreach (var f in result.Files)
       {
         DeleteInFolderWithId(f.Id, DataModels.Enums.FileType.pdf, 0);
-        var skip = "";
       }
     }
 

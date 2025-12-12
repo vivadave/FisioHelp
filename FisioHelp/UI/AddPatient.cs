@@ -236,14 +236,21 @@ namespace FisioHelp.UI
           Helper.PdfManager.CreatePdf(pdfPath, htmlPath);
           System.Threading.Thread.Sleep(1000);
         }
-        catch (Exception ee)
+        catch (Exception)
         {
           MessageBox.Show("Il file è già aperto, chiuderlo", "Stampa", MessageBoxButtons.OK, MessageBoxIcon.Error);
           return;
         }
       }
 
-      System.Diagnostics.Process.Start(pdfPath);     
+    if (File.Exists(pdfPath))
+    {
+        System.Diagnostics.Process.Start(pdfPath);
+    } else
+    {
+        System.Diagnostics.Process.Start(htmlPath);
+    }
+
 
     }
 
