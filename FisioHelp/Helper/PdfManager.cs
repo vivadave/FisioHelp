@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using PuppeteerSharp;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+using PuppeteerSharp.Media;
 
 namespace FisioHelp.Helper
 {
@@ -23,6 +23,39 @@ namespace FisioHelp.Helper
       process.Start();
       Thread.Sleep(4000);
     }
+
+    public static async Task CreatePdfNew(string outputPdf, string html)
+    {
+	    // Scarica Chromium
+	    await new BrowserFetcher().DownloadAsync();
+
+	    // Avvia browser
+	    var browser = await Puppeteer.LaunchAsync(new LaunchOptions
+	    {
+		    Headless = true
+	    });
+
+	    try
+	    {
+		    var page = await browser.NewPageAsync();
+
+		    // Carica HTML
+		    await page.SetContentAsync(html);
+
+		    // Genera PDF
+		    await page.PdfAsync(outputPdf, new PdfOptions
+		    {
+			    Format = PaperFormat.A4,
+			    PrintBackground = true
+		    });
+	    }
+	    finally
+	    {
+		    await browser.CloseAsync();
+	    }
+
+    }
+
 
   }
 }
