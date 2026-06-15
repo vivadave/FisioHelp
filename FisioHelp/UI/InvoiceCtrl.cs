@@ -452,9 +452,9 @@ namespace FisioHelp.UI
         File.WriteAllText(htmlPath, html);
         await Helper.PdfManager.CreatePdfNew(pdfPath, html);
       }
-      catch (Exception)
+      catch (Exception e)
       {
-        MessageBox.Show("Il file è già aperto, chiuderlo", "Stampa", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        MessageBox.Show("Il file è già aperto, chiuderlo" + e, "Stampa", MessageBoxButtons.OK, MessageBoxIcon.Error);
         return;
       }
       //Helper.DriveManagement.InsertFilePdf(pdfPath, new List<string> { "Invoice", date });
