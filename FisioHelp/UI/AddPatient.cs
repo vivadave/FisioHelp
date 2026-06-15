@@ -199,7 +199,7 @@ namespace FisioHelp.UI
       Close?.Invoke(this, e);
     }
 
-    private void buttonOpenPrivacy_Click(object sender, EventArgs e)
+    private async void buttonOpenPrivacy_Click(object sender, EventArgs e)
     {
       if (_customer.Id == null || _customer.Id == Guid.Empty)
       {
@@ -233,7 +233,7 @@ namespace FisioHelp.UI
         try
         {
           File.WriteAllText(htmlPath, html);
-          Helper.PdfManager.CreatePdf(pdfPath, htmlPath);
+          await Helper.PdfManager.CreatePdfNew(pdfPath, html);
           System.Threading.Thread.Sleep(1000);
         }
         catch (Exception)

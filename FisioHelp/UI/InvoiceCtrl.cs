@@ -393,7 +393,7 @@ namespace FisioHelp.UI
       }
     }
 
-    private void PrintInvoice(DataModels.Invoice invoice)
+    private async void PrintInvoice(DataModels.Invoice invoice)
     {
 
       if (invoice.Id == null || invoice.Id == Guid.Empty)
@@ -450,7 +450,7 @@ namespace FisioHelp.UI
       try
       {
         File.WriteAllText(htmlPath, html);
-        Helper.PdfManager.CreatePdf(pdfPath, htmlPath);
+        await Helper.PdfManager.CreatePdfNew(pdfPath, html);
       }
       catch (Exception)
       {
@@ -470,7 +470,7 @@ namespace FisioHelp.UI
       }
     }
 
-    private void PrintProforma(DataModels.ProformaInvoice invoice )
+    private async void PrintProforma(DataModels.ProformaInvoice invoice )
     {
 
       if (invoice.Id == null || invoice.Id == Guid.Empty)
@@ -523,7 +523,7 @@ namespace FisioHelp.UI
       try
       {
         File.WriteAllText(htmlPath, html);
-        Helper.PdfManager.CreatePdf(pdfPath, htmlPath);
+        await Helper.PdfManager.CreatePdfNew(pdfPath, html);
       }
       catch (Exception)
       {
