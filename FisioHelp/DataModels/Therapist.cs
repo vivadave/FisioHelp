@@ -20,6 +20,8 @@ namespace FisioHelp.DataModels
       [Column("sqlbackup_folder"), Nullable] public string SqlbackupFolder { get; set; } // text
       [Column("email"), Nullable] public string Email { get; set; } // text
       [Column("aifi"), Nullable] public string Aifi { get; set; } // text
+      [Column("sts_password"), Nullable] public string StsPassword { get; set; }
+      [Column("sts_pincode"), Nullable] public string StsPincode { get; set; }
 
     public override Guid SaveToDB()
     {

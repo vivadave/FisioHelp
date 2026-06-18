@@ -9,6 +9,7 @@ using LinqToDB;
 using System.Windows.Forms;
 using PdfSharp.Pdf;
 using PdfSharp;
+using System.Threading.Tasks;
 
 namespace FisioHelp.UI
 {
@@ -24,6 +25,10 @@ namespace FisioHelp.UI
     private ToolTip _printInvoiceTT = new ToolTip();
     private ToolTip _printProInvoiceTT = new ToolTip();
     private bool _initialization = true;
+    private Button _btnSendSts;
+    private Button _btnMarkSts;
+    private Button _btnCheckSts;
+    private Label _lblStsStatus;
 
     public InvoiceCtrl(DataModels.ProformaInvoice proformaInvoice, bool edit = false)
     {
@@ -207,7 +212,157 @@ namespace FisioHelp.UI
         dateTimePickerPayed.CustomFormat = " ";
       }
 
+      RefreshStsControls();
       _initialization = false;
+    }
+
+    private void RefreshStsControls()
+    {
+      bool invoiced = ProformaInvoice.Invoice != null;
+
+      if (_btnSendSts == null)
+      {
+        _btnSendSts = new Button();
+        _btnSendSts.Size = new Size(130, 28);
+        _btnSendSts.Location = new Point(buttonPrintInvoice.Right + 8, buttonPrintInvoice.Top);
+        _btnSendSts.Click += BtnSendSts_Click;
+        this.Controls.Add(_btnSendSts);
+
+        _btnMarkSts = new Button();
+        _btnMarkSts.Size = new Size(130, 28);
+        _btnMarkSts.Location = new Point(_btnSendSts.Left, _btnSendSts.Bottom + 4);
+        _btnMarkSts.Text = "Registra invio manuale";
+        _btnMarkSts.BackColor = System.Drawing.Color.LightYellow;
+        _btnMarkSts.Click += BtnMarkSts_Click;
+        this.Controls.Add(_btnMarkSts);
+
+        _lblStsStatus = new Label();
+        _lblStsStatus.AutoSize = true;
+        _lblStsStatus.Font = new System.Drawing.Font("Segoe UI", 9F);
+        _lblStsStatus.Location = new Point(_btnSendSts.Left, _btnMarkSts.Bottom + 4);
+        this.Controls.Add(_lblStsStatus);
+
+        _btnCheckSts = new Button();
+        _btnCheckSts.Size = new Size(130, 28);
+        _btnCheckSts.Location = new Point(_btnSendSts.Left, _lblStsStatus.Bottom + 4);
+        _btnCheckSts.Text = "Verifica su STS";
+        _btnCheckSts.BackColor = System.Drawing.Color.LightBlue;
+        _btnCheckSts.Click += BtnCheckSts_Click;
+        this.Controls.Add(_btnCheckSts);
+      }
+
+      _btnSendSts.Visible = invoiced;
+      _btnMarkSts.Visible = invoiced;
+      _lblStsStatus.Visible = invoiced;
+      _btnCheckSts.Visible = invoiced;
+
+      if (!invoiced) return;
+
+      bool sent = ProformaInvoice.Invoice.StsSent;
+      _btnSendSts.Text = sent ? "Re-invia a STS" : "Invia a STS";
+      _btnSendSts.BackColor = sent ? System.Drawing.Color.LightGreen : System.Drawing.Color.LightSteelBlue;
+      _btnMarkSts.Visible = !sent;
+
+      if (sent && ProformaInvoice.Invoice.StsSentDate.HasValue)
+      {
+        _lblStsStatus.Text = $"✓ Inviato il {((DateTime)ProformaInvoice.Invoice.StsSentDate.Value).ToShortDateString()}";
+        _lblStsStatus.ForeColor = System.Drawing.Color.DarkGreen;
+      }
+      else
+      {
+        _lblStsStatus.Text = "⚠ Non ancora inviato al STS";
+        _lblStsStatus.ForeColor = System.Drawing.Color.OrangeRed;
+      }
+    }
+
+    private void BtnMarkSts_Click(object sender, EventArgs e)
+    {
+      if (ProformaInvoice.Invoice == null) return;
+
+      using (var dlg = new Form())
+      {
+        dlg.Text = "Segna come inviato a STS";
+        dlg.Size = new Size(300, 140);
+        dlg.FormBorderStyle = FormBorderStyle.FixedDialog;
+        dlg.StartPosition = FormStartPosition.CenterParent;
+        dlg.MaximizeBox = false;
+        dlg.MinimizeBox = false;
+
+        var lbl = new Label { Text = "Data invio:", Location = new Point(12, 16), AutoSize = true };
+        var dtp = new DateTimePicker { Location = new Point(90, 12), Width = 180, Value = DateTime.Today, Format = DateTimePickerFormat.Short };
+        var btnOk = new Button { Text = "Conferma", DialogResult = DialogResult.OK, Location = new Point(90, 55), Width = 90 };
+        var btnCancel = new Button { Text = "Annulla", DialogResult = DialogResult.Cancel, Location = new Point(186, 55), Width = 84 };
+
+        dlg.Controls.AddRange(new Control[] { lbl, dtp, btnOk, btnCancel });
+        dlg.AcceptButton = btnOk;
+        dlg.CancelButton = btnCancel;
+
+        if (dlg.ShowDialog(this) != DialogResult.OK) return;
+
+        ProformaInvoice.Invoice.StsSent = true;
+        ProformaInvoice.Invoice.StsSentDate = new NpgsqlTypes.NpgsqlDate(dtp.Value);
+        ProformaInvoice.Invoice.SaveToDB();
+      }
+
+      RefreshStsControls();
+    }
+
+    private async void BtnCheckSts_Click(object sender, EventArgs e)
+    {
+      if (ProformaInvoice.Invoice == null) return;
+
+      _btnCheckSts.Enabled = false;
+      this.Cursor = Cursors.WaitCursor;
+
+      var (found, details) = await Helper.StsService.CheckInvoiceStatusAsync(ProformaInvoice.Invoice, _therapist);
+
+      this.Cursor = Cursors.Default;
+      _btnCheckSts.Enabled = true;
+
+      if (found)
+        MessageBox.Show($"La fattura risulta registrata su STS.\n\n{details}",
+          "Verifica STS", MessageBoxButtons.OK, MessageBoxIcon.Information);
+      else
+        MessageBox.Show($"La fattura NON risulta registrata su STS.\n\n{details}",
+          "Verifica STS", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+    }
+
+    private async void BtnSendSts_Click(object sender, EventArgs e)
+    {
+      if (ProformaInvoice.Invoice == null) return;
+
+      if (ProformaInvoice.Invoice.StsSent)
+      {
+        string sentDate = ProformaInvoice.Invoice.StsSentDate.HasValue
+          ? ((DateTime)ProformaInvoice.Invoice.StsSentDate.Value).ToShortDateString()
+          : "data sconosciuta";
+        if (MessageBox.Show(
+              $"La fattura è già stata inviata il {sentDate}. Vuoi reinviarla?",
+              "Reinvio STS", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+          return;
+      }
+
+      _btnSendSts.Enabled = false;
+      this.Cursor = Cursors.WaitCursor;
+
+      var (success, error) = await Helper.StsService.SendInvoiceAsync(
+        ProformaInvoice.Invoice, _customer, _therapist);
+
+      this.Cursor = Cursors.Default;
+      _btnSendSts.Enabled = true;
+
+      if (success)
+      {
+        string successText = "Fattura inviata al Sistema Tessera Sanitaria con successo.";
+        if (!string.IsNullOrEmpty(error))
+          successText += $"\n\nAvvisi:\n{error}";
+        MessageBox.Show(successText, "STS", MessageBoxButtons.OK, MessageBoxIcon.Information);
+      }
+      else
+        MessageBox.Show($"Errore invio STS:\n{error}",
+          "STS", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+      RefreshStsControls();
     }
 
     private void InvoiceCtrl_Load(object sender, EventArgs e)

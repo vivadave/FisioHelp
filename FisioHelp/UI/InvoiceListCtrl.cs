@@ -206,9 +206,12 @@ namespace FisioHelp.UI
           r.Cells[4].Value = proforma.Total;
           r.Cells[5].Value = proforma.Visitsproformainvoiceidfkeys.ToList().Count.ToString();
           r.Cells[6].Value = proforma.Payed;
-          r.Cells[7].Value = imageList1.Images[0];
-          r.Cells[8].Value = imageList1.Images[1];
-          r.Cells[9].Value = proforma.Id;
+          r.Cells[7].Value = proforma.Invoice?.StsSent ?? false;
+          if (proforma.Invoice?.StsSent == true)
+            r.Cells[7].Style.BackColor = Color.LightGreen;
+          r.Cells[8].Value = imageList1.Images[0];
+          r.Cells[9].Value = imageList1.Images[1];
+          r.Cells[10].Value = proforma.Id;
           r.DefaultCellStyle.BackColor = colors[odd];
           dataGridView1.Rows.Add(r);
           odd = (odd + 1) % 2;
@@ -248,12 +251,12 @@ namespace FisioHelp.UI
     private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
     {
       if (e.RowIndex < 0) return;
-      var id = dataGridView1[9, e.RowIndex].Value;
+      var id = dataGridView1[10, e.RowIndex].Value;
 
       if (e.RowIndex + 1 >= dataGridView1.RowCount)
         return;
       SelectedInvoice = _proformaInvoices.FirstOrDefault(x => x.Id == new Guid(id.ToString()));
-      if (e.ColumnIndex == 7) //fatture
+      if (e.ColumnIndex == 8) //fatture
       { 
         if(SelectedInvoice.Invoice == null)
         {
@@ -270,7 +273,7 @@ namespace FisioHelp.UI
             MessageBox.Show("La cartella non esiste ancora stampare prima la fattura");
         }
       }
-      else if(e.ColumnIndex == 8) //dettagli
+      else if(e.ColumnIndex == 9) //dettagli
       {
         OpenInvoice?.Invoke(this, e);
       }

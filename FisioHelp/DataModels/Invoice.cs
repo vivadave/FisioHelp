@@ -20,6 +20,8 @@ namespace FisioHelp.DataModels
     [Column("proforma_invoice_id"), Nullable] public Guid? ProformaInvoiceId { get; set; } // uuid
     [Column("contanti"), NotNull] public bool Contanti { get; set; } // boolean
     [Column("custom_text"), NotNull] public string CustomText { get; set; } // TEXT
+    [Column("sts_sent"), NotNull] public bool StsSent { get; set; }
+    [Column("sts_sent_date"), Nullable] public NpgsqlDate? StsSentDate { get; set; }
 
     public double Total
     {

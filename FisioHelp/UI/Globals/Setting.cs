@@ -57,6 +57,8 @@ namespace FisioHelp.UI.Globals
         textBoxAddress.Text = _therapist.Address;
         textBoxAddressDe.Text = _therapist.AddressDe;
         textBoxAifi.Text = _therapist.Aifi;
+        textBoxStsPassword.Text = _therapist.StsPassword;
+        textBoxStsPincode.Text = _therapist.StsPincode;
       } else
         _therapist = new Therapist();
     }
@@ -77,6 +79,8 @@ namespace FisioHelp.UI.Globals
         _therapist.Address = textBoxAddress.Text;
         _therapist.AddressDe = textBoxAddressDe.Text;
         _therapist.Aifi = textBoxAifi.Text;
+        _therapist.StsPassword = textBoxStsPassword.Text;
+        _therapist.StsPincode = textBoxStsPincode.Text;
         _therapist.SaveToDB();
        
         foreach (var a in priceListBindingSource)

@@ -64,6 +64,7 @@ namespace FisioHelp.UI
       comboBoxPrices.Items.AddRange(_priceList);
       comboBoxPrices.SelectedItem = _priceList.FirstOrDefault(p => p.Id == customer.Pricelist?.Id);
       checkBox1.Checked = _customer.Privacy;
+      checkBoxStsOpponent.Checked = _customer.StsOpponent;
 
       if (customer.Address != null)
       {
@@ -100,6 +101,7 @@ namespace FisioHelp.UI
       _customer.LegalRepresentative = textBoxLegRapp.Text;
       _customer.CreationDate = NpgsqlDate.Now;
       _customer.Privacy = checkBox1.Checked;
+      _customer.StsOpponent = checkBoxStsOpponent.Checked;
       _customer.Therapist = _therapist;
       _customer.TherapistId = _therapist.Id;
 

@@ -30,6 +30,30 @@ namespace FisioHelp.UI
       label2.Text = $"{ProformaInvoice.Visitsproformainvoiceidfkeys.ToList().Count.ToString()} visite";
       label5.Text = $"{ProformaInvoice.Total} €";
       checkBox2.Checked = ProformaInvoice.Payed;
+
+      var lblSts = new Label();
+      lblSts.AutoSize = true;
+      lblSts.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold);
+      lblSts.Location = new System.Drawing.Point(this.Width - 90, (this.Height - 16) / 2);
+      lblSts.Anchor = System.Windows.Forms.AnchorStyles.Right | System.Windows.Forms.AnchorStyles.Top;
+
+      if (ProformaInvoice.Invoice != null && ProformaInvoice.Invoice.StsSent)
+      {
+        lblSts.Text = "STS ✓";
+        lblSts.ForeColor = System.Drawing.Color.DarkGreen;
+        string sentDate = ProformaInvoice.Invoice.StsSentDate.HasValue
+          ? ((DateTime)ProformaInvoice.Invoice.StsSentDate.Value).ToShortDateString()
+          : "";
+        var tt = new System.Windows.Forms.ToolTip();
+        tt.SetToolTip(lblSts, $"Inviato al STS il {sentDate}");
+      }
+      else if (ProformaInvoice.Invoice != null)
+      {
+        lblSts.Text = "STS --";
+        lblSts.ForeColor = System.Drawing.Color.Gray;
+      }
+
+      this.Controls.Add(lblSts);
       _loaded = true;
     }
     private void button1_Click(object sender, EventArgs e)

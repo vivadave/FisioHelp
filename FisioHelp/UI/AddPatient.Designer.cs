@@ -59,6 +59,7 @@
       this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
       this.errorProvider2 = new System.Windows.Forms.ErrorProvider(this.components);
       this.checkBox1 = new System.Windows.Forms.CheckBox();
+      this.checkBoxStsOpponent = new System.Windows.Forms.CheckBox();
       this.richTextBoxEx1 = new RichTextBoxEx.RichTextBoxEx();
       this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
       this.panel14 = new System.Windows.Forms.Panel();
@@ -422,7 +423,21 @@
       this.checkBox1.Text = "Privacy";
       this.checkBox1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
       this.checkBox1.UseVisualStyleBackColor = true;
-      // 
+      //
+      // checkBoxStsOpponent
+      //
+      this.checkBoxStsOpponent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+      this.checkBoxStsOpponent.AutoSize = true;
+      this.checkBoxStsOpponent.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F);
+      this.checkBoxStsOpponent.Location = new System.Drawing.Point(545, 501);
+      this.checkBoxStsOpponent.Name = "checkBoxStsOpponent";
+      this.checkBoxStsOpponent.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+      this.checkBoxStsOpponent.Size = new System.Drawing.Size(107, 24);
+      this.checkBoxStsOpponent.TabIndex = 15;
+      this.checkBoxStsOpponent.Text = "Oppose STS";
+      this.checkBoxStsOpponent.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+      this.checkBoxStsOpponent.UseVisualStyleBackColor = true;
+      //
       // richTextBoxEx1
       // 
       this.richTextBoxEx1.AllowBullets = true;
@@ -741,6 +756,7 @@
       this.Controls.Add(this.buttonDelete);
       this.Controls.Add(this.buttonOpenPrivacy);
       this.Controls.Add(this.checkBox1);
+      this.Controls.Add(this.checkBoxStsOpponent);
       this.Controls.Add(this.buttonCancel);
       this.Controls.Add(this.label12);
       this.Controls.Add(this.tableLayoutPanel1);
@@ -841,6 +857,7 @@
     private System.Windows.Forms.Button buttonCancel;
     private System.Windows.Forms.Button buttonOpenPrivacy;
     private System.Windows.Forms.CheckBox checkBox1;
+    private System.Windows.Forms.CheckBox checkBoxStsOpponent;
     private System.Windows.Forms.Panel panel14;
     private System.Windows.Forms.Label label16;
     private System.Windows.Forms.TextBox textBoxAge;

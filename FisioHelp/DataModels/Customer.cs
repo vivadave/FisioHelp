@@ -24,6 +24,7 @@ namespace FisioHelp.DataModels
     [Column("creation_date"), Nullable] public NpgsqlDate? CreationDate { get; set; } // date
     [Column("legal_representative"), Nullable] public string LegalRepresentative { get; set; }
     [Column("age"), Nullable] public int Age { get; set; }
+    [Column("sts_opponent"), NotNull] public bool StsOpponent { get; set; }
 
     public string FullName
     {
